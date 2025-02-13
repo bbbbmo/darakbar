@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-import GlobalNav from "./components/GlobalNav";
+import GlobalNav from "./components/layout/GlobalNav";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="w-full h-screen">
+    <div className="h-screen w-full">
       <GlobalNav />
       <RouterProvider router={router} />
     </div>
