@@ -1,4 +1,4 @@
-export default function RecipeCard() {
+export default function RecipeDetailCard() {
   return (
     <div className="h-full w-full flex-col rounded-xl bg-slate-100">
       <div className="h-60 w-full rounded-t-xl bg-stone-300"></div>
