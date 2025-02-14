@@ -7,6 +7,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+// 모달 컴포넌트
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
   return (
@@ -16,16 +17,17 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         className="modal-overlay bg-opacity-50 fixed inset-0 z-20 backdrop-blur-[2px]"
         onClick={onClose}
       ></div>
-      <div className="modal-container x-full flex h-full items-center justify-center">
-        <div className="modal z-30 flex flex-col">
+      <div className="modal-container fixed inset-0 z-30 flex items-center justify-center">
+        <section className="modal bg-opacity-70 z-40 flex h-[80%] flex-col rounded-3xl bg-stone-700 p-5">
           <div>
             <XMarkIcon
-              className="close-btn mr-3 ml-auto size-7 fill-zinc-600"
+              className="close-btn ml-auto size-7 cursor-pointer fill-zinc-600"
               onClick={onClose}
             />
           </div>
+          {/* 모달 내용 */}
           {children}
-        </div>
+        </section>
       </div>
     </>
   );

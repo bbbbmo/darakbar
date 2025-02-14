@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import RecipeModal from "../components/modal-recipe/RecipeModal";
+// 컴포넌트
 import GlobalNav from "../components/layout/GlobalNav";
 import Modal from "../components/layout/Modal";
 import RecipeViewCard from "../components/modal-recipe/modal-recipe-components/RecipeViewCard";
@@ -18,21 +18,28 @@ export default function Home() {
 
   return (
     <>
+      {/* Nav 바 */}
       <GlobalNav />
-      <div className="flex h-full w-full bg-neutral-800 px-15 pt-15">
+
+      <div className="wrapper h-full w-full bg-neutral-800 px-15 pt-15">
+        {/* 닫기버튼 */}
         <button
-          className="h-10 w-30 rounded-full bg-red-500"
+          className="modal-open-btn h-10 w-30 cursor-pointer rounded-full bg-red-500"
           onClick={openRecipeModal}
         >
           모달 OPEN
         </button>
+        {/* 모달 */}
         <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
-          <div className="flex h-[80%] w-auto gap-5">
-            <RecipeViewCard />
-            <RecipeDetailCard />
+          <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
+            <div className="w-200">
+              <RecipeViewCard />
+            </div>
+            <div className="w-100">
+              <RecipeDetailCard />
+            </div>
           </div>
         </Modal>
-        {/* {isModalOpen ? <RecipeModal closeModal={closeRecipeModal} /> : null} */}
       </div>
     </>
   );
