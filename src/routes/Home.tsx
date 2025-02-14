@@ -21,7 +21,7 @@ export default function Home() {
       {/* Nav 바 */}
       <GlobalNav />
 
-      <div className="wrapper h-full w-full bg-neutral-800 px-15 pt-15">
+      <div className="wrapper h-full w-full px-15 pt-15">
         {/* 닫기버튼 */}
         <button
           className="modal-open-btn h-10 w-30 cursor-pointer rounded-full bg-red-500"
