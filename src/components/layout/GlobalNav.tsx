@@ -28,12 +28,14 @@ export default function GlobalNav() {
           <Link to="/recipe-view">레시피 보기</Link>
         </li>
       </ul>
-      <div className="ml-auto">
-        <UserIcon className="size-6" onClick={toggleMenuList} />
+      <div className="relative ml-auto">
+        <UserIcon className="size-6 cursor-pointer" onClick={toggleMenuList} />
+        <Menu isOpen={isMenuOpen}>
+          <div>메뉴 항목 1</div>
+          <div>메뉴 항목 2</div>
+          <div>메뉴 항목 3</div>
+        </Menu>
       </div>
-      <Menu isOpen={isMenuOpen}>
-        <li>하이</li>
-      </Menu>
     </nav>
   );
 }
