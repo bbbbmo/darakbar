@@ -11,8 +11,8 @@ export default function GlobalNav() {
   };
 
   return (
-    <nav className="border-b-white-100 fixed top-0 z-10 flex h-15 w-full items-center justify-center bg-neutral-800 px-5 text-lg">
-      <div className="nav-title mr-auto cursor-pointer">
+    <nav className="border-b-white-100 fixed top-0 z-10 flex h-15 w-full items-center justify-center bg-neutral-700 px-5 text-lg">
+      <div className="nav-title mr-auto cursor-pointer hover:animate-bounce">
         <Link to="/">🍸</Link>
       </div>
       <ul className="flex gap-5">
