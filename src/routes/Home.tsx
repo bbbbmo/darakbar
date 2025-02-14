@@ -7,6 +7,7 @@ import RecipeDetailCard from "../components/modal-recipe/modal-recipe-components
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isRecipeDetailOpen, setIsRecipeOpen] = useState<boolean>(true);
 
   const openRecipeModal = () => {
     setIsModalOpen(true);
@@ -14,6 +15,11 @@ export default function Home() {
 
   const closeRecipeModal = () => {
     setIsModalOpen(false);
+  };
+
+  // [TODO] RecipeDetailCard 닫기 버튼 구현
+  const closeRecipeDetail = () => {
+    setIsRecipeOpen(false);
   };
 
   return (
@@ -36,7 +42,7 @@ export default function Home() {
               <RecipeViewCard />
             </div>
             <div className="w-100">
-              <RecipeDetailCard />
+              <RecipeDetailCard onClose={closeRecipeDetail} />
             </div>
           </div>
         </Modal>
