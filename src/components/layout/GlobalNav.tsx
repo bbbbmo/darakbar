@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function GlobalNav() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const toggleMenuList = () => {
+  const toggleUserMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -29,7 +29,7 @@ export default function GlobalNav() {
         </li>
       </ul>
       <div className="relative ml-auto">
-        <UserIcon className="size-6 cursor-pointer" onClick={toggleMenuList} />
+        <UserIcon className="size-6 cursor-pointer" onClick={toggleUserMenu} />
         <Menu isOpen={isMenuOpen}>
           <div>메뉴 항목 1</div>
           <div>메뉴 항목 2</div>

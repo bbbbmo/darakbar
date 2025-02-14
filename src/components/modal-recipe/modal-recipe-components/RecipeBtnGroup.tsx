@@ -18,7 +18,7 @@ export default function RecipeBtnGroup() {
         className="star-icon flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"
         onClick={toggleStarIcon}
       >
-        star
+        Star
         <StarIcon
           className={`size-7 ${selectStarIcon ? "fill-amber-300 hover:fill-amber-400" : "fill-stone-300 hover:fill-stone-400"}`}
         />
@@ -28,7 +28,7 @@ export default function RecipeBtnGroup() {
         <ShareIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
       </span>
       <span className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2">
-        chat
+        Chat
         <ChatBubbleBottomCenterIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
       </span>
     </div>
