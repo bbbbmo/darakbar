@@ -25,7 +25,13 @@
   }
 }
 
+@font-face {
+  font-family: "UnPenheulim";
+  src: url("../fonts/UnPenheulim.ttf") format("truetype");
+}
+
 @layer components {
-  .btn-primary {
+  .nav-title-name {
+    font-family: "UnPenheulinm", sans-serif;
   }
 }

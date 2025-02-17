@@ -4,6 +4,7 @@ import GlobalNav from "../components/layout/GlobalNav";
 import Modal from "../components/layout/Modal";
 import RecipeViewCard from "../components/modal-recipe/modal-recipe-components/RecipeViewCard";
 import RecipeDetailCard from "../components/modal-recipe/modal-recipe-components/RecipeDetailCard";
+import GlobalFooter from "../components/layout/GlobalFooter";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -47,6 +48,7 @@ export default function Home() {
           </div>
         </Modal>
       </div>
+      <GlobalFooter />
     </>
   );
 }
