@@ -15,7 +15,7 @@ export default function GlobalNav() {
       <div className="nav-title mr-auto cursor-pointer hover:animate-bounce">
         <Link to="/">
           <span>🍸 </span>
-          <span className="nav-title-name font-custom">다락바</span>
+          <span className="nav-title-name font-custom font-unpen">다락바</span>
         </Link>
       </div>
       <ul className="flex gap-5">

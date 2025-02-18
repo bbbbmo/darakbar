@@ -9,7 +9,7 @@ export default function RecipeChatCard() {
       <div className="close-chat-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
         <XMarkIcon className="size-6" onClick={closeChat} />
       </div>
-      <div className="details-container h-auto w-full text-stone-700">
+      <div className="chat-container h-auto w-full text-stone-700">
         <p>hi</p>
       </div>
     </div>
