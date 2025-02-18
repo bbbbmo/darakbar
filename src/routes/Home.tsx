@@ -7,6 +7,7 @@ export default function Home() {
     <>
       {/* Nav 바 */}
       <GlobalNav />
+      <div className="wrapper h-full w-full px-15 pt-15"></div>
       <GlobalFooter />
     </>
   );
