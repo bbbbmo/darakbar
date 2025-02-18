@@ -1,12 +1,15 @@
 import {
   ChatBubbleBottomCenterIcon,
+  PlusIcon,
   ShareIcon,
   StarIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import useRecipeStore from "./useRecipeStrore";
 
 export default function RecipeBtnGroup() {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);
+  const { isOpen, toggleOpen } = useRecipeStore();
 
   const toggleStarIcon = () => {
     setSelectStarIcon(!selectStarIcon);
@@ -30,6 +33,13 @@ export default function RecipeBtnGroup() {
       <span className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2">
         Chat
         <ChatBubbleBottomCenterIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
+      </span>
+      <span
+        className={`${isOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
+        onClick={toggleOpen}
+      >
+        Details
+        <PlusIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
       </span>
     </div>
   );

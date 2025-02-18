@@ -5,7 +5,7 @@ export default function RecipeViewCard() {
   return (
     // [TODO] 배경색 어떻게 할지
     <div className="h-full w-full rounded-xl bg-stone-700 text-stone-100">
-      <div className="h-100 w-full rounded-t-xl bg-white"></div>
+      <div className="h-[70%] w-full rounded-t-xl bg-white"></div>
       <div className="p-3">
         <div className="flex">
           <div className="w-full text-2xl">Name</div>
