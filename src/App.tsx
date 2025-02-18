@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-import RecipeView from "./routes/RecipeView";
+import RecipeView from "./routes/RecipeNavigation";
 import RecipeRegister from "./routes/RecipeRegister";
 
 const router = createBrowserRouter([

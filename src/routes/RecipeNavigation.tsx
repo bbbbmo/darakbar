@@ -6,10 +6,11 @@ import RecipeViewCard from "../components/modal-recipe/modal-recipe-components/R
 import RecipeDetailCard from "../components/modal-recipe/modal-recipe-components/RecipeDetailCard";
 import GlobalFooter from "../components/layout/GlobalFooter";
 import useRecipeStore from "../components/modal-recipe/modal-recipe-components/useRecipeStrore";
+import RecipeChatCard from "../components/modal-recipe/modal-recipe-components/RecipeChatCard";
 
-export default function RecipeView() {
+export default function RecipeNavigation() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { isOpen } = useRecipeStore();
+  const { isDetailOpen, isChatOpen } = useRecipeStore();
 
   const openRecipeModal = () => {
     setIsModalOpen(true);
@@ -35,8 +36,15 @@ export default function RecipeView() {
             <div className="w-200">
               <RecipeViewCard />
             </div>
-            <div className={`${isOpen ? "w-100" : "hidden"}`}>
+            <div
+              className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
+            >
               <RecipeDetailCard />
+            </div>
+            <div
+              className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
+            >
+              <RecipeChatCard />
             </div>
           </div>
         </Modal>

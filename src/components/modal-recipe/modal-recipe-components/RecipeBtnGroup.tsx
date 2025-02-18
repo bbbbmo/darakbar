@@ -9,7 +9,8 @@ import useRecipeStore from "./useRecipeStrore";
 
 export default function RecipeBtnGroup() {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);
-  const { isOpen, toggleOpen } = useRecipeStore();
+  const { isDetailOpen, isChatOpen, toggleDetailOpen, toggleChatOpen } =
+    useRecipeStore();
 
   const toggleStarIcon = () => {
     setSelectStarIcon(!selectStarIcon);
@@ -30,13 +31,16 @@ export default function RecipeBtnGroup() {
         Share
         <ShareIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
       </span>
-      <span className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2">
+      <span
+        className={`${isChatOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
+        onClick={toggleChatOpen}
+      >
         Chat
         <ChatBubbleBottomCenterIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
       </span>
       <span
-        className={`${isOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
-        onClick={toggleOpen}
+        className={`${isDetailOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
+        onClick={toggleDetailOpen}
       >
         Details
         <PlusIcon className="size-7 fill-stone-300 hover:fill-stone-400" />

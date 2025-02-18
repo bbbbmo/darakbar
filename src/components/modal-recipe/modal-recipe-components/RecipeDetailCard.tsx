@@ -4,12 +4,12 @@ import useRecipeStore from "./useRecipeStrore";
 
 // 레시피 정보
 export default function RecipeDetailCard() {
-  const { toggleOpen } = useRecipeStore();
+  const { closeDetail } = useRecipeStore();
   return (
     <div className="wrapper h-full w-full flex-col rounded-3xl bg-slate-100">
       <div className="image-container relative h-60 w-full rounded-t-3xl bg-stone-300">
         <div className="close-detail-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
-          <XMarkIcon className="size-6" onClick={toggleOpen} />
+          <XMarkIcon className="size-6" onClick={closeDetail} />
         </div>
       </div>
       <div className="details-container h-auto w-full text-stone-700">
