@@ -9,6 +9,7 @@ import useRecipeStore from "./useRecipeStore";
 import RecipeChatCard from "./components/modal/RecipeChatCard";
 import RecipeCard from "./components/RecipeCard";
 import recipes from "./recipes";
+import SearchBar from "../../components/SearchBar";
 
 export default function RecipeNavigation() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -27,6 +28,7 @@ export default function RecipeNavigation() {
       <GlobalNav />
       {/* [TODO] 모달창 안닫히는 오류 수정하기, RecipeDetailCard 내용 헤당 카드에 맞게 수정하기 */}
       <div className="wrapper h-full w-full px-15 pt-15">
+        <SearchBar />
         {/* 레시피 카드 */}
         <div className="grid justify-center md:grid-cols-2 xl:grid-cols-3">
           {recipes.map((cocktail) => (
