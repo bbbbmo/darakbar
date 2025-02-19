@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import useRecipeStore from "./useRecipeStrore";
+import useRecipeStore from "../../useRecipeStore";
 
 // 레시피 정보
 export default function RecipeChatCard() {

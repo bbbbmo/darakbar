@@ -15,7 +15,9 @@ export default function GlobalNav() {
       <div className="nav-title mr-auto cursor-pointer hover:animate-bounce">
         <Link to="/">
           <span>🍸 </span>
-          <span className="nav-title-name font-custom font-unpen">다락바</span>
+          <span className="nav-title-name font-unpen text-amber-400">
+            다락바
+          </span>
         </Link>
       </div>
       <ul className="flex gap-5">
@@ -28,15 +30,14 @@ export default function GlobalNav() {
         </li>
         <span className="border-r border-stone-400"></span>
         <li>
-          <Link to="/recipe-view">레시피 탐색</Link>
+          <Link to="/recipe-navigation">레시피 탐색</Link>
         </li>
       </ul>
       <div className="relative ml-auto">
         <UserIcon className="size-6 cursor-pointer" onClick={toggleUserMenu} />
         <Menu isOpen={isMenuOpen}>
-          <div>메뉴 항목 1</div>
-          <div>메뉴 항목 2</div>
-          <div>메뉴 항목 3</div>
+          <div>로그아웃</div>
+          <div>정보수정</div>
         </Menu>
       </div>
     </nav>

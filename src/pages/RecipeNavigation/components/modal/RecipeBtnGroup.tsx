@@ -5,7 +5,7 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import useRecipeStore from "./useRecipeStrore";
+import useRecipeStore from "../../useRecipeStore";
 
 export default function RecipeBtnGroup() {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);

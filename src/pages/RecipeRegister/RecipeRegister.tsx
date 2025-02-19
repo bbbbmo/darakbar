@@ -1,5 +1,5 @@
-import GlobalFooter from "../components/layout/GlobalFooter";
-import GlobalNav from "../components/layout/GlobalNav";
+import GlobalFooter from "../../components/layout/GlobalFooter";
+import GlobalNav from "../../components/layout/GlobalNav";
 
 export default function RecipeRegister() {
   return (
