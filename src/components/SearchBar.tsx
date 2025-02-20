@@ -16,7 +16,7 @@ export default function SearchBar() {
         placeholder="원하는 칵테일을 입력해보세요!"
         onChange={getSearchContent}
       />
-      <button className="search-bar__btn flex w-20 items-center justify-center gap-1 rounded-4xl bg-red-500 text-neutral-800">
+      <button className="search-bar__btn flex w-20 cursor-pointer items-center justify-center gap-1 rounded-4xl bg-red-500 text-neutral-800 hover:bg-red-600">
         <MagnifyingGlassIcon className="size-5" />
         검색
       </button>
