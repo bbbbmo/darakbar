@@ -54,7 +54,7 @@ export default function RecipeDetailCard({ cocktail }: RecipeDetailCardProps) {
         </div>
         <p className="tab-content p-4 text-xl">
           {activeTab === 0 && cocktail && (
-            <div className="tab-content__description flex flex-col gap-3">
+            <div className="tab-content__description flex flex-col gap-2">
               <div className="description__base">
                 <span className="mr-1 font-bold">베이스:</span>
                 {cocktail.base_liquor}
@@ -63,13 +63,17 @@ export default function RecipeDetailCard({ cocktail }: RecipeDetailCardProps) {
                 <span className="mr-1 font-bold">잔:</span>
                 {cocktail.glass_type}
               </div>
-              <div className="description__description">
+              {/* <div className="description__description">
                 <span className="mr-1 font-bold">설명:</span>
-                {cocktail.description}
-              </div>
+                {cocktail.description.length >= 38
+                  ? `${cocktail.description.slice(0, 38)}...`
+                  : cocktail.description}
+              </div> */}
             </div>
           )}
-          {activeTab === 1 && cocktail && cocktail.ingredients}
+          {activeTab === 1 &&
+            cocktail &&
+            cocktail.ingredients.map((ingredient) => <div>{ingredient}</div>)}
           {activeTab === 2 && cocktail && cocktail.instructions}
         </p>
       </div>
