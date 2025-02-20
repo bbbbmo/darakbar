@@ -9,8 +9,8 @@ export default function RecipeChatCard() {
       <div className="close-chat-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
         <XMarkIcon className="size-6" onClick={closeChat} />
       </div>
-      <div className="chat-container h-auto w-full text-stone-700">
-        <p>hi</p>
+      <div className="chat-container h-full w-full text-stone-700">
+        <p className="flex h-full items-center justify-center">진행 중...</p>
       </div>
     </div>
   );

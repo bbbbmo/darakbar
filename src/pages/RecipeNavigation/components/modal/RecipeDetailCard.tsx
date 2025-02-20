@@ -1,20 +1,14 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-
 import useRecipeStore from "../../useRecipeStore";
 import { useState } from "react";
+import { Cocktail_T } from "../../../../types/cocktailTypes";
 
 interface RecipeDetailCardProps {
-  ingredients: string[];
-  description: string;
-  instructions: string;
+  cocktail: Cocktail_T | null;
 }
 
 // 레시피 정보
-export default function RecipeDetailCard({
-  ingredients,
-  description,
-  instructions,
-}: RecipeDetailCardProps) {
+export default function RecipeDetailCard({ cocktail }: RecipeDetailCardProps) {
   const { closeDetail } = useRecipeStore();
   const [activeTab, setActiveTab] = useState<number>(0);
 
@@ -58,13 +52,26 @@ export default function RecipeDetailCard({
             </li>
           </ul>
         </div>
-        <div className="tab-content p-4 text-xl">
-          <p>
-            {activeTab === 0 && description}
-            {activeTab === 1 && ingredients}
-            {activeTab === 2 && instructions}
-          </p>
-        </div>
+        <p className="tab-content p-4 text-xl">
+          {activeTab === 0 && cocktail && (
+            <div className="tab-content__description flex flex-col gap-3">
+              <div className="description__base">
+                <span className="mr-1 font-bold">베이스:</span>
+                {cocktail.base_liquor}
+              </div>
+              <div className="description__glass">
+                <span className="mr-1 font-bold">잔:</span>
+                {cocktail.glass_type}
+              </div>
+              <div className="description__description">
+                <span className="mr-1 font-bold">설명:</span>
+                {cocktail.description}
+              </div>
+            </div>
+          )}
+          {activeTab === 1 && cocktail && cocktail.ingredients}
+          {activeTab === 2 && cocktail && cocktail.instructions}
+        </p>
       </div>
     </div>
   );
