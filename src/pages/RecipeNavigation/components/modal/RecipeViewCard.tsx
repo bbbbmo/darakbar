@@ -13,10 +13,14 @@ export default function RecipeViewCard({ cocktail }: RecipeViewCardProps) {
       <div className="h-[70%] w-full rounded-t-xl bg-white"></div>
       <div className="p-3">
         <div className="flex items-center">
-          <div className="w-full text-2xl font-bold">{cocktail.name}</div>
+          <div className="w-full text-2xl font-bold">
+            {cocktail && cocktail.name}
+          </div>
           <RecipeBtnGroup />
         </div>
-        <article className="mt-2 text-lg">{cocktail.description}</article>
+        <article className="mt-2 text-lg">
+          {cocktail && cocktail.description}
+        </article>
       </div>
     </div>
   );

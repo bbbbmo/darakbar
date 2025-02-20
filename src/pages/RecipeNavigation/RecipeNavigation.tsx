@@ -27,6 +27,7 @@ export default function RecipeNavigation() {
   // 칵테일 데이터 마운트
   useEffect(() => {
     getOriginalCocktails();
+    getOriginalCocktailsImage();
   }, []);
 
   // cocktailsData가 변경될 때마다 콘솔 출력
@@ -48,6 +49,9 @@ export default function RecipeNavigation() {
     }
     setOriginalCocktails(data);
   };
+
+  // [TODO] 칵테일 이미지 Storage에서 가져오는 로직 구현
+  const getOriginalCocktailsImage = async () => {};
 
   // 모달 여닫기 함수
   const openRecipeModal = (cocktail: Cocktail_T) => {
