@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
-@font-face {
+/* @font-face { // 왜안되냐고!!!!
   font-family: "UnPenheulim";
   src: url("/fonts/UnPenheulim.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+} */
+
+@font-face {
+  font-family: "Nanum";
+  src: url("/fonts/나눔손글씨성실체.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
 }
@@ -36,7 +43,7 @@
 }
 
 .font-unpen {
-  font-family: "UnPenheulim", serif;
+  font-family: "Nanum", serif;
   text-align: center;
   font-weight: 700;
 }
