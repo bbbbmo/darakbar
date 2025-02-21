@@ -18,10 +18,9 @@ export default function SearchBar() {
       } else {
         // 사용자가 입력한 값으로 필터링
         filterCocktails(cocktailNameOrIngredients);
+        inputRef.current.value = "";
       }
-      // filterCocktails(cocktailNameOrIngredients);
     }
-    // setFilteredCocktails(allCocktails); // 입력 값이 없다면 -> 전체 데이터 store에 전달
   };
 
   // 사용자가 입력한 값을 부모 컴포넌트에서 받아온 칵테일 데이터와 비교
