@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../../supabase";
+import { supabase, supabaseUrl } from "../../supabase";
 // 컴포넌트
 import GlobalNav from "../../components/layout/GlobalNav";
 import Modal from "../../components/modal/Modal";
@@ -27,7 +27,6 @@ export default function RecipeNavigation() {
   // 칵테일 데이터 마운트
   useEffect(() => {
     getOriginalCocktails();
-    getOriginalCocktailsImage();
   }, []);
 
   // cocktailsData가 변경될 때마다 콘솔 출력
@@ -39,7 +38,10 @@ export default function RecipeNavigation() {
 
   // 칵테일 전체 데이터 가져오는 함수
   const getOriginalCocktails = async () => {
-    const { data, error } = await supabase.from("cocktails").select(); // 객체 배열 반환
+    const { data, error } = await supabase
+      .from("cocktails")
+      .select()
+      .order("id", { ascending: true }); // id를 기준으로 오름차순 정렬, 객체 배열 반환
 
     if (error) {
       console.log("Error Fetching data", error);
@@ -51,7 +53,10 @@ export default function RecipeNavigation() {
   };
 
   // [TODO] 칵테일 이미지 Storage에서 가져오는 로직 구현
-  const getOriginalCocktailsImage = async () => {};
+  // const getOriginalCocktailsImage = async () => {
+  //   const imageUrl = `${supabaseUrl}/storage/v1/object/sign/darakbar-storage/cocktails_img/`;
+
+  // };
 
   // 모달 여닫기 함수
   const openRecipeModal = (cocktail: Cocktail_T) => {
@@ -78,7 +83,11 @@ export default function RecipeNavigation() {
                 className="flex justify-center"
                 onClick={() => openRecipeModal(cocktail)}
               >
-                <RecipeCard key={cocktail.id} title={cocktail.name} />
+                <RecipeCard
+                  key={cocktail.id}
+                  title={cocktail.name}
+                  image={cocktail.image_url}
+                />
               </div>
             ))}
         </div>

@@ -6,4 +6,5 @@ export type Cocktail_T = {
   glass_type: string;
   instructions: string;
   description: string;
+  image_url: string | null;
 };

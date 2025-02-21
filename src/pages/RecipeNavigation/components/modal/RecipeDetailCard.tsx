@@ -5,6 +5,7 @@ import { Cocktail_T } from "../../../../types/cocktailTypes";
 
 interface RecipeDetailCardProps {
   cocktail: Cocktail_T | null;
+  image: Cocktail_T;
 }
 
 // 레시피 정보
@@ -20,6 +21,10 @@ export default function RecipeDetailCard({ cocktail }: RecipeDetailCardProps) {
     <div className="wrapper h-full w-full flex-col rounded-3xl bg-slate-100">
       {/* 해당 레시피 이미지 */}
       <div className="image-container relative h-60 w-full rounded-t-3xl bg-stone-300">
+        <img
+          className="h-full w-full rounded-t-3xl object-cover"
+          src={cocktail?.image_url}
+        />
         {/* detail 닫기 버튼 */}
         <div className="close-detail-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
           <XMarkIcon className="size-6" onClick={closeDetail} />
