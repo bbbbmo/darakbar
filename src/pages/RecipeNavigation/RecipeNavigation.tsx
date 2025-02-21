@@ -12,10 +12,10 @@ import RecipeCard from "./components/RecipeCard";
 // 타입
 import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand
-import useRecipeStore from "./useRecipeStore";
+import useModalStore from "../../stores/modalStore";
 
 export default function RecipeNavigation() {
-  const { isDetailOpen, isChatOpen } = useRecipeStore();
+  const { isDetailOpen, isChatOpen } = useModalStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [originalCocktails, setOriginalCocktails] = useState<
     Cocktail_T[] | null
@@ -51,12 +51,6 @@ export default function RecipeNavigation() {
     }
     setOriginalCocktails(data);
   };
-
-  // [TODO] 칵테일 이미지 Storage에서 가져오는 로직 구현
-  // const getOriginalCocktailsImage = async () => {
-  //   const imageUrl = `${supabaseUrl}/storage/v1/object/sign/darakbar-storage/cocktails_img/`;
-
-  // };
 
   // 모달 여닫기 함수
   const openRecipeModal = (cocktail: Cocktail_T) => {
