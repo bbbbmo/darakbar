@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase, supabaseUrl } from "../../supabase";
+import supabase from "../../supabase";
 // 컴포넌트
 import GlobalNav from "../../components/layout/GlobalNav";
 import Modal from "../../components/modal/Modal";
@@ -13,16 +13,18 @@ import RecipeCard from "./components/RecipeCard";
 import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand
 import useModalStore from "../../stores/modalStore";
+import useCocktailStore from "../../stores/cocktailStore";
 
 export default function RecipeNavigation() {
   const { isDetailOpen, isChatOpen } = useModalStore();
+  const {
+    allCocktails,
+    filteredCocktails,
+    setAllCocktails,
+    setClickedCardData,
+  } = useCocktailStore();
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [originalCocktails, setOriginalCocktails] = useState<
-    Cocktail_T[] | null
-  >(null);
-  const [clickedCardData, setClickedCardData] = useState<Cocktail_T | null>(
-    null,
-  );
 
   // 칵테일 데이터 마운트
   useEffect(() => {
@@ -31,10 +33,11 @@ export default function RecipeNavigation() {
 
   // cocktailsData가 변경될 때마다 콘솔 출력
   useEffect(() => {
-    if (originalCocktails) {
-      console.log("Cocktails Data:", originalCocktails);
+    if (allCocktails) {
+      console.log("Cocktails Data:", allCocktails);
+      console.log("filtered Data:", filteredCocktails);
     }
-  }, [originalCocktails]);
+  }, [allCocktails]);
 
   // 칵테일 전체 데이터 가져오는 함수
   const getOriginalCocktails = async () => {
@@ -49,11 +52,11 @@ export default function RecipeNavigation() {
     } else if (!data) {
       console.log("Miss Fetching data");
     }
-    setOriginalCocktails(data);
+    setAllCocktails(data);
   };
 
   // 모달 여닫기 함수
-  const openRecipeModal = (cocktail: Cocktail_T) => {
+  const openRecipeCardModal = (cocktail: Cocktail_T) => {
     setClickedCardData(cocktail);
     setIsModalOpen(true);
   };
@@ -71,17 +74,14 @@ export default function RecipeNavigation() {
         <SearchBar />
         {/* 레시피 카드 */}
         <div className="grid justify-center md:grid-cols-2 xl:grid-cols-3">
-          {originalCocktails &&
-            originalCocktails.map((cocktail) => (
+          {filteredCocktails &&
+            filteredCocktails.map((cocktail) => (
               <div
                 className="flex justify-center"
-                onClick={() => openRecipeModal(cocktail)}
+                onClick={() => openRecipeCardModal(cocktail)}
+                key={cocktail.id}
               >
-                <RecipeCard
-                  key={cocktail.id}
-                  title={cocktail.name}
-                  image={cocktail.image_url}
-                />
+                <RecipeCard title={cocktail.name} image={cocktail.image_url} />
               </div>
             ))}
         </div>
@@ -91,13 +91,13 @@ export default function RecipeNavigation() {
           <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
             <div className="w-200">
               {/* 모달 좌측 카드 */}
-              <RecipeViewCard cocktail={clickedCardData} />
+              <RecipeViewCard />
             </div>
             <div
               className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
             >
               {/* 모달 우측 설명 카드 */}
-              <RecipeDetailCard cocktail={clickedCardData} />
+              <RecipeDetailCard />
             </div>
             <div
               className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
