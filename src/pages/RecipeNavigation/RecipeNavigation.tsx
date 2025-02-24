@@ -89,7 +89,7 @@ export default function RecipeNavigation() {
         {/* 모달 */}
         <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
           <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
-            <div className="w-200">
+            <div className="w-150">
               {/* 모달 좌측 카드 */}
               <RecipeViewCard />
             </div>
