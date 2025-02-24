@@ -13,5 +13,5 @@
 ## Pages
 ### 레시피 탐색 페이지
 ![레시피 탐색 페이지](/public/images/imges-readme/recipe-navigation.png)
-![레시피 탐색 페이지 - 모달창](/public/images/imges-readme/recipe-navgation-modal.png)
+![레시피 탐색 페이지 - 모달창](/public/images/imges-readme/recipe-navigation-modal.png)
 
