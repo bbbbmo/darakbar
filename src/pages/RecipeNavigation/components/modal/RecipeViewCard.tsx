@@ -86,7 +86,9 @@ export default function RecipeViewCard() {
             allowFullScreen
           ></iframe>
         ) : (
-          <div className="h-full w-full bg-stone-700">로딩 중...</div>
+          <div className="flex h-full w-full items-center justify-center bg-stone-900">
+            로딩 중...
+          </div>
         )}
       </div>
       <div className="p-3">
