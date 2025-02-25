@@ -6,23 +6,24 @@ export default function GlobalFooter() {
       <div className="divider w-full bg-neutral-800 px-7">
         <hr className="border-t border-zinc-700"></hr>
       </div>
-      <footer className="footer w-full bg-neutral-800 p-5">
-        <span className="rounded-3xl bg-neutral-700 p-2 text-xl">Contact</span>
-        <div className="mt-3 flex w-full">
-          <p className="footer-content"></p>
-          <div className="mr-3 ml-auto flex flex-col gap-2">
-            <Link to="" className="flex cursor-pointer gap-1 hover:underline">
-              Instagram
-              <img src="/images/instagram.png" alt="instagram" />
-            </Link>
-
-            <Link
-              to="https://github.com/bbbbmo"
-              className="flex cursor-pointer gap-1 hover:underline"
-            >
-              GitHub
-              <img src="/images/github.png" alt="github" />
-            </Link>
+      <footer className="footer w-full bg-neutral-800 px-10 py-5 text-neutral-400">
+        <div className="flex w-full">
+          <Link to="/">
+            <img src="/images/logo/logo-whole.png" className="size-18" />
+          </Link>
+          <div className="mr-20 ml-auto flex flex-col gap-3">
+            <div>aqw20501@naver.com</div>
+            <div className="flex gap-3">
+              <Link to="" className="flex cursor-pointer gap-1 hover:underline">
+                <img src="/images/instagram.png" alt="instagram" />
+              </Link>
+              <Link
+                to="https://github.com/bbbbmo"
+                className="flex cursor-pointer gap-1 hover:underline"
+              >
+                <img src="/images/github.png" alt="github" />
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

@@ -14,12 +14,12 @@ export default function RecipeDetailCard() {
   };
 
   return (
-    <div className="wrapper h-full w-full flex-col rounded-3xl bg-slate-100">
+    <div className="wrapper h-full w-full flex-col rounded-xl bg-slate-100">
       {/* 해당 레시피 이미지 */}
-      <div className="image-container relative h-60 w-full rounded-t-3xl bg-stone-300">
+      <div className="image-container relative h-60 w-full rounded-t-xl bg-stone-300">
         {clickedCardData?.image_url ? (
           <img
-            className="h-full w-full rounded-t-3xl object-cover"
+            className="h-full w-full rounded-t-xl object-cover"
             src={clickedCardData?.image_url}
           />
         ) : null}
@@ -55,7 +55,7 @@ export default function RecipeDetailCard() {
             </li>
           </ul>
         </div>
-        <p className="tab-content p-4 text-xl">
+        <section className="tab-content p-4 text-xl">
           {activeTab === 0 && clickedCardData && (
             <div className="tab-content__description flex flex-col gap-2">
               <div className="description__base">
@@ -66,12 +66,6 @@ export default function RecipeDetailCard() {
                 <span className="mr-1 font-bold">잔:</span>
                 {clickedCardData.glass_type}
               </div>
-              {/* <div className="description__description">
-                <span className="mr-1 font-bold">설명:</span>
-                {clickedCardData.description.length >= 38
-                  ? `${clickedCardData.description.slice(0, 38)}...`
-                  : clickedCardData.description}
-              </div> */}
             </div>
           )}
           {activeTab === 1 &&
@@ -80,7 +74,7 @@ export default function RecipeDetailCard() {
               <div>{ingredient}</div>
             ))}
           {activeTab === 2 && clickedCardData && clickedCardData.instructions}
-        </p>
+        </section>
       </div>
     </div>
   );

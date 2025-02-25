@@ -17,12 +17,8 @@ import useCocktailStore from "../../stores/cocktailStore";
 
 export default function RecipeNavigation() {
   const { isDetailOpen, isChatOpen } = useModalStore();
-  const {
-    allCocktails,
-    filteredCocktails,
-    setAllCocktails,
-    setClickedCardData,
-  } = useCocktailStore();
+  const { filteredCocktails, setAllCocktails, setClickedCardData } =
+    useCocktailStore();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -30,14 +26,6 @@ export default function RecipeNavigation() {
   useEffect(() => {
     getOriginalCocktails();
   }, []);
-
-  // cocktailsData가 변경될 때마다 콘솔 출력
-  useEffect(() => {
-    if (allCocktails) {
-      console.log("Cocktails Data:", allCocktails);
-      console.log("filtered Data:", filteredCocktails);
-    }
-  }, [allCocktails]);
 
   // 칵테일 전체 데이터 가져오는 함수
   const getOriginalCocktails = async () => {

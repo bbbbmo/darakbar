@@ -63,7 +63,7 @@ export default function RecipeViewCard() {
       if (response) {
         const data = await response.json();
         setRecipeVideo(data);
-        console.log(recipeVideo);
+        console.log(data);
       } else {
         console.log("칵테일 유튜브 동영상 fetch 에러");
       }
@@ -78,13 +78,17 @@ export default function RecipeViewCard() {
       <div className="flex h-[70%] w-full items-center justify-center rounded-t-xl">
         {recipeVideo ? (
           <iframe
-            width="580"
-            height="315"
+            className="h-full w-full"
             src={`https://www.youtube.com/embed/${recipeVideo.items[0].id.videoId}`}
             title={recipeVideo.items[0].snippet.title}
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            loading="lazy" // iframe이 위치한 거리에 도달할 때까지 iframe 로딩 연기 -> 성능 및 비용 향상
             allowFullScreen
-          ></iframe>
+          >
+            <a
+              href={`https://www.youtube.com/embed/${recipeVideo.items[0].id.videoId}`}
+            ></a>
+          </iframe>
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-stone-900">
             로딩 중...

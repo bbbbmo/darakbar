@@ -5,7 +5,7 @@ import useRecipeStore from "../../../../stores/modalStore";
 export default function RecipeChatCard() {
   const { closeChat } = useRecipeStore();
   return (
-    <div className="wrapper relative h-full w-full flex-col rounded-3xl bg-slate-100">
+    <div className="wrapper relative h-full w-full flex-col rounded-xl bg-slate-100">
       <div className="close-chat-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
         <XMarkIcon className="size-6" onClick={closeChat} />
       </div>
