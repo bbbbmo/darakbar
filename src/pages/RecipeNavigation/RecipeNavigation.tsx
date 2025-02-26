@@ -61,7 +61,7 @@ export default function RecipeNavigation() {
       <div className="wrapper h-full w-full px-15 pt-15">
         <SearchBar />
         {/* 레시피 카드 */}
-        <div className="grid justify-center md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
           {filteredCocktails &&
             filteredCocktails.map((cocktail) => (
               <div
