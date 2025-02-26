@@ -14,21 +14,21 @@ export default function RecipeRegisterIntroduce({
   };
   return (
     <>
-      <form className="register-container" onSubmit={handleSubmit}>
-        <p>
+      <form
+        className="register-container flex h-full min-w-100 flex-col pb-5"
+        onSubmit={handleSubmit}
+      >
+        <p className="mt-2 mb-5 text-lg">
           <span>만들어진 나만의 칵테일 제조법을 설명해 주세요!</span>
         </p>
-        <div>
-          <label htmlFor="">베이스(주재료)</label>
-          <input type="text" />
+        <div className="flex grow flex-col gap-3 overflow-y-auto rounded-lg bg-slate-100 p-2 text-stone-700">
+          <label htmlFor="" className="font-bold">
+            제조법
+          </label>
+          <textarea className="h-full rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800" />
         </div>
-        <div>
-          <label htmlFor="">재료 1</label>
-          <input type="text" />
-        </div>
-        <button>+</button>
       </form>
-      <div className="footer flex w-full justify-between">
+      <div className="footer mt-auto flex w-full justify-between">
         <button
           className="flex items-center gap-1 hover:text-amber-400"
           onClick={prevStep}

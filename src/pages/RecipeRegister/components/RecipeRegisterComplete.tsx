@@ -6,11 +6,13 @@ export default function RecipeRegisterComplete({
   onClose,
 }: RecipeRegisterCompleteProps) {
   return (
-    <div className="register-container min-w-100">
-      <p>
+    <div className="register-container flex h-full min-w-100 flex-col items-center justify-center gap-5">
+      <p className="text-lg">
         <span>나만의 칵테일이 완성되었어요!</span>
       </p>
-      <button onClick={onClose}>확인 하기</button>
+      <button onClick={onClose} className="btn-secondary w-40">
+        확인하러 가기
+      </button>
     </div>
   );
 }

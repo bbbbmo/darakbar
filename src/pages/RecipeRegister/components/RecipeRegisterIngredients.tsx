@@ -46,7 +46,7 @@ export default function RecipeRegisterIngredients({
           <span>나만의 특별한 레시피를 위한 재료를 입력해 주세요!</span>
         </p>
         <div className="scroll-none flex max-h-100 flex-col gap-2 overflow-y-auto text-stone-700">
-          <div className="text flex flex-col gap-3 rounded-lg bg-slate-100 p-2">
+          <div className="flex flex-col gap-3 rounded-lg bg-slate-100 p-2">
             <label htmlFor="" className="font-bold">
               베이스(주재료)
             </label>
@@ -57,6 +57,7 @@ export default function RecipeRegisterIngredients({
                 placeholder="칵테일의 메인이 되는 술이나 재료를 입력해 주세요"
                 className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
                 onChange={(e) => changeBaseValue(e.target.value)}
+                required
               />
               <select className="w-15" required>
                 <option value="oz">oz</option>
@@ -92,6 +93,7 @@ export default function RecipeRegisterIngredients({
                   onChange={(e) =>
                     changeIngredientsValue(index, e.target.value)
                   }
+                  required
                 />
                 <select className="w-15" required>
                   <option value="oz">oz</option>
@@ -113,7 +115,7 @@ export default function RecipeRegisterIngredients({
       </form>
       <div className="footer mt-auto w-full">
         <button
-          className="flex items-center gap-1 hover:text-amber-400"
+          className="ml-auto flex items-center gap-1 hover:text-amber-400"
           onClick={nextStep}
         >
           다음 단계로 <ArrowRightIcon className="size-4" />

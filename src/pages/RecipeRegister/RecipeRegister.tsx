@@ -44,7 +44,7 @@ export default function RecipeRegister() {
           <p className="flex flex-col text-xl text-amber-400">
             <span>자신만의 칵테일을 만들어 다락바에 보관해 보세요!</span>
             <button
-              className="rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500 sm:w-30 xl:w-50"
+              className="btn-secondary sm:w-30 xl:w-50"
               onClick={openRegisterModal}
             >
               레시피 등록하기

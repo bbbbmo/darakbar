@@ -18,7 +18,7 @@ export default function Home() {
             </span>
             <span></span>
             <Link to="/recipe-register" className="ml-auto">
-              <button className="rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500 sm:w-30 xl:w-50">
+              <button className="btn-secondary sm:w-30 xl:w-50">
                 시작하기
               </button>
             </Link>

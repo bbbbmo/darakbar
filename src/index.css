@@ -47,6 +47,14 @@
   .scroll-none::-webkit-scrollbar {
     display: none;
   }
+
+  .btn-primary {
+    @apply rounded-lg bg-zinc-600 p-2 text-white;
+  }
+
+  .btn-secondary {
+    @apply rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500;
+  }
 }
 
 .font-unpen {
