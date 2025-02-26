@@ -9,6 +9,7 @@ import GlobalFooter from "../../components/layout/GlobalFooter";
 import SearchBar from "../../components/SearchBar";
 import RecipeChatCard from "./components/modal/RecipeChatCard";
 import RecipeCard from "./components/RecipeCard";
+import LoadingScreen from "../../components/layout/LoadingScreen";
 // 타입
 import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand
@@ -19,7 +20,7 @@ export default function RecipeNavigation() {
   const { isDetailOpen, isChatOpen } = useModalStore();
   const { filteredCocktails, setAllCocktails, setClickedCardData } =
     useCocktailStore();
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 칵테일 데이터 마운트
@@ -41,6 +42,7 @@ export default function RecipeNavigation() {
       console.log("Miss Fetching data");
     }
     setAllCocktails(data);
+    setIsLoading(false);
   };
 
   // 모달 여닫기 함수
@@ -55,49 +57,58 @@ export default function RecipeNavigation() {
 
   return (
     <>
-      {/* Nav 바 */}
-      <GlobalNav />
-      {/* [TODO] 모달창 안닫히는 오류 수정하기, RecipeDetailCard 내용 헤당 카드에 맞게 수정하기 */}
-      <div className="wrapper h-full w-full px-15 pt-15">
-        <SearchBar />
-        {/* 레시피 카드 */}
-        <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
-          {filteredCocktails &&
-            filteredCocktails.map((cocktail) => (
-              <div
-                className="flex justify-center"
-                onClick={() => openRecipeCardModal(cocktail)}
-                key={cocktail.id}
-              >
-                <RecipeCard title={cocktail.name} image={cocktail.image_url} />
-              </div>
-            ))}
-        </div>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          {/* Nav 바 */}
+          <GlobalNav />
+          {/* [TODO] 모달창 안닫히는 오류 수정하기, RecipeDetailCard 내용 헤당 카드에 맞게 수정하기 */}
+          <div className="wrapper h-full w-full px-15 pt-15">
+            <SearchBar />
+            {/* 레시피 카드 */}
+            <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
+              {filteredCocktails &&
+                filteredCocktails.map((cocktail) => (
+                  <div
+                    className="flex justify-center"
+                    onClick={() => openRecipeCardModal(cocktail)}
+                    key={cocktail.id}
+                  >
+                    <RecipeCard
+                      title={cocktail.name}
+                      image={cocktail.image_url}
+                    />
+                  </div>
+                ))}
+            </div>
 
-        {/* 모달 */}
-        <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
-          <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
-            <div className="w-150">
-              {/* 모달 좌측 카드 */}
-              <RecipeViewCard />
-            </div>
-            <div
-              className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
-            >
-              {/* 모달 우측 설명 카드 */}
-              <RecipeDetailCard />
-            </div>
-            <div
-              className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
-            >
-              {/* 모달 우측 채팅 카드 */}
-              <RecipeChatCard />
-            </div>
+            {/* 모달 */}
+            <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
+              <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
+                <div className="w-150">
+                  {/* 모달 좌측 카드 */}
+                  <RecipeViewCard />
+                </div>
+                <div
+                  className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
+                >
+                  {/* 모달 우측 설명 카드 */}
+                  <RecipeDetailCard />
+                </div>
+                <div
+                  className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
+                >
+                  {/* 모달 우측 채팅 카드 */}
+                  <RecipeChatCard />
+                </div>
+              </div>
+            </Modal>
           </div>
-        </Modal>
-      </div>
-      {/* Footer */}
-      <GlobalFooter />
+          {/* Footer */}
+          <GlobalFooter />
+        </>
+      )}
     </>
   );
 }

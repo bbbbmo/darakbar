@@ -25,7 +25,10 @@ export default function RecipeRegisterIntroduce({
           <label htmlFor="" className="font-bold">
             제조법
           </label>
-          <textarea className="h-full rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800" />
+          <textarea
+            placeholder="ex) 1. 라임과 레몬을 반으로 슬라이스 한다."
+            className="h-full rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+          />
         </div>
       </form>
       <div className="footer mt-auto flex w-full justify-between">

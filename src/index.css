@@ -55,6 +55,15 @@
   .btn-secondary {
     @apply rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500;
   }
+
+  .canvas {
+    height: 100vh;
+    left: 0px;
+    pointer-events: none;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+  }
 }
 
 .font-unpen {

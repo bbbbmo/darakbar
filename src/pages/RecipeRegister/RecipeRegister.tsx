@@ -41,10 +41,12 @@ export default function RecipeRegister() {
       <GlobalNav />
       <div className="wrapper h-full w-full px-15 pt-15">
         <div className="mt-10 mb-10 flex h-full w-full flex-col">
-          <p className="flex flex-col text-xl text-amber-400">
-            <span>자신만의 칵테일을 만들어 다락바에 보관해 보세요!</span>
+          <p className="flex flex-col items-center text-xl text-amber-400">
+            <span className="text-2xl">
+              나만의 칵테일을 만들어 다락바에 보관해 보세요!
+            </span>
             <button
-              className="btn-secondary sm:w-30 xl:w-50"
+              className="btn-secondary ml-auto sm:w-30 xl:w-50"
               onClick={openRegisterModal}
             >
               레시피 등록하기
