@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import supabase from "../supabase";
 
 // 로그인한 경우 이 페이지, 로그인 하지 않은 경우는 로그인 페이지로 가게 함
@@ -10,36 +8,45 @@ export default function ProtectedRoute({
 }: {
   children: React.ReactNode;
 }) {
-  //   const [user, setUser] = useState(auth.currentUser); // 유저가 로그인 했는지 여부를 알려줌, 로그인 되어있는 user의 값 또는 null
-  //   useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-  //       // 유저의 회원가입 여부를 관찰
-  //       setUser(authUser);
-  //     });
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   }, []);
-  //   if (user === null) {
-  //     // user가 null이라면
-  //     return <Navigate to="/login" />;
-  //   }
-  //   return children; // 로그인 했다면 ProtectedRoute의 하위 페이지(Layout)로 가게함
-  //   const [session, setSession] = useState(null);
-  //   useEffect(() => {
-  //     supabase.auth.getSession().then(({ data: { session } }) => {
-  //       setSession(session);
-  //     });
-  //     const {
-  //       data: { subscription },
-  //     } = supabase.auth.onAuthStateChange((_event, session) => {
-  //       setSession(session);
-  //     });
-  //     return () => subscription.unsubscribe();
-  //   }, []);
-  //   if (!session) {
-  //     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
-  //   } else {
-  //     return <div>Logged in!</div>;
-  //   }
+  const [user, setUser] = useState(null); // 유저가 로그인 했는지 여부를 알려줌
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data, error: userError } = await supabase.auth.getUser(); // 현재 로그인된 사용자 가져오기
+      if (data) {
+        setUser(data); // 로그인된 유저가 있으면 setUser로 상태 업데이트
+      } else if (userError) {
+        console.log(userError);
+      } else {
+        setUser(null); // 유저가 없으면 null로 설정
+      }
+    };
+
+    // 컴포넌트 마운트 시 현재 로그인된 사용자 확인
+    checkUser();
+
+    // 로그인 상태 변화 감지
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (session?.user) {
+          setUser(session.user); // 유저가 로그인 상태이면 user 상태 업데이트
+        } else {
+          setUser(null); // 유저가 로그아웃된 상태라면 null로 설정
+        }
+      },
+    );
+
+    // 클린업 함수: 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+      authListener?.unsubscribe();
+    };
+  }, []);
+
+  // user가 null이면 로그인 페이지로 리다이렉트
+  if (user === null) {
+    return <Navigate to="/signin" />;
+  }
+
+  // 로그인된 유저가 있으면 children을 렌더링
+  return <>{children}</>;
 }
