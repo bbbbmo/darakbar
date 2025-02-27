@@ -42,7 +42,9 @@ export default function GlobalNav() {
         <UserIcon className="size-6 cursor-pointer" onClick={toggleUserMenu} />
         <Menu isOpen={isMenuOpen}>
           <div>로그아웃</div>
-          <div>정보수정</div>
+          <Link to="/user-profile">
+            <div>정보수정</div>
+          </Link>
         </Menu>
       </div>
     </nav>
