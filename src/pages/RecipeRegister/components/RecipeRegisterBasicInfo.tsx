@@ -56,7 +56,7 @@ export default function RecipeRegisterBasicInfo({
             <input
               type="text"
               placeholder="ex) 초코 바나나 펀치, 레인보우 샤베트 등"
-              className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+              className="input-primary h-10 grow"
               required
             />
           </div>

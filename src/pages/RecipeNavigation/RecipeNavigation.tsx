@@ -9,7 +9,7 @@ import GlobalFooter from "../../components/layout/GlobalFooter";
 import SearchBar from "../../components/SearchBar";
 import RecipeChatCard from "./components/modal/RecipeChatCard";
 import RecipeCard from "./components/RecipeCard";
-import LoadingScreen from "../../components/layout/LoadingScreen";
+import LoadingScreen from "../../components/LoadingScreen";
 // 타입
 import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand

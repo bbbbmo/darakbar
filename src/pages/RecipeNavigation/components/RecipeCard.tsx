@@ -1,6 +1,6 @@
 interface RecipeCardProps {
   title: string;
-  image: string;
+  image: string | null;
 }
 
 const RecipeCard = ({ title, image }: RecipeCardProps) => {

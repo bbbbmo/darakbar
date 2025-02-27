@@ -41,6 +41,14 @@
   button {
     cursor: pointer;
   }
+
+  select {
+    border: 2px solid;
+  }
+
+  label {
+    font-weight: 700;
+  }
 }
 
 @layer components {
@@ -54,6 +62,10 @@
 
   .btn-secondary {
     @apply rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500;
+  }
+
+  .input-primary {
+    @apply h-10 rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800;
   }
 
   .canvas {
