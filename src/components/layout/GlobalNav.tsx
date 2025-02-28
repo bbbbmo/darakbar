@@ -2,12 +2,20 @@ import { UserIcon } from "@heroicons/react/24/solid";
 import Menu from "./Menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import supabase from "../../supabase";
 
 export default function GlobalNav() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const toggleUserMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert(`로그아웃 에러 발생 ${error}`);
+    }
   };
 
   return (
@@ -41,7 +49,7 @@ export default function GlobalNav() {
       <div className="relative ml-auto">
         <UserIcon className="size-6 cursor-pointer" onClick={toggleUserMenu} />
         <Menu isOpen={isMenuOpen}>
-          <div>로그아웃</div>
+          <div onClick={signOut}>로그아웃</div>
           <Link to="/user-profile">
             <div>정보수정</div>
           </Link>
