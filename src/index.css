@@ -68,6 +68,10 @@
     @apply h-10 rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800;
   }
 
+  .tab {
+    @apply inline-block min-w-20 rounded-t-lg border-b-2;
+  }
+
   .canvas {
     height: 100vh;
     left: 0px;

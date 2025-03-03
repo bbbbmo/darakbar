@@ -1,5 +1,6 @@
 import { ArrowRightIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import React from "react";
+import useRegisterStore from "../registerStore";
 
 interface RecipeRegisterIngredientsProps {
   nextStep: () => void;
@@ -8,33 +9,37 @@ interface RecipeRegisterIngredientsProps {
 export default function RecipeRegisterIngredients({
   nextStep,
 }: RecipeRegisterIngredientsProps) {
-  const [base, setBase] = useState<string>("");
-  const [ingredients, setIngredients] = useState<string[]>([""]);
+  const {
+    baseLiquor,
+    ingredients,
+    ingredientUnits,
+    addIngredient,
+    removeIngredient,
+    setBaseLiquor,
+    setIngredients,
+    setIngredientUnit,
+  } = useRegisterStore();
 
-  // 재료 입력 추가
+  // 새 재료를 추가하는 함수
   const addNewIngredient = () => {
-    setIngredients([...ingredients, ""]);
+    addIngredient(""); // 빈 문자열로 새로운 재료 추가
   };
 
-  // 재료 입력 삭제
-  const deleteNewIngredient = (index: number) => {
-    const newIngredients = ingredients.filter((_, i) => i !== index); // index와 일치하지 않는 항목만 필터링
-    setIngredients(newIngredients); // 필터링된 새 배열을 상태로 업데이트
+  const handleBaseLiquorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBaseLiquor(e.target.value);
   };
 
-  // 재료 입력 시 해당 데이터 저장
-  const changeIngredientsValue = (index: number, value: string) => {
+  // 재료 입력값을 변경하는 함수
+  const handleIngredientChange = (index: number, value: string) => {
     const updatedIngredients = [...ingredients];
-    updatedIngredients[index] = value; // 변경된 값으로 배열 업데이트
-    setIngredients(updatedIngredients);
+    updatedIngredients[index] = value; // 해당 인덱스의 값 수정
+    setIngredients(updatedIngredients); // Zustand에 새로운 배열을 설정
   };
 
-  // 베이스 입력 시 해당 데이터 저장
-  const changeBaseValue = (value: string) => {
-    setBase(value);
+  const handleIngredientUnitChange = (index: number, unit: string) => {
+    setIngredientUnit(index, unit);
   };
 
-  // 폼 제출 방지
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
@@ -53,13 +58,13 @@ export default function RecipeRegisterIngredients({
             <div className="flex gap-3">
               <input
                 type="text"
-                value={base}
+                value={baseLiquor}
                 placeholder="칵테일의 메인이 되는 술이나 재료를 입력해 주세요"
                 className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
-                onChange={(e) => changeBaseValue(e.target.value)}
+                onChange={handleBaseLiquorChange}
                 required
               />
-              <select className="w-15" required>
+              <select className="w-15 rounded-sm" required>
                 <option value="oz">oz</option>
                 <option value="ml">ml</option>
                 <option value="티스푼">티스푼</option>
@@ -79,7 +84,7 @@ export default function RecipeRegisterIngredients({
               {index !== 0 && (
                 <span
                   className="absolute right-2 cursor-pointer"
-                  onClick={() => deleteNewIngredient(index)}
+                  onClick={() => removeIngredient(index)}
                 >
                   <XCircleIcon className="size-5" />
                 </span>
@@ -87,15 +92,22 @@ export default function RecipeRegisterIngredients({
               <div className="flex gap-3">
                 <input
                   type="text"
-                  value={ingredient}
+                  value={ingredient[index]} // 각 재료 입력값 바인딩
                   placeholder="추가적인 재료를 입력해 주세요"
                   className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
                   onChange={(e) =>
-                    changeIngredientsValue(index, e.target.value)
-                  }
+                    handleIngredientChange(index, e.target.value)
+                  } // 각 재료 수정
                   required
                 />
-                <select className="w-15" required>
+                <select
+                  value={ingredientUnits[index]} // 현재 단위 바인딩
+                  className="w-15 rounded-sm"
+                  required
+                  onChange={(e) =>
+                    handleIngredientUnitChange(index, e.target.value)
+                  }
+                >
                   <option value="oz">oz</option>
                   <option value="ml">ml</option>
                   <option value="티스푼">티스푼</option>
@@ -106,6 +118,7 @@ export default function RecipeRegisterIngredients({
             </div>
           ))}
           <button
+            type="button"
             className="rounded-lg bg-zinc-600 p-2 text-white"
             onClick={addNewIngredient}
           >

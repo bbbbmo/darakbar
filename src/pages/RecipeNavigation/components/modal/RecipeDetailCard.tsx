@@ -34,23 +34,23 @@ export default function RecipeDetailCard() {
           <ul className="tabs flex flex-wrap gap-2">
             <li onClick={() => handleTabClick(0)}>
               <span
-                className={`tab inline-block rounded-t-lg border-b-2 ${activeTab === 0 ? "border-red-300 bg-zinc-200 text-stone-900" : "border-transparent hover:border-red-300 hover:text-stone-900"} p-2`}
+                className={`tab ${activeTab === 0 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
-                Description
+                설명
               </span>
             </li>
             <li onClick={() => handleTabClick(1)}>
               <span
-                className={`tab inline-block rounded-t-lg border-b-2 ${activeTab === 1 ? "border-red-300 bg-zinc-200 text-stone-900" : "border-transparent hover:border-red-300 hover:text-stone-900"} p-2`}
+                className={`tab ${activeTab === 1 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
-                Ingredients
+                재료
               </span>
             </li>
             <li onClick={() => handleTabClick(2)}>
               <span
-                className={`tab inline-block rounded-t-lg border-b-2 ${activeTab === 2 ? "border-red-300 bg-zinc-200 text-stone-900" : "border-transparent hover:border-red-300 hover:text-stone-900"} p-2`}
+                className={`tab ${activeTab === 2 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
-                Instruction
+                제조법
               </span>
             </li>
           </ul>

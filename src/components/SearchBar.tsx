@@ -23,7 +23,7 @@ export default function SearchBar() {
     }
   };
 
-  // 사용자가 입력한 값을 부모 컴포넌트에서 받아온 칵테일 데이터와 비교
+  /** 사용자가 입력한 값을 부모 컴포넌트에서 받아온 칵테일 데이터와 비교 */
   const filterCocktails = (cocktailNameOrIngredients: string): void => {
     const filteredData = allCocktails?.filter((cocktail) => {
       return (
@@ -37,7 +37,7 @@ export default function SearchBar() {
       );
     });
     // 입력 값이 있고 일치하는 값 있으면 -> 해당 데이터 반환
-    if (filteredData?.length > 0) {
+    if (filteredData && filteredData?.length > 0) {
       setFilteredCocktails(filteredData);
       console.log("검색 결과 : ", filteredData);
     } else {
@@ -56,7 +56,7 @@ export default function SearchBar() {
         placeholder="찾는 칵테일의 이름이나 재료를 입력해보세요!"
       />
       <button
-        className="search-bar__btn flex w-20 cursor-pointer items-center justify-center gap-1 rounded-4xl bg-red-500 font-bold text-neutral-800 hover:bg-red-600"
+        className="btn-primary flex w-20 items-center justify-center gap-1 rounded-xl font-bold"
         onClick={onClickSearchBtn}
       >
         <MagnifyingGlassIcon className="size-5" />
