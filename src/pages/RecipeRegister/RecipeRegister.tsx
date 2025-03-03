@@ -39,7 +39,7 @@ export default function RecipeRegister() {
     console.log(currentStep);
   }, [currentStep]);
   return (
-    <>
+    <div className="flex h-full flex-col">
       <GlobalNav />
       <div className="wrapper h-full w-full px-15 pt-15">
         <div className="mt-10 mb-10 flex h-full w-full flex-col">
@@ -54,6 +54,7 @@ export default function RecipeRegister() {
               레시피 등록하기
             </button>
           </p>
+          <SearchBar />
         </div>
         {/* 모달 */}
         <Modal isOpen={isModalOpen} onClose={closeRegisterModal}>
@@ -80,12 +81,11 @@ export default function RecipeRegister() {
             }
           })()}
         </Modal>
-        <SearchBar />
         <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
           {/* <RecipeCard title={} image={} /> */}
         </div>
       </div>
       <GlobalFooter />
-    </>
+    </div>
   );
 }

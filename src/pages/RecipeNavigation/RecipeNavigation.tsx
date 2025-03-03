@@ -56,7 +56,7 @@ export default function RecipeNavigation() {
   };
 
   return (
-    <>
+    <div className="flex w-full flex-col">
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -109,6 +109,6 @@ export default function RecipeNavigation() {
           <GlobalFooter />
         </>
       )}
-    </>
+    </div>
   );
 }

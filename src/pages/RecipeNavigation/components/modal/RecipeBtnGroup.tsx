@@ -19,31 +19,31 @@ export default function RecipeBtnGroup() {
   return (
     <div className="float-right flex gap-3 text-lg">
       <span
-        className="star-icon flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"
+        className="star-icon btn-primary flex cursor-pointer items-center justify-center"
         onClick={toggleStarIcon}
       >
         Star
         <StarIcon
-          className={`size-7 ${selectStarIcon ? "fill-amber-300 hover:fill-amber-400" : "fill-stone-300 hover:fill-stone-400"}`}
+          className={`size-7 ${selectStarIcon ? "fill-amber-300 hover:fill-amber-400" : "fill-stone-300"}`}
         />
       </span>
-      <span className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2">
+      <span className="btn-primary flex cursor-pointer items-center justify-center">
         Share
-        <ShareIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
+        <ShareIcon className="size-7 fill-stone-300" />
       </span>
       <span
-        className={`${isChatOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
+        className={`${isChatOpen ? "hidden" : "btn-primary flex cursor-pointer items-center justify-center"}`}
         onClick={toggleChatOpen}
       >
         Chat
-        <ChatBubbleBottomCenterIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
+        <ChatBubbleBottomCenterIcon className="size-7 fill-stone-300" />
       </span>
       <span
-        className={`${isDetailOpen ? "hidden" : "flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-zinc-600 p-2"}`}
+        className={`${isDetailOpen ? "hidden" : "btn-primary flex cursor-pointer items-center justify-center"}`}
         onClick={toggleDetailOpen}
       >
         Details
-        <PlusIcon className="size-7 fill-stone-300 hover:fill-stone-400" />
+        <PlusIcon className="size-7 fill-stone-300" />
       </span>
     </div>
   );

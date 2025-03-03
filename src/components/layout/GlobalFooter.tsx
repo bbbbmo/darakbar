@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 export default function GlobalFooter() {
   return (
-    <>
+    <footer className="mt-auto h-28">
       <div className="divider w-full bg-neutral-800 px-7">
         <hr className="border-t border-zinc-700"></hr>
       </div>
-      <footer className="footer w-full bg-neutral-800 px-10 py-5 text-neutral-400">
+      <div className="w-full bg-neutral-800 px-10 py-5 text-neutral-400">
         <div className="flex w-full">
           <Link to="/">
             <img src="/images/logo/logo-whole.png" className="size-18" />
@@ -26,7 +26,7 @@ export default function GlobalFooter() {
             </div>
           </div>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 }

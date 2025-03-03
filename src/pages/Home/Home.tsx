@@ -4,11 +4,11 @@ import GlobalFooter from "../../components/layout/GlobalFooter";
 import { Link } from "react-router-dom";
 export default function Home() {
   return (
-    <>
+    <div className="flex h-full flex-col">
       {/* Nav 바 */}
       <GlobalNav />
       <div className="wrapper h-full w-full px-15 pt-15 text-amber-400">
-        <div className="introduce mt-10 mb-10 flex h-full w-full">
+        <div className="introduce mt-10 mb-10 flex w-full">
           <img src="/images/bg.jpg" className="introduce__img h-110 w-220" />
           <p className="introduce__text ml-5 flex flex-col justify-between">
             <span className="text-8xl">칵테일 레시피 공유 서비스</span>
@@ -26,6 +26,6 @@ export default function Home() {
         </div>
       </div>
       <GlobalFooter />
-    </>
+    </div>
   );
 }
