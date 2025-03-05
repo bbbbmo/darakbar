@@ -20,7 +20,7 @@ export default function RecipeRegisterIngredients({
     setIngredientUnit,
   } = useRegisterStore();
 
-  // 새 재료를 추가하는 함수
+  /** 새 재료를 추가하는 함수 */
   const addNewIngredient = () => {
     addIngredient(""); // 빈 문자열로 새로운 재료 추가
   };
@@ -29,7 +29,7 @@ export default function RecipeRegisterIngredients({
     setBaseLiquor(e.target.value);
   };
 
-  // 재료 입력값을 변경하는 함수
+  /** 재료 입력값을 변경하는 함수 */
   const handleIngredientChange = (index: number, value: string) => {
     const updatedIngredients = [...ingredients];
     updatedIngredients[index] = value; // 해당 인덱스의 값 수정
@@ -42,6 +42,16 @@ export default function RecipeRegisterIngredients({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+  };
+
+  const mergeIngredientsWithUnits = () => {
+    const mergedBaseLiquor = baseLiquor + ingredientUnits[0];
+    const mergedIngredients = ingredients.map((ingredient, index) => {
+      return ingredient + " " + ingredientUnits[index];
+    });
+    setBaseLiquor(mergedBaseLiquor);
+    setIngredients(mergedIngredients);
+    console.log(mergedIngredients);
   };
 
   return (
@@ -58,7 +68,7 @@ export default function RecipeRegisterIngredients({
             <div className="flex gap-3">
               <input
                 type="text"
-                value={baseLiquor}
+                value={baseLiquor || ""}
                 placeholder="칵테일의 메인이 되는 술이나 재료를 입력해 주세요"
                 className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
                 onChange={handleBaseLiquorChange}
@@ -92,7 +102,7 @@ export default function RecipeRegisterIngredients({
               <div className="flex gap-3">
                 <input
                   type="text"
-                  value={ingredient[index]} // 각 재료 입력값 바인딩
+                  value={ingredient || ""} // 각 재료 입력값 바인딩
                   placeholder="추가적인 재료를 입력해 주세요"
                   className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
                   onChange={(e) =>
@@ -101,7 +111,7 @@ export default function RecipeRegisterIngredients({
                   required
                 />
                 <select
-                  value={ingredientUnits[index]} // 현재 단위 바인딩
+                  value={ingredientUnits[index] || ""} // 현재 단위 바인딩
                   className="w-15 rounded-sm"
                   required
                   onChange={(e) =>
@@ -129,7 +139,10 @@ export default function RecipeRegisterIngredients({
       <div className="footer mt-auto w-full">
         <button
           className="ml-auto flex items-center gap-1 hover:text-amber-400"
-          onClick={nextStep}
+          onClick={() => {
+            mergeIngredientsWithUnits();
+            nextStep();
+          }}
         >
           다음 단계로 <ArrowRightIcon className="size-4" />
         </button>
