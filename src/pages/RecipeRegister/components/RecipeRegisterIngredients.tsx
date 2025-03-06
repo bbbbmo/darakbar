@@ -44,6 +44,7 @@ export default function RecipeRegisterIngredients({
     e.preventDefault();
   };
 
+  /** 베이스 + 단위, 재료 + 단위 */
   const mergeIngredientsWithUnits = () => {
     const mergedBaseLiquor = baseLiquor + ingredientUnits[0];
     const mergedIngredients = ingredients.map((ingredient, index) => {
@@ -65,14 +66,20 @@ export default function RecipeRegisterIngredients({
             <label htmlFor="" className="font-bold">
               베이스(주재료)
             </label>
-            <div className="flex gap-3">
+            <div className="flex gap-1">
               <input
                 type="text"
                 value={baseLiquor || ""}
                 placeholder="칵테일의 메인이 되는 술이나 재료를 입력해 주세요"
-                className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+                className="input-primary h-10 grow"
                 onChange={handleBaseLiquorChange}
                 required
+              />
+              <input
+                className="input-primary ml-3 w-20"
+                type="number"
+                min={0}
+                placeholder="용량 및 개수"
               />
               <select className="w-15 rounded-sm" required>
                 <option value="oz">oz</option>
@@ -99,16 +106,22 @@ export default function RecipeRegisterIngredients({
                   <XCircleIcon className="size-5" />
                 </span>
               )}
-              <div className="flex gap-3">
+              <div className="flex gap-1">
                 <input
                   type="text"
                   value={ingredient || ""} // 각 재료 입력값 바인딩
                   placeholder="추가적인 재료를 입력해 주세요"
-                  className="h-10 grow rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+                  className="input-primary h-10 grow"
                   onChange={(e) =>
                     handleIngredientChange(index, e.target.value)
                   } // 각 재료 수정
                   required
+                />
+                <input
+                  className="input-primary ml-3 w-20"
+                  type="number"
+                  min={0}
+                  placeholder="용량 및 개수"
                 />
                 <select
                   value={ingredientUnits[index] || ""} // 현재 단위 바인딩

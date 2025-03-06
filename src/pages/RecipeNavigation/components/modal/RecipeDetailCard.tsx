@@ -34,21 +34,21 @@ export default function RecipeDetailCard() {
           <ul className="tabs flex flex-wrap gap-2">
             <li onClick={() => handleTabClick(0)}>
               <span
-                className={`tab ${activeTab === 0 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
+                className={`tab flex items-center justify-center ${activeTab === 0 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 설명
               </span>
             </li>
             <li onClick={() => handleTabClick(1)}>
               <span
-                className={`tab ${activeTab === 1 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
+                className={`tab flex items-center justify-center ${activeTab === 1 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 재료
               </span>
             </li>
             <li onClick={() => handleTabClick(2)}>
               <span
-                className={`tab ${activeTab === 2 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
+                className={`tab flex items-center justify-center ${activeTab === 2 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 제조법
               </span>

@@ -2,30 +2,48 @@
 import GlobalNav from "../../components/layout/GlobalNav";
 import GlobalFooter from "../../components/layout/GlobalFooter";
 import { Link } from "react-router-dom";
+import useLoadingStore from "../../stores/loadingStore";
+import { useEffect } from "react";
+import LoadingScreen from "../../components/LoadingScreen";
 export default function Home() {
+  const { isLoading, setIsLoading } = useLoadingStore();
+
+  useEffect(() => {
+    // useEffect는 컴포넌트가 렌더링(마운트)된 후 실행
+    setIsLoading(false);
+  }, [setIsLoading]);
   return (
-    <div className="flex h-full flex-col">
-      {/* Nav 바 */}
-      <GlobalNav />
-      <div className="wrapper h-full w-full px-15 pt-15 text-amber-400">
-        <div className="introduce mt-10 mb-10 flex w-full">
-          <img src="/images/bg.jpg" className="introduce__img h-110 w-220" />
-          <p className="introduce__text ml-5 flex flex-col justify-between">
-            <span className="text-8xl">칵테일 레시피 공유 서비스</span>
-            <br />
-            <span>
-              다락바는 자신만의 칵테일 레시피를 만들고 공유하는 공간입니다.
-            </span>
-            <span></span>
-            <Link to="/recipe-register" className="ml-auto">
-              <button className="btn-secondary sm:w-30 xl:w-50">
-                시작하기
-              </button>
-            </Link>
-          </p>
+    <>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div className="flex h-full flex-col">
+          {/* Nav 바 */}
+          <GlobalNav />
+          <div className="wrapper h-full w-full px-15 pt-15 text-amber-400">
+            <div className="introduce mt-10 mb-10 flex w-full">
+              <img
+                src="/images/bg.jpg"
+                className="introduce__img h-110 w-220"
+              />
+              <p className="introduce__text ml-5 flex flex-col justify-between">
+                <span className="text-8xl">칵테일 레시피 공유 서비스</span>
+                <br />
+                <span>
+                  다락바는 자신만의 칵테일 레시피를 만들고 공유하는 공간입니다.
+                </span>
+                <span></span>
+                <Link to="/recipe-register" className="ml-auto">
+                  <button className="btn-secondary sm:w-30 xl:w-50">
+                    시작하기
+                  </button>
+                </Link>
+              </p>
+            </div>
+          </div>
+          <GlobalFooter />
         </div>
-      </div>
-      <GlobalFooter />
-    </div>
+      )}
+    </>
   );
 }
