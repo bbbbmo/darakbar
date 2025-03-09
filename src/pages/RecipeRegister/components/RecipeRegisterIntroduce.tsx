@@ -1,7 +1,9 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import useRegisterStore from "../registerStore";
-import React from "react";
+import React, { useState } from "react";
 import supabase from "../../../supabase";
+import { Cocktail_T } from "../../../types/cocktailTypes";
+import useAuth from "../../../hooks/useAuth";
 
 interface RecipeRegisterIntroduceProps {
   nextStep: () => void;
@@ -12,65 +14,168 @@ export default function RecipeRegisterIntroduce({
   nextStep,
   prevStep,
 }: RecipeRegisterIntroduceProps) {
+  // useRegisterStore에서 상태 불러옴
   const {
     baseLiquor,
+    baseLiquorAmount,
+    baseLiquorUnit,
     ingredients,
+    ingredientAmounts,
+    ingredientUnits,
     name,
+    image,
     glassType,
     instructions,
     description,
+    setBaseLiquor,
+    setBaseLiquorAmount,
+    setBaseLiquorUnit,
+    setIngredients,
     setInstructions,
+    setIngredientAmounts,
+    setIngredientUnits,
+    setName,
+    setImage,
+    setImagePreview,
     setDescription,
+    setGlassType,
   } = useRegisterStore();
+  const { session } = useAuth();
+  const [publicURL, setPublicURL] = useState<string | null>(null);
+  const filePath = `user_cocktail_image/${image?.name}`; // 파일 경로 설정 (예: images/파일이름)
 
+  console.log(session);
+  // 제조법 입력 이벤트 함수
   const handleInstructionsChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setInstructions(e.target.value);
   };
 
+  // 설명 입력 이벤트 함수
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setDescription(e.target.value);
   };
 
+  // 폼 기본 제출 방지
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // 폼 제출 막기
+    e.preventDefault();
   };
 
-  // [TODO] 이미지도 추가, 재료와 재료 단위 합치기
+  /** 사용자가 첫번째 페이지에서 입력한 값을 하나의 문자열(베이스 + 용량 + 단위, 재료 + 용량 + 단위)로 합치는 함수 */
+  const mergeInputElements = (): void => {
+    if (baseLiquor && ingredients) {
+      const fullBaseLiquor = `${baseLiquor} ${baseLiquorAmount}${baseLiquorUnit}`;
+      const fullIngredients = ingredients.map((ingredient, index) => {
+        return `${ingredient} ${ingredientAmounts[index]}${ingredientUnits[index]}`;
+      });
+      setBaseLiquor(fullBaseLiquor);
+      setIngredients(fullIngredients);
+      console.log(fullIngredients);
+    }
+  };
+
+  const getImageUrl = async () => {
+    // 업로드가 성공하면, 파일의 URL을 반환
+    const { data } = await supabase.storage
+      .from("darakbar-storage")
+      .getPublicUrl(filePath);
+
+    console.log("File uploaded successfully:", data.publicUrl);
+    setPublicURL(data.publicUrl);
+  };
+
+  const uploadImageToSupabase = async (file: File) => {
+    const { error } = await supabase.storage
+      .from("darakbar-storage") // 'images'는 저장소 버킷 이름
+      .upload(filePath, file, {
+        cacheControl: "3600", // 파일 캐시 시간 (초 단위)
+        upsert: true, // 파일이 이미 존재하면 덮어쓰도록 설정
+      });
+
+    if (error) {
+      console.error("Error uploading file:", error);
+      alert("파일 업로드에 실패했습니다.");
+      return;
+    }
+    await getImageUrl();
+  };
+
   /** 유저가 입력한 값을 supabase 데이터 테이블에 삽입 */
-  const uploadNewCocktail = async () => {
+  const uploadNewUserCocktail = async () => {
     if (
       !name ||
       !baseLiquor ||
-      !ingredients.length ||
+      !ingredients?.length ||
       !instructions ||
       !description
     ) {
-      alert("모든 항목을 작성해주세요!");
+      alert(
+        "필수 항목(베이스 + 최소 하나의 재료, 이름, 제조법, 맛과 향)을 작성해주세요!",
+      );
+      return;
     }
 
-    const { data, error } = await supabase.from("user_cocktails").insert([
-      {
-        name: name,
-        base_liquor: baseLiquor,
-        ingredients: ingredients,
-        glass_type: glassType,
-        instructions: instructions,
-        description: description,
-      },
-    ]);
+    mergeInputElements();
+
+    if (image) {
+      await uploadImageToSupabase(image);
+    }
+
+    const userCocktail: Cocktail_T = {
+      name: name,
+      base_liquor: baseLiquor,
+      ingredients: ingredients,
+      glass_type: glassType,
+      instructions: instructions,
+      description: description,
+      image_url: publicURL,
+      user_id: session?.user.id,
+    };
+
+    const { data, error } = await supabase
+      .from("user_cocktails")
+      .insert([userCocktail]);
+
+    console.log(userCocktail);
+
     if (error) {
       console.error("칵테일 등록 중 오류 발생:", error.message);
       alert("칵테일 등록에 실패했습니다.");
+      return;
     } else {
       console.log("칵테일 등록 성공:", data);
       alert("칵테일 등록이 완료되었습니다!");
+      setBaseLiquor(null);
+      setBaseLiquorAmount(null);
+      setBaseLiquorUnit(null);
+      setIngredients([]);
+      setIngredientAmounts([]);
+      setIngredientUnits([]);
+      setName(null);
+      setImage(null);
+      setImagePreview(null);
+      setInstructions(null);
+      setDescription(null);
+      setGlassType(null);
       nextStep(); // 다음 단계로 진행
     }
   };
+
+  /** 입력 잘 제출되는지 확인용 */
+  // const check = () => {
+  //   console.log(`
+  //     베이스: ${baseLiquor},
+  //     재료: ${ingredients},
+  //     이름: ${name},
+  //     이미지: ${image},
+  //     잔: ${glassType},
+  //     제조법: ${instructions},
+  //     설명: ${description}
+  //    `);
+  // };
   return (
     <>
       <form
@@ -85,9 +190,10 @@ export default function RecipeRegisterIntroduce({
             제조법
           </label>
           <textarea
-            value={instructions}
+            value={instructions || ""}
             placeholder="ex) 1. 라임과 레몬을 반으로 슬라이스 한다."
             className="h-full rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+            required
             onChange={handleInstructionsChange}
           />
         </div>
@@ -99,9 +205,10 @@ export default function RecipeRegisterIntroduce({
             맛과 향 설명
           </label>
           <textarea
-            value={description}
+            value={description || ""}
             placeholder="ex) 열대과일의 상큼한 맛과 오렌지 향"
             className="h-full rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800"
+            required
             onChange={handleDescriptionChange}
           />
         </div>
@@ -115,7 +222,7 @@ export default function RecipeRegisterIntroduce({
         </button>
         <button
           className="mt-auto flex items-center gap-1 hover:text-amber-400"
-          onClick={uploadNewCocktail}
+          onClick={uploadNewUserCocktail}
         >
           칵테일 등록하기 <ArrowRightIcon className="size-4" />
         </button>

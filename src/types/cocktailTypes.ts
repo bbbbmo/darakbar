@@ -1,10 +1,11 @@
 export type Cocktail_T = {
-  id: number;
-  name: string;
-  base_liquor: string;
-  ingredients: string[];
-  glass_type: string;
-  instructions: string;
-  description: string;
-  image_url: string | null;
+  id?: number;
+  name: string | null;
+  base_liquor: string | null;
+  ingredients: (string | null)[];
+  glass_type: string | null;
+  instructions: string | null;
+  description: string | null;
+  image_url: string | File | null;
+  user_id?: string | null;
 };

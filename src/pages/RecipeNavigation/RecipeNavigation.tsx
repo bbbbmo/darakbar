@@ -76,8 +76,12 @@ export default function RecipeNavigation() {
                     key={cocktail.id}
                   >
                     <RecipeCard
-                      title={cocktail.name}
-                      image={cocktail.image_url}
+                      title={cocktail.name || ""}
+                      image={
+                        typeof cocktail.image_url === "string"
+                          ? cocktail.image_url
+                          : null
+                      }
                     />
                   </div>
                 ))}
