@@ -22,7 +22,7 @@
   html,
   body {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     font-family:
       system-ui,
       -apple-system,

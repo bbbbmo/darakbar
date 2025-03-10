@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
+import supabase from "../../supabase";
+// 컴포넌트
 import GlobalFooter from "../../components/layout/GlobalFooter";
 import GlobalNav from "../../components/layout/GlobalNav";
 import Modal from "../../components/modal/Modal";
 import SearchBar from "../../components/SearchBar";
-import useModalStore from "../../stores/modalStore";
 import RecipeRegisterIngredients from "./components/RecipeRegisterIngredients";
 import RecipeRegisterBasicInfo from "./components/RecipeRegisterBasicInfo";
 import RecipeRegisterIntroduce from "./components/RecipeRegisterIntroduce";
 import RecipeRegisterComplete from "./components/RecipeRegisterComplete";
 import RecipeCard from "../../components/RecipeCard";
-import useCocktailStore from "../../stores/cocktailStore";
-import useLoadingStore from "../../stores/loadingStore";
-import LoadingScreen from "../../components/LoadingScreen";
-import supabase from "../../supabase";
-import { Cocktail_T } from "../../types/cocktailTypes";
 import RecipeViewCard from "../RecipeNavigation/components/modal/RecipeViewCard";
 import RecipeDetailCard from "../RecipeNavigation/components/modal/RecipeDetailCard";
 import RecipeChatCard from "../RecipeNavigation/components/modal/RecipeChatCard";
+// Zustand
+import useModalStore from "../../stores/modalStore";
+import useCocktailStore from "../../stores/cocktailStore";
+import useLoadingStore from "../../stores/loadingStore";
+// 타입
+import { Cocktail_T } from "../../types/cocktailTypes";
 
 // [TODO] Footer 레이아웃 수정, 클릭 시 모달 내용 수정해야함
 export default function RecipeRegister() {
   const { filteredCocktails, setAllCocktails, setClickedCardData } =
     useCocktailStore();
   const { isDetailOpen, isChatOpen } = useModalStore();
-  const { isLoading, setIsLoading } = useLoadingStore();
+  const { setIsLoading } = useLoadingStore();
   // 모달 상태
   // const { isDetailOpen, isChatOpen } = useModalStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -85,99 +87,95 @@ export default function RecipeRegister() {
   //   console.log(currentStep);
   // }, [currentStep]);
   return (
-    <div className="flex h-full flex-col">
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <GlobalNav />
-          <div className="wrapper h-full w-full px-15 pt-15">
-            <div className="mt-10 mb-10 flex h-full w-full flex-col">
-              <p className="flex items-center justify-center gap-5 text-xl text-amber-400">
-                <span className="text-2xl">
-                  나만의 칵테일을 만들어 다락바에 보관해 보세요!
-                </span>
-                <button
-                  className="btn-secondary sm:w-30 xl:w-50"
-                  onClick={openRegisterModal}
-                >
-                  레시피 등록하기
-                </button>
-              </p>
-              <SearchBar />
-              {/* 레시피 카드 */}
-              <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
-                {filteredCocktails &&
-                  filteredCocktails.map((cocktail) => (
-                    <div
-                      className="flex justify-center"
-                      onClick={() => openRecipeCardModal(cocktail)}
-                      key={cocktail.id}
-                    >
-                      <RecipeCard
-                        title={cocktail.name || ""}
-                        image={
-                          typeof cocktail.image_url === "string"
-                            ? cocktail.image_url
-                            : null
-                        }
-                      />
-                    </div>
-                  ))}
-              </div>
-            </div>
-            {/* 레시피 등록 모달 */}
-            <Modal isOpen={isModalOpen} onClose={closeRegisterModal}>
-              {(() => {
-                switch (currentStep) {
-                  case 1:
-                    return <RecipeRegisterIngredients nextStep={nextStep} />;
-                  case 2:
-                    return (
-                      <RecipeRegisterBasicInfo
-                        nextStep={nextStep}
-                        prevStep={prevStep}
-                      />
-                    );
-                  case 3:
-                    return (
-                      <RecipeRegisterIntroduce
-                        nextStep={nextStep}
-                        prevStep={prevStep}
-                      />
-                    );
-                  default:
-                    return (
-                      <RecipeRegisterComplete onClose={closeRegisterModal} />
-                    );
-                }
-              })()}
-            </Modal>
-            {/* 레시피 카드 모달 */}
-            <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
-              <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
-                <div className="w-150">
-                  {/* 모달 좌측 카드 */}
-                  <RecipeViewCard />
-                </div>
-                <div
-                  className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
-                >
-                  {/* 모달 우측 설명 카드 */}
-                  <RecipeDetailCard />
-                </div>
-                <div
-                  className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
-                >
-                  {/* 모달 우측 채팅 카드 */}
-                  <RecipeChatCard />
-                </div>
-              </div>
-            </Modal>
+    <>
+      <div className="flex h-screen flex-col">
+        {/* Nav 바 */}
+        <GlobalNav />
+        <div className="wrapper w-full flex-1 px-15 pt-15">
+          <div className="mt-10 mb-10 flex w-full flex-col">
+            <p className="flex items-center justify-center gap-5 text-xl text-amber-400">
+              <span className="text-2xl">
+                나만의 칵테일을 만들어 다락바에 보관해 보세요!
+              </span>
+              <button
+                className="btn-secondary sm:w-30 xl:w-50"
+                onClick={openRegisterModal}
+              >
+                레시피 등록하기
+              </button>
+            </p>
           </div>
-          <GlobalFooter />
-        </>
-      )}
-    </div>
+          <SearchBar />
+          {/* 레시피 카드 */}
+          <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
+            {filteredCocktails &&
+              filteredCocktails.map((cocktail) => (
+                <div
+                  className="flex justify-center"
+                  onClick={() => openRecipeCardModal(cocktail)}
+                  key={cocktail.id}
+                >
+                  <RecipeCard
+                    title={cocktail.name || ""}
+                    image={
+                      typeof cocktail.image_url === "string"
+                        ? cocktail.image_url
+                        : null
+                    }
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+        {/* Footer */}
+        <GlobalFooter />
+      </div>
+      {/* 레시피 등록 모달 */}
+      <Modal isOpen={isModalOpen} onClose={closeRegisterModal}>
+        {(() => {
+          switch (currentStep) {
+            case 1:
+              return <RecipeRegisterIngredients nextStep={nextStep} />;
+            case 2:
+              return (
+                <RecipeRegisterBasicInfo
+                  nextStep={nextStep}
+                  prevStep={prevStep}
+                />
+              );
+            case 3:
+              return (
+                <RecipeRegisterIntroduce
+                  nextStep={nextStep}
+                  prevStep={prevStep}
+                />
+              );
+            default:
+              return <RecipeRegisterComplete onClose={closeRegisterModal} />;
+          }
+        })()}
+      </Modal>
+      {/* 레시피 카드 모달 */}
+      <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
+        <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
+          <div className="w-150">
+            {/* 모달 좌측 카드 */}
+            <RecipeViewCard />
+          </div>
+          <div
+            className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
+          >
+            {/* 모달 우측 설명 카드 */}
+            <RecipeDetailCard />
+          </div>
+          <div
+            className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
+          >
+            {/* 모달 우측 채팅 카드 */}
+            <RecipeChatCard />
+          </div>
+        </div>
+      </Modal>
+    </>
   );
 }

@@ -15,12 +15,13 @@ import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand
 import useModalStore from "../../stores/modalStore";
 import useCocktailStore from "../../stores/cocktailStore";
+import useLoadingStore from "../../stores/loadingStore";
 
 export default function RecipeNavigation() {
   const { isDetailOpen, isChatOpen } = useModalStore();
   const { filteredCocktails, setAllCocktails, setClickedCardData } =
     useCocktailStore();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { isLoading, setIsLoading } = useLoadingStore();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 칵테일 데이터 마운트
@@ -63,7 +64,7 @@ export default function RecipeNavigation() {
         <>
           {/* Nav 바 */}
           <GlobalNav />
-          {/* [TODO] 모달창 안닫히는 오류 수정하기, RecipeDetailCard 내용 헤당 카드에 맞게 수정하기 */}
+          {/* [TODO] 배경 클릭 시 모달창 안닫히는 오류 수정하기 */}
           <div className="wrapper h-full w-full px-15 pt-15">
             <SearchBar />
             {/* 레시피 카드 */}
