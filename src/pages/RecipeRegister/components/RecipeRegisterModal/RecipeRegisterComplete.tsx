@@ -1,5 +1,6 @@
 import confetti, { Options as ConfettiOptions } from "canvas-confetti";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 interface RecipeRegisterCompleteProps {
   onClose: () => void;
 }
@@ -70,9 +71,11 @@ export default function RecipeRegisterComplete({
         <span>나만의 칵테일이 완성되었어요</span>
         <span>👏</span>
       </p>
-      <button onClick={onClose} className="btn-secondary w-40">
-        확인하러 가기
-      </button>
+      <Link to="/recipe-register">
+        <button onClick={onClose} className="btn-secondary w-40">
+          확인하러 가기
+        </button>
+      </Link>
     </div>
   );
 }

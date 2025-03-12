@@ -3,11 +3,11 @@ import supabase from "../../supabase";
 // 컴포넌트
 import GlobalNav from "../../components/layout/GlobalNav";
 import Modal from "../../components/modal/Modal";
-import RecipeViewCard from "./components/modal/RecipeViewCard";
-import RecipeDetailCard from "./components/modal/RecipeDetailCard";
+import RecipeViewCard from "./RecipeCardModal/modal/PreRecipePreview";
+import RecipeDetailCard from "./RecipeCardModal/modal/PreRecipeDetail";
 import GlobalFooter from "../../components/layout/GlobalFooter";
 import SearchBar from "../../components/SearchBar";
-import RecipeChatCard from "./components/modal/RecipeChatCard";
+import RecipeChatCard from "./RecipeCardModal/modal/PreRecipeChat";
 import RecipeCard from "../../components/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";
 // 타입

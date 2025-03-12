@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import useRecipeStore from "../../../../stores/modalStore";
 
 // 레시피 정보
-export default function RecipeChatCard() {
+export default function PreRecipeChat() {
   const { closeChat } = useRecipeStore();
   return (
     <div className="wrapper relative h-full w-full flex-col rounded-xl bg-slate-100">

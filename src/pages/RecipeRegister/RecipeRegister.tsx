@@ -5,14 +5,14 @@ import GlobalFooter from "../../components/layout/GlobalFooter";
 import GlobalNav from "../../components/layout/GlobalNav";
 import Modal from "../../components/modal/Modal";
 import SearchBar from "../../components/SearchBar";
-import RecipeRegisterIngredients from "./components/RecipeRegisterIngredients";
-import RecipeRegisterBasicInfo from "./components/RecipeRegisterBasicInfo";
-import RecipeRegisterIntroduce from "./components/RecipeRegisterIntroduce";
-import RecipeRegisterComplete from "./components/RecipeRegisterComplete";
+import RecipeRegisterIngredients from "./components/RecipeRegisterModal/RecipeRegisterIngredients";
+import RecipeRegisterBasicInfo from "./components/RecipeRegisterModal/RecipeRegisterBasicInfo";
+import RecipeRegisterIntroduce from "./components/RecipeRegisterModal/RecipeRegisterIntroduce";
+import RecipeRegisterComplete from "./components/RecipeRegisterModal/RecipeRegisterComplete";
 import RecipeCard from "../../components/RecipeCard";
-import RecipeViewCard from "../RecipeNavigation/components/modal/RecipeViewCard";
-import RecipeDetailCard from "../RecipeNavigation/components/modal/RecipeDetailCard";
-import RecipeChatCard from "../RecipeNavigation/components/modal/RecipeChatCard";
+import UserRecipePreview from "./components/RecipeCardModal/UserRecipePreview";
+import UserRecipeDetail from "./components/RecipeCardModal/UserRecipeDetail";
+import RecipeChatCard from "../RecipeNavigation/RecipeCardModal/modal/PreRecipeChat";
 // Zustand
 import useModalStore from "../../stores/modalStore";
 import useCocktailStore from "../../stores/cocktailStore";
@@ -24,18 +24,18 @@ import { Cocktail_T } from "../../types/cocktailTypes";
 export default function RecipeRegister() {
   const { filteredCocktails, setAllCocktails, setClickedCardData } =
     useCocktailStore();
-  const { isDetailOpen, isChatOpen } = useModalStore();
   const { setIsLoading } = useLoadingStore();
-  // 모달 상태
-  // const { isDetailOpen, isChatOpen } = useModalStore();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { isDetailOpen, isChatOpen } = useModalStore(); // 레시피 모달 Open 시 우측 카드의 상태
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState<boolean>(false); // 레시피 모달 Open, Close
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = // 레시피 등록 모달 Open, Close
+    useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   useEffect(() => {
     getUserCocktails();
   }, []);
 
-  // 칵테일 전체 데이터 가져오는 함수
+  /** user_cocktails 테이블로부터 유저가 등록한 전체 칵테일 데이터 가져오는 함수 */
   const getUserCocktails = async () => {
     const { data, error } = await supabase
       .from("user_cocktails")
@@ -55,23 +55,23 @@ export default function RecipeRegister() {
   // 레시피 등록 모달 열기
   const openRegisterModal = () => {
     setCurrentStep(1);
-    setIsModalOpen(true);
+    setIsRegisterModalOpen(true);
   };
 
   // 레시피 등록 모달 닫기
   const closeRegisterModal = () => {
-    setIsModalOpen(false);
+    setIsRegisterModalOpen(false);
   };
 
   // 레시피 카드 모달 열기
   const openRecipeCardModal = (cocktail: Cocktail_T) => {
     setClickedCardData(cocktail);
-    setIsModalOpen(true);
+    setIsRecipeModalOpen(true);
   };
 
   // 레시피 카드 모달 닫기
   const closeRecipeModal = () => {
-    setIsModalOpen(false);
+    setIsRecipeModalOpen(false);
   };
 
   const nextStep = () => {
@@ -131,7 +131,7 @@ export default function RecipeRegister() {
         <GlobalFooter />
       </div>
       {/* 레시피 등록 모달 */}
-      <Modal isOpen={isModalOpen} onClose={closeRegisterModal}>
+      <Modal isOpen={isRegisterModalOpen} onClose={closeRegisterModal}>
         {(() => {
           switch (currentStep) {
             case 1:
@@ -156,17 +156,17 @@ export default function RecipeRegister() {
         })()}
       </Modal>
       {/* 레시피 카드 모달 */}
-      <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
+      <Modal isOpen={isRecipeModalOpen} onClose={closeRecipeModal}>
         <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
           <div className="w-150">
             {/* 모달 좌측 카드 */}
-            <RecipeViewCard />
+            <UserRecipePreview />
           </div>
           <div
             className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
           >
             {/* 모달 우측 설명 카드 */}
-            <RecipeDetailCard />
+            <UserRecipeDetail />
           </div>
           <div
             className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}

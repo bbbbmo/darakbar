@@ -1,15 +1,16 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
-import useRegisterStore from "../registerStore";
-import React, { useState } from "react";
-import supabase from "../../../supabase";
-import { Cocktail_T } from "../../../types/cocktailTypes";
-import useAuth from "../../../hooks/useAuth";
+import useRegisterStore from "../../registerStore";
+import React from "react";
+import supabase from "../../../../supabase";
+import { Cocktail_T } from "../../../../types/cocktailTypes";
+import useAuth from "../../../../hooks/useAuth";
 
 interface RecipeRegisterIntroduceProps {
   nextStep: () => void;
   prevStep: () => void;
 }
 
+// [TODO] image_url 저장안되는 오류 해결해야 함
 export default function RecipeRegisterIntroduce({
   nextStep,
   prevStep,
@@ -41,10 +42,8 @@ export default function RecipeRegisterIntroduce({
     setGlassType,
   } = useRegisterStore();
   const { session } = useAuth();
-  const [publicURL, setPublicURL] = useState<string | null>(null);
   const filePath = `user_cocktail_image/${image?.name}`; // 파일 경로 설정 (예: images/파일이름)
 
-  console.log(session);
   // 제조법 입력 이벤트 함수
   const handleInstructionsChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -77,17 +76,9 @@ export default function RecipeRegisterIntroduce({
     }
   };
 
-  const getImageUrl = async () => {
-    // 업로드가 성공하면, 파일의 URL을 반환
-    const { data } = await supabase.storage
-      .from("darakbar-storage")
-      .getPublicUrl(filePath);
-
-    console.log("File uploaded successfully:", data.publicUrl);
-    setPublicURL(data.publicUrl);
-  };
-
-  const uploadImageToSupabase = async (file: File) => {
+  /** 이미지 Storage에 업로드 후 해당 이미지 URL 반환하는 함수 */
+  const uploadImageToStorage = async (file: File): Promise<string | null> => {
+    // 비동기 함수는 항상 Promise 반환
     const { error } = await supabase.storage
       .from("darakbar-storage") // 'images'는 저장소 버킷 이름
       .upload(filePath, file, {
@@ -98,9 +89,20 @@ export default function RecipeRegisterIntroduce({
     if (error) {
       console.error("Error uploading file:", error);
       alert("파일 업로드에 실패했습니다.");
-      return;
+      return null;
     }
-    await getImageUrl();
+
+    // 업로드가 성공하면, 파일의 URL을 반환
+    const { data } = await supabase.storage
+      .from("darakbar-storage")
+      .getPublicUrl(filePath);
+
+    if (data.publicUrl === undefined) {
+      return null;
+    } else {
+      console.log("File uploaded successfully:", data.publicUrl);
+      return data.publicUrl;
+    }
   };
 
   /** 유저가 입력한 값을 supabase 데이터 테이블에 삽입 */
@@ -118,10 +120,12 @@ export default function RecipeRegisterIntroduce({
       return;
     }
 
+    // 재료명, 단위, 용량 합치기
     mergeInputElements();
 
+    let imageUrl: string | null = null;
     if (image) {
-      await uploadImageToSupabase(image);
+      imageUrl = await uploadImageToStorage(image); // 유저가 이미지 삽입했다면 해당 이미지 업로드, 이때 state는 비동기적이므로 state 업데이트 전 데이터베이스에 삽입해버림
     }
 
     const userCocktail: Cocktail_T = {
@@ -131,7 +135,7 @@ export default function RecipeRegisterIntroduce({
       glass_type: glassType,
       instructions: instructions,
       description: description,
-      image_url: publicURL,
+      image_url: imageUrl,
       user_id: session?.user.id,
     };
 

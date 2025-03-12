@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useCocktailStore from "../../../../stores/cocktailStore";
-import RecipeBtnGroup from "./RecipeBtnGroup";
+import RecipeBtnGroup from "./PreRecipeBtns";
 
 interface recipeVideo {
   kind: string;
@@ -50,7 +50,7 @@ interface recipeVideo {
 }
 
 // 레시피 시각 파트
-export default function RecipeViewCard() {
+export default function PreRecipePreview() {
   const { clickedCardData } = useCocktailStore();
   const [recipeVideo, setRecipeVideo] = useState<recipeVideo | null>(null);
   const youtubeKey = import.meta.env.VITE_YOUTUBE_KEY;

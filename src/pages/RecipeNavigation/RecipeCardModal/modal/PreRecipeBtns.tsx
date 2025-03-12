@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import useRecipeStore from "../../../../stores/modalStore";
 
-export default function RecipeBtnGroup() {
+export default function PreRecipeBtns() {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);
   const { isDetailOpen, isChatOpen, toggleDetailOpen, toggleChatOpen } =
     useRecipeStore();

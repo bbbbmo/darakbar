@@ -4,7 +4,7 @@ import { useState } from "react";
 import useCocktailStore from "../../../../stores/cocktailStore";
 
 // 레시피 정보
-export default function RecipeDetailCard() {
+export default function PreRecipeDetail() {
   const { clickedCardData } = useCocktailStore();
   const { closeDetail } = useModalStore();
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -71,7 +71,7 @@ export default function RecipeDetailCard() {
           {activeTab === 1 &&
             clickedCardData &&
             clickedCardData.ingredients.map((ingredient) => (
-              <div>{ingredient}</div>
+              <div key={clickedCardData.id}>{ingredient}</div>
             ))}
           {activeTab === 2 && clickedCardData && clickedCardData.instructions}
         </section>
