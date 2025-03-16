@@ -12,7 +12,9 @@
 
 ## 프로젝트 개요
 
-평소 칵테일을 좋아하는데 나만의 칵테일 레시피를 만들고 공유하여 칵테일에 대한 진입장벽을 낮추고자 개발 중입니다. 또한 기존의 유명한 칵테일들의 레시피를 참고할 수 있도록 개발 중입니다.
+평소 칵테일을 좋아하는데 나만의 칵테일 레시피를 만들고 공유하여 칵테일에 대한 진입장벽을 낮추고자 개발 중입니다.
+
+현재 페이지는 메인 홈 페이지, 유저 칵테일 등록/조회 페이지(나만의 칵테일), 기존 유명한 칵테일 조회 페이지로 구성되어 있습니다.
 
 ## Pages
 
@@ -20,7 +22,14 @@
 
 ![홈 페이지](/public/images/imges-readme/home.png)
 
+### 나만의 칵테일 페이지
+
+![나만의 칵테일 페이지 - 모달창1](/public/images/imges-readme/recipe-register-modal.png)
+![나만의 칵테일 페이지 - 모달창2](/public/images/imges-readme/recipe-register-modal2.png)
+![나만의 칵테일 페이지 - 모달창3](/public/images/imges-readme/recipe-register-modal3.png)
+![나만의 칵테일 페이지](/public/images/imges-readme/recipe-register.png)
+
 ### 레시피 탐색 페이지
 
 ![레시피 탐색 페이지](/public/images/imges-readme/recipe-navigation.png)
-![레시피 탐색 페이지 - 모달창](/public/images/imges-readme/recipe-navigation-modal.png)
+![레시피 탐색 페이지 - 모달창1](/public/images/imges-readme/recipe-navigation-modal.png)

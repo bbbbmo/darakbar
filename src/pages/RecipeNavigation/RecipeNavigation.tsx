@@ -74,7 +74,7 @@ export default function RecipeNavigation() {
                   <div
                     className="flex justify-center"
                     onClick={() => openRecipeCardModal(cocktail)}
-                    key={cocktail.id}
+                    key={cocktail.name}
                   >
                     <RecipeCard
                       title={cocktail.name || ""}
