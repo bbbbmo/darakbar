@@ -57,11 +57,11 @@
   }
 
   .btn-primary {
-    @apply rounded-lg bg-zinc-600 p-2 text-white hover:bg-zinc-700;
+    @apply rounded-lg bg-zinc-600 p-2 text-white transition duration-300 ease-in-out hover:bg-zinc-700;
   }
 
   .btn-secondary {
-    @apply rounded-2xl bg-amber-400 p-2 text-xl text-neutral-900 hover:bg-amber-500;
+    @apply rounded-2xl bg-amber-400 p-2 text-xl font-bold text-neutral-900 transition delay-100 duration-300 ease-in-out hover:bg-amber-600;
   }
 
   .input-primary {

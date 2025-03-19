@@ -56,6 +56,10 @@ export default function GlobalNav() {
             <li>
               <Link to="/recipe-navigation">레시피 탐색</Link>
             </li>
+            <span className="border-r border-stone-400"></span>
+            <li>
+              <Link to="/bar-search">다락바 탐방</Link>
+            </li>
           </ul>
         </div>
         <div className="relative ml-auto">
