@@ -45,7 +45,7 @@ export default function SignIn() {
     setIsLoading(false);
   };
   return (
-    <div className="wrapper flex h-screen w-full flex-col items-center px-15">
+    <div className="wrapper flex h-screen w-full flex-col items-center justify-center px-15">
       <img src="/images/logo/logo-whole.png" alt="logo" className="size-50" />
       <form className="md:100 flex flex-col items-center sm:w-80 xl:w-120">
         <div className="flex w-full flex-col gap-2 rounded-xl bg-slate-100 p-10 text-stone-700">
