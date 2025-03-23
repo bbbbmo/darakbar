@@ -10,7 +10,6 @@ interface RecipeRegisterIntroduceProps {
   prevStep: () => void;
 }
 
-// [TODO] image_url 저장안되는 오류 해결해야 함
 export default function RecipeRegisterIntroduce({
   nextStep,
   prevStep,
