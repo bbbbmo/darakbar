@@ -6,7 +6,7 @@ import supabase from "../supabase";
 import { useNavigate } from "react-router-dom";
 
 // [TODO] 유저 프로필 이미지 기능 추가하기
-export default function UserProfile() {
+export default function EditProfile() {
   const [newName, setNewName] = useState<string | null>(null);
   const [newPassword, setNewPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
@@ -63,13 +63,23 @@ export default function UserProfile() {
 
     setSaveLoading(true);
     if (newName) {
-      const { error } = await supabase.auth.updateUser({
+      const { error: authError } = await supabase.auth.updateUser({
         data: {
           name: newName,
         },
       });
-      if (error) {
-        setShowError(error.message);
+      if (authError) {
+        setShowError(authError.message);
+        return;
+      }
+
+      const { error: tableError } = await supabase
+        .from("userinfo")
+        .update({ name: newName })
+        .eq("id", userData?.sub); // user.id 또는 고유한 식별자로 필터링
+      if (tableError) {
+        setShowError(tableError.message);
+        return;
       }
     }
     if (newPassword || confirmPassword) {
@@ -79,6 +89,7 @@ export default function UserProfile() {
         });
         if (error) {
           setShowError(error.message);
+          return;
         }
       } else if (newPassword !== confirmPassword) {
         setShowError("비밀번호가 일치하지 않습니다.");

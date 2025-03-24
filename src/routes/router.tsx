@@ -4,7 +4,7 @@ import RecipeNavigation from "../pages/RecipeNavigation/RecipeNavigation";
 import RecipeRegister from "../pages/RecipeRegister/RecipeRegister";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
-import UserProfile from "../pages/UserProfile";
+import UserProfile from "../pages/EditProfile";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/user-profile", // 정보 수정 -> 로그인 필요
+    path: "/edit-profile", // 정보 수정 -> 로그인 필요
     element: (
       <ProtectedRoute>
         <UserProfile />

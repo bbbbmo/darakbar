@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
-import GlobalNav from "../../components/layout/GlobalNav";
+import GlobalNav from "../../components/Nav/GlobalNav";
 import Modal from "../../components/modal/Modal";
 import RecipeViewCard from "./RecipeCardModal/modal/PreRecipePreview";
 import RecipeDetailCard from "./RecipeCardModal/modal/PreRecipeDetail";
-import GlobalFooter from "../../components/layout/GlobalFooter";
+import GlobalFooter from "../../components/GlobalFooter";
 import SearchBar from "../../components/SearchBar";
 import RecipeChatCard from "./RecipeCardModal/modal/PreRecipeChat";
 import RecipeCard from "../../components/RecipeCard";

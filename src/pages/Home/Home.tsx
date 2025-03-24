@@ -1,6 +1,6 @@
 // 컴포넌트
-import GlobalNav from "../../components/layout/GlobalNav";
-import GlobalFooter from "../../components/layout/GlobalFooter";
+import GlobalNav from "../../components/Nav/GlobalNav";
+import GlobalFooter from "../../components/GlobalFooter";
 import { Link, useLocation } from "react-router-dom";
 import useLoadingStore from "../../stores/loadingStore";
 import { useEffect, useState } from "react";
@@ -29,7 +29,7 @@ export default function Home() {
           {/* Nav 바 */}
           <GlobalNav />
           <div
-            className={`wrapper h-full w-full px-15 pt-15 text-amber-400 ${showIntro ? "opacity-100" : "opacity-0"} transition delay-100 duration-600`}
+            className={`wrapper h-full w-full px-15 pt-16 text-amber-400 ${showIntro ? "opacity-100" : "opacity-0"} transition delay-100 duration-600`}
           >
             <div className="introduce mt-10 mb-10 flex w-full">
               <img

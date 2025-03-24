@@ -14,7 +14,7 @@ export default function Menu({ isOpen, children }: MenuProps) {
   // children 배열로 반환
   const childArray = React.Children.toArray(children);
   return (
-    <menu className="menu-container !important absolute top-full right-0 z-30 mt-5 w-40 rounded-lg bg-neutral-600 p-2 text-sm shadow-lg">
+    <menu className="menu-container w-40 rounded-lg bg-neutral-600 p-2 text-sm shadow-lg">
       <ul className="flex flex-col gap-2">
         {childArray.map((child, index) => (
           <li

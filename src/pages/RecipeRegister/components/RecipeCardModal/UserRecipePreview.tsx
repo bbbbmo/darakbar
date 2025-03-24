@@ -17,7 +17,8 @@ export default function UserRecipePreview() {
       <div className="p-3">
         <div className="flex items-center">
           <div className="w-full text-2xl font-bold">
-            {clickedCardData ? clickedCardData.name : "이름 없는 칵테일"}
+            {clickedCardData ? clickedCardData.name : "이름 없는 칵테일"} -
+            [TODO] 유저 이름 넣기
           </div>
           <UserRecipeBtns />
         </div>
