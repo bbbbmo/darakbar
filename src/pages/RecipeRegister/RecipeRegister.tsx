@@ -39,7 +39,7 @@ export default function RecipeRegister() {
   const getUserCocktails = async () => {
     const { data, error } = await supabase
       .from("user_cocktails")
-      .select()
+      .select(`*, userinfo(name)`) // user_cocktail 테이블의 모든 데이터를 가져오면서, 연관된 userinfo 테이블에서 name 컬럼만 함께 조회
       .order("id", { ascending: true }); // id를 기준으로 오름차순 정렬, 객체 배열 반환
 
     if (error) {

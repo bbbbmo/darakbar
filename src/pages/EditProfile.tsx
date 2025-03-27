@@ -17,6 +17,7 @@ export default function EditProfile() {
   const { isLoading, session } = useAuth();
   const userData = session?.user.user_metadata;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const filePath = `profile_img/${image?.name}`;
   const navigate = useNavigate();
 
   const goToBack = () => {
@@ -57,6 +58,31 @@ export default function EditProfile() {
     }
   };
 
+  // [TODO] 이미지 url 테이블에 미저장됨, 고치기
+  const uploadImageToStorage = async (image: File): Promise<string | null> => {
+    const { error: storageError } = await supabase.storage
+      .from("darakbar-storage")
+      .upload(filePath, image, {
+        cacheControl: "3600", // 파일 캐시 시간 (초 단위)
+        upsert: true,
+      });
+    if (storageError) {
+      console.error("Error uploading file:", storageError.message);
+      setShowError("파일 업로드에 실패했습니다.");
+      return null;
+    }
+
+    const { data } = await supabase.storage
+      .from("darakbar-storage")
+      .getPublicUrl(filePath);
+    if (data.publicUrl === undefined) {
+      return null;
+    } else {
+      console.log("File uploaded successfully:", data.publicUrl);
+      return data.publicUrl;
+    }
+  };
+
   /** 유저 정보를 업로드하는 함수 */
   const updateUserProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +108,19 @@ export default function EditProfile() {
         return;
       }
     }
+
+    let imageUrl: string | null = null;
+    if (image) {
+      imageUrl = await uploadImageToStorage(image);
+      const { error: tableError } = await supabase
+        .from("userinfo")
+        .update({ profile_img_url: imageUrl })
+        .eq("id", session?.user.id);
+      if (tableError) {
+        console.error("Error updating userinfo:", tableError.message);
+      }
+    }
+
     if (newPassword || confirmPassword) {
       if (newPassword && confirmPassword && newPassword === confirmPassword) {
         const { error } = await supabase.auth.updateUser({

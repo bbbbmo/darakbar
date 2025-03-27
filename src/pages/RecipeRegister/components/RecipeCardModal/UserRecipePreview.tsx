@@ -6,7 +6,6 @@ export default function UserRecipePreview() {
   const { clickedCardData } = useCocktailStore();
 
   return (
-    // [TODO] 배경색 어떻게 할지
     <div className="h-full w-full rounded-xl bg-stone-700 text-stone-100">
       <div className="flex h-[70%] w-full items-center justify-center">
         <img
@@ -18,7 +17,7 @@ export default function UserRecipePreview() {
         <div className="flex items-center">
           <div className="w-full text-2xl font-bold">
             {clickedCardData ? clickedCardData.name : "이름 없는 칵테일"} -
-            [TODO] 유저 이름 넣기
+            <span className="italic">{clickedCardData?.userinfo?.name}</span>
           </div>
           <UserRecipeBtns />
         </div>

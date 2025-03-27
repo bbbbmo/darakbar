@@ -8,4 +8,5 @@ export type Cocktail_T = {
   description: string | null;
   image_url: string | null;
   user_id?: string | null;
+  userinfo?: { name: string };
 };
