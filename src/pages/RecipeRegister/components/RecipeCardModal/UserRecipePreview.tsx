@@ -1,5 +1,5 @@
 import useCocktailStore from "../../../../stores/cocktailStore";
-import UserRecipeBtns from "./UserRecipeBtnGroup";
+import UserRecipeBtns from "../../../../components/BtnGroup";
 
 // 레시피 시각 파트
 export default function UserRecipePreview() {
