@@ -157,11 +157,10 @@ export default function RecipeRegister() {
       </Modal>
       {/* 레시피 카드 모달 */}
       <Modal isOpen={isRecipeModalOpen} onClose={closeRecipeModal}>
-        <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
-          <div className="w-150">
-            {/* 모달 좌측 카드 */}
-            <UserRecipePreview />
-          </div>
+        <div className="modal-components-container mt-3 flex h-full gap-5">
+          {/* 모달 좌측 카드 */}
+          <UserRecipePreview />
+
           <div
             className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
           >

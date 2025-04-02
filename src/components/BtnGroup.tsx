@@ -6,13 +6,23 @@ import {
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import useRecipeStore from "../stores/modalStore";
-import useButtonsStore from "../stores/buttonsStore";
 
-export default function UserRecipeBtns() {
+interface BtnGroupsProps {
+  starBtn: boolean;
+  shareBtn: boolean;
+  chatBtn: boolean;
+  detailBtn: boolean;
+}
+
+export default function BtnGroups({
+  starBtn,
+  shareBtn,
+  chatBtn,
+  detailBtn,
+}: BtnGroupsProps) {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);
   const { isDetailOpen, isChatOpen, toggleDetailOpen, toggleChatOpen } =
     useRecipeStore();
-  const { starBtn, shareBtn, chatBtn, detailBtn } = useButtonsStore();
 
   const toggleStarIcon = () => {
     setSelectStarIcon(!selectStarIcon);
@@ -22,7 +32,7 @@ export default function UserRecipeBtns() {
     <div className="float-right flex gap-3 text-lg">
       {starBtn && (
         <span
-          className="star-icon btn-primary flex cursor-pointer items-center justify-center"
+          className="star-icon btn-primary flex min-w-20 cursor-pointer items-center justify-center"
           onClick={toggleStarIcon}
         >
           찜
@@ -32,14 +42,14 @@ export default function UserRecipeBtns() {
         </span>
       )}
       {shareBtn && (
-        <span className="btn-primary flex cursor-pointer items-center justify-center">
+        <span className="btn-primary flex min-w-20 cursor-pointer items-center justify-center">
           공유
           <ShareIcon className="size-7 fill-stone-300" />
         </span>
       )}
       {chatBtn && (
         <span
-          className={`${isChatOpen ? "hidden" : "btn-primary flex cursor-pointer items-center justify-center"}`}
+          className={`${isChatOpen ? "hidden" : "btn-primary flex min-w-20 cursor-pointer items-center justify-center"}`}
           onClick={toggleChatOpen}
         >
           댓글
@@ -48,7 +58,7 @@ export default function UserRecipeBtns() {
       )}
       {detailBtn && (
         <span
-          className={`${isDetailOpen ? "hidden" : "btn-primary flex cursor-pointer items-center justify-center"}`}
+          className={`${isDetailOpen ? "hidden" : "btn-primary flex min-w-20 cursor-pointer items-center justify-center"}`}
           onClick={toggleDetailOpen}
         >
           상세

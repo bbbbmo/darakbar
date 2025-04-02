@@ -22,7 +22,7 @@ export default function UserRecipeDetail() {
 
       <div className="details-container h-full w-full text-stone-700">
         {/* 탭 구간 */}
-        <div className="tab-group mt-2 flex gap-5 border-b border-gray-200 px-3 text-xl">
+        <div className="tab-group flex gap-5 border-b border-gray-200 px-3 text-xl">
           <ul className="tabs flex flex-wrap gap-2">
             <li onClick={() => handleTabClick(0)}>
               <span

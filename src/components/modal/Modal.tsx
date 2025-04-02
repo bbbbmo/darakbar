@@ -20,8 +20,8 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         onClick={onClose}
       ></div>
 
-      <div className="modal-container fixed inset-0 z-30 flex min-h-[476px] min-w-[820px] items-center justify-center">
-        <section className="modal bg-opacity-70 z-40 flex h-[80%] flex-col rounded-xl bg-stone-700 p-5">
+      <div className="modal-container fixed inset-0 z-30 flex min-h-[476px] items-center justify-center">
+        <section className="modal bg-opacity-70 z-40 flex h-[80%] min-w-[720px] flex-col rounded-xl bg-stone-700 p-5">
           {/* 모달 닫기 버튼 */}
           <div>
             <XMarkIcon
