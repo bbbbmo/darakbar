@@ -17,7 +17,7 @@ export default function LoadingScreen() {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <span className="sr-only text-xl">Loading...</span>
     </div>
   );
 }

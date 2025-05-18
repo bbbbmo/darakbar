@@ -1,5 +1,5 @@
 import useCocktailStore from "../../../../stores/cocktailStore";
-import UserRecipeBtns from "../../../../components/BtnGroup";
+import UserRecipeBtns from "../../../../components/BtnGroup/ButtonGroup";
 
 // 레시피 시각 파트
 export default function UserRecipePreview() {
@@ -23,7 +23,7 @@ export default function UserRecipePreview() {
           </div>
 
           <UserRecipeBtns
-            starBtn={true}
+            heartBtn={true}
             shareBtn={true}
             chatBtn={true}
             detailBtn={true}

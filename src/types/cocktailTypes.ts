@@ -1,4 +1,4 @@
-export type Cocktail_T = {
+export type Cocktail = {
   id?: number;
   name: string | null;
   base_liquor: string | null;

@@ -2,27 +2,17 @@ import { useEffect, useState } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
 import GlobalNav from "../../components/Nav/GlobalNav";
-import Modal from "../../components/modal/Modal";
-import RecipeViewCard from "./RecipeCardModal/modal/PreRecipePreview";
-import RecipeDetailCard from "./RecipeCardModal/modal/PreRecipeDetail";
 import GlobalFooter from "../../components/GlobalFooter";
 import SearchBar from "../../components/SearchBar";
-import RecipeChatCard from "./RecipeCardModal/modal/PreRecipeChat";
-import RecipeCard from "../../components/RecipeCard";
+import RecipeCard from "../../components/Recipe/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";
-// 타입
-import { Cocktail_T } from "../../types/cocktailTypes";
 // Zustand
-import useModalStore from "../../stores/modalStore";
 import useCocktailStore from "../../stores/cocktailStore";
-import useLoadingStore from "../../stores/loadingStore";
+import GridList from "../../components/GridList";
 
 export default function RecipeNavigation() {
-  const { isDetailOpen, isChatOpen } = useModalStore();
-  const { filteredCocktails, setAllCocktails, setClickedCardData } =
-    useCocktailStore();
-  const { isLoading, setIsLoading } = useLoadingStore();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { filteredCocktails, setAllCocktails } = useCocktailStore();
+  const [loading, setLoading] = useState<boolean>(true);
 
   // 칵테일 데이터 마운트
   useEffect(() => {
@@ -43,22 +33,22 @@ export default function RecipeNavigation() {
       console.log("Miss Fetching data");
     }
     setAllCocktails(data);
-    setIsLoading(false);
+    setLoading(false);
   };
 
   // 모달 여닫기 함수
-  const openRecipeCardModal = (cocktail: Cocktail_T) => {
-    setClickedCardData(cocktail);
-    setIsModalOpen(true);
-  };
+  // const openRecipeCardModal = (cocktail: Cocktail_T) => {
+  //   setClickedCardData(cocktail);
+  //   setIsModalOpen(true);
+  // };
 
-  const closeRecipeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeRecipeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   return (
     <div className="flex w-full flex-col">
-      {isLoading ? (
+      {loading ? (
         <LoadingScreen />
       ) : (
         <>
@@ -68,47 +58,19 @@ export default function RecipeNavigation() {
           <div className="wrapper h-full w-full px-15 pt-15">
             <SearchBar />
             {/* 레시피 카드 */}
-            <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
-              {filteredCocktails &&
-                filteredCocktails.map((cocktail) => (
-                  <div
-                    className="flex justify-center"
-                    onClick={() => openRecipeCardModal(cocktail)}
-                    key={cocktail.name}
-                  >
-                    <RecipeCard
-                      title={cocktail.name || ""}
-                      image={
-                        typeof cocktail.image_url === "string"
-                          ? cocktail.image_url
-                          : null
-                      }
-                    />
-                  </div>
-                ))}
-            </div>
-
-            {/* 모달 */}
-            <Modal isOpen={isModalOpen} onClose={closeRecipeModal}>
-              <div className="modal-components-container mt-3 flex h-full w-auto gap-5">
-                <div className="w-150">
-                  {/* 모달 좌측 카드 */}
-                  <RecipeViewCard />
-                </div>
-                <div
-                  className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
-                >
-                  {/* 모달 우측 설명 카드 */}
-                  <RecipeDetailCard />
-                </div>
-                <div
-                  className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
-                >
-                  {/* 모달 우측 채팅 카드 */}
-                  <RecipeChatCard />
-                </div>
-              </div>
-            </Modal>
+            <GridList items={filteredCocktails ?? []}>
+              {(cocktail, index) => (
+                <RecipeCard
+                  key={index}
+                  title={cocktail.name || ""}
+                  image={
+                    typeof cocktail.image_url === "string"
+                      ? cocktail.image_url
+                      : null
+                  }
+                />
+              )}
+            </GridList>
           </div>
           {/* Footer */}
           <GlobalFooter />

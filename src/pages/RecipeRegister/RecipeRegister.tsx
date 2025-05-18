@@ -1,34 +1,30 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
 import GlobalFooter from "../../components/GlobalFooter";
 import GlobalNav from "../../components/Nav/GlobalNav";
-import Modal from "../../components/modal/Modal";
+import Modal from "../../components/ModalRoot";
 import SearchBar from "../../components/SearchBar";
 import RecipeRegisterIngredients from "./components/RecipeRegisterModal/RecipeRegisterIngredients";
 import RecipeRegisterBasicInfo from "./components/RecipeRegisterModal/RecipeRegisterBasicInfo";
 import RecipeRegisterIntroduce from "./components/RecipeRegisterModal/RecipeRegisterIntroduce";
 import RecipeRegisterComplete from "./components/RecipeRegisterModal/RecipeRegisterComplete";
-import RecipeCard from "../../components/RecipeCard";
+import RecipeCard from "../../components/Recipe/RecipeCard";
 import UserRecipePreview from "./components/RecipeCardModal/UserRecipePreview";
 import UserRecipeDetail from "./components/RecipeCardModal/UserRecipeDetail";
 import RecipeChatCard from "../RecipeNavigation/RecipeCardModal/modal/PreRecipeChat";
-// Zustand
-import useModalStore from "../../stores/modalStore";
 import useCocktailStore from "../../stores/cocktailStore";
-import useLoadingStore from "../../stores/loadingStore";
 // 타입
-import { Cocktail_T } from "../../types/cocktailTypes";
+import { Cocktail } from "../../types/cocktailTypes";
+import GridList from "../../components/GridList";
+import ModalRoot from "../../components/ModalRoot";
 
-// [TODO] Footer 레이아웃 수정, 클릭 시 모달 내용 수정해야함
+// 클릭 시 모달 내용 수정해야함
 export default function RecipeRegister() {
   const { filteredCocktails, setAllCocktails, setClickedCardData } =
     useCocktailStore();
-  const { setIsLoading } = useLoadingStore();
-  const { isDetailOpen, isChatOpen } = useModalStore(); // 레시피 모달 Open 시 우측 카드의 상태
-  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState<boolean>(false); // 레시피 모달 Open, Close
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = // 레시피 등록 모달 Open, Close
-    useState<boolean>(false);
+  // const [loading, setLoading] = useState(true);
+  useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   useEffect(() => {
@@ -49,29 +45,6 @@ export default function RecipeRegister() {
       console.log("Miss Fetching data");
     }
     setAllCocktails(data);
-    setIsLoading(false);
-  };
-
-  // 레시피 등록 모달 열기
-  const openRegisterModal = () => {
-    setCurrentStep(1);
-    setIsRegisterModalOpen(true);
-  };
-
-  // 레시피 등록 모달 닫기
-  const closeRegisterModal = () => {
-    setIsRegisterModalOpen(false);
-  };
-
-  // 레시피 카드 모달 열기
-  const openRecipeCardModal = (cocktail: Cocktail_T) => {
-    setClickedCardData(cocktail);
-    setIsRecipeModalOpen(true);
-  };
-
-  // 레시피 카드 모달 닫기
-  const closeRecipeModal = () => {
-    setIsRecipeModalOpen(false);
   };
 
   const nextStep = () => {
@@ -97,41 +70,33 @@ export default function RecipeRegister() {
               <span className="text-2xl">
                 나만의 칵테일을 만들어 다락바에 보관해 보세요!
               </span>
-              <button
-                className="btn-secondary sm:w-30 xl:w-50"
-                onClick={openRegisterModal}
-              >
+              <button className="btn-secondary sm:w-30 xl:w-50">
                 레시피 등록하기
               </button>
             </p>
           </div>
           <SearchBar />
           {/* 레시피 카드 */}
-          <div className="grid justify-center md:grid-cols-3 xl:grid-cols-4">
-            {filteredCocktails &&
-              filteredCocktails.map((cocktail) => (
-                <div
-                  className="flex justify-center"
-                  onClick={() => openRecipeCardModal(cocktail)}
-                  key={cocktail.id}
-                >
-                  <RecipeCard
-                    title={cocktail.name || ""}
-                    image={
-                      typeof cocktail.image_url === "string"
-                        ? cocktail.image_url
-                        : null
-                    }
-                  />
-                </div>
-              ))}
-          </div>
+          <GridList items={filteredCocktails ?? []}>
+            {(cocktail) => (
+              <RecipeCard
+                key={cocktail.id}
+                title={cocktail.name || ""}
+                image={
+                  typeof cocktail.image_url === "string"
+                    ? cocktail.image_url
+                    : null
+                }
+              />
+            )}
+          </GridList>
         </div>
         {/* Footer */}
         <GlobalFooter />
       </div>
+
       {/* 레시피 등록 모달 */}
-      <Modal isOpen={isRegisterModalOpen} onClose={closeRegisterModal}>
+      <ModalRoot>
         {(() => {
           switch (currentStep) {
             case 1:
@@ -151,30 +116,12 @@ export default function RecipeRegister() {
                 />
               );
             default:
-              return <RecipeRegisterComplete onClose={closeRegisterModal} />;
+              return <RecipeRegisterComplete />;
           }
         })()}
-      </Modal>
+      </ModalRoot>
       {/* 레시피 카드 모달 */}
-      <Modal isOpen={isRecipeModalOpen} onClose={closeRecipeModal}>
-        <div className="modal-components-container mt-3 flex h-full gap-5">
-          {/* 모달 좌측 카드 */}
-          <UserRecipePreview />
-
-          <div
-            className={`${isDetailOpen && !isChatOpen ? "w-100" : "hidden"}`}
-          >
-            {/* 모달 우측 설명 카드 */}
-            <UserRecipeDetail />
-          </div>
-          <div
-            className={`${!isDetailOpen && isChatOpen ? "w-100" : "hidden"}`}
-          >
-            {/* 모달 우측 채팅 카드 */}
-            <RecipeChatCard />
-          </div>
-        </div>
-      </Modal>
+      <ModalRoot></ModalRoot>
     </>
   );
 }

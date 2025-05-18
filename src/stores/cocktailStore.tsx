@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { Cocktail_T } from "../types/cocktailTypes";
+import { Cocktail } from "../types/cocktailTypes";
 
 interface CocktailStore {
-  allCocktails: Cocktail_T[] | null;
-  filteredCocktails: Cocktail_T[] | null;
-  clickedCardData: Cocktail_T | null;
-  setAllCocktails: (cocktails: Cocktail_T[] | null) => void;
-  setFilteredCocktails: (cocktails: Cocktail_T[] | null) => void;
-  setClickedCardData: (cocktails: Cocktail_T | null) => void;
+  allCocktails: Cocktail[] | null;
+  filteredCocktails: Cocktail[] | null;
+  clickedCardData: Cocktail | null;
+  setAllCocktails: (cocktails: Cocktail[] | null) => void;
+  setFilteredCocktails: (cocktails: Cocktail[] | null) => void;
+  setClickedCardData: (cocktails: Cocktail | null) => void;
 }
 
 const useCocktailStore = create<CocktailStore>((set) => ({

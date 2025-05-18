@@ -2,18 +2,16 @@
 import GlobalNav from "../../components/Nav/GlobalNav";
 import GlobalFooter from "../../components/GlobalFooter";
 import { Link, useLocation } from "react-router-dom";
-import useLoadingStore from "../../stores/loadingStore";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
 export default function Home() {
-  const { isLoading, setIsLoading } = useLoadingStore();
-  const [showIntro, setShowIntro] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [showIntro, setShowIntro] = useState<boolean>(false);
   const location = useLocation(); // 현재 url 정보를 담은 location 객체 반환
 
   useEffect(() => {
-    // useEffect는 컴포넌트가 렌더링(마운트)된 후 실행
-    setIsLoading(false);
-  }, [setIsLoading]);
+    setLoading(false);
+  }, [setLoading]);
 
   useEffect(() => {
     setShowIntro(false);
@@ -22,7 +20,7 @@ export default function Home() {
   }, [location]);
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <LoadingScreen />
       ) : (
         <div className="flex h-full flex-col">

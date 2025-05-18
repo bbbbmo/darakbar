@@ -1,10 +1,10 @@
 import React from "react";
 
-interface MenuProps {
+type MenuProps = {
   isOpen: boolean;
 
   children: React.ReactNode;
-}
+};
 
 export default function Menu({ isOpen, children }: MenuProps) {
   if (!isOpen) {
