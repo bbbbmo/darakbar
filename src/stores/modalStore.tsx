@@ -1,39 +1,22 @@
 import { create } from "zustand";
 
-interface ModalStore {
-  isDetailOpen: boolean;
-  isChatOpen: boolean;
-  closeDetail: () => void;
-  closeChat: () => void;
-  toggleDetailOpen: () => void;
-  toggleChatOpen: () => void;
-}
+type ModalType = "detail" | "register";
+
+// type ModalPropsMap = {
+//   detail: { id: number };
+//   register:
+// };
+
+type ModalStore = {
+  modal: ModalType | null;
+  open: <K extends ModalType>(modal: K) => void;
+  close: () => void;
+};
 // RecipeDetailCard 열고 닫기
 const useModalStore = create<ModalStore>((set) => ({
-  isDetailOpen: true,
-  isChatOpen: false,
-
-  closeDetail: () =>
-    set(() => ({
-      isDetailOpen: false,
-    })),
-
-  closeChat: () =>
-    set(() => ({
-      isChatOpen: false,
-    })),
-
-  toggleDetailOpen: () =>
-    set((state) => {
-      state.closeChat();
-      return { isDetailOpen: !state.isDetailOpen };
-    }),
-
-  toggleChatOpen: () =>
-    set((state) => {
-      state.closeDetail();
-      return { isChatOpen: !state.isChatOpen };
-    }),
+  modal: null,
+  open: (modal) => set({ modal }),
+  close: () => set({ modal: null }),
 }));
 
 export default useModalStore;

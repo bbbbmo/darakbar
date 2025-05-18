@@ -1,23 +1,27 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import ReactDOM from "react-dom";
+import RecipeModal from "./Recipe/RecipeModal/RecipeModal";
+import useModalStore from "../stores/modalStore";
+import RecipeRegisterModal from "../pages/RecipeRegister/components/RecipeRegisterModal";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-}
+const MODAL_COMPONENTS = {
+  detail: RecipeModal,
+  register: RecipeRegisterModal,
+};
 
 // 모달 컴포넌트
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
-  if (!isOpen) return null;
+export default function ModalRoot() {
+  const { modal, close } = useModalStore();
+  if (!modal) return null;
 
-  return (
+  const SpecificModal = MODAL_COMPONENTS[modal];
+  return ReactDOM.createPortal(
     <>
       {/* [TODO] modal-overlay 클릭 시에도 모달창 닫기 */}
       <div
         role="presentation"
         className="modal-overlay bg-opacity-50 fixed inset-0 z-20 backdrop-blur-[2px]"
-        onClick={onClose}
+        onClick={close}
       ></div>
 
       <div className="modal-container fixed inset-0 z-30 flex min-h-[476px] items-center justify-center">
@@ -26,13 +30,14 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
           <div>
             <XMarkIcon
               className="close-btn ml-auto size-7 cursor-pointer fill-zinc-500"
-              onClick={onClose}
+              onClick={close}
             />
           </div>
           {/* 모달 내용 */}
-          {children}
+          <SpecificModal />
         </section>
       </div>
-    </>
+    </>,
+    document.body,
   );
 }
