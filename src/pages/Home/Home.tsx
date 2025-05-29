@@ -1,6 +1,4 @@
 // 컴포넌트
-import GlobalNav from "../../components/Nav/GlobalNav";
-import GlobalFooter from "../../components/GlobalFooter";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
@@ -24,8 +22,6 @@ export default function Home() {
         <LoadingScreen />
       ) : (
         <div className="flex h-full flex-col">
-          {/* Nav 바 */}
-          <GlobalNav />
           <div
             className={`wrapper h-full w-full px-15 pt-16 text-amber-400 ${showIntro ? "opacity-100" : "opacity-0"} transition delay-100 duration-600`}
           >
@@ -55,7 +51,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <GlobalFooter />
         </div>
       )}
     </>

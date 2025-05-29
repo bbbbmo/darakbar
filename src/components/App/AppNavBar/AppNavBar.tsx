@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand } from "flowbite-react";
 import UserProfile from "./components/UserProfile";
 import NavMenu from "./components/NavMenu";
 
-export default function Navigation() {
+export default function AppNavBar() {
   return (
     <Navbar fluid rounded>
       <NavbarBrand>

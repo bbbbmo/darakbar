@@ -7,9 +7,9 @@ import {
   DropdownItem,
   NavbarToggle,
 } from "flowbite-react";
-import supabase from "../../../supabase";
+import supabase from "../../../../supabase";
 import { useEffect, useState } from "react";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UserProfile() {

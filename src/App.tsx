@@ -1,14 +1,14 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/router";
-import ModalRoot from "./components/ModalRoot";
+import AppNavBar from "./components/App/AppNavBar/AppNavBar";
+import AppFooter from "./components/App/AppFooter";
 
 function App() {
   return (
     <>
-      <div className="wrapper h-screen w-full overflow-y-auto bg-neutral-800">
-        <RouterProvider router={router} />
-      </div>
-      <ModalRoot />
+      <AppNavBar />
+      <RouterProvider router={router} />
+      <AppFooter />
     </>
   );
 }
