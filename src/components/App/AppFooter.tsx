@@ -1,16 +1,23 @@
+import {
+  Footer,
+  FooterBrand,
+  FooterCopyright,
+  FooterDivider,
+} from "flowbite-react";
 import { Link } from "react-router-dom";
 
-export default function GlobalFooter() {
+export default function AppFooter() {
   return (
-    <footer className="mt-auto h-28">
-      <div className="divider w-full bg-neutral-800 px-7">
-        <hr className="border-t border-zinc-700"></hr>
-      </div>
-      <div className="w-full bg-neutral-800 px-10 py-5 text-neutral-400">
-        <div className="flex w-full">
-          <Link to="/">
-            <img src="/images/logo/logo-whole.png" className="size-18" />
-          </Link>
+    <Footer container>
+      <div className="w-full text-center">
+        <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
+          <FooterBrand
+            src="/images/logo/logo-whole.png"
+            alt="다락바 로고"
+            name="다락바"
+          >
+            <Link to="/"></Link>
+          </FooterBrand>
           <div className="mr-20 ml-auto flex flex-col gap-3">
             <div>aqw20501@naver.com</div>
             <div className="flex gap-3">
@@ -26,7 +33,9 @@ export default function GlobalFooter() {
             </div>
           </div>
         </div>
+        <FooterDivider />
+        <FooterCopyright href="#" by="Flowbite™" year={2022} />
       </div>
-    </footer>
+    </Footer>
   );
 }
