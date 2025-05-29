@@ -1,27 +1,24 @@
 import { UserIcon } from "@heroicons/react/24/solid";
-import { Link, useNavigate } from "react-router-dom";
-import Menu from "../../Menu";
+import {
+  Avatar,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  NavbarToggle,
+} from "flowbite-react";
 import supabase from "../../../supabase";
-import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
+import useAuth from "../../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { session, userName } = useAuth();
   const [profileImage, setProfileImage] = useState(null);
-  const { session } = useAuth();
+
+  console.log(session);
   const userId = session?.user.id;
-  const user = session?.user.user_metadata; // 현재 로그인된 유저 정보
-
-  useEffect(() => {
-    if (userId) {
-      getProfileImage();
-    }
-  }, [userId]);
-
-  const toggleUserMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const getProfileImage = async () => {
     const { data, error } = await supabase
@@ -33,7 +30,7 @@ export default function UserProfile() {
       console.log(data);
     }
     if (error) {
-      console.log(error);
+      alert(`유저 프로필 가져오기 중 에러 발생 ${error.message}`);
     }
   };
 
@@ -42,53 +39,56 @@ export default function UserProfile() {
     navigate("/");
     const { error } = await supabase.auth.signOut();
     if (error) {
-      alert(`로그아웃 에러 발생 ${error}`);
+      alert(`로그아웃 에러 발생 ${error.message}`);
     }
     alert("로그아웃 완료 !");
   };
+
+  useEffect(() => {
+    if (userId) {
+      getProfileImage();
+    }
+  }, [userId]);
   return (
     <>
-      {session ? (
-        <div
-          className="relative flex cursor-pointer items-center gap-4"
-          onClick={toggleUserMenu}
-        >
-          {profileImage ? (
-            <img src={profileImage} className="user-icon size-8 rounded-full" />
+      <Dropdown
+        arrowIcon={false}
+        inline
+        label={
+          profileImage ? (
+            <Avatar alt="User Avatar" img={profileImage} rounded />
           ) : (
             <UserIcon className="user-icon size-6" />
-          )}
-          <div className="absolute top-10 right-0 mt-2">
-            <Menu isOpen={isMenuOpen}>
-              <span onClick={signOut}>로그아웃</span>
-              <Link to="/edit-profile">
-                <span>정보수정</span>
-              </Link>
-            </Menu>
-          </div>
-
-          <div className="user-name font-bold">
-            {user ? user.name : "No name available"}
-          </div>
-        </div>
-      ) : (
-        <div
-          className="relative flex cursor-pointer items-center gap-4"
-          onClick={toggleUserMenu}
-        >
-          <UserIcon className="user-icon size-6" />
-          <div className="absolute top-10 right-0 mt-2">
-            <Menu isOpen={isMenuOpen}>
-              <Link to="/signin">
-                <span>로그인</span>
-              </Link>
-              <Link to="/signup">
-                <span>회원가입</span>
-              </Link>
-            </Menu>
-          </div>
-        </div>
-      )}
+          )
+        }
+      >
+        <DropdownHeader>
+          <span className="block text-sm">{userName}</span>
+          <span className="block truncate text-sm font-medium">
+            {session?.user.email}
+          </span>
+        </DropdownHeader>
+        {session ? (
+          <>
+            <DropdownItem>
+              <Link to="/edit-profile">정보수정</Link>
+            </DropdownItem>
+            <DropdownDivider />
+            <DropdownItem onClick={signOut}>로그아웃</DropdownItem>
+          </>
+        ) : (
+          <>
+            <DropdownItem>
+              <Link to="/signin">로그인</Link>
+            </DropdownItem>
+            <DropdownDivider />
+            <DropdownItem>
+              <Link to="/signup">회원가입</Link>
+            </DropdownItem>
+          </>
+        )}
+      </Dropdown>
+      <NavbarToggle />
     </>
   );
 }
