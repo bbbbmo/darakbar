@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import supabase from "../supabase";
 
@@ -6,6 +6,11 @@ import supabase from "../supabase";
 export default function useAuth() {
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
   const [session, setSession] = useState<Session | null>(null);
+
+  const userName = useMemo<string | null>(
+    () => session?.user.identities?.[0]?.identity_data?.name ?? "Guest",
+    [session],
+  );
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -21,5 +26,5 @@ export default function useAuth() {
 
     return () => subscription.unsubscribe();
   }, []);
-  return { session, isLoading };
+  return { session, userName, isLoading };
 }
