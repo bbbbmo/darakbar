@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import RecipeNavigation from "../pages/RecipeNavigation/RecipeNavigation";
-import RecipeRegister from "../pages/RecipeRegister/RecipeRegister";
+import BasicRecipe from "../pages/BasicRecipe/BasicRecipe";
+import PersonalRecipe from "../pages/PersonalRecipe/PersonalRecipe";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import UserProfile from "../pages/EditProfile";
@@ -34,16 +34,16 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "recipe-register", // 나만의 레시피 -> 로그인 필요
+        path: "personal-recipe", // 나만의 레시피 -> 로그인 필요
         element: (
           <ProtectedRoute>
-            <RecipeRegister />
+            <PersonalRecipe />
           </ProtectedRoute>
         ),
       },
       {
-        path: "recipe-navigation", // 레시피 탐색
-        element: <RecipeNavigation />,
+        path: "basic-recipe", // 레시피 탐색
+        element: <BasicRecipe />,
       },
     ],
   },

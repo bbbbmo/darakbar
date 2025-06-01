@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
-import useRegisterStore from "../../registerStore";
+import useRegisterStore from "../../store";
 import React from "react";
 import supabase from "../../../../supabase";
 import { Cocktail } from "../../../../types/cocktails";

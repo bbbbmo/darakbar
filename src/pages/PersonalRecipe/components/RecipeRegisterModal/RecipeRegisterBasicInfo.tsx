@@ -4,7 +4,7 @@ import {
   ArrowUpTrayIcon,
 } from "@heroicons/react/24/solid";
 import React, { useRef } from "react";
-import useRegisterStore from "../../registerStore";
+import useRegisterStore from "../../store";
 
 interface RecipeRegisterBasicInfoProps {
   nextStep: () => void;

@@ -1,6 +1,6 @@
 import { ArrowRightIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
-import useRegisterStore from "../../registerStore";
+import useRegisterStore from "../../store";
 
 interface RecipeRegisterIngredientsProps {
   nextStep: () => void;

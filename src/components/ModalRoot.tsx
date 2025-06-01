@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import ReactDOM from "react-dom";
 import RecipeModal from "./Recipe/RecipeModal/RecipeModal";
 import useModalStore from "../stores/modalStore";
-import RecipeRegisterModal from "../pages/RecipeRegister/components/RecipeRegisterModal";
+import RecipeRegisterModal from "../pages/PersonalRecipe/components/RecipeRegisterModal";
 
 const MODAL_COMPONENTS = {
   detail: RecipeModal,
