@@ -16,8 +16,6 @@ export default function UserProfile() {
   const navigate = useNavigate();
   const { session, userName } = useAuth();
   const [profileImage, setProfileImage] = useState(null);
-
-  console.log(session);
   const userId = session?.user.id;
 
   const getProfileImage = async () => {

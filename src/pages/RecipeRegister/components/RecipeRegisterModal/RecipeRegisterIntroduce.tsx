@@ -2,7 +2,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import useRegisterStore from "../../registerStore";
 import React from "react";
 import supabase from "../../../../supabase";
-import { Cocktail_T } from "../../../../types/cocktailTypes";
+import { Cocktail } from "../../../../types/cocktails";
 import useAuth from "../../../../hooks/useAuth";
 
 interface RecipeRegisterIntroduceProps {
@@ -127,7 +127,7 @@ export default function RecipeRegisterIntroduce({
       imageUrl = await uploadImageToStorage(image); // 유저가 이미지 삽입했다면 해당 이미지 업로드, 이때 state는 비동기적이므로 state 업데이트 전 데이터베이스에 삽입해버림
     }
 
-    const userCocktail: Cocktail_T = {
+    const userCocktail: Cocktail = {
       name: name,
       base_liquor: baseLiquor,
       ingredients: ingredients,

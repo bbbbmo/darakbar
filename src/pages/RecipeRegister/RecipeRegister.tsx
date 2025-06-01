@@ -1,28 +1,23 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
-import GlobalFooter from "../../components/GlobalFooter";
-import GlobalNav from "../../components/Nav/GlobalNav";
-import Modal from "../../components/ModalRoot";
+
+import GlobalNav from "../../components/App/AppNavBar/AppNavBar";
 import SearchBar from "../../components/SearchBar";
 import RecipeRegisterIngredients from "./components/RecipeRegisterModal/RecipeRegisterIngredients";
 import RecipeRegisterBasicInfo from "./components/RecipeRegisterModal/RecipeRegisterBasicInfo";
 import RecipeRegisterIntroduce from "./components/RecipeRegisterModal/RecipeRegisterIntroduce";
 import RecipeRegisterComplete from "./components/RecipeRegisterModal/RecipeRegisterComplete";
 import RecipeCard from "../../components/Recipe/RecipeCard";
-import UserRecipePreview from "./components/RecipeCardModal/UserRecipePreview";
-import UserRecipeDetail from "./components/RecipeCardModal/UserRecipeDetail";
-import RecipeChatCard from "../RecipeNavigation/RecipeCardModal/modal/PreRecipeChat";
+
 import useCocktailStore from "../../stores/cocktailStore";
 // 타입
-import { Cocktail } from "../../types/cocktailTypes";
+
 import GridList from "../../components/GridList";
-import ModalRoot from "../../components/ModalRoot";
 
 // 클릭 시 모달 내용 수정해야함
 export default function RecipeRegister() {
-  const { filteredCocktails, setAllCocktails, setClickedCardData } =
-    useCocktailStore();
+  const { filteredCocktails, setAllCocktails } = useCocktailStore();
   // const [loading, setLoading] = useState(true);
   useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -92,36 +87,32 @@ export default function RecipeRegister() {
           </GridList>
         </div>
         {/* Footer */}
-        <GlobalFooter />
       </div>
 
       {/* 레시피 등록 모달 */}
-      <ModalRoot>
-        {(() => {
-          switch (currentStep) {
-            case 1:
-              return <RecipeRegisterIngredients nextStep={nextStep} />;
-            case 2:
-              return (
-                <RecipeRegisterBasicInfo
-                  nextStep={nextStep}
-                  prevStep={prevStep}
-                />
-              );
-            case 3:
-              return (
-                <RecipeRegisterIntroduce
-                  nextStep={nextStep}
-                  prevStep={prevStep}
-                />
-              );
-            default:
-              return <RecipeRegisterComplete />;
-          }
-        })()}
-      </ModalRoot>
-      {/* 레시피 카드 모달 */}
-      <ModalRoot></ModalRoot>
+
+      {(() => {
+        switch (currentStep) {
+          case 1:
+            return <RecipeRegisterIngredients nextStep={nextStep} />;
+          case 2:
+            return (
+              <RecipeRegisterBasicInfo
+                nextStep={nextStep}
+                prevStep={prevStep}
+              />
+            );
+          case 3:
+            return (
+              <RecipeRegisterIntroduce
+                nextStep={nextStep}
+                prevStep={prevStep}
+              />
+            );
+          default:
+            return <RecipeRegisterComplete />;
+        }
+      })()}
     </>
   );
 }

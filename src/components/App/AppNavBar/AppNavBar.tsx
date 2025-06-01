@@ -5,7 +5,7 @@ import NavMenu from "./components/NavMenu";
 
 export default function AppNavBar() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid>
       <NavbarBrand>
         <div className="flex items-center gap-2">
           <img src="/images/logo/logo-icon.png" alt="Logo" className="w-9" />

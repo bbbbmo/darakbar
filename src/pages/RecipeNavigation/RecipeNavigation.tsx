@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
-import GlobalNav from "../../components/Nav/GlobalNav";
-import GlobalFooter from "../../components/GlobalFooter";
+import GlobalNav from "../../components/App/AppNavBar/AppNavBar";
+import GlobalFooter from "../../components/App/AppFooter";
 import SearchBar from "../../components/SearchBar";
 import RecipeCard from "../../components/Recipe/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";

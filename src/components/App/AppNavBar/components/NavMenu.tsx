@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { navMenuList } from "../nav.config";
-import { NavbarCollapse, NavbarLink } from "flowbite-react";
+import { NavbarCollapse } from "flowbite-react";
 
 export default function NavMenu() {
   return (
     <NavbarCollapse>
       {navMenuList.map((menu, index) => {
         return (
-          <NavbarLink active key={index}>
-            <Link to={menu.url}>{menu.text}</Link>
-          </NavbarLink>
+          <NavLink key={index} to={menu.url} className="active">
+            {menu.text}
+          </NavLink>
         );
       })}
     </NavbarCollapse>

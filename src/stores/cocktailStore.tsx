@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Cocktail } from "../types/cocktailTypes";
+import { Cocktail } from "../types/cocktails";
 
 interface CocktailStore {
   allCocktails: Cocktail[] | null;
