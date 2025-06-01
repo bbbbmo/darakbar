@@ -1,56 +1,51 @@
 // 컴포넌트
-import { Link, useLocation } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
+import { Button } from "flowbite-react";
+import { Card } from "flowbite-react";
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [showIntro, setShowIntro] = useState<boolean>(false);
-  const location = useLocation(); // 현재 url 정보를 담은 location 객체 반환
 
   useEffect(() => {
     setLoading(false);
   }, [setLoading]);
 
-  useEffect(() => {
-    setShowIntro(false);
-    const timeoutId = setTimeout(() => setShowIntro(true), 10);
-    return () => clearTimeout(timeoutId);
-  }, [location]);
   return (
     <>
       {loading ? (
         <LoadingScreen />
       ) : (
-        <div className="flex h-full flex-col">
-          <div
-            className={`wrapper h-full w-full px-15 pt-16 text-amber-400 ${showIntro ? "opacity-100" : "opacity-0"} transition delay-100 duration-600`}
-          >
-            <div className="introduce mt-10 mb-10 flex w-full">
-              <img
-                src="/images/bg.jpg"
-                className="introduce__img h-110 w-220"
-              />
-              <p className="introduce__text ml-5 flex flex-col justify-between">
-                <span className="text-7xl">다락바 - 나만의 칵테일 레시피</span>
-                <br />
-                <span>
-                  다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은
-                  칵테일 레시피들이 숨어있는 공간입니다.
-                  <br></br>
-                  이곳에서 여러분만의 독창적인 레시피와 그 속에 담긴 감성을
-                  보여주세요.
-                </span>
-                <span className="font-bold text-black">
-                  #나만의 레시피 만들기 #레시피 공유 #전국 바 찾기
-                </span>
-                <Link to="/recipe-register" className="ml-auto">
-                  <button className="btn-secondary sm:w-30 xl:w-50">
-                    시작하기
-                  </button>
-                </Link>
-              </p>
-            </div>
-          </div>
+        <div className="flex h-full justify-center">
+          <Card className="mt-10 h-100 max-w-2xl">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+              다락바 - 나만의 칵테일 레시피
+            </h1>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              <span>
+                다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
+                레시피들이 숨어있는 공간입니다.
+                <br></br>
+                이곳에서 여러분만의 독창적인 레시피와 그 속에 담긴 감성을
+                보여주세요.
+              </span>
+            </p>
+            <Button>
+              시작하기
+              <svg
+                className="-mr-1 ml-2 h-4 w-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Button>
+          </Card>
         </div>
       )}
     </>
