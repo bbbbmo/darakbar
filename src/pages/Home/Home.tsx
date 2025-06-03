@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
 import { Button } from "flowbite-react";
 import { Card } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  const goNextPage = () => {
+    navigate("/personal-recipe");
+  };
 
   useEffect(() => {
     setLoading(false);
@@ -26,11 +32,10 @@ export default function Home() {
                 다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
                 레시피들이 숨어있는 공간입니다.
                 <br></br>
-                이곳에서 여러분만의 독창적인 레시피와 그 속에 담긴 감성을
-                보여주세요.
+                이곳에서 독창적인 레시피와 그 속에 담긴 감성을 보여주세요.
               </span>
             </p>
-            <Button>
+            <Button onClick={goNextPage}>
               시작하기
               <svg
                 className="-mr-1 ml-2 h-4 w-4"
