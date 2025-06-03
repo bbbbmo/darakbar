@@ -4,10 +4,11 @@ import supabase from "../../supabase";
 import GlobalNav from "../../components/App/AppNavBar/AppNavBar";
 import GlobalFooter from "../../components/App/AppFooter";
 import SearchBar from "../../components/SearchBar";
-import RecipeCard from "../../components/Recipe/RecipeCard";
+import RecipeCard from "../../components/Cards/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";
+import { RecipeModal } from "../../components/Modals/RecipeModal/RecipeModal";
 // Zustand
-import useCocktailStore from "../../stores/cocktailStore";
+import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
 import GridList from "../../components/GridList";
 
 export default function RecipeNavigation() {
@@ -68,12 +69,15 @@ export default function RecipeNavigation() {
                       ? cocktail.image_url
                       : null
                   }
+                  cocktail={cocktail}
                 />
               )}
             </GridList>
           </div>
           {/* Footer */}
           <GlobalFooter />
+          {/* Recipe Modal */}
+          <RecipeModal />
         </>
       )}
     </div>

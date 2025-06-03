@@ -1,12 +1,11 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import useModalStore from "../../../../stores/modalStore";
 import { useState } from "react";
-import useCocktailStore from "../../../../components/Modals/RecipeModal/recipe-modal.store";
+import useCocktailStore from "../recipe-modal.store";
 
 // 레시피 정보
-export default function UserRecipeDetail() {
+export default function Detail() {
   const { clickedCardData } = useCocktailStore();
-  const { closeDetail } = useModalStore();
+
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
@@ -17,7 +16,7 @@ export default function UserRecipeDetail() {
     <div className="wrapper relative h-full w-full flex-col rounded-xl bg-slate-100">
       {/* detail 닫기 버튼 */}
       <div className="close-detail-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
-        <XMarkIcon className="size-6" onClick={closeDetail} />
+        <XMarkIcon className="size-6" />
       </div>
 
       <div className="details-container h-full w-full text-stone-700">

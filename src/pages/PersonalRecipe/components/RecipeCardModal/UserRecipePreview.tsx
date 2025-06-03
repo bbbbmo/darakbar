@@ -1,4 +1,4 @@
-import useCocktailStore from "../../../../stores/cocktailStore";
+import useCocktailStore from "../../../../components/Modals/RecipeModal/recipe-modal.store";
 import UserRecipeBtns from "../../../../components/BtnGroup/ButtonGroup";
 
 // 레시피 시각 파트

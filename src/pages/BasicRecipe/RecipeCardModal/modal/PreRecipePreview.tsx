@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useCocktailStore from "../../../../stores/cocktailStore";
+import useCocktailStore from "../../../../components/Modals/RecipeModal/recipe-modal.store";
 import RecipeBtnGroup from "./PreRecipeBtns";
 
 interface recipeVideo {

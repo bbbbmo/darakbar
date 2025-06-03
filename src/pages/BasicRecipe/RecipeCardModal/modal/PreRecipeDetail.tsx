@@ -1,7 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import useModalStore from "../../../../stores/modalStore";
 import { useState } from "react";
-import useCocktailStore from "../../../../stores/cocktailStore";
+import useCocktailStore from "../../../../components/Modals/RecipeModal/recipe-modal.store";
 
 // 레시피 정보
 export default function PreRecipeDetail() {

@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useRef } from "react";
-import useCocktailStore from "../stores/cocktailStore";
+import useCocktailStore from "./Modals/RecipeModal/recipe-modal.store";
 
 export default function SearchBar() {
   const inputRef = useRef<HTMLInputElement | null>(null);
