@@ -4,7 +4,7 @@ import supabase from "../../supabase";
 import SearchBar from "../../components/SearchBar";
 import RecipeCreateModal from "../../components/Modals/RecipeCreateModal/RecipeCreateModal";
 import GridList from "../../components/GridList";
-import RecipeCard from "../../components/Cards/RecipeCard";
+import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 import RecipeModal from "../../components/Modals/RecipeModal/RecipeModal";
 import useModalStore from "../../components/Modals/modalStore";
 import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
@@ -57,6 +57,7 @@ export default function PersonalRecipe() {
                   ? cocktail.image_url
                   : null
               }
+              cocktail={cocktail}
             />
           )}
         </GridList>
