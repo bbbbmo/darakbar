@@ -5,7 +5,7 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import useRecipeStore from "../../../../stores/modalStore";
+import useRecipeStore from "../../../../components/Modals/modalStore";
 
 export default function PreRecipeBtns() {
   const [selectStarIcon, setSelectStarIcon] = useState<boolean>(false);

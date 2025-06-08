@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
 import SearchBar from "../../components/SearchBar";
-import RecipeRegisterIngredients from "./components/RecipeRegisterModal/RecipeRegisterIngredients";
-import RecipeRegisterBasicInfo from "./components/RecipeRegisterModal/RecipeRegisterBasicInfo";
-import RecipeRegisterIntroduce from "./components/RecipeRegisterModal/RecipeRegisterIntroduce";
-import RecipeRegisterComplete from "./components/RecipeRegisterModal/RecipeRegisterComplete";
-
-import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
-// 타입
-
+import RecipeCreateModal from "../../components/Modals/RecipeCreateModal/RecipeCreateModal";
 import GridList from "../../components/GridList";
 import RecipeCard from "../../components/Cards/RecipeCard";
-import { RecipeModal } from "../../components/Modals/RecipeModal/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal/RecipeModal";
+import useModalStore from "../../components/Modals/modalStore";
+import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
 
 // 클릭 시 모달 내용 수정해야함
 export default function PersonalRecipe() {
   const { filteredCocktails, setAllCocktails } = useCocktailStore();
-  const [currentStep, setCurrentStep] = useState<number>(1);
-
+  const { open } = useModalStore();
   /** user_cocktails 테이블로부터 유저가 등록한 전체 칵테일 데이터 가져오는 함수 */
   const getUserCocktails = async () => {
     try {
@@ -32,21 +26,9 @@ export default function PersonalRecipe() {
     }
   };
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
   useEffect(() => {
     getUserCocktails();
   }, []);
-  // 현재 step 확인 용
-  // useEffect(() => {
-  //   console.log(currentStep);
-  // }, [currentStep]);
   return (
     <>
       <div className="wrapper w-full px-10">
@@ -55,7 +37,10 @@ export default function PersonalRecipe() {
             <span className="text-2xl">
               나만의 칵테일을 만들어 다락바에 보관해 보세요!
             </span>
-            <button className="btn-secondary sm:w-30 xl:w-50">
+            <button
+              className="btn-secondary sm:w-30 xl:w-50"
+              onClick={() => open("create")}
+            >
               레시피 등록하기
             </button>
           </p>
@@ -77,30 +62,7 @@ export default function PersonalRecipe() {
         </GridList>
       </div>
 
-      {/* 레시피 등록 모달 */}
-
-      {(() => {
-        switch (currentStep) {
-          case 1:
-            return <RecipeRegisterIngredients nextStep={nextStep} />;
-          case 2:
-            return (
-              <RecipeRegisterBasicInfo
-                nextStep={nextStep}
-                prevStep={prevStep}
-              />
-            );
-          case 3:
-            return (
-              <RecipeRegisterIntroduce
-                nextStep={nextStep}
-                prevStep={prevStep}
-              />
-            );
-          default:
-            return <RecipeRegisterComplete />;
-        }
-      })()}
+      <RecipeCreateModal />
       <RecipeModal />
     </>
   );

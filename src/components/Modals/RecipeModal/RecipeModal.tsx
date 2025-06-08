@@ -5,14 +5,14 @@ import {
   ModalFooter,
   ModalHeader,
 } from "flowbite-react";
-import useModalStore from "../../../stores/modalStore";
+import useModalStore from "../modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useState } from "react";
 
 type Content = "preview" | "detail";
 
-export function RecipeModal() {
+export default function RecipeModal() {
   const [content, setContent] = useState<Content>("preview");
   const { modals, close } = useModalStore();
   return (

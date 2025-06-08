@@ -9,7 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  const goNextPage = () => {
+  const goPersonalRecipePage = () => {
     navigate("/personal-recipe");
   };
 
@@ -35,7 +35,7 @@ export default function Home() {
                 이곳에서 독창적인 레시피와 그 속에 담긴 감성을 보여주세요.
               </span>
             </p>
-            <Button onClick={goNextPage}>
+            <Button onClick={goPersonalRecipePage}>
               시작하기
               <svg
                 className="-mr-1 ml-2 h-4 w-4"

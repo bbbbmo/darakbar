@@ -1,4 +1,4 @@
-import useModalStore from "../../stores/modalStore";
+import useModalStore from "../Modals/modalStore";
 
 type RecipeCardProps = {
   title: string;

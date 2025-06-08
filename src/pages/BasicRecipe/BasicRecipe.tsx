@@ -6,7 +6,7 @@ import GlobalFooter from "../../components/App/AppFooter";
 import SearchBar from "../../components/SearchBar";
 import RecipeCard from "../../components/Cards/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";
-import { RecipeModal } from "../../components/Modals/RecipeModal/RecipeModal";
+import RecipeModal from "../../components/Modals/RecipeModal/RecipeModal";
 // Zustand
 import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
 import GridList from "../../components/GridList";
@@ -37,16 +37,6 @@ export default function RecipeNavigation() {
     setLoading(false);
   };
 
-  // 모달 여닫기 함수
-  // const openRecipeCardModal = (cocktail: Cocktail_T) => {
-  //   setClickedCardData(cocktail);
-  //   setIsModalOpen(true);
-  // };
-
-  // const closeRecipeModal = () => {
-  //   setIsModalOpen(false);
-  // };
-
   return (
     <div className="flex w-full flex-col">
       {loading ? (
@@ -69,7 +59,6 @@ export default function RecipeNavigation() {
                       ? cocktail.image_url
                       : null
                   }
-                  cocktail={cocktail}
                 />
               )}
             </GridList>

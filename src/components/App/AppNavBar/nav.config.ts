@@ -10,11 +10,11 @@ export const navMenuList: NavMenu[] = [
   },
   {
     text: "나만의 레시피",
-    url: "/recipe-register",
+    url: "/personal-recipe",
   },
   {
     text: "레시피 탐색",
-    url: "/recipe-navigation",
+    url: "/basic-recipe",
   },
   {
     text: "다락바 탐방",

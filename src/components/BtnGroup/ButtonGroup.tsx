@@ -5,7 +5,7 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 
-import useRecipeStore from "../../stores/modalStore";
+import useRecipeStore from "../Modals/modalStore";
 import Button from "./Button";
 
 type BtnGroupsProps = {

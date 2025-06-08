@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import useModalStore from "../../../../stores/modalStore";
+import useModalStore from "../../../../components/Modals/modalStore";
 import { useState } from "react";
 import useCocktailStore from "../../../../components/Modals/RecipeModal/recipe-modal.store";
 

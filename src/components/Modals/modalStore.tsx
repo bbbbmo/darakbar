@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type ModalKey = "recipe" | "register" | "alert";
+type ModalKey = "recipe" | "create" | "alert";
 
 type ModalStore = {
   modals: Record<ModalKey, boolean>;
@@ -12,7 +12,7 @@ type ModalStore = {
 const useModalStore = create<ModalStore>((set, get) => ({
   modals: {
     recipe: false,
-    register: false,
+    create: false,
     alert: false,
   },
   open: (key: ModalKey) =>

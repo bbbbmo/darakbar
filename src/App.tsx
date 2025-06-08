@@ -11,9 +11,9 @@ type AppProps = {
 
 function App({ header, body, footer }: AppProps) {
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       {header || <AppNavBar />}
-      <main className="flex-grow overflow-auto">{body || <Outlet />}</main>
+      <main className="flex-grow">{body || <Outlet />}</main>
       {footer || <AppFooter />}
     </div>
   );
