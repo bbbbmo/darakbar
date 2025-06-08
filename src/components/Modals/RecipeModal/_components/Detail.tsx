@@ -1,4 +1,3 @@
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import useCocktailStore from "../recipe-modal.store";
 
@@ -14,11 +13,6 @@ export default function Detail() {
 
   return (
     <div className="wrapper relative h-full w-full flex-col rounded-xl bg-slate-100">
-      {/* detail 닫기 버튼 */}
-      <div className="close-detail-card-btn absolute top-2 right-2 z-60 cursor-pointer rounded-lg bg-zinc-700">
-        <XMarkIcon className="size-6" />
-      </div>
-
       <div className="details-container h-full w-full text-stone-700">
         {/* 탭 구간 */}
         <div className="tab-group flex gap-5 border-b border-gray-200 px-3 text-xl">
