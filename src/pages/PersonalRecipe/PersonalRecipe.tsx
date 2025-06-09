@@ -13,6 +13,7 @@ import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.s
 export default function PersonalRecipe() {
   const { filteredCocktails, setAllCocktails } = useCocktailStore();
   const { open } = useModalStore();
+
   /** user_cocktails 테이블로부터 유저가 등록한 전체 칵테일 데이터 가져오는 함수 */
   const getUserCocktails = async () => {
     try {

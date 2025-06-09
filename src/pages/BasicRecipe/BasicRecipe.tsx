@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import supabase from "../../supabase";
-// 컴포넌트
-import GlobalNav from "../../components/App/AppNavBar/AppNavBar";
-import GlobalFooter from "../../components/App/AppFooter";
+
 import SearchBar from "../../components/SearchBar";
 import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 import LoadingScreen from "../../components/LoadingScreen";
@@ -43,10 +41,8 @@ export default function RecipeNavigation() {
         <LoadingScreen />
       ) : (
         <>
-          {/* Nav 바 */}
-          <GlobalNav />
           {/* [TODO] 배경 클릭 시 모달창 안닫히는 오류 수정하기 */}
-          <div className="wrapper h-full w-full px-15 pt-15">
+          <div className="wrapper h-full w-full px-15">
             <SearchBar />
             {/* 레시피 카드 */}
             <GridList items={filteredCocktails ?? []}>
@@ -64,8 +60,6 @@ export default function RecipeNavigation() {
               )}
             </GridList>
           </div>
-          {/* Footer */}
-          <GlobalFooter />
           {/* Recipe Modal */}
           <RecipeModal />
         </>

@@ -4,6 +4,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  ArrowRightIcon,
 } from "flowbite-react";
 import useModalStore from "../modalStore";
 import IngredientForm from "./_components/IngredientForm";
@@ -48,8 +49,12 @@ export default function RecipeCreateModal() {
         <Button color="gray" onClick={prevStep}>
           이전 단계
         </Button>
-        <Button color="gray" onClick={nextStep}>
-          다음 단계
+        <Button
+          color="gray"
+          onClick={nextStep}
+          className="ml-auto flex items-center gap-1 hover:text-amber-400"
+        >
+          다음 단계 <ArrowRightIcon className="size-4" />
         </Button>
       </ModalFooter>
     </Modal>
