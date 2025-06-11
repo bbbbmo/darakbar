@@ -12,3 +12,8 @@ export type BasicInfoForm = {
   image: string;
   glassType: string;
 };
+
+export type DescriptionForm = {
+  instructions: string;
+  description: string;
+};
