@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import RequiredMark from "./RequiredMark";
+import FormRequiredMark from "./FormRequiredMark";
 
 type FormItemProps = {
   label: string;
@@ -24,7 +24,7 @@ export default function FormItem({
     <div className={`flex flex-col gap-3 rounded-lg p-2 ${wrapperClassName}`}>
       <Label className={`font-bold ${labelClassName}`}>
         {label}
-        {required && <RequiredMark />}
+        {required && <FormRequiredMark />}
       </Label>
       <div className="flex gap-1">{children}</div>
     </div>
