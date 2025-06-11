@@ -19,7 +19,7 @@ export default function RecipeCreateModal() {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const nextStep = () => {
-    if (currentStep < 3) {
+    if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -41,8 +41,10 @@ export default function RecipeCreateModal() {
               return <BasicInfoForm />;
             case 3:
               return <DescriptionForm />;
-            default:
+            case 4:
               return <SuccessCreate />;
+            default:
+              return null;
           }
         })()}
       </ModalBody>
