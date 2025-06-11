@@ -5,6 +5,7 @@ import {
   ModalFooter,
   Button,
   ArrowRightIcon,
+  ArrowLeftIcon,
 } from "flowbite-react";
 import useModalStore from "../modalStore";
 import IngredientForm from "./_components/IngredientForm";
@@ -46,14 +47,10 @@ export default function RecipeCreateModal() {
         })()}
       </ModalBody>
       <ModalFooter className="flex justify-between">
-        <Button color="gray" onClick={prevStep}>
-          이전 단계
+        <Button color="gray" onClick={prevStep} className="flex gap-1">
+          <ArrowLeftIcon className="size-4" /> 이전 단계
         </Button>
-        <Button
-          color="gray"
-          onClick={nextStep}
-          className="ml-auto flex items-center gap-1 hover:text-amber-400"
-        >
+        <Button color="gray" onClick={nextStep} className="flex gap-1">
           다음 단계 <ArrowRightIcon className="size-4" />
         </Button>
       </ModalFooter>
