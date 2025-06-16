@@ -42,13 +42,16 @@ export default function IngredientForm() {
               {...register("baseLiquor", { required: true, maxLength: 15 })}
             />
             <TextInput
-              className="w-20"
+              className="w-22"
               type="number"
               step={0.25}
-              placeholder="용량 및 개수"
+              placeholder="용량"
               {...register("baseLiquorAmount", { required: true, min: 0 })}
             />
-            <Select {...register("baseLiquorUnit", { required: true })}>
+            <Select
+              className="w-28"
+              {...register("baseLiquorUnit", { required: true })}
+            >
               {unitOptions.map((unit) => (
                 <option key={unit.value} value={unit.value}>
                   {unit.label}
@@ -71,14 +74,14 @@ export default function IngredientForm() {
                 {...register("ingredients", { required: true })}
               />
               <TextInput
-                className="w-20"
+                className="w-22"
                 type="number"
                 step={0.25}
                 placeholder="용량 및 개수"
                 {...register("ingredientAmounts", { required: true, min: 0 })}
               />
               <Select
-                className="w-15 rounded-sm"
+                className="w-28"
                 {...register("ingredientUnits", { required: true })}
               >
                 {unitOptions.map((unit) => (
