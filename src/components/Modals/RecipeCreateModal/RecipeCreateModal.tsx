@@ -6,48 +6,53 @@ import {
   Button,
   ArrowRightIcon,
   ArrowLeftIcon,
+  Progress,
 } from "flowbite-react";
 import useModalStore from "../modalStore";
 import IngredientForm from "./_components/IngredientForm";
 import BasicInfoForm from "./_components/BasicInfoForm";
 import DescriptionForm from "./_components/DescriptionForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuccessCreate from "./_components/SuccessCreate";
+
+const steps = [
+  // NOTE: Reconciliation 처리를 위해 key 추가
+  <IngredientForm key="ingredient" />,
+  <BasicInfoForm key="basicInfo" />,
+  <DescriptionForm key="description" />,
+  <SuccessCreate key="success" />,
+];
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
 
   const nextStep = () => {
-    if (currentStep < 4) {
+    if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
+    if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
   };
+
+  useEffect(() => {
+    setProgress(Math.round(((currentStep + 1) / steps.length) * 100));
+  }, [currentStep]);
   return (
     <Modal show={modals.create} onClose={() => close("create")} size="2xl">
-      <ModalHeader>칵테일 등록하기</ModalHeader>
-      <ModalBody>
-        {(() => {
-          switch (currentStep) {
-            case 1:
-              return <IngredientForm />;
-            case 2:
-              return <BasicInfoForm />;
-            case 3:
-              return <DescriptionForm />;
-            case 4:
-              return <SuccessCreate />;
-            default:
-              return null;
-          }
-        })()}
-      </ModalBody>
+      <ModalHeader className="w-full">칵테일 등록하기</ModalHeader>
+      <ModalBody>{steps[currentStep]}</ModalBody>
+      <Progress
+        progress={progress}
+        className="my-2"
+        size="sm"
+        textLabel="진행률"
+      />
       <ModalFooter className="flex justify-between">
         <Button color="gray" onClick={prevStep} className="flex gap-1">
           <ArrowLeftIcon className="size-4" /> 이전 단계
