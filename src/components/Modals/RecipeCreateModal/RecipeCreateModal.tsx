@@ -3,9 +3,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
-  ArrowRightIcon,
-  ArrowLeftIcon,
   Progress,
 } from "flowbite-react";
 import useModalStore from "../modalStore";
@@ -14,6 +11,7 @@ import BasicInfoForm from "./_components/BasicInfoForm";
 import DescriptionForm from "./_components/DescriptionForm";
 import { useEffect, useState } from "react";
 import SuccessCreate from "./_components/SuccessCreate";
+import StepButtons from "./_components/StepButtons";
 
 const steps = [
   // NOTE: Reconciliation 처리를 위해 key 추가
@@ -27,16 +25,17 @@ export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
+  const maxStep = steps.length - 1;
 
   const nextStep = () => {
-    if (currentStep < steps.length - 1) {
+    if (currentStep < maxStep) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep(maxStep);
     }
   };
 
@@ -54,12 +53,12 @@ export default function RecipeCreateModal() {
         textLabel="진행률"
       />
       <ModalFooter className="flex justify-between">
-        <Button color="gray" onClick={prevStep} className="flex gap-1">
-          <ArrowLeftIcon className="size-4" /> 이전 단계
-        </Button>
-        <Button color="gray" onClick={nextStep} className="flex gap-1">
-          다음 단계 <ArrowRightIcon className="size-4" />
-        </Button>
+        <StepButtons
+          currentStep={currentStep}
+          maxStep={maxStep}
+          prevStep={prevStep}
+          nextStep={nextStep}
+        />
       </ModalFooter>
     </Modal>
   );
