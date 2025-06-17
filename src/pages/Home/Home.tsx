@@ -5,8 +5,11 @@ import LoadingScreen from "../../components/LoadingScreen";
 import { Button } from "flowbite-react";
 import { Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import BlurText from "../../reactbits/BlurText";
+
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
+  const animationTitle = "다락바 - 나만의 칵테일 레시피";
   const navigate = useNavigate();
 
   const goPersonalRecipePage = () => {
@@ -24,9 +27,13 @@ export default function Home() {
       ) : (
         <div className="flex h-full justify-center">
           <Card className="mt-10 h-100 max-w-2xl">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-              다락바 - 나만의 칵테일 레시피
-            </h1>
+            <BlurText
+              text={animationTitle}
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+            />
             <p className="font-normal text-gray-700 dark:text-gray-400">
               <span>
                 다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
