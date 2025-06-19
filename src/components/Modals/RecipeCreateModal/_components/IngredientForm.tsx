@@ -1,5 +1,5 @@
 import { Select, TextInput, Button } from "flowbite-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import type { IngredientForm } from "./form.type";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import FormItem from "../../../Form/FormItem";
@@ -13,15 +13,24 @@ const unitOptions = [
   { value: "개", label: "개" },
 ];
 
+const emptyIngredient = {
+  name: "",
+  amount: 0,
+  unit: "",
+};
+
 export default function IngredientForm() {
-  const { register, handleSubmit } = useForm<IngredientForm>();
-  const ingredients = [
-    {
-      name: "",
-      amount: 0,
-      unit: "",
+  const { register, control, handleSubmit } = useForm<IngredientForm>({
+    defaultValues: {
+      baseLiquor: structuredClone(emptyIngredient),
+      ingredients: [structuredClone(emptyIngredient)],
     },
-  ];
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "ingredients",
+  });
 
   const onSubmit: SubmitHandler<IngredientForm> = (data) => {
     console.log(data);
@@ -39,18 +48,21 @@ export default function IngredientForm() {
               type="text"
               placeholder="메인이 되는 술이나 재료를 입력해 주세요"
               className="h-10 grow"
-              {...register("baseLiquor", { required: true, maxLength: 15 })}
+              {...register("baseLiquor.name", {
+                required: true,
+                maxLength: 15,
+              })}
             />
             <TextInput
               className="w-22"
               type="number"
               step={0.25}
               placeholder="용량"
-              {...register("baseLiquorAmount", { required: true, min: 0 })}
+              {...register("baseLiquor.amount", { required: true, min: 0 })}
             />
             <Select
               className="w-28"
-              {...register("baseLiquorUnit", { required: true })}
+              {...register("baseLiquor.unit", { required: true })}
             >
               {unitOptions.map((unit) => (
                 <option key={unit.value} value={unit.value}>
@@ -60,10 +72,13 @@ export default function IngredientForm() {
             </Select>
           </FormItem>
           {/* 재료 입력 */}
-          {ingredients?.map((ingredient, index) => (
-            <FormItem key={index} label={`재료 ${index + 1}`} required>
+          {fields?.map((field, index) => (
+            <FormItem key={field.id} label={`재료 ${index + 1}`} required>
               {index !== 0 && (
-                <span className="absolute right-2 cursor-pointer">
+                <span
+                  className="absolute right-2 cursor-pointer"
+                  onClick={() => remove(index)}
+                >
                   <XCircleIcon className="size-5" />
                 </span>
               )}
@@ -71,18 +86,21 @@ export default function IngredientForm() {
                 type="text"
                 placeholder="추가적인 재료를 입력해 주세요"
                 className="h-10 grow"
-                {...register("ingredients", { required: true })}
+                {...register(`ingredients.${index}.name`, { required: true })}
               />
               <TextInput
                 className="w-22"
                 type="number"
                 step={0.25}
                 placeholder="용량 및 개수"
-                {...register("ingredientAmounts", { required: true, min: 0 })}
+                {...register(`ingredients.${index}.amount`, {
+                  required: true,
+                  min: 0,
+                })}
               />
               <Select
                 className="w-28"
-                {...register("ingredientUnits", { required: true })}
+                {...register(`ingredients.${index}.unit`, { required: true })}
               >
                 {unitOptions.map((unit) => (
                   <option key={unit.value} value={unit.value}>
@@ -95,7 +113,11 @@ export default function IngredientForm() {
         </div>
         {/* 재료 추가 버튼 */}
         <div className="mt-2">
-          <Button className="w-full rounded-lg bg-zinc-600 p-2">
+          <Button
+            className="w-full rounded-lg bg-zinc-600 p-2"
+            type="button"
+            onClick={() => append(structuredClone(emptyIngredient))}
+          >
             재료 추가
           </Button>
         </div>

@@ -1,10 +1,12 @@
 export type IngredientForm = {
-  baseLiquor: string;
-  baseLiquorAmount: number;
-  baseLiquorUnit: string;
-  ingredients: string[];
-  ingredientAmounts: number[];
-  ingredientUnits: string[];
+  baseLiquor: Ingredient;
+  ingredients: Ingredient[];
+};
+
+export type Ingredient = {
+  name: string;
+  amount: number;
+  unit: string;
 };
 
 export type BasicInfoForm = {
