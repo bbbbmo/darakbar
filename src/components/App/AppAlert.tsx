@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";

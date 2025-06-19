@@ -18,25 +18,25 @@ export default function Detail() {
         <div className="tab-group flex gap-5 border-b border-gray-200 px-3 text-xl">
           <ul className="tabs flex flex-wrap gap-2">
             <li onClick={() => handleTabClick(0)}>
-              <span
+              <strong
                 className={`tab flex items-center justify-center ${activeTab === 0 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 설명
-              </span>
+              </strong>
             </li>
             <li onClick={() => handleTabClick(1)}>
-              <span
+              <strong
                 className={`tab flex items-center justify-center ${activeTab === 1 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 재료
-              </span>
+              </strong>
             </li>
             <li onClick={() => handleTabClick(2)}>
-              <span
+              <strong
                 className={`tab flex items-center justify-center ${activeTab === 2 ? "border-amber-400 bg-zinc-200 text-stone-900" : "border-transparent hover:border-amber-400 hover:text-stone-900"} p-2`}
               >
                 제조법
-              </span>
+              </strong>
             </li>
           </ul>
         </div>
@@ -44,11 +44,11 @@ export default function Detail() {
           {activeTab === 0 && clickedCardData && (
             <div className="tab-content__description flex flex-col gap-2">
               <div className="description__base">
-                <span className="mr-1 font-bold">베이스:</span>
+                <strong className="mr-1 font-bold">베이스:</strong>
                 {clickedCardData.base_liquor}
               </div>
               <div className="description__glass">
-                <span className="mr-1 font-bold">잔:</span>
+                <strong className="mr-1 font-bold">잔:</strong>
                 {clickedCardData.glass_type}
               </div>
             </div>

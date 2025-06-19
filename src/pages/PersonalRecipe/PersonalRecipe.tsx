@@ -32,7 +32,7 @@ export default function PersonalRecipe() {
   }, []);
   return (
     <>
-      <div className="wrapper w-full px-10">
+      <div className="wrapper w-full px-15">
         <div className="mt-10 mb-10 flex w-full flex-col">
           <p className="flex items-center justify-center gap-5 text-xl text-amber-400">
             <span className="text-2xl">

@@ -6,27 +6,74 @@ import { Button } from "flowbite-react";
 import { Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import BlurText from "../../reactbits/BlurText";
+// import supabase from "../../supabase";
+import { Cocktail } from "../../types/cocktails";
+import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 
 export default function Home() {
-  const [loading, setLoading] = useState<boolean>(true);
   const animationTitle = "다락바 - 나만의 칵테일 레시피";
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [randomCocktails, setRandomCocktails] = useState<Cocktail[]>([]);
 
   const goPersonalRecipePage = () => {
     navigate("/personal-recipe");
   };
 
+  // const getRandomCocktails = async () => {
+  //   const { data } = await supabase
+  //     .from("cocktails")
+  //     .select("*")
+  //     .order("id", { ascending: true });
+  //   setRandomCocktails(data ?? []);
+  // };
+
+  const ramdomData: Cocktail[] = [
+    {
+      id: 1,
+      name: "칵테일 1",
+      base_liquor: "베이스 위스키",
+      ingredients: ["재료1", "재료2", "재료3"],
+      glass_type: "잔 타입",
+      instructions: "레시피 1",
+      description: "설명 1",
+      image_url: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      name: "칵테일 2",
+      base_liquor: "베이스 위스키",
+      ingredients: ["재료1", "재료2", "재료3"],
+      glass_type: "잔 타입",
+      instructions: "레시피 1",
+      description: "설명 1",
+      image_url: "https://via.placeholder.com/150",
+    },
+    {
+      id: 3,
+      name: "칵테일 3",
+      base_liquor: "베이스 위스키",
+      ingredients: ["재료1", "재료2", "재료3"],
+      glass_type: "잔 타입",
+      instructions: "레시피 1",
+      description: "설명 1",
+      image_url: "https://via.placeholder.com/150",
+    },
+  ];
+
   useEffect(() => {
+    setRandomCocktails(ramdomData);
+    // getRandomCocktails();
     setLoading(false);
-  }, [setLoading]);
+  }, []);
 
   return (
     <>
       {loading ? (
         <LoadingScreen />
       ) : (
-        <div className="flex h-full justify-center">
-          <Card className="mt-10 h-100 max-w-2xl">
+        <div className="wrapper m-10 flex h-full flex-col justify-center gap-10">
+          <Card className="h-90 w-full">
             <BlurText
               text={animationTitle}
               delay={150}
@@ -42,7 +89,10 @@ export default function Home() {
                 이곳에서 독창적인 레시피와 그 속에 담긴 감성을 보여주세요.
               </span>
             </p>
-            <Button onClick={goPersonalRecipePage}>
+            <Button
+              className="mt-10 ml-auto w-xs"
+              onClick={goPersonalRecipePage}
+            >
               시작하기
               <svg
                 className="-mr-1 ml-2 h-4 w-4"
@@ -57,6 +107,20 @@ export default function Home() {
                 />
               </svg>
             </Button>
+          </Card>
+          <Card className="w-full">
+            <div className="grid w-full grid-cols-3 gap-10">
+              {randomCocktails.map((cocktail) => (
+                <RecipeCard
+                  key={cocktail.id}
+                  title={cocktail.name ?? ""}
+                  image={cocktail.image_url}
+                  rating={0}
+                  creater={""}
+                  cocktail={cocktail}
+                />
+              ))}
+            </div>
           </Card>
         </div>
       )}

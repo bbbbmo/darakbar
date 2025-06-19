@@ -61,7 +61,8 @@ export default function UserProfile() {
         }
       >
         <DropdownHeader>
-          <span className="block text-sm">{userName}</span>
+          <strong className="block text-sm">{userName}</strong>
+
           <span className="block truncate text-sm font-medium">
             {session?.user.email}
           </span>

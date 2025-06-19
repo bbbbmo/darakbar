@@ -9,6 +9,7 @@ type RecipeCardProps = {
   image: string | null;
   rating?: number;
   creater?: string;
+  className?: string;
   cocktail: Cocktail;
 };
 
@@ -18,6 +19,7 @@ const RecipeCard = ({
   rating = 0,
   creater,
   cocktail,
+  className,
 }: RecipeCardProps) => {
   const { open } = useModalStore();
   const { setClickedCardData } = useCocktailStore();
@@ -28,12 +30,13 @@ const RecipeCard = ({
   };
 
   return (
-    <Card
-      className="max-w-sm"
-      imgAlt="Cocktail Image"
-      imgSrc={image ? image : undefined}
-    >
-      <div className="px-3 pb-5">
+    <Card className={className}>
+      <img
+        src={image ? image : undefined}
+        alt="Cocktail Image"
+        className="max-h-80 w-full"
+      />
+      <section className="px-3 pb-5">
         {/* 칵테일 이름 */}
         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {title}
@@ -56,7 +59,7 @@ const RecipeCard = ({
             레시피 보기
           </Button>
         </div>
-      </div>
+      </section>
     </Card>
   );
 };
