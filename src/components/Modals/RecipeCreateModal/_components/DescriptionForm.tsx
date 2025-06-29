@@ -38,13 +38,19 @@ export default function DescriptionForm({
           <FormItem label="제조법" required>
             <Textarea
               placeholder="ex) 1. 라임과 레몬을 반으로 슬라이스 한다."
-              {...register("instructions", { required: true })}
+              {...register("instructions", {
+                required: true,
+                maxLength: { value: 200, message: "200자 이하로 입력해주세요" },
+              })}
             />
           </FormItem>
           <FormItem label="맛과 향 설명">
             <Textarea
               placeholder="ex) 열대과일의 상큼한 맛과 오렌지 향"
-              {...register("description", { required: true })}
+              {...register("description", {
+                required: true,
+                maxLength: { value: 200, message: "200자 이하로 입력해주세요" },
+              })}
             />
           </FormItem>
         </div>

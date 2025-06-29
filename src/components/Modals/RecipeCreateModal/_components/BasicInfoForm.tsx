@@ -41,7 +41,13 @@ export default function BasicInfoForm({
               type="text"
               className="grow"
               placeholder="ex) 초코 바나나 펀치, 레인보우 샤베트 등"
-              {...register("name", { required: true, maxLength: 15 })}
+              {...register("name", {
+                required: true,
+                maxLength: {
+                  value: 15,
+                  message: "필수 입력입니다.",
+                },
+              })}
             />
           </FormItem>
 
@@ -57,7 +63,7 @@ export default function BasicInfoForm({
               type="text"
               className="grow"
               placeholder="ex) 허리케인 글라스, 칵테일 글라스 등"
-              {...register("glassType", { required: true })}
+              {...register("glassType")}
             />
           </FormItem>
         </div>
