@@ -1,25 +1,22 @@
 import { Select, TextInput, Button } from "flowbite-react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import type { IngredientForm } from "./form.type";
+import type { IngredientForm } from "./create-form.type";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import FormItem from "../../../Form/FormItem";
 import FormDescription from "../../../Form/FormDescription";
+import { emptyIngredient, unitOptions } from "./create-form.const";
+import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
+import { useEffect } from "react";
 
-const unitOptions = [
-  { value: "oz", label: "oz" },
-  { value: "ml", label: "ml" },
-  { value: "티스푼", label: "티스푼" },
-  { value: "스푼", label: "스푼" },
-  { value: "개", label: "개" },
-];
-
-const emptyIngredient = {
-  name: "",
-  amount: 0,
-  unit: "",
+type IngredientFormProps = {
+  onNext: () => void;
+  setSubmitHandler: (handler: () => void) => void;
 };
 
-export default function IngredientForm() {
+export default function IngredientForm({
+  onNext,
+  setSubmitHandler,
+}: IngredientFormProps) {
   const { register, control, handleSubmit } = useForm<IngredientForm>({
     defaultValues: {
       baseLiquor: structuredClone(emptyIngredient),
@@ -32,9 +29,17 @@ export default function IngredientForm() {
     name: "ingredients",
   });
 
+  const { updateIngredients, getAllForm } = useRecipeCreateStore();
+
   const onSubmit: SubmitHandler<IngredientForm> = (data) => {
-    console.log(data);
+    updateIngredients(data);
+    console.log("저장된 값", getAllForm());
+    onNext();
   };
+
+  useEffect(() => {
+    setSubmitHandler(() => handleSubmit(onSubmit));
+  }, [handleSubmit]);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,8 +54,8 @@ export default function IngredientForm() {
               placeholder="메인이 되는 술이나 재료를 입력해 주세요"
               className="h-10 grow"
               {...register("baseLiquor.name", {
-                required: true,
-                maxLength: 15,
+                required: "베이스 재료 이름을 입력해주세요",
+                maxLength: { value: 15, message: "15자 이하로 입력해주세요" },
               })}
             />
             <TextInput
@@ -58,7 +63,11 @@ export default function IngredientForm() {
               type="number"
               step={0.25}
               placeholder="용량"
-              {...register("baseLiquor.amount", { required: true, min: 0 })}
+              {...register("baseLiquor.amount", {
+                required: true,
+                min: 0,
+                valueAsNumber: true,
+              })}
             />
             <Select
               className="w-28"
@@ -74,19 +83,14 @@ export default function IngredientForm() {
           {/* 재료 입력 */}
           {fields?.map((field, index) => (
             <FormItem key={field.id} label={`재료 ${index + 1}`} required>
-              {index !== 0 && (
-                <span
-                  className="absolute right-2 cursor-pointer"
-                  onClick={() => remove(index)}
-                >
-                  <XCircleIcon className="size-5" />
-                </span>
-              )}
               <TextInput
                 type="text"
                 placeholder="추가적인 재료를 입력해 주세요"
                 className="h-10 grow"
-                {...register(`ingredients.${index}.name`, { required: true })}
+                {...register(`ingredients.${index}.name`, {
+                  required: "재료 이름을 입력해주세요",
+                  maxLength: { value: 15, message: "15자 이하로 입력해주세요" },
+                })}
               />
               <TextInput
                 className="w-22"
@@ -96,6 +100,7 @@ export default function IngredientForm() {
                 {...register(`ingredients.${index}.amount`, {
                   required: true,
                   min: 0,
+                  valueAsNumber: true,
                 })}
               />
               <Select
@@ -108,6 +113,14 @@ export default function IngredientForm() {
                   </option>
                 ))}
               </Select>
+              {index !== 0 && (
+                <button
+                  className="ml-2 cursor-pointer"
+                  onClick={() => remove(index)}
+                >
+                  <XCircleIcon className="size-5" />
+                </button>
+              )}
             </FormItem>
           ))}
         </div>

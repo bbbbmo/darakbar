@@ -1,16 +1,33 @@
 import { TextInput } from "flowbite-react";
 import FormDescription from "../../../Form/FormDescription";
 import { SubmitHandler, useForm } from "react-hook-form";
-import type { BasicInfoForm } from "./form.type";
+import type { BasicInfoForm } from "./create-form.type";
 import FormItem from "../../../Form/FormItem";
 import FormFileInput from "../../../Form/FormFileInput";
+import { useEffect } from "react";
+import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 
-export default function BasicInfoForm() {
+type BasicInfoFormProps = {
+  onNext: () => void;
+  setSubmitHandler: (handler: () => void) => void;
+};
+
+export default function BasicInfoForm({
+  onNext,
+  setSubmitHandler,
+}: BasicInfoFormProps) {
   const { register, handleSubmit } = useForm<BasicInfoForm>();
 
+  const { updateBasicInfo } = useRecipeCreateStore();
+
   const onSubmit: SubmitHandler<BasicInfoForm> = (data) => {
-    console.log(data);
+    updateBasicInfo(data);
+    onNext();
   };
+
+  useEffect(() => {
+    setSubmitHandler(() => handleSubmit(onSubmit));
+  }, [handleSubmit]);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

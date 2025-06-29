@@ -1,15 +1,33 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import type { DescriptionForm } from "./form.type";
+import type { DescriptionForm } from "./create-form.type";
 import { Textarea } from "flowbite-react";
 import FormItem from "../../../Form/FormItem";
 import FormDescription from "../../../Form/FormDescription";
+import { useEffect } from "react";
+import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 
-export default function DescriptionForm() {
+type DescriptionFormProps = {
+  onNext: () => void;
+  setSubmitHandler: (handler: () => void) => void;
+};
+
+export default function DescriptionForm({
+  onNext,
+  setSubmitHandler,
+}: DescriptionFormProps) {
   const { register, handleSubmit } = useForm<DescriptionForm>();
+
+  const { updateDescription } = useRecipeCreateStore();
 
   const onSubmit: SubmitHandler<DescriptionForm> = (data) => {
     console.log(data);
+    updateDescription(data);
+    onNext();
   };
+
+  useEffect(() => {
+    setSubmitHandler(() => handleSubmit(onSubmit));
+  }, [handleSubmit]);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

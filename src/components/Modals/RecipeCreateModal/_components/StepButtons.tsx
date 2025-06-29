@@ -5,14 +5,14 @@ type StepButtonsProps = {
   currentStep: number;
   maxStep: number;
   prevStep: () => void;
-  nextStep: () => void;
+  submitHandler: () => void;
 };
 
 export default function StepButtons({
   currentStep,
   maxStep,
   prevStep,
-  nextStep,
+  submitHandler,
 }: StepButtonsProps) {
   // TODO: 확인하러 가기 버튼 클릭 시 페이지 새로고침, 더 좋은 방안이 있다면 변경하자
   const reloadPage = () => {
@@ -33,7 +33,7 @@ export default function StepButtons({
           확인하러 가기
         </Button>
       ) : (
-        <Button color="gray" onClick={nextStep} className="flex gap-1">
+        <Button color="gray" onClick={submitHandler} className="flex gap-1">
           다음 단계 <ArrowRightIcon className="size-4" />
         </Button>
       )}

@@ -13,31 +13,44 @@ import { useEffect, useState } from "react";
 import SuccessCreate from "./_components/SuccessCreate";
 import StepButtons from "./_components/StepButtons";
 
-const steps = [
-  // NOTE: Reconciliation 처리를 위해 key 추가
-  <IngredientForm key="ingredient" />,
-  <BasicInfoForm key="basicInfo" />,
-  <DescriptionForm key="description" />,
-  <SuccessCreate key="success" />,
-];
-
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
-  const maxStep = steps.length - 1;
-
+  const [submitHandler, setSubmitHandler] = useState<() => void>(
+    () => () => {},
+  );
   const nextStep = () => {
     if (currentStep < maxStep) {
       setCurrentStep(currentStep + 1);
     }
   };
-
   const prevStep = () => {
     if (currentStep > 0) {
-      setCurrentStep(maxStep);
+      setCurrentStep(currentStep - 1);
     }
   };
+
+  const steps = [
+    // NOTE: Reconciliation 처리를 위해 key 추가
+    <IngredientForm
+      key="ingredient"
+      onNext={nextStep}
+      setSubmitHandler={setSubmitHandler}
+    />,
+    <BasicInfoForm
+      key="basicInfo"
+      onNext={nextStep}
+      setSubmitHandler={setSubmitHandler}
+    />,
+    <DescriptionForm
+      key="description"
+      onNext={nextStep}
+      setSubmitHandler={setSubmitHandler}
+    />,
+    <SuccessCreate key="success" />,
+  ];
+  const maxStep = steps.length - 1;
 
   useEffect(() => {
     setProgress(Math.round(((currentStep + 1) / steps.length) * 100));
@@ -57,7 +70,7 @@ export default function RecipeCreateModal() {
           currentStep={currentStep}
           maxStep={maxStep}
           prevStep={prevStep}
-          nextStep={nextStep}
+          submitHandler={submitHandler}
         />
       </ModalFooter>
     </Modal>
