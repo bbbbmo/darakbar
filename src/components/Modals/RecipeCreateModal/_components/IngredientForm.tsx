@@ -1,6 +1,6 @@
 import { Select, TextInput, Button } from "flowbite-react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import type { IngredientForm } from "./create-form.type";
+import type { IngredientForm } from "../types/create-form.type";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import FormItem from "../../../Form/FormItem";
 import FormDescription from "../../../Form/FormDescription";

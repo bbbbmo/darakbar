@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import type { DescriptionForm } from "./create-form.type";
+import type { DescriptionForm } from "../types/create-form.type";
 import { Textarea } from "flowbite-react";
 import FormItem from "../../../Form/FormItem";
 import FormDescription from "../../../Form/FormDescription";

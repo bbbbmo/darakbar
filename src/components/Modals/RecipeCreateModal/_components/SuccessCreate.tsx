@@ -3,6 +3,7 @@ import { showConfetti } from "../../../../utils/showConfetti";
 import FormDescription from "../../../Form/FormDescription";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 import supabase from "../../../../supabase";
+import { CreateRecipeForm } from "../types/create-form.type";
 
 // TODO: 레시피 등록, 이미지 등록, 유저 정보 캐싱 추가
 type SuccessCreateProps = {
@@ -53,10 +54,21 @@ export default function SuccessCreate({
           .getPublicUrl(`${user?.id}/cocktail/${finalData.image.name}`)
           .data.publicUrl;
 
-        await supabase.from("recipes").insert({
-          name: "Mojito",
-          image_url: publicUrl,
-        });
+        await supabase
+          .from("user_cocktails")
+          .insert({
+            name: finalData.name,
+            image_url: publicUrl,
+            user_id: user?.id,
+            base_liquor: finalData.baseLiquor.name,
+            ingredients: finalData.ingredients.map(
+              (ingredient) => ingredient.name,
+            ),
+            instructions: finalData.instructions,
+            description: finalData.description,
+            glass_type: finalData.glassType,
+          } as unknown as CreateRecipeForm)
+          .select();
 
         // 전송 성공 시 페이지 새로고침
         window.location.reload();
