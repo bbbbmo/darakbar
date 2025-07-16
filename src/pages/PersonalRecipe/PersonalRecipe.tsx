@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import supabase from "../../supabase";
 // 컴포넌트
-import SearchBar from "../../components/SearchBar";
-import RecipeCreateModal from "../../components/Modals/RecipeCreateModal/RecipeCreateModal";
+import SearchBar from "@/components/SearchBar";
+import RecipeCreateModal from "./components/RecipeCreateModal/RecipeCreateModal";
 import GridList from "../../components/GridList";
 import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 import RecipeModal from "../../components/Modals/RecipeModal/RecipeModal";

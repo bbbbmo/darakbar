@@ -5,7 +5,7 @@ import {
   ModalFooter,
   Progress,
 } from "flowbite-react";
-import useModalStore from "../modalStore";
+import useModalStore from "../../../../components/Modals/modalStore";
 import { useEffect, useState } from "react";
 import StepButtons from "./_components/StepButtons";
 import useFunnelStep from "./hooks/useFunnelStep";

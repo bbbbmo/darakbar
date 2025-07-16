@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import type { DescriptionForm } from "../types/create-form.type";
 import { Textarea } from "flowbite-react";
-import FormItem from "../../../Form/FormItem";
-import FormDescription from "../../../Form/FormDescription";
+import FormItem from "../../../../../components/Form/FormItem";
+import FormDescription from "../../../../../components/Form/FormDescription";
 import { useEffect } from "react";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 
