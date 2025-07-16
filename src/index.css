@@ -58,16 +58,24 @@
     display: none;
   }
 
+  .bg-primary {
+    @apply !border-zinc-700 !bg-zinc-800;
+  }
+
+  .bg-secondary {
+    @apply !border-zinc-600 !bg-zinc-700;
+  }
+
   .btn-primary {
-    @apply rounded-lg bg-zinc-600 p-2 text-white transition duration-300 ease-in-out hover:bg-zinc-700;
+    @apply !bg-zinc-600 p-2 !text-white hover:bg-zinc-700;
   }
 
   .btn-secondary {
-    @apply rounded-2xl bg-amber-400 p-2 text-xl font-bold text-neutral-900 transition delay-100 duration-300 ease-in-out hover:bg-amber-600;
+    @apply !bg-amber-400 !text-neutral-900 hover:bg-amber-600;
   }
 
   .input-primary {
-    @apply h-10 rounded-sm border-2 pl-2 focus:outline focus:outline-stone-800;
+    @apply focus:outline focus:outline-stone-800;
   }
 
   .tab {
