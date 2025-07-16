@@ -41,9 +41,9 @@ export default function SignIn() {
     setIsLoading(false);
   };
   return (
-    <div className="wrapper flex h-screen w-full flex-col items-center justify-center">
+    <div className="wrapper flex w-full flex-col items-center">
       <img src="/images/logo/logo-whole.png" alt="logo" className="size-50" />
-      <Card className="w-lg p-8">
+      <Card className="bg-primary w-lg p-8">
         <h1 className="mb-5 text-4xl font-bold text-amber-400">로그인</h1>
         <form className="flex flex-col gap-4">
           <FormItem label="이메일">

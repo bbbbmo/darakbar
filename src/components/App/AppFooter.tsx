@@ -3,7 +3,7 @@ import { BsFacebook, BsInstagram, BsGithub, BsDribbble } from "react-icons/bs";
 
 export default function AppFooter() {
   return (
-    <Footer container>
+    <Footer container className="!bg-zinc-900 !opacity-95">
       <div className="w-full text-center">
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
           {/* <FooterBrand

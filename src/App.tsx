@@ -11,7 +11,7 @@ type AppProps = {
 
 function App({ header, body, footer }: AppProps) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-zinc-900">
       {header || <AppNavBar />}
       <main className="flex-grow">{body || <Outlet />}</main>
       {footer || <AppFooter />}

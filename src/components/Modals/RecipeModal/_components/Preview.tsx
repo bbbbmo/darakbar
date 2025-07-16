@@ -7,7 +7,7 @@ export default function Preview() {
     <div className="flex h-full w-full flex-col text-stone-100">
       <div className="h-[70%] w-full bg-gray-800">
         {/* TODO: 이미지 여러개 추가 */}
-        <Carousel pauseOnHover slideInterval={5000} className="">
+        <Carousel className="bg-secondary" pauseOnHover slideInterval={5000}>
           <img
             className="h-full w-full object-contain"
             src={clickedCardData?.image_url ?? ""}

@@ -18,15 +18,18 @@ export default function RecipeModal() {
   return (
     <>
       <Modal show={modals.recipe} onClose={() => close("recipe")} size="2xl">
-        <ModalHeader>칵테일 레시피</ModalHeader>
-        <ModalBody>
+        <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
+        <ModalBody className="bg-primary">
           <div className="flex h-[60vh] max-h-140">
             {content === "preview" ? <Preview /> : <Detail />}
           </div>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="bg-primary">
           {content === "preview" ? (
-            <Button onClick={() => setContent("detail")}>
+            <Button
+              className="btn-secondary"
+              onClick={() => setContent("detail")}
+            >
               레시피 자세히보기
             </Button>
           ) : (
@@ -34,9 +37,6 @@ export default function RecipeModal() {
               기본 정보로 돌아가기
             </Button>
           )}
-          <Button color="gray" onClick={() => close("recipe")}>
-            Decline
-          </Button>
         </ModalFooter>
       </Modal>
     </>

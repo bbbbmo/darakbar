@@ -73,7 +73,7 @@ export default function Home() {
         <LoadingScreen />
       ) : (
         <div className="wrapper m-10 flex h-full flex-col justify-center gap-10">
-          <Card className="h-90 w-full">
+          <Card className="bg-primary h-90 w-full !shadow-2xl">
             <BlurText
               text={animationTitle}
               delay={150}
@@ -108,7 +108,7 @@ export default function Home() {
               </svg>
             </Button>
           </Card>
-          <Card className="w-full">
+          <Card className="bg-primary w-full !shadow-2xl">
             <div className="grid w-full grid-cols-3 gap-10">
               {randomCocktails.map((cocktail) => (
                 <RecipeCard

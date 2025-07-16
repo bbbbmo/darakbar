@@ -30,7 +30,9 @@ const RecipeCard = ({
   };
 
   return (
-    <Card className={className}>
+    <Card
+      className={`${className} bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103`}
+    >
       <img
         src={image ? image : undefined}
         alt="Cocktail Image"
