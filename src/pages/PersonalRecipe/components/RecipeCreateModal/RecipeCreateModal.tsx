@@ -8,7 +8,7 @@ import {
 import useModalStore from "../../../../components/Modals/modalStore";
 import { useEffect, useState } from "react";
 import StepButtons from "./_components/StepButtons";
-import useFunnelStep from "./hooks/useFunnelStep";
+import useFunnelStep from "./_hooks/useFunnelStep";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();

@@ -1,9 +1,9 @@
 import { TextInput } from "flowbite-react";
-import FormDescription from "../../../../../components/Form/FormDescription";
+import FormDescription from "../../../../../components/Forms/FormDescription";
 import { SubmitHandler, useForm } from "react-hook-form";
-import type { BasicInfoForm } from "../types/create-form.type";
-import FormItem from "../../../../../components/Form/FormItem";
-import FormFileInput from "../../../../../components/Form/FormFileInput";
+import type { BasicInfoForm } from "../_types/create-form.type";
+import FormItem from "../../../../../components/Forms/FormItem";
+import FormFileInput from "../../../../../components/Forms/FormFileInput";
 import { useEffect } from "react";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 

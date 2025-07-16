@@ -1,9 +1,9 @@
 import { Select, TextInput, Button } from "flowbite-react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import type { IngredientForm } from "../types/create-form.type";
+import type { IngredientForm } from "../_types/create-form.type";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import FormItem from "../../../../../components/Form/FormItem";
-import FormDescription from "../../../../../components/Form/FormDescription";
+import FormItem from "../../../../../components/Forms/FormItem";
+import FormDescription from "../../../../../components/Forms/FormDescription";
 import { emptyIngredient, unitOptions } from "./create-form.const";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 import { useEffect } from "react";
