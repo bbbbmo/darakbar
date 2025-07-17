@@ -55,7 +55,7 @@ const RecipeCard = ({
           ) : null}
           {/* 레시피 보기 버튼 */}
           <Button
-            className="ml-auto rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-black hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 focus:outline-none dark:bg-amber-400 dark:hover:bg-amber-500 dark:focus:ring-amber-800"
+            className="ml-auto rounded-lg px-5 py-2.5 text-center text-sm font-bold text-black hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 focus:outline-none dark:bg-amber-400 dark:hover:bg-amber-500 dark:focus:ring-amber-800"
             onClick={showCocktail}
           >
             레시피 보기

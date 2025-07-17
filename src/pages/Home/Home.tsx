@@ -90,7 +90,7 @@ export default function Home() {
               </span>
             </p>
             <Button
-              className="mt-10 ml-auto w-xs"
+              className="btn-secondary mt-10 ml-auto w-xs font-bold"
               onClick={goPersonalRecipePage}
             >
               시작하기

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import supabase from "../../supabase";
+import supabase from "@/supabase";
 // 컴포넌트
 import SearchBar from "@/components/SearchBar";
-import RecipeCreateModal from "./components/RecipeCreateModal/RecipeCreateModal";
-import GridList from "../../components/GridList";
-import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
-import RecipeModal from "../../components/Modals/RecipeModal/RecipeModal";
-import useModalStore from "../../components/Modals/modalStore";
-import useCocktailStore from "../../components/Modals/RecipeModal/recipe-modal.store";
+import GridList from "@/components/GridList";
+import RecipeCard from "@/components/Cards/RecipeCard/RecipeCard";
+import RecipeModal from "@/components/Modals/RecipeModal/RecipeModal";
+import RecipeCreateModal from "./_components/RecipeCreateModal/RecipeCreateModal";
+import useModalStore from "@/components/Modals/modalStore";
+import useCocktailStore from "@/components/Modals/RecipeModal/recipe-modal.store";
 
 // 클릭 시 모달 내용 수정해야함
 export default function PersonalRecipe() {
