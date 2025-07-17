@@ -1,6 +1,6 @@
 import FormItem from "@/components/Forms/FormItem";
 import { Button, TextInput } from "flowbite-react";
-import { SignInForm } from "../SignIn.types";
+import { SignInFormData } from "./SignIn.types";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import supabase from "@/supabase";
@@ -22,11 +22,11 @@ export default function SignForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<SignInForm>();
+  } = useForm<SignInFormData>();
 
   const navigate = useNavigate();
 
-  const signInWithEmail = async ({ email, password }: SignInForm) => {
+  const signInWithEmail = async ({ email, password }: SignInFormData) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -55,7 +55,8 @@ export default function SignForm() {
     >
       <FormItem label="이메일">
         <TextInput
-          className="grow"
+          type="email"
+          placeholder="example@naver.com"
           {...register("email", {
             required: "이메일을 입력해주세요",
             pattern: {
@@ -70,6 +71,8 @@ export default function SignForm() {
       </FormItem>
       <FormItem label="비밀번호">
         <TextInput
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
           {...register("password", {
             required: "비밀번호를 입력해주세요",
             minLength: {
@@ -82,10 +85,7 @@ export default function SignForm() {
           <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
         )}
       </FormItem>
-      <Button
-        type="submit"
-        disabled={isLoading || !!errors.email || !!errors.password}
-      >
+      <Button type="submit" disabled={isLoading}>
         {isLoading ? "loading..." : "로그인"}
       </Button>
       {error && (

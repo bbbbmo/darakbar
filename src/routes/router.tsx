@@ -4,7 +4,7 @@ import BasicRecipe from "../pages/BasicRecipe/BasicRecipe";
 import PersonalRecipe from "../pages/PersonalRecipe/PersonalRecipe";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
-import UserProfile from "../pages/EditProfile";
+import EditProfile from "../pages/EditProfile/EditProfile";
 import ProtectedRoute from "../components/ProtectedRoute";
 import App from "../App";
 
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         path: "edit-profile", // 정보 수정 -> 로그인 필요
         element: (
           <ProtectedRoute>
-            <UserProfile />
+            <EditProfile />
           </ProtectedRoute>
         ),
       },

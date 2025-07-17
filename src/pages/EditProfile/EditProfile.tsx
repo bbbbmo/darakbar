@@ -1,8 +1,8 @@
 import { ArrowLeftIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
-import useAuth from "../hooks/useAuth";
-import LoadingScreen from "../components/LoadingScreen";
+import useAuth from "@/hooks/useAuth";
+import LoadingScreen from "@/components/LoadingScreen";
 import React, { useEffect, useRef, useState } from "react";
-import supabase from "../supabase";
+import supabase from "@/supabase";
 import { useNavigate } from "react-router-dom";
 
 // [TODO] 유저 프로필 이미지 기능 추가하기
