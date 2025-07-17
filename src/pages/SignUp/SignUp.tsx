@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import supabase from "../supabase";
+import supabase from "../../supabase";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { Button, Card, TextInput } from "flowbite-react";

@@ -26,7 +26,7 @@ export default function FormItem({
         {label}
         {required && <FormRequiredMark />}
       </Label>
-      <div className="flex gap-1">{children}</div>
+      <div className="flex flex-col gap-1">{children}</div>
     </div>
   );
 }
