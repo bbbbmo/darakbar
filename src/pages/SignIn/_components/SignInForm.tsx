@@ -1,9 +1,9 @@
 import FormItem from "@/components/Forms/FormItem";
 import { Button, HelperText, TextInput } from "flowbite-react";
-import { SignInFormData } from "./SignIn.types";
+import { SignInFormData } from "./SignInForm.types";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import supabase from "@/supabase";
+import supabase from "@/supabase/supabase";
 import { useState } from "react";
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";

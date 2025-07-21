@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "flowbite-react";
-import SignForm from "./_components/SignForm";
+import SignForm from "./_components/SignInForm";
 import FormHeader from "@/components/Forms/FormHeader";
 import GoToButton from "@/components/Buttons/GoToButton";
 

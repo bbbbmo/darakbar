@@ -1,7 +1,7 @@
-interface NavMenu {
+type NavMenu = {
   text: string;
   url: string;
-}
+};
 
 export const navMenuList: NavMenu[] = [
   {

@@ -5,7 +5,7 @@ import { Button, HelperText, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SignUpFormData } from "./SignUpForm.types";
-import supabase from "@/supabase";
+import supabase from "@/supabase/supabase";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {

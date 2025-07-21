@@ -7,10 +7,11 @@ import {
   DropdownItem,
   NavbarToggle,
 } from "flowbite-react";
-import supabase from "../../../../supabase";
+import supabase from "../../../../supabase/supabase";
 import { useEffect, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import { getUserProfileImage } from "@/supabase/functions/getUserProfile";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -18,34 +19,24 @@ export default function UserProfile() {
   const [profileImage, setProfileImage] = useState(null);
   const userId = session?.user.id;
 
-  const getProfileImage = async () => {
-    const { data, error } = await supabase
-      .from("userinfo")
-      .select("profile_img_url")
-      .eq("id", userId);
-    if (data) {
-      setProfileImage(data[0].profile_img_url);
-      console.log(data);
-    }
-    if (error) {
-      alert(`유저 프로필 가져오기 중 에러 발생 ${error.message}`);
-    }
-  };
-
   /** 로그아웃, 에러 발생 시 alert */
   const signOut = async () => {
     navigate("/");
     const { error } = await supabase.auth.signOut();
     if (error) {
-      alert(`로그아웃 에러 발생 ${error.message}`);
+      throw new Error(`로그아웃 에러 발생 ${error.message}`);
     }
-    alert("로그아웃 완료 !");
+    console.log("로그아웃 완료 !");
   };
 
   useEffect(() => {
-    if (userId) {
-      getProfileImage();
-    }
+    const initial = async () => {
+      if (userId) {
+        const profileImage = await getUserProfileImage(userId);
+        setProfileImage(profileImage);
+      }
+    };
+    initial();
   }, [userId]);
   return (
     <>

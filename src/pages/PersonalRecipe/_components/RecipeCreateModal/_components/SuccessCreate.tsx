@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { showConfetti } from "../../../../../utils/showConfetti";
 import FormDescription from "../../../../../components/Forms/FormDescription";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
-import supabase from "../../../../../supabase";
+import supabase from "../../../../../supabase/supabase";
 import { CreateRecipeForm } from "../_types/create-form.type";
 
 // TODO: 레시피 등록, 이미지 등록, 유저 정보 캐싱 추가

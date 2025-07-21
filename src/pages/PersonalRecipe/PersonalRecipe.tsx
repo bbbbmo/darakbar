@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import supabase from "@/supabase";
+import supabase from "@/supabase/supabase";
 // 컴포넌트
 import SearchBar from "@/components/SearchBar";
 import GridList from "@/components/GridList";
