@@ -1,7 +1,7 @@
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";
 import FormItem from "@/components/Forms/FormItem";
-import { Button, TextInput } from "flowbite-react";
+import { Button, HelperText, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SignUpFormData } from "./SignUpForm.types";
@@ -66,7 +66,7 @@ export default function SignUpForm() {
           placeholder="다락바에서 활동할 이름을 정해주세요🍸"
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+          <HelperText className="font-medium">{errors.name.message}</HelperText>
         )}
       </FormItem>
       <FormItem label="이메일" required>
@@ -74,9 +74,12 @@ export default function SignUpForm() {
           {...register("email", { required: "이메일을 입력해주세요" })}
           type="email"
           placeholder="example@naver.com"
+          color={errors.email ? "failure" : "default"}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+          <HelperText className="font-medium">
+            {errors.email.message}
+          </HelperText>
         )}
       </FormItem>
       <FormItem label="비밀번호" required>
@@ -88,11 +91,14 @@ export default function SignUpForm() {
               message: "비밀번호는 10자 이상이어야 합니다.",
             },
           })}
+          color={errors.password ? "failure" : "default"}
           type="password"
           placeholder="문자, 숫자, 특수문자를 포함한 10자 이상"
         />
         {errors.password && (
-          <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+          <HelperText className="font-medium">
+            {errors.password.message}
+          </HelperText>
         )}
       </FormItem>
       {/* <select className="h-8 w-30 rounded-sm">
@@ -110,13 +116,14 @@ export default function SignUpForm() {
               return value === password || "비밀번호가 일치하지 않습니다.";
             },
           })}
+          color={errors.confirmPassword ? "failure" : "default"}
           type="password"
           placeholder="비밀번호 확인을 위해 재입력해주세요"
         />
         {errors.confirmPassword && (
-          <p className="mt-1 text-sm text-red-500">
+          <HelperText className="font-medium">
             {errors.confirmPassword.message}
-          </p>
+          </HelperText>
         )}
       </FormItem>
       {error && <p className="text-red-500">{error}</p>} {/* Error 표시 */}

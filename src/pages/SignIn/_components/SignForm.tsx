@@ -1,5 +1,5 @@
 import FormItem from "@/components/Forms/FormItem";
-import { Button, TextInput } from "flowbite-react";
+import { Button, HelperText, TextInput } from "flowbite-react";
 import { SignInFormData } from "./SignIn.types";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -55,6 +55,7 @@ export default function SignForm() {
     >
       <FormItem label="이메일">
         <TextInput
+          color={errors.email ? "failure" : "default"}
           type="email"
           placeholder="example@naver.com"
           {...register("email", {
@@ -66,11 +67,14 @@ export default function SignForm() {
           })}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+          <HelperText className="font-medium">
+            {errors.email.message}
+          </HelperText>
         )}
       </FormItem>
       <FormItem label="비밀번호">
         <TextInput
+          color={errors.password ? "failure" : "default"}
           type="password"
           placeholder="비밀번호를 입력해주세요"
           {...register("password", {
@@ -82,11 +86,13 @@ export default function SignForm() {
           })}
         />
         {errors.password && (
-          <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+          <HelperText className="font-medium">
+            {errors.password.message}
+          </HelperText>
         )}
       </FormItem>
       <Button type="submit" disabled={isLoading}>
-        {isLoading ? "loading..." : "로그인"}
+        {isLoading ? "로그인 중..." : "로그인"}
       </Button>
       {error && (
         <AppSnackBar
