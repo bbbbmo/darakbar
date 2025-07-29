@@ -174,11 +174,11 @@ export default function EditProfile() {
   return (
     <>
       <div className="wrapper mt-20 flex h-full w-full flex-col items-center justify-center">
-        <ArrowLeftIcon
-          className="fixed top-5 left-5 size-7 cursor-pointer fill-amber-500"
-          onClick={goToBack}
-        />
-        <Card className="bg-primary w-lg p-8">
+        <Card className="bg-primary relative w-lg p-8">
+          <ArrowLeftIcon
+            className="absolute top-6 left-6 size-7 cursor-pointer fill-zinc-600"
+            onClick={goToBack}
+          />
           <FormHeader title="프로필 수정" />
           <EditProfileForm />
         </Card>

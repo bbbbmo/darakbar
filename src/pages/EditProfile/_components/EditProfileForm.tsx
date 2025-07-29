@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 import FormItem from "@/components/Forms/FormItem";
-import { Avatar, Button, HelperText, TextInput } from "flowbite-react";
+import { Button, HelperText, TextInput } from "flowbite-react";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
+import EditProfileCard from "./EditProfileCard";
 
 export default function EditProfileForm() {
   //   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { session, userName } = useAuth();
+  const { session } = useAuth();
 
   console.log(setIsLoading);
 
@@ -26,28 +27,7 @@ export default function EditProfileForm() {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(updateUserProfile)}
     >
-      <div className="flex flex-col gap-4">
-        <Avatar
-          src={session?.user.user_metadata.avatar_url}
-          alt="User Profile"
-          className="h-28 w-28 rounded-full bg-zinc-300"
-        />
-        <h3 className="text-2xl font-medium">{userName}</h3>
-        {/* <TextInput
-          type="text"
-          placeholder="닉네임"
-          {...register("name", {
-            required: "닉네임을 입력해주세요",
-          })}
-        /> */}
-        {errors.name && (
-          <HelperText className="font-medium">{errors.name.message}</HelperText>
-        )}
-        <h5 className="text-md text-gray-500 dark:text-gray-400">
-          {session?.user.user_metadata.email}
-        </h5>
-        {/* <TextInput type="email" placeholder="이메일" disabled /> */}
-      </div>
+      <EditProfileCard session={session} />
 
       <FormItem label="비밀번호 변경">
         <TextInput
