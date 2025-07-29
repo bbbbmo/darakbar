@@ -39,7 +39,6 @@
       sans-serif;
     color: #ffffff;
   }
-
   button {
     cursor: pointer;
   }
@@ -80,6 +79,10 @@
 
   .tab {
     @apply inline-block min-w-20 rounded-t-lg border-b-2;
+  }
+
+  .text-primary {
+    @apply font-normal text-gray-700 dark:text-gray-400;
   }
 
   .canvas {
