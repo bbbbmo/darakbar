@@ -11,7 +11,6 @@ import { Cocktail } from "../../types/cocktails";
 import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 
 export default function Home() {
-  const animationTitle = "다락바 - 나만의 칵테일 레시피";
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [randomCocktails, setRandomCocktails] = useState<Cocktail[]>([]);
@@ -75,13 +74,13 @@ export default function Home() {
         <div className="wrapper m-10 flex h-full flex-col justify-center gap-10">
           <Card className="bg-primary h-90 w-full !shadow-2xl">
             <BlurText
-              text={animationTitle}
+              text={"다락바 - 나만의 칵테일 레시피"}
               delay={150}
               animateBy="words"
               direction="top"
               className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
             />
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="text-primary">
               <span>
                 다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
                 레시피들이 숨어있는 공간입니다.

@@ -1,6 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useRef } from "react";
 import useCocktailStore from "./Modals/RecipeModal/recipe-modal.store";
+import { Button, TextInput } from "flowbite-react";
 
 export default function SearchBar() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -27,7 +28,7 @@ export default function SearchBar() {
   const filterCocktails = (cocktailNameOrIngredients: string): void => {
     const filteredData = allCocktails?.filter((cocktail) => {
       return (
-        cocktail.name
+        cocktail?.name
           .toLowerCase()
           .includes(cocktailNameOrIngredients.toLowerCase()) ||
         cocktail.ingredients
@@ -47,21 +48,19 @@ export default function SearchBar() {
     }
   };
   return (
-    <div className="search-bar__wrapper my-8 flex w-full justify-center gap-3">
-      <input
-        className="search-bar__input h-15 rounded-2xl border-2 border-amber-300 pl-3 text-xl focus:outline focus:outline-amber-500 sm:w-60 xl:w-120"
-        // value={cocktailNameOrIngredients}
+    <div className="flex justify-center gap-3">
+      <TextInput
         ref={inputRef}
         type="text"
-        placeholder="찾는 칵테일의 이름이나 재료를 입력해보세요!"
+        icon={MagnifyingGlassIcon}
+        placeholder="이름 또는 재료 검색"
       />
-      <button
+      <Button
         className="btn-primary flex w-20 items-center justify-center gap-1 rounded-xl font-bold"
         onClick={onClickSearchBtn}
       >
-        <MagnifyingGlassIcon className="size-5" />
-        <span>검색</span>
-      </button>
+        검색
+      </Button>
     </div>
   );
 }
