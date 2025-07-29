@@ -3,7 +3,7 @@ import { createTheme } from "flowbite-react";
 export const cardTheme = createTheme({
   card: {
     root: {
-      base: "bg-primary",
+      base: "bg-primary shadow-2xl",
     },
   },
 
@@ -16,7 +16,7 @@ export const cardTheme = createTheme({
   editProfile: {
     root: {
       base: "bg-secondary",
-      children: "flex flex-row gap-4",
+      children: "flex flex-row justify-between gap-4",
     },
   },
 });

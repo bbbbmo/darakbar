@@ -62,7 +62,7 @@ export default function Preview() {
             </Button>
           </ButtonGroup>
         </div>
-        <article className="mt-2 text-lg">
+        <article className="text-primary mt-2">
           {clickedCardData ? clickedCardData.description : "칵테일 설명 없음"}
         </article>
       </div>
