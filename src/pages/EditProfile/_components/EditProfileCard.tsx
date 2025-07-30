@@ -9,30 +9,27 @@ import {
   ThemeProvider,
 } from "flowbite-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 
 type EditProfileCardProps = {
   session: Session | null;
+  register: UseFormRegister<EditProfileFormData>;
+  watch: UseFormWatch<EditProfileFormData>;
+  errors: FieldErrors<EditProfileFormData>;
 };
 
-export default function EditProfileCard({ session }: EditProfileCardProps) {
+export default function EditProfileCard({
+  session,
+  register,
+  watch,
+  errors,
+}: EditProfileCardProps) {
   const avatarUrl = session?.user.user_metadata.avatar_url;
   const userName = session?.user.user_metadata.name;
   const email = session?.user.user_metadata.email;
 
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
-
-  const {
-    register,
-    watch,
-    formState: { errors },
-  } = useForm<EditProfileFormData>({
-    defaultValues: {
-      name: userName || "",
-    },
-  });
-
   const watchedName = watch("name");
 
   const toggleEditName = () => {

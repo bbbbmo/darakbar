@@ -11,7 +11,7 @@ import supabase from "../../../../supabase/supabase";
 import { useEffect, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserProfileImage } from "@/supabase/functions/getUserProfile";
+import { getUserProfileImage } from "@/supabase/functions/user";
 
 export default function UserProfile() {
   const navigate = useNavigate();

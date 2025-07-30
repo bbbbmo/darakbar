@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { SignUpFormData } from "./SignUpForm.types";
 import supabase from "@/supabase/supabase";
 import { useNavigate } from "react-router-dom";
+import FormPasswordInput from "@/components/Forms/FormPasswordInput";
 
 export default function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +21,6 @@ export default function SignUpForm() {
     reset,
     watch,
   } = useForm<SignUpFormData>();
-
-  const password = watch("password");
 
   const goLoginPage = () => {
     navigate("/signin");
@@ -82,50 +81,7 @@ export default function SignUpForm() {
           </HelperText>
         )}
       </FormItem>
-      <FormItem label="비밀번호" required>
-        <TextInput
-          {...register("password", {
-            required: "비밀번호를 입력해주세요",
-            minLength: {
-              value: 10,
-              message: "비밀번호는 10자 이상이어야 합니다.",
-            },
-          })}
-          color={errors.password ? "failure" : "default"}
-          type="password"
-          placeholder="문자, 숫자, 특수문자를 포함한 10자 이상"
-        />
-        {errors.password && (
-          <HelperText className="font-medium">
-            {errors.password.message}
-          </HelperText>
-        )}
-      </FormItem>
-      {/* <select className="h-8 w-30 rounded-sm">
-      <option value="">직접 입력</option>
-      <option value="naver.com">naver.com</option>
-      <option value="daum.com">daum.com</option>
-      <option value="github.com">github.com</option>
-      <option value="gmail.com">gmail.com</option>
-    </select> */}
-      <FormItem label="비밀번호 재입력" required>
-        <TextInput
-          {...register("confirmPassword", {
-            required: "비밀번호 재입력을 입력해주세요",
-            validate: (value) => {
-              return value === password || "비밀번호가 일치하지 않습니다.";
-            },
-          })}
-          color={errors.confirmPassword ? "failure" : "default"}
-          type="password"
-          placeholder="비밀번호 확인을 위해 재입력해주세요"
-        />
-        {errors.confirmPassword && (
-          <HelperText className="font-medium">
-            {errors.confirmPassword.message}
-          </HelperText>
-        )}
-      </FormItem>
+      <FormPasswordInput register={register} errors={errors} watch={watch} />
       {error && <p className="text-red-500">{error}</p>} {/* Error 표시 */}
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "가입중..." : "회원가입"}
