@@ -2,6 +2,16 @@ import { User } from "@supabase/supabase-js";
 import supabase from "../supabase";
 import { uploadToStorage } from "./storage";
 
+export const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user) {
+    throw new Error(error?.message || "유저 정보를 가져올 수 없습니다.");
+  }
+
+  return data.user; // User 객체
+};
+
 /**
  * @description 유저 프로필 이미지 가져오기
  * @param userId 유저 아이디

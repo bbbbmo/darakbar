@@ -1,6 +1,6 @@
 import { cardTheme } from "@/flowbite/themes/card.theme";
 import { PencilIcon } from "@heroicons/react/24/solid";
-import { Session } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import {
   Avatar,
   Card,
@@ -8,26 +8,26 @@ import {
   TextInput,
   ThemeProvider,
 } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 
 type EditProfileCardProps = {
-  session: Session | null;
+  userData: User | undefined;
   register: UseFormRegister<EditProfileFormData>;
   watch: UseFormWatch<EditProfileFormData>;
   errors: FieldErrors<EditProfileFormData>;
 };
 
 export default function EditProfileCard({
-  session,
+  userData,
   register,
   watch,
   errors,
 }: EditProfileCardProps) {
-  const avatarUrl = session?.user.user_metadata.avatar_url;
-  const userName = session?.user.user_metadata.name;
-  const email = session?.user.user_metadata.email;
+  const avatarUrl = userData?.user_metadata.avatar_url;
+  const userName = userData?.user_metadata.name;
+  const email = userData?.email;
 
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const watchedName = watch("name");
@@ -36,6 +36,9 @@ export default function EditProfileCard({
     setIsEditingName((prev) => !prev);
   };
 
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
   console.log(avatarUrl);
   return (
     <ThemeProvider theme={cardTheme}>

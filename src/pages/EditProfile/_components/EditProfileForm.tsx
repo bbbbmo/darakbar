@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 import { Button } from "flowbite-react";
 import { useState } from "react";
-import useAuth from "@/hooks/useAuth";
 import EditProfileCard from "./EditProfileCard";
 import FormPasswordInput from "@/components/Forms/FormPasswordInput";
 import {
@@ -11,11 +10,12 @@ import {
 } from "@/supabase/functions/user";
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 export default function EditProfileForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { session } = useAuth();
+  const { userId, userData } = useCurrentUser();
 
   console.log(setIsLoading);
 
@@ -34,8 +34,8 @@ export default function EditProfileForm() {
   }: EditProfileFormData) => {
     try {
       setIsLoading(true);
-      if (profileImage && session?.user.id) {
-        await uploadUserProfileImage(profileImage, session.user.id);
+      if (profileImage && userId) {
+        await uploadUserProfileImage(profileImage, userId);
       }
       await updateUserProfile(name, email, password);
     } catch (error) {
@@ -55,7 +55,7 @@ export default function EditProfileForm() {
       onSubmit={handleSubmit(patchUserProfile)}
     >
       <EditProfileCard
-        session={session}
+        userData={userData}
         register={register}
         watch={watch}
         errors={errors}
