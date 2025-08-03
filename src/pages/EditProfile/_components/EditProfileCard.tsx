@@ -35,6 +35,8 @@ export default function EditProfileCard({
   const toggleEditName = () => {
     setIsEditingName((prev) => !prev);
   };
+
+  console.log(avatarUrl);
   return (
     <ThemeProvider theme={cardTheme}>
       <Card theme={cardTheme.editProfile}>
@@ -49,7 +51,9 @@ export default function EditProfileCard({
               <>
                 <TextInput
                   type="text"
-                  {...register("name")}
+                  {...register("name", {
+                    required: "이름을 입력해주세요.",
+                  })}
                   placeholder={userName}
                   rightIcon={CheckIcon}
                   className="max-w-40"

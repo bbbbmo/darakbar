@@ -1,5 +1,11 @@
 import supabase from "../supabase";
 
+/**
+ * @description supabase storage에 파일 업로드
+ * @param file 업로드할 파일
+ * @param filePath 업로드할 파일 경로
+ * @returns 업로드된 파일 데이터와 에러
+ */
 export const uploadToStorage = async (file: File, filePath: string) => {
   const { data, error } = await supabase.storage
     .from("darakbar-storage")
@@ -8,7 +14,7 @@ export const uploadToStorage = async (file: File, filePath: string) => {
       upsert: true,
     });
 
-  return { ...data, error };
+  return { data, ...data, error };
 };
 
 export const getUrlFromStorage = async (filePath: string) => {

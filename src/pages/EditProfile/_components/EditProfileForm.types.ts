@@ -1,6 +1,7 @@
 export type EditProfileFormData = {
-  name: string;
-  password: string;
-  confirmPassword: string;
-  profileImage: File;
+  name: string | null;
+  email: string | null;
+  password: string | null;
+  confirmPassword: string | null;
+  profileImage: File | null;
 };
