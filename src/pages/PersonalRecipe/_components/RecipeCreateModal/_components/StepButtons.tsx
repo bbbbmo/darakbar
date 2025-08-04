@@ -1,6 +1,7 @@
-import { Button } from "flowbite-react";
+import { Button, ThemeProvider } from "flowbite-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FunnelStep } from "./create-form.const";
+import { buttonTheme } from "@/flowbite/themes/button.theme";
 
 type StepButtonsProps = {
   currentStep: FunnelStep;
@@ -18,14 +19,22 @@ export default function StepButtons({
   //   window.location.reload();
   // };
   return (
-    <>
-      <Button color="gray" onClick={handlePrevStep} className="flex gap-1">
+    <ThemeProvider theme={buttonTheme}>
+      <Button
+        theme={buttonTheme.button}
+        onClick={handlePrevStep}
+        className="flex gap-1"
+      >
         <ArrowLeftIcon className="size-4" /> {currentStep.prevText}
       </Button>
 
-      <Button color="gray" onClick={submitHandler} className="flex gap-1">
+      <Button
+        theme={buttonTheme.button}
+        onClick={submitHandler}
+        className="flex gap-1"
+      >
         {currentStep.nextText} <ArrowRightIcon className="size-4" />
       </Button>
-    </>
+    </ThemeProvider>
   );
 }

@@ -1,5 +1,5 @@
 import FormItem from "@/components/Forms/FormItem";
-import { Button, HelperText, TextInput } from "flowbite-react";
+import { Button, HelperText, TextInput, ThemeProvider } from "flowbite-react";
 import { SignInFormData } from "./SignInForm.types";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import supabase from "@/supabase/supabase";
 import { useState } from "react";
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";
+import { buttonTheme } from "@/flowbite/themes/button.theme";
 
 export default function SignForm() {
   const [error, setError] = useState<string | null>(null);
@@ -55,7 +56,7 @@ export default function SignForm() {
     >
       <FormItem label="이메일">
         <TextInput
-          color={errors.email ? "failure" : "default"}
+          color={errors.email ? "failure" : "gray"}
           type="email"
           placeholder="example@naver.com"
           {...register("email", {
@@ -74,7 +75,7 @@ export default function SignForm() {
       </FormItem>
       <FormItem label="비밀번호">
         <TextInput
-          color={errors.password ? "failure" : "default"}
+          color={errors.password ? "failure" : "gray"}
           type="password"
           placeholder="비밀번호를 입력해주세요"
           {...register("password", {
@@ -91,9 +92,11 @@ export default function SignForm() {
           </HelperText>
         )}
       </FormItem>
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? "로그인 중..." : "로그인"}
-      </Button>
+      <ThemeProvider theme={buttonTheme}>
+        <Button theme={buttonTheme.button} type="submit" disabled={isLoading}>
+          {isLoading ? "로그인 중..." : "로그인"}
+        </Button>
+      </ThemeProvider>
       {error && (
         <AppSnackBar
           color={AppSnackBarColor.FAILURE}

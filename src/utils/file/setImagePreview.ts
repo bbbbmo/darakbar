@@ -1,8 +1,9 @@
-export const setImagePreview = (file: File) => {
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    console.log(reader.result);
-  };
-  reader.readAsDataURL(file);
+export const getImagePreview = (file: File): Promise<string> => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  });
 };

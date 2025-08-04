@@ -19,4 +19,13 @@ export const cardTheme = createTheme({
       children: "flex flex-row justify-between gap-4",
     },
   },
+
+  cocktail: {
+    root: {
+      base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103",
+    },
+    img: {
+      base: "max-h-80",
+    },
+  },
 });

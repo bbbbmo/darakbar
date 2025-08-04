@@ -39,7 +39,6 @@ export default function BasicInfoForm({
           <FormItem label="나만의 칵테일 이름" required>
             <TextInput
               type="text"
-              className="grow"
               placeholder="ex) 초코 바나나 펀치, 레인보우 샤베트 등"
               {...register("name", {
                 required: true,

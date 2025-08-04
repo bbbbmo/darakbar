@@ -5,12 +5,16 @@ import {
   Avatar,
   Card,
   CheckIcon,
+  FileInput,
+  Label,
   TextInput,
   ThemeProvider,
 } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
+import { getUserProfileImage } from "@/supabase/functions/user";
+import { getImagePreview } from "@/utils/file/setImagePreview";
 
 type EditProfileCardProps = {
   userData: User | undefined;
@@ -25,29 +29,49 @@ export default function EditProfileCard({
   watch,
   errors,
 }: EditProfileCardProps) {
-  const avatarUrl = userData?.user_metadata.avatar_url;
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const userName = userData?.user_metadata.name;
   const email = userData?.email;
 
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const watchedName = watch("name");
+  const watchedProfileImage = watch("profileImage");
 
   const toggleEditName = () => {
     setIsEditingName((prev) => !prev);
   };
 
   useEffect(() => {
-    console.log(userData);
+    if (watchedProfileImage && watchedProfileImage instanceof File) {
+      getImagePreview(watchedProfileImage).then(setImagePreview);
+    }
+  }, [watchedProfileImage]);
+
+  useEffect(() => {
+    const fetchAvatarUrl = async () => {
+      const url = await getUserProfileImage(userData?.id ?? "");
+      setAvatarUrl(url);
+    };
+    fetchAvatarUrl();
   }, [userData]);
-  console.log(avatarUrl);
   return (
     <ThemeProvider theme={cardTheme}>
       <Card theme={cardTheme.editProfile}>
-        <Avatar
-          img={avatarUrl}
-          alt="User Profile"
-          className="h-28 w-28 rounded-full bg-zinc-300"
-        />
+        <Label id="profile-image" className="cursor-pointer">
+          <Avatar
+            img={imagePreview || avatarUrl || ""}
+            alt="User Profile"
+            size="lg"
+            rounded
+          />
+          <FileInput
+            id="profile-image"
+            className="hidden"
+            accept="image/*"
+            {...register("profileImage")}
+          />
+        </Label>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             {isEditingName ? (

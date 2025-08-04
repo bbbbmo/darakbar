@@ -37,7 +37,7 @@ export default function FormPasswordInput<T extends FieldValues>({
               message: "비밀번호는 10자 이상이어야 합니다.",
             },
           })}
-          color={errors.password ? "failure" : "default"}
+          color={errors.password ? "failure" : "gray"}
         />
         {errors.password && (
           <HelperText className="font-medium">
@@ -59,7 +59,7 @@ export default function FormPasswordInput<T extends FieldValues>({
               );
             },
           })}
-          color={errors.confirmPassword ? "failure" : "default"}
+          color={errors.confirmPassword ? "failure" : "gray"}
         />
         {errors.confirmPassword && (
           <HelperText className="font-medium">

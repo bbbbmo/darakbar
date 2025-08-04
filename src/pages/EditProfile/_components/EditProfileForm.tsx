@@ -63,8 +63,8 @@ export default function EditProfileForm() {
 
       <FormPasswordInput
         register={register}
-        errors={errors}
         watch={watch}
+        errors={errors}
         required={false}
       />
       <div className="flex justify-end gap-3">

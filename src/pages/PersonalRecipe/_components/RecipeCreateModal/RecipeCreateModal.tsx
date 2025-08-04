@@ -24,8 +24,8 @@ export default function RecipeCreateModal() {
   }, [stepIndex]);
   return (
     <Modal show={modals.create} onClose={() => close("create")} size="2xl">
-      <ModalHeader className="w-full">칵테일 등록하기</ModalHeader>
-      <ModalBody>
+      <ModalHeader className="bg-primary w-full">칵테일 등록하기</ModalHeader>
+      <ModalBody className="bg-primary">
         <currentStep.component
           onNext={handleNextStep}
           setSubmitHandler={setSubmitHandler}
@@ -33,16 +33,19 @@ export default function RecipeCreateModal() {
       </ModalBody>
       <Progress
         progress={progress}
-        className="my-2"
+        color="yellow"
+        className="bg-primary"
         size="sm"
         textLabel="진행률"
       />
-      <ModalFooter className="flex justify-between">
-        <StepButtons
-          currentStep={currentStep}
-          handlePrevStep={handlePrevStep}
-          submitHandler={submitHandler}
-        />
+      <ModalFooter className="bg-primary">
+        <div className="flex w-full justify-between">
+          <StepButtons
+            currentStep={currentStep}
+            handlePrevStep={handlePrevStep}
+            submitHandler={submitHandler}
+          />
+        </div>
       </ModalFooter>
     </Modal>
   );
