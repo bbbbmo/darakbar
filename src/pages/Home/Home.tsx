@@ -15,6 +15,8 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [randomCocktails, setRandomCocktails] = useState<Cocktail[]>([]);
 
+  const cocktailLoading = true;
+
   const goPersonalRecipePage = () => {
     navigate("/personal-recipe");
   };
@@ -108,7 +110,7 @@ export default function Home() {
             </Button>
           </Card>
           <Card className="bg-primary w-full">
-            <div className="grid w-full grid-cols-3 gap-10">
+            <div className="grid w-full grid-cols-3 gap-20">
               {randomCocktails.map((cocktail) => (
                 <RecipeCard
                   key={cocktail.id}
@@ -117,6 +119,7 @@ export default function Home() {
                   rating={0}
                   creater={""}
                   cocktail={cocktail}
+                  loading={cocktailLoading}
                 />
               ))}
             </div>

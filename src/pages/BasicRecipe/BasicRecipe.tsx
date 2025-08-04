@@ -20,6 +20,7 @@ export default function RecipeNavigation() {
 
   // 칵테일 전체 데이터 가져오는 함수
   const getOriginalCocktails = async () => {
+    setLoading(true);
     const { data, error } = await supabase
       .from("cocktails")
       .select()
@@ -56,6 +57,7 @@ export default function RecipeNavigation() {
                       : null
                   }
                   cocktail={cocktail}
+                  loading={loading}
                 />
               )}
             </GridList>

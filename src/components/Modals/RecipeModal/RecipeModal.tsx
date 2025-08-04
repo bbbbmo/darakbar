@@ -4,11 +4,13 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  ThemeProvider,
 } from "flowbite-react";
 import useModalStore from "../modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useState } from "react";
+import { buttonTheme } from "@/flowbite/themes/button.theme";
 
 type Content = "preview" | "detail";
 
@@ -16,7 +18,7 @@ export default function RecipeModal() {
   const [content, setContent] = useState<Content>("preview");
   const { modals, close } = useModalStore();
   return (
-    <>
+    <ThemeProvider theme={buttonTheme}>
       <Modal show={modals.recipe} onClose={() => close("recipe")} size="2xl">
         <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
         <ModalBody className="bg-primary">
@@ -26,19 +28,16 @@ export default function RecipeModal() {
         </ModalBody>
         <ModalFooter className="bg-primary">
           {content === "preview" ? (
-            <Button
-              className="btn-secondary"
-              onClick={() => setContent("detail")}
-            >
+            <Button color="primary" onClick={() => setContent("detail")}>
               레시피 자세히보기
             </Button>
           ) : (
-            <Button onClick={() => setContent("preview")}>
+            <Button color="primary" onClick={() => setContent("preview")}>
               기본 정보로 돌아가기
             </Button>
           )}
         </ModalFooter>
       </Modal>
-    </>
+    </ThemeProvider>
   );
 }

@@ -22,7 +22,7 @@ export const cardTheme = createTheme({
 
   cocktail: {
     root: {
-      base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103",
+      base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103 max-h-130",
     },
     img: {
       base: "max-h-80",

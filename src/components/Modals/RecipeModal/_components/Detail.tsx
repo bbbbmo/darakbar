@@ -40,14 +40,14 @@ export default function Detail() {
             </li>
           </ul>
         </div>
-        <section className="tab-content p-4 text-xl">
+        <section className="p-4 text-xl">
           {activeTab === 0 && clickedCardData && (
-            <div className="tab-content__description flex flex-col gap-2">
-              <div className="description__base">
+            <div className="flex flex-col gap-2">
+              <div>
                 <strong className="mr-1 font-bold">베이스:</strong>
                 {clickedCardData.base_liquor}
               </div>
-              <div className="description__glass">
+              <div>
                 <strong className="mr-1 font-bold">잔:</strong>
                 {clickedCardData.glass_type}
               </div>
