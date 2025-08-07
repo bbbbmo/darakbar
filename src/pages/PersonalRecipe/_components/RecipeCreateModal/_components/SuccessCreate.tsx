@@ -4,6 +4,8 @@ import FormDescription from "../../../../../components/Forms/FormDescription";
 import { useRecipeCreateStore } from "../_stores/recipeCreateStore";
 import supabase from "../../../../../supabase/supabase";
 import { CreateRecipeForm } from "../_types/create-form.type";
+import { uploadToStorage } from "@/supabase/functions/storage";
+import { getCurrentUser } from "@/supabase/functions/user";
 
 // TODO: 레시피 등록, 이미지 등록, 유저 정보 캐싱 추가
 type SuccessCreateProps = {
@@ -18,48 +20,26 @@ export default function SuccessCreate({
 }: SuccessCreateProps) {
   const { getAllForm } = useRecipeCreateStore();
 
-  const fetchUserProfile = async () => {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-    if (error) throw error;
-    return user;
-  };
-
   useEffect(() => {
     showConfetti(5000);
 
     // 최종 제출 핸들러 등록
     setSubmitHandler(async () => {
       const finalData = getAllForm();
-
       try {
-        const user = await fetchUserProfile();
-        console.log("user", user);
+        const user = await getCurrentUser();
+        // TODO: 업로드 에러 수정
+        const filePath = `${user?.user?.id}/cocktail/${finalData.image.name}`;
 
-        await supabase.storage
-          .from("darakbar-storage")
-          .upload(
-            `${user?.id}/cocktail/${finalData.image.name}`,
-            finalData.image,
-            {
-              cacheControl: "3600", // 파일 캐시 시간 (초 단위)
-              upsert: true, // 파일이 이미 존재하면 덮어쓰도록 설정
-            },
-          );
+        const { path } = await uploadToStorage(finalData.image, filePath);
 
-        const publicUrl = supabase.storage
-          .from("darakbar-storage")
-          .getPublicUrl(`${user?.id}/cocktail/${finalData.image.name}`)
-          .data.publicUrl;
-
+        // user_cocktails 대신 unified_cocktails 사용
         await supabase
-          .from("user_cocktails")
+          .from("recipes")
           .insert({
             name: finalData.name,
-            image_url: publicUrl,
-            user_id: user?.id,
+            image_url: path,
+            user_id: user?.user?.id,
             base_liquor: finalData.baseLiquor.name,
             ingredients: finalData.ingredients.map(
               (ingredient) => ingredient.name,
@@ -67,6 +47,7 @@ export default function SuccessCreate({
             instructions: finalData.instructions,
             description: finalData.description,
             glass_type: finalData.glassType,
+            is_user_recipe: true, // 사용자 생성 레시피
           } as unknown as CreateRecipeForm)
           .select();
 

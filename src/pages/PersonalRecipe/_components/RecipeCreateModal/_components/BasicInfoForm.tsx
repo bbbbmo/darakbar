@@ -12,6 +12,7 @@ type BasicInfoFormProps = {
   setSubmitHandler: (handler: () => void) => void;
 };
 
+// TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm({
   onNext,
   setSubmitHandler,

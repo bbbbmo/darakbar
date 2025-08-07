@@ -9,7 +9,7 @@ export const getCurrentUser = async () => {
     throw new Error(error?.message || "유저 정보를 가져올 수 없습니다.");
   }
 
-  return data.user; // User 객체
+  return { user: data.user }; // User 객체
 };
 
 /**
