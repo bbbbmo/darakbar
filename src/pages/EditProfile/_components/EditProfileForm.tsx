@@ -4,10 +4,7 @@ import { Button } from "flowbite-react";
 import { useState } from "react";
 import EditProfileCard from "./EditProfileCard";
 import FormPasswordInput from "@/components/Forms/FormPasswordInput";
-import {
-  updateUserProfile,
-  uploadUserProfileImage,
-} from "@/supabase/functions/user";
+import { updateUserProfile, uploadUserProfileImage } from "@/supabase/api/user";
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";
 import { useCurrentUser } from "@/hooks/useCurrentUser";

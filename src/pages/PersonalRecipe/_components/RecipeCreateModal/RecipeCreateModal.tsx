@@ -16,14 +16,16 @@ import {
 } from "./RecipeCreateModal.schemes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import supabase from "@/supabase/supabase";
-import { uploadToStorage } from "@/supabase/functions/storage";
-import { getCurrentUser } from "@/supabase/functions/user";
+import { uploadToStorage } from "@/supabase/api/storage";
+import { getCurrentUser } from "@/supabase/api/user";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
+  const [progress, setProgress] = useState<number>(0);
   const { currentStep, maxStep, stepIndex, handleNextStep, handlePrevStep } =
     useFunnelStep();
-  const [progress, setProgress] = useState<number>(0);
+  const queryClient = useQueryClient();
 
   const methods = useForm<CreateRecipeForm>({
     resolver: zodResolver(CreateRecipeFormSchema),
@@ -44,37 +46,42 @@ export default function RecipeCreateModal() {
     if (ok) handleNextStep();
   };
 
-  const createUserRecipe = async (data: CreateRecipeForm) => {
+  const createUserRecipe = async () => {
     try {
+      const finalData = methods.getValues();
       const user = await getCurrentUser();
-      // TODO: 업로드 에러 수정
-      const filePath = `${user?.user?.id}/cocktail/${data.image.name}`;
-
-      const { path } = await uploadToStorage(data.image, filePath);
-
-      // user_cocktails 대신 unified_cocktails 사용
+      let path: string | null = null;
+      if (finalData.image) {
+        const filePath = `${user?.user?.id}/cocktail/${finalData.image.name}`;
+        const { path: uploadedPath } = await uploadToStorage(
+          finalData.image,
+          filePath,
+        );
+        path = uploadedPath ?? null;
+      }
       await supabase
         .from("recipes")
         .insert({
-          name: data.name,
+          name: finalData.name,
           image_url: path,
           user_id: user?.user?.id,
-          base_liquor: data.baseLiquor.name,
-          ingredients: data.ingredients.map((ingredient) => ingredient.name),
-          instructions: data.instructions,
-          description: data.description,
-          glass_type: data.glassType,
+          base_liquor: finalData.baseLiquor.name,
+          ingredients: finalData.ingredients.map(
+            (ingredient) => ingredient.name,
+          ),
+          instructions: finalData.instructions,
+          description: finalData.description,
+          glass_type: finalData.glassType,
           is_user_recipe: true, // 사용자 생성 레시피
         } as unknown as CreateRecipeForm)
         .select();
 
-      // 전송 성공 시 페이지 새로고침
-      window.location.reload();
+      console.log(finalData);
+      queryClient.invalidateQueries({ queryKey: ["user-recipe"] });
     } catch (error) {
       console.error("레시피 등록 실패", error);
       alert("레시피 등록에 실패했습니다. 다시 시도해주세요.");
     }
-    console.log(data);
   };
 
   useEffect(() => {

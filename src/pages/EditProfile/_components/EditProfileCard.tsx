@@ -13,7 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
-import { getUserProfileImage } from "@/supabase/functions/user";
+import { getUserProfileImage } from "@/supabase/api/user";
 import { getImagePreview } from "@/utils/file/setImagePreview";
 
 type EditProfileCardProps = {

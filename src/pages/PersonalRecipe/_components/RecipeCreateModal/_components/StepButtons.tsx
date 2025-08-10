@@ -20,13 +20,17 @@ export default function StepButtons({
   // };
   return (
     <ThemeProvider theme={buttonTheme}>
-      <Button
-        theme={buttonTheme.button}
-        onClick={handlePrevStep}
-        className="flex gap-1"
-      >
-        <ArrowLeftIcon className="size-4" /> {currentStep.prevText}
-      </Button>
+      {currentStep.prevText ? (
+        <Button
+          theme={buttonTheme.button}
+          onClick={handlePrevStep}
+          className="flex gap-1"
+        >
+          <ArrowLeftIcon className="size-4" /> {currentStep.prevText}
+        </Button>
+      ) : (
+        <div></div>
+      )}
 
       <Button
         theme={buttonTheme.button}
