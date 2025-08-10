@@ -6,7 +6,7 @@ export const IngredientSchema = z.object({
     .string()
     .min(1, "재료명을 입력하세요.")
     .max(15, "15자 이하로 입력해주세요"),
-  amount: z.number().positive("용량은 0보다 커야 합니다."),
+  amount: z.number().positive("용량은 0보다 커야 합니다.").multipleOf(0.01),
   unit: z.string().min(1, "단위를 입력하세요."),
 });
 export type Ingredient = z.infer<typeof IngredientSchema>;
@@ -29,8 +29,9 @@ export const BasicInfoFormSchema = z.object({
     .refine(
       (file) => file.size <= 5 * 1024 * 1024,
       "이미지 크기는 5MB 이하여야 합니다.",
-    ),
-  glassType: z.string().min(1, "잔 종류를 선택하세요."),
+    )
+    .optional(),
+  glassType: z.string().min(1, "잔 종류를 선택하세요.").optional(),
 });
 export type BasicInfoForm = z.infer<typeof BasicInfoFormSchema>;
 

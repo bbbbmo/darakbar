@@ -5,6 +5,7 @@ import FormItem from "@/components/Forms/FormItem";
 import FormFileInput from "@/components/Forms/FormFileInput";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
 import FormDescription from "@/components/Forms/FormDescription";
+import FormErrorMessage from "@/components/Forms/FormErrorMessage";
 
 // TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm() {
@@ -27,6 +28,7 @@ export default function BasicInfoForm() {
             {...register("name")}
             aria-invalid={!!errors.name}
           />
+          <FormErrorMessage error={errors.name} />
         </FormItem>
 
         {/* 칵테일 이미지 등록 */}
@@ -44,6 +46,7 @@ export default function BasicInfoForm() {
             {...register("glassType")}
             aria-invalid={!!errors.glassType}
           />
+          <FormErrorMessage error={errors.glassType} />
         </FormItem>
       </div>
     </>

@@ -3,6 +3,7 @@ import FormItem from "@/components/Forms/FormItem";
 import FormDescription from "@/components/Forms/FormDescription";
 import { useFormContext } from "react-hook-form";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
+import FormErrorMessage from "@/components/Forms/FormErrorMessage";
 
 export default function DescriptionForm() {
   const {
@@ -22,6 +23,7 @@ export default function DescriptionForm() {
             {...register("instructions")}
             aria-invalid={!!errors.instructions}
           />
+          <FormErrorMessage error={errors.instructions} />
         </FormItem>
         <FormItem label="맛과 향 설명">
           <Textarea
@@ -29,6 +31,7 @@ export default function DescriptionForm() {
             {...register("description")}
             aria-invalid={!!errors.description}
           />
+          <FormErrorMessage error={errors.description} />
         </FormItem>
       </div>
     </>

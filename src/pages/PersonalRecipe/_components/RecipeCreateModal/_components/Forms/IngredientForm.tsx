@@ -6,6 +6,7 @@ import FormDescription from "@/components/Forms/FormDescription";
 import { emptyIngredient, unitOptions } from "../../RecipeCreateModal.const";
 import { buttonTheme } from "@/flowbite/themes/button.theme";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
+import FormErrorMessage from "@/components/Forms/FormErrorMessage";
 
 export default function IngredientForm() {
   const {
@@ -40,7 +41,9 @@ export default function IngredientForm() {
               type="number"
               step={0.25}
               placeholder="용량"
-              {...register("baseLiquor.amount")}
+              {...register("baseLiquor.amount", {
+                valueAsNumber: true,
+              })}
               aria-invalid={!!errors.baseLiquor?.amount}
             />
             <Select
@@ -55,6 +58,13 @@ export default function IngredientForm() {
               ))}
             </Select>
           </div>
+          <FormErrorMessage
+            error={
+              errors.baseLiquor?.amount ||
+              errors.baseLiquor?.unit ||
+              errors.baseLiquor?.name
+            }
+          />
         </FormItem>
         {/* 재료 입력 */}
         {fields?.map((field, index) => (
@@ -67,14 +77,18 @@ export default function IngredientForm() {
                 {...register(`ingredients.${index}.name`)}
                 aria-invalid={!!errors.ingredients?.[index]?.name}
               />
+
               <TextInput
                 className="w-22"
                 type="number"
                 step={0.25}
                 placeholder="용량 및 개수"
-                {...register(`ingredients.${index}.amount`)}
+                {...register(`ingredients.${index}.amount`, {
+                  valueAsNumber: true,
+                })}
                 aria-invalid={!!errors.ingredients?.[index]?.amount}
               />
+
               <Select
                 className="w-28"
                 {...register(`ingredients.${index}.unit`)}
@@ -95,6 +109,13 @@ export default function IngredientForm() {
                 </button>
               )}
             </div>
+            <FormErrorMessage
+              error={
+                errors.baseLiquor?.amount ||
+                errors.baseLiquor?.unit ||
+                errors.baseLiquor?.name
+              }
+            />
           </FormItem>
         ))}
       </div>
