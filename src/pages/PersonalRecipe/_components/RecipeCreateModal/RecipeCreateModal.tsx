@@ -5,19 +5,77 @@ import {
   ModalFooter,
   Progress,
 } from "flowbite-react";
-import useModalStore from "../../../../components/Modals/modalStore";
+import useModalStore from "@/components/Modals/modalStore";
 import { useEffect, useState } from "react";
 import StepButtons from "./_components/StepButtons";
 import useFunnelStep from "./_hooks/useFunnelStep";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  CreateRecipeForm,
+  CreateRecipeFormSchema,
+} from "./RecipeCreateModal.schemes";
+import { zodResolver } from "@hookform/resolvers/zod";
+import supabase from "@/supabase/supabase";
+import { uploadToStorage } from "@/supabase/functions/storage";
+import { getCurrentUser } from "@/supabase/functions/user";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
   const { currentStep, maxStep, stepIndex, handleNextStep, handlePrevStep } =
     useFunnelStep();
   const [progress, setProgress] = useState<number>(0);
-  const [submitHandler, setSubmitHandler] = useState<() => void>(
-    () => () => {},
-  );
+
+  const methods = useForm<CreateRecipeForm>({
+    resolver: zodResolver(CreateRecipeFormSchema),
+    mode: "onSubmit", // 필요시 "onChange" / "onBlur"
+    shouldUnregister: false, // 스텝 UI 전환 시 값 유지
+  });
+
+  const onClickNext = async () => {
+    // 마지막이면 제출
+    if (currentStep.isFinal) {
+      methods.handleSubmit(createUserRecipe)();
+      return;
+    }
+    // 현재 스텝 필드만 부분 검증
+    const ok = await methods.trigger(currentStep.fieldsToValidate, {
+      shouldFocus: true,
+    });
+    if (ok) handleNextStep();
+  };
+
+  const createUserRecipe = async (data: CreateRecipeForm) => {
+    try {
+      const user = await getCurrentUser();
+      // TODO: 업로드 에러 수정
+      const filePath = `${user?.user?.id}/cocktail/${data.image.name}`;
+
+      const { path } = await uploadToStorage(data.image, filePath);
+
+      // user_cocktails 대신 unified_cocktails 사용
+      await supabase
+        .from("recipes")
+        .insert({
+          name: data.name,
+          image_url: path,
+          user_id: user?.user?.id,
+          base_liquor: data.baseLiquor.name,
+          ingredients: data.ingredients.map((ingredient) => ingredient.name),
+          instructions: data.instructions,
+          description: data.description,
+          glass_type: data.glassType,
+          is_user_recipe: true, // 사용자 생성 레시피
+        } as unknown as CreateRecipeForm)
+        .select();
+
+      // 전송 성공 시 페이지 새로고침
+      window.location.reload();
+    } catch (error) {
+      console.error("레시피 등록 실패", error);
+      alert("레시피 등록에 실패했습니다. 다시 시도해주세요.");
+    }
+    console.log(data);
+  };
 
   useEffect(() => {
     setProgress(Math.round(((stepIndex + 1) / maxStep) * 100));
@@ -26,10 +84,11 @@ export default function RecipeCreateModal() {
     <Modal show={modals.create} onClose={() => close("create")} size="2xl">
       <ModalHeader className="bg-primary w-full">칵테일 등록하기</ModalHeader>
       <ModalBody className="bg-primary">
-        <currentStep.component
-          onNext={handleNextStep}
-          setSubmitHandler={setSubmitHandler}
-        />
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(createUserRecipe)}>
+            <currentStep.component />
+          </form>
+        </FormProvider>
       </ModalBody>
       <Progress
         progress={progress}
@@ -43,7 +102,7 @@ export default function RecipeCreateModal() {
           <StepButtons
             currentStep={currentStep}
             handlePrevStep={handlePrevStep}
-            submitHandler={submitHandler}
+            handleNextStep={onClickNext}
           />
         </div>
       </ModalFooter>

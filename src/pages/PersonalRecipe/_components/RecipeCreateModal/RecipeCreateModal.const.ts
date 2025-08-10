@@ -1,8 +1,10 @@
 import React from "react";
-import IngredientForm from "./IngredientForm";
-import BasicInfoForm from "./BasicInfoForm";
-import DescriptionForm from "./DescriptionForm";
-import SuccessCreate from "./SuccessCreate";
+import IngredientForm from "./_components/Forms/IngredientForm";
+import BasicInfoForm from "./_components/Forms/BasicInfoForm";
+import DescriptionForm from "./_components/Forms/DescriptionForm";
+import SuccessCreate from "./_components/Forms/SuccessCreate";
+import { FieldPath } from "react-hook-form";
+import { CreateRecipeForm } from "./RecipeCreateModal.schemes";
 
 export const unitOptions = [
   { value: "oz", label: "oz" },
@@ -10,25 +12,22 @@ export const unitOptions = [
   { value: "티스푼", label: "티스푼" },
   { value: "스푼", label: "스푼" },
   { value: "개", label: "개" },
-];
+] as const;
 
 export const emptyIngredient = {
   name: "",
   amount: 0,
-  unit: "",
-};
-
-type StepProps = {
-  onNext: () => void;
-  setSubmitHandler: (handler: () => void) => void;
+  unit: "oz",
 };
 
 export type FunnelStep = {
-  component: React.FC<StepProps>;
+  component: React.FC;
   nextText: string;
   prevText?: string;
   getNextStep: () => FunnelStep | null;
   getPrevStep: () => FunnelStep | null;
+  fieldsToValidate: FieldPath<CreateRecipeForm>[];
+  isFinal?: boolean;
 };
 
 const NEXT = "다음 단계";
@@ -40,6 +39,12 @@ export const 재료입력: FunnelStep = {
   nextText: NEXT,
   getNextStep: () => 기본정보입력,
   getPrevStep: () => null,
+  fieldsToValidate: [
+    "baseLiquor.name",
+    "baseLiquor.amount",
+    "baseLiquor.unit",
+    "ingredients",
+  ],
 };
 
 export const 기본정보입력: FunnelStep = {
@@ -48,6 +53,7 @@ export const 기본정보입력: FunnelStep = {
   prevText: PREV,
   getNextStep: () => 설명입력,
   getPrevStep: () => 재료입력,
+  fieldsToValidate: ["name", "image", "glassType"],
 };
 
 export const 설명입력: FunnelStep = {
@@ -56,6 +62,7 @@ export const 설명입력: FunnelStep = {
   prevText: PREV,
   getNextStep: () => 레시피등록완료,
   getPrevStep: () => 기본정보입력,
+  fieldsToValidate: ["description", "instructions"],
 };
 
 export const 레시피등록완료: FunnelStep = {
@@ -63,6 +70,8 @@ export const 레시피등록완료: FunnelStep = {
   nextText: "확인하러 가기",
   getNextStep: () => null,
   getPrevStep: () => null,
+  fieldsToValidate: [],
+  isFinal: true,
 };
 
 export const funnelSteps: Record<string, FunnelStep> = {
@@ -70,4 +79,4 @@ export const funnelSteps: Record<string, FunnelStep> = {
   기본정보입력,
   설명입력,
   레시피등록완료,
-};
+} as const;

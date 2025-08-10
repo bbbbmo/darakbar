@@ -1,18 +1,18 @@
 import { Button, ThemeProvider } from "flowbite-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
-import { FunnelStep } from "./create-form.const";
+import { FunnelStep } from "../RecipeCreateModal.const";
 import { buttonTheme } from "@/flowbite/themes/button.theme";
 
 type StepButtonsProps = {
   currentStep: FunnelStep;
   handlePrevStep: () => void;
-  submitHandler: () => void;
+  handleNextStep: () => void;
 };
 
 export default function StepButtons({
   currentStep,
   handlePrevStep,
-  submitHandler,
+  handleNextStep,
 }: StepButtonsProps) {
   // TODO: 확인하러 가기 버튼 클릭 시 페이지 새로고침, 더 좋은 방안이 있다면 변경하자
   // const reloadPage = () => {
@@ -30,7 +30,7 @@ export default function StepButtons({
 
       <Button
         theme={buttonTheme.button}
-        onClick={submitHandler}
+        onClick={handleNextStep}
         className="flex gap-1"
       >
         {currentStep.nextText} <ArrowRightIcon className="size-4" />

@@ -12,7 +12,6 @@ export type IngredientForm = {
 export type BasicInfoForm = {
   name: string;
   image: File;
-  imageUrl: string;
   glassType: string;
 };
 

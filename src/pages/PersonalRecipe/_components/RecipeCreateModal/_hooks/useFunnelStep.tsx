@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FunnelStep, funnelSteps } from "../_components/create-form.const";
+import { FunnelStep, funnelSteps } from "../RecipeCreateModal.const";
 
 const useFunnelStep = () => {
   const [currentStep, setCurrentStep] = useState<FunnelStep>(

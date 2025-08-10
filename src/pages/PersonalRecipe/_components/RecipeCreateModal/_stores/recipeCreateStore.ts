@@ -3,8 +3,8 @@ import type {
   BasicInfoForm,
   CreateRecipeForm,
   IngredientForm,
-} from "../_types/create-form.type";
-import type { DescriptionForm } from "../_types/create-form.type";
+} from "../RecipeCreateModal.type";
+import type { DescriptionForm } from "../RecipeCreateModal.type";
 
 type RecipeFormStore = {
   basicInfo: Partial<BasicInfoForm>;
