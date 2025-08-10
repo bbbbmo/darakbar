@@ -4,7 +4,7 @@ import { Card, ThemeProvider } from "flowbite-react";
 export default function CardSkeleton() {
   return (
     <ThemeProvider theme={cardTheme}>
-      <Card role="status" className="animate-pulse" theme={cardTheme.cocktail}>
+      <Card role="status" className="!animate-pulse" theme={cardTheme.cocktail}>
         <div className="mb-4 flex h-48 items-center justify-center rounded-sm bg-gray-300">
           <svg
             className="h-10 w-10 text-gray-200"
