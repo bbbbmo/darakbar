@@ -4,10 +4,3 @@ export enum AppSnackBarColor {
   WARNING = "warning",
   INFO = "info",
 }
-
-export type AppSnackBarProps = {
-  color?: AppSnackBarColor;
-  subject: string;
-  message: string;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
-};
