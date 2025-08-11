@@ -5,8 +5,8 @@ import PersonalRecipe from "../pages/PersonalRecipe/PersonalRecipe";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import EditProfile from "../pages/EditProfile/EditProfile";
-import ProtectedRoute from "../components/ProtectedRoute";
 import App from "../App";
+import AuthProvider from "@/components/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -28,17 +28,17 @@ const router = createBrowserRouter([
       {
         path: "edit-profile", // 정보 수정 -> 로그인 필요
         element: (
-          <ProtectedRoute>
+          <AuthProvider>
             <EditProfile />
-          </ProtectedRoute>
+          </AuthProvider>
         ),
       },
       {
         path: "personal-recipe", // 나만의 레시피 -> 로그인 필요
         element: (
-          <ProtectedRoute>
+          <AuthProvider>
             <PersonalRecipe />
-          </ProtectedRoute>
+          </AuthProvider>
         ),
       },
       {
