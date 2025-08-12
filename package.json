@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "postinstall": "flowbite-react patch"
+    "postinstall": "flowbite-react patch",
+    "db:types": "npx supabase gen types typescript --project-id VITE_SUPABASE_PROJECT_REF --schema public > src/supabase/database.types.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -45,6 +46,7 @@
     "globals": "^15.14.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "supabase": "^2.34.3",
     "tailwindcss": "^4.0.6",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
