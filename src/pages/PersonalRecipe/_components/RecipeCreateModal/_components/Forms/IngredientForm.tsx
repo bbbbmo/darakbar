@@ -33,23 +33,23 @@ export default function IngredientForm() {
               type="text"
               placeholder="메인이 되는 술이나 재료를 입력해 주세요"
               className="h-10 grow"
-              {...register("baseLiquor.name")}
-              aria-invalid={!!errors.baseLiquor?.name}
+              {...register("ingredients.0.name")}
+              aria-invalid={!!errors.ingredients?.[0]?.name}
             />
             <TextInput
               className="w-22"
               type="number"
               step={0.25}
               placeholder="용량"
-              {...register("baseLiquor.amount", {
+              {...register("ingredients.0.amount", {
                 valueAsNumber: true,
               })}
-              aria-invalid={!!errors.baseLiquor?.amount}
+              aria-invalid={!!errors.ingredients?.[0]?.amount}
             />
             <Select
               className="w-28"
-              {...register("baseLiquor.unit")}
-              aria-invalid={!!errors.baseLiquor?.unit}
+              {...register("ingredients.0.unit")}
+              aria-invalid={!!errors.ingredients?.[0]?.unit}
             >
               {unitOptions.map((unit) => (
                 <option key={unit.value} value={unit.value}>
@@ -60,9 +60,9 @@ export default function IngredientForm() {
           </div>
           <FormErrorMessage
             error={
-              errors.baseLiquor?.amount ||
-              errors.baseLiquor?.unit ||
-              errors.baseLiquor?.name
+              errors.ingredients?.[0]?.amount ||
+              errors.ingredients?.[0]?.unit ||
+              errors.ingredients?.[0]?.name
             }
           />
         </FormItem>
@@ -111,9 +111,9 @@ export default function IngredientForm() {
             </div>
             <FormErrorMessage
               error={
-                errors.baseLiquor?.amount ||
-                errors.baseLiquor?.unit ||
-                errors.baseLiquor?.name
+                errors.ingredients?.[index]?.amount ||
+                errors.ingredients?.[index]?.unit ||
+                errors.ingredients?.[index]?.name
               }
             />
           </FormItem>
@@ -124,7 +124,11 @@ export default function IngredientForm() {
         <Button
           className="w-full"
           type="button"
-          onClick={() => append(structuredClone(emptyIngredient))}
+          onClick={() =>
+            append(
+              structuredClone({ ...emptyIngredient, is_base_liquor: false }),
+            )
+          }
         >
           재료 추가
         </Button>

@@ -63,6 +63,7 @@ export const 설명입력: FunnelStep = {
   getNextStep: () => 레시피등록완료,
   getPrevStep: () => 기본정보입력,
   fieldsToValidate: ["description", "instructions"],
+  isFinal: true,
 };
 
 export const 레시피등록완료: FunnelStep = {
@@ -71,7 +72,6 @@ export const 레시피등록완료: FunnelStep = {
   getNextStep: () => null,
   getPrevStep: () => null,
   fieldsToValidate: [],
-  isFinal: true,
 };
 
 export const funnelSteps: Record<string, FunnelStep> = {

@@ -17,10 +17,10 @@ export const getCurrentUser = async () => {
  * @param userId 유저 아이디
  * @returns 유저 프로필 이미지 주소
  */
-export const getUserProfileImage = async (userId: string) => {
+export const getUserProfile = async (userId: string) => {
   const { data, error } = await supabase
     .from("userinfo")
-    .select("profile_img_url")
+    .select("*")
     .eq("id", userId);
   if (error) {
     throw new Error(`유저 프로필 가져오기 중 에러 발생 ${error.message}`);

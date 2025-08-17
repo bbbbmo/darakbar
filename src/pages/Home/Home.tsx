@@ -7,7 +7,7 @@ import { Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import BlurText from "../../reactbits/BlurText";
 // import supabase from "../../supabase";
-import { Cocktail } from "../../types/cocktails";
+import { Cocktail } from "../../types/recipe";
 import RecipeCard from "../../components/Cards/RecipeCard/RecipeCard";
 
 export default function Home() {

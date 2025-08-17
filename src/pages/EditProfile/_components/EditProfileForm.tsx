@@ -7,12 +7,12 @@ import FormPasswordInput from "@/components/Forms/FormPasswordInput";
 import { updateUserProfile, uploadUserProfileImage } from "@/supabase/api/user";
 import AppSnackBar from "@/components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@/components/App/AppSnackBar/AppSnackBar.types";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useCurrentUser } from "@/hooks/useCurrentUserQuery";
 
 export default function EditProfileForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { userId, userData } = useCurrentUser();
+  const { userId } = useCurrentUser();
 
   console.log(setIsLoading);
 
@@ -51,12 +51,7 @@ export default function EditProfileForm() {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(patchUserProfile)}
     >
-      <EditProfileCard
-        userData={userData}
-        register={register}
-        watch={watch}
-        errors={errors}
-      />
+      <EditProfileCard register={register} watch={watch} errors={errors} />
 
       <FormPasswordInput
         register={register}

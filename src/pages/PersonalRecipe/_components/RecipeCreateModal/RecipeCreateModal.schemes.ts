@@ -8,12 +8,11 @@ export const IngredientSchema = z.object({
     .max(15, "15자 이하로 입력해주세요"),
   amount: z.number().positive("용량은 0보다 커야 합니다.").multipleOf(0.01),
   unit: z.string().min(1, "단위를 입력하세요."),
+  is_base_liquor: z.boolean().default(false),
 });
-export type Ingredient = z.infer<typeof IngredientSchema>;
 
 /** IngredientForm 스키마 */
 export const IngredientFormSchema = z.object({
-  baseLiquor: IngredientSchema,
   ingredients: z
     .array(IngredientSchema)
     .min(1, "추가 재료를 하나 이상 입력하세요."),

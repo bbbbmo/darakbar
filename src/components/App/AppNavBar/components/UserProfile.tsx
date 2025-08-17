@@ -8,57 +8,64 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import supabase from "../../../../supabase/supabase";
-import { useEffect, useState } from "react";
-import useAuth from "../../../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserProfileImage } from "@/supabase/api/user";
+import { useProfileQuery } from "@/hooks/useProfileQuery";
+import { useAuthStore } from "@/stores/authStore";
+import { useQueryClient } from "@tanstack/react-query";
+import AppSnackBar from "../../AppSnackBar/AppSnackBar";
+import { useState } from "react";
+import { AppSnackBarColor } from "../../AppSnackBar/AppSnackBar.types";
+import { AuthError } from "@supabase/supabase-js";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { session, userName } = useAuth();
-  const [profileImage, setProfileImage] = useState(null);
-  const userId = session?.user.id;
+  const queryClient = useQueryClient();
+  const { data: profile } = useProfileQuery();
+  const [isOpen, setIsOpen] = useState(false);
+  const [signOutError, setSignOutError] = useState<string | null>(null);
 
   /** 로그아웃, 에러 발생 시 alert */
   const signOut = async () => {
-    navigate("/");
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      throw new Error(`로그아웃 에러 발생 ${error.message}`);
+    try {
+      const { error } = await supabase.auth.signOut();
+      useAuthStore.getState().reset();
+      queryClient.clear();
+      if (error) {
+        throw new Error(`로그아웃 에러 발생 ${error.message}`);
+      }
+      navigate("/");
+    } catch (error: unknown) {
+      if (error instanceof AuthError) {
+        setSignOutError(error.message);
+      } else {
+        setSignOutError("알 수 없는 에러가 발생했습니다.");
+      }
+    } finally {
+      setIsOpen(true);
     }
-    console.log("로그아웃 완료 !");
   };
 
-  useEffect(() => {
-    const initial = async () => {
-      if (userId) {
-        const profileImage = await getUserProfileImage(userId);
-        setProfileImage(profileImage);
-      }
-    };
-    initial();
-  }, [userId]);
   return (
     <>
       <Dropdown
         arrowIcon={false}
         inline
         label={
-          profileImage ? (
-            <Avatar alt="User Avatar" img={profileImage} rounded />
+          profile?.profile_img_url ? (
+            <Avatar alt="User Avatar" img={profile.profile_img_url} rounded />
           ) : (
             <UserIcon className="user-icon size-6" />
           )
         }
       >
         <DropdownHeader>
-          <strong className="block text-sm">{userName}</strong>
+          <strong className="block text-sm">{profile?.name}</strong>
 
           <span className="block truncate text-sm font-medium">
-            {session?.user.email}
+            {profile?.email}
           </span>
         </DropdownHeader>
-        {session ? (
+        {profile ? (
           <>
             <DropdownItem>
               <Link to="/edit-profile">정보수정</Link>
@@ -79,6 +86,16 @@ export default function UserProfile() {
         )}
       </Dropdown>
       <NavbarToggle />
+      <AppSnackBar
+        color={
+          signOutError ? AppSnackBarColor.FAILURE : AppSnackBarColor.SUCCESS
+        }
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        position="top"
+        subject="로그아웃"
+        message={signOutError ?? "로그아웃 완료 !"}
+      />
     </>
   );
 }

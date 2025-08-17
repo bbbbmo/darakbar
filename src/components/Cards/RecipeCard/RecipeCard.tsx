@@ -2,7 +2,7 @@ import { Button, Card, ThemeProvider } from "flowbite-react";
 import useModalStore from "../../Modals/modalStore";
 import Stars from "./_components/Stars";
 import useCocktailStore from "../../Modals/RecipeModal/recipe-modal.store";
-import { Cocktail } from "../../../types/cocktails";
+import { Cocktail } from "../../../types/recipe";
 import { cardTheme } from "@/flowbite/themes/card.theme";
 import { buttonTheme } from "@/flowbite/themes/button.theme";
 import CardSkeleton from "../CardSkeleton";

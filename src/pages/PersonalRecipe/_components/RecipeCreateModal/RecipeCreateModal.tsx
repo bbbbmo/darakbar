@@ -15,23 +15,31 @@ import {
   CreateRecipeFormSchema,
 } from "./RecipeCreateModal.schemes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import supabase from "@/supabase/supabase";
-import { uploadToStorage } from "@/supabase/api/storage";
-import { getCurrentUser } from "@/supabase/api/user";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCreateUserRecipe } from "./_hooks/useCreateUserRecipe";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
   const [progress, setProgress] = useState<number>(0);
-  const { currentStep, maxStep, stepIndex, handleNextStep, handlePrevStep } =
-    useFunnelStep();
-  const queryClient = useQueryClient();
+  const {
+    currentStep,
+    Step,
+    maxStep,
+    stepIndex,
+    handleNextStep,
+    handlePrevStep,
+  } = useFunnelStep();
+  const { mutate } = useCreateUserRecipe();
 
   const methods = useForm<CreateRecipeForm>({
     resolver: zodResolver(CreateRecipeFormSchema),
     mode: "onSubmit", // 필요시 "onChange" / "onBlur"
     shouldUnregister: false, // 스텝 UI 전환 시 값 유지
   });
+
+  const createUserRecipe = () => {
+    const finalData = methods.getValues();
+    mutate(finalData);
+  };
 
   const onClickNext = async () => {
     // 마지막이면 제출
@@ -46,44 +54,6 @@ export default function RecipeCreateModal() {
     if (ok) handleNextStep();
   };
 
-  const createUserRecipe = async () => {
-    try {
-      const finalData = methods.getValues();
-      const user = await getCurrentUser();
-      let path: string | null = null;
-      if (finalData.image) {
-        const filePath = `${user?.user?.id}/cocktail/${finalData.image.name}`;
-        const { path: uploadedPath } = await uploadToStorage(
-          finalData.image,
-          filePath,
-        );
-        path = uploadedPath ?? null;
-      }
-      await supabase
-        .from("recipes")
-        .insert({
-          name: finalData.name,
-          image_url: path,
-          user_id: user?.user?.id,
-          base_liquor: finalData.baseLiquor.name,
-          ingredients: finalData.ingredients.map(
-            (ingredient) => ingredient.name,
-          ),
-          instructions: finalData.instructions,
-          description: finalData.description,
-          glass_type: finalData.glassType,
-          is_user_recipe: true, // 사용자 생성 레시피
-        } as unknown as CreateRecipeForm)
-        .select();
-
-      console.log(finalData);
-      queryClient.invalidateQueries({ queryKey: ["user-recipe"] });
-    } catch (error) {
-      console.error("레시피 등록 실패", error);
-      alert("레시피 등록에 실패했습니다. 다시 시도해주세요.");
-    }
-  };
-
   useEffect(() => {
     setProgress(Math.round(((stepIndex + 1) / maxStep) * 100));
   }, [stepIndex]);
@@ -92,8 +62,8 @@ export default function RecipeCreateModal() {
       <ModalHeader className="bg-primary w-full">칵테일 등록하기</ModalHeader>
       <ModalBody className="bg-primary">
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(createUserRecipe)}>
-            <currentStep.component />
+          <form>
+            <Step />
           </form>
         </FormProvider>
       </ModalBody>

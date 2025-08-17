@@ -6,7 +6,7 @@ import RecipeModal from "@/components/Modals/RecipeModal/RecipeModal";
 import useCocktailStore from "@/components/Modals/RecipeModal/recipe-modal.store";
 import PersonalRecipeHeader from "./_components/PersonalRecipeHeader";
 import { useUserRecipe } from "./_hooks/useUserRecipe";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useCurrentUser } from "@/hooks/useCurrentUserQuery";
 
 // 클릭 시 모달 내용 수정해야함
 export default function PersonalRecipe() {

@@ -1,6 +1,5 @@
 import { cardTheme } from "@/flowbite/themes/card.theme";
 import { PencilIcon } from "@heroicons/react/24/solid";
-import { User } from "@supabase/supabase-js";
 import {
   Avatar,
   Card,
@@ -13,26 +12,22 @@ import {
 import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
-import { getUserProfileImage } from "@/supabase/api/user";
 import { getImagePreview } from "@/utils/file/setImagePreview";
+import { useProfileQuery } from "@/hooks/useProfileQuery";
 
 type EditProfileCardProps = {
-  userData: User | undefined;
   register: UseFormRegister<EditProfileFormData>;
   watch: UseFormWatch<EditProfileFormData>;
   errors: FieldErrors<EditProfileFormData>;
 };
 
 export default function EditProfileCard({
-  userData,
   register,
   watch,
   errors,
 }: EditProfileCardProps) {
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const userName = userData?.user_metadata.name;
-  const email = userData?.email;
+  const { data: profile } = useProfileQuery();
 
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const watchedName = watch("name");
@@ -47,20 +42,12 @@ export default function EditProfileCard({
       getImagePreview(watchedProfileImage).then(setImagePreview);
     }
   }, [watchedProfileImage]);
-
-  useEffect(() => {
-    const fetchAvatarUrl = async () => {
-      const url = await getUserProfileImage(userData?.id ?? "");
-      setAvatarUrl(url);
-    };
-    fetchAvatarUrl();
-  }, [userData]);
   return (
     <ThemeProvider theme={cardTheme}>
       <Card theme={cardTheme.editProfile}>
         <Label id="profile-image" className="cursor-pointer">
           <Avatar
-            img={imagePreview || avatarUrl || ""}
+            img={imagePreview || profile?.profile_img_url || ""}
             alt="User Profile"
             size="lg"
             rounded
@@ -81,7 +68,7 @@ export default function EditProfileCard({
                   {...register("name", {
                     required: "이름을 입력해주세요.",
                   })}
-                  placeholder={userName}
+                  placeholder={profile?.name}
                   rightIcon={CheckIcon}
                   className="max-w-40"
                   theme={{
@@ -98,7 +85,7 @@ export default function EditProfileCard({
               </>
             ) : (
               <>
-                <h3 className="text-xl font-bold">{userName}</h3>
+                <h3 className="text-xl font-bold">{profile?.name}</h3>
                 <PencilIcon
                   className="size-4 cursor-pointer fill-zinc-400"
                   onClick={toggleEditName}
@@ -106,7 +93,9 @@ export default function EditProfileCard({
               </>
             )}
           </div>
-          <h5 className="text-md text-gray-500 dark:text-gray-400">{email}</h5>
+          <h5 className="text-md text-gray-500 dark:text-gray-400">
+            {profile?.email}
+          </h5>
         </div>
       </Card>
     </ThemeProvider>
