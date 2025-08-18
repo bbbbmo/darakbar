@@ -9,7 +9,6 @@ import {
 } from "flowbite-react";
 import supabase from "../../../../supabase/supabase";
 import { Link, useNavigate } from "react-router-dom";
-import { useProfileQuery } from "@/hooks/useProfileQuery";
 import { useAuthStore } from "@/stores/authStore";
 import { useQueryClient } from "@tanstack/react-query";
 import AppSnackBar from "../../AppSnackBar/AppSnackBar";
@@ -20,7 +19,7 @@ import { AuthError } from "@supabase/supabase-js";
 export default function UserProfile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { data: profile } = useProfileQuery();
+  const { userData } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const [signOutError, setSignOutError] = useState<string | null>(null);
 
@@ -51,21 +50,21 @@ export default function UserProfile() {
         arrowIcon={false}
         inline
         label={
-          profile?.profile_img_url ? (
-            <Avatar alt="User Avatar" img={profile.profile_img_url} rounded />
+          userData?.avatarUrl ? (
+            <Avatar alt="User Avatar" img={userData.avatarUrl} rounded />
           ) : (
             <UserIcon className="user-icon size-6" />
           )
         }
       >
         <DropdownHeader>
-          <strong className="block text-sm">{profile?.name}</strong>
+          <strong className="block text-sm">{userData?.name}</strong>
 
           <span className="block truncate text-sm font-medium">
-            {profile?.email}
+            {userData?.email}
           </span>
         </DropdownHeader>
-        {profile ? (
+        {userData ? (
           <>
             <DropdownItem>
               <Link to="/edit-profile">정보수정</Link>

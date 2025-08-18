@@ -37,13 +37,15 @@ export const getIngredients = async (name?: string) => {
  * @param recipe 레시피 데이터
  * @returns 레시피 데이터
  */
-export const createUserRecipe = async (recipeData: {
+type UserRecipeInput = {
   name: string;
   glassType: string | null;
   instructions: string;
   description: string;
   imageUrl: string | null;
-}, userId: string) => {
+}
+
+export const createUserRecipe = async (recipeData: UserRecipeInput, userId: string) => {
   const { data, error } = await supabase
     .from("recipes")
     .insert({
@@ -98,29 +100,22 @@ export const createRecipeIngredients = async (
   return { data, error };
 };
 
-// ===== MCP를 활용한 개선된 함수들 =====
-
 /**
- * @description MCP를 활용한 완전한 유저 레시피 생성 (트랜잭션 포함)
+ * @description 완전한 유저 레시피 생성 (트랜잭션 포함)
  * @param recipeData 레시피 기본 정보
  * @param ingredients 재료 목록
  * @param userId 유저 ID
  * @returns 생성된 레시피 데이터
  */
+type IngredientInput = {
+  name: string;
+  amount: number;
+  unit: string;
+  isBaseLiquor: boolean;
+}
 export const createCompleteUserRecipe = async (
-  recipeData: {
-    name: string;
-    glassType: string | null;
-    instructions: string;
-    description: string;
-    imageUrl: string | null;
-  },
-  ingredients: Array<{
-    name: string;
-    amount: number;
-    unit: string;
-    isBaseLiquor: boolean;
-  }>,
+  recipeData: UserRecipeInput,
+  ingredients: IngredientInput[],
   userId: string
 ) => {
   try {
@@ -190,6 +185,7 @@ export const getUserRecipesWithIngredients = async (userId: string) => {
         unit,
         is_base_liquor,
         ingredients (
+          id,
           name
         )
       )

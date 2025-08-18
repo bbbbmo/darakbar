@@ -1,10 +1,12 @@
-import { getRecipes } from "@/supabase/api/recipe";
+import { useCurrentUser } from "@/hooks/useCurrentUserQuery";
+import { getUserRecipesWithIngredients } from "@/supabase/api/recipe";
 import { useQuery } from "@tanstack/react-query";
 
-export const useUserRecipe = (userId: number) => {
+export const useUserRecipe = () => {
+  const { userId } = useCurrentUser();
   const readQuery = useQuery({
     queryKey: ["user-recipe", userId],
-    queryFn: () => getRecipes(userId),
+    queryFn: () => getUserRecipesWithIngredients(userId ?? ""),
     enabled: !!userId,
   });
 

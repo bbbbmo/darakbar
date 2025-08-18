@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { Cocktail } from "../../../types/recipe";
 
-interface CocktailStore {
+type CocktailStore = {
   allCocktails: Cocktail[] | null;
   filteredCocktails: Cocktail[] | null;
   clickedCardData: Cocktail | null;
   setAllCocktails: (cocktails: Cocktail[] | null) => void;
   setFilteredCocktails: (cocktails: Cocktail[] | null) => void;
   setClickedCardData: (cocktails: Cocktail | null) => void;
-}
+};
 
 const useCocktailStore = create<CocktailStore>((set) => ({
   allCocktails: null,

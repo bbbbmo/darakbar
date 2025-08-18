@@ -32,3 +32,4 @@ export type RecipeIngredient = {
   unit: string;
   is_base_liquor: boolean;
 };
+

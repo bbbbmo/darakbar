@@ -1,8 +1,6 @@
 import { Button, Card, ThemeProvider } from "flowbite-react";
 import useModalStore from "../../Modals/modalStore";
 import Stars from "./_components/Stars";
-import useCocktailStore from "../../Modals/RecipeModal/recipe-modal.store";
-import { Cocktail } from "../../../types/recipe";
 import { cardTheme } from "@/flowbite/themes/card.theme";
 import { buttonTheme } from "@/flowbite/themes/button.theme";
 import CardSkeleton from "../CardSkeleton";
@@ -13,7 +11,6 @@ type RecipeCardProps = {
   rating?: number;
   creater?: string;
   className?: string;
-  cocktail: Cocktail;
   loading?: boolean;
 };
 
@@ -22,15 +19,12 @@ const RecipeCard = ({
   image,
   rating = 0,
   creater,
-  cocktail,
   className,
   loading,
 }: RecipeCardProps) => {
   const { open } = useModalStore();
-  const { setClickedCardData } = useCocktailStore();
 
   const showCocktail = () => {
-    setClickedCardData(cocktail); // 클릭한 칵테일 데이터 저장
     open("recipe");
   };
 

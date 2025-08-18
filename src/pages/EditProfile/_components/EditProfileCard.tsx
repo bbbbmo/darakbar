@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 import { getImagePreview } from "@/utils/file/setImagePreview";
-import { useProfileQuery } from "@/hooks/useProfileQuery";
+import { useAuthStore } from "@/stores/authStore";
 
 type EditProfileCardProps = {
   register: UseFormRegister<EditProfileFormData>;
@@ -27,7 +27,7 @@ export default function EditProfileCard({
   errors,
 }: EditProfileCardProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const { data: profile } = useProfileQuery();
+  const { userData } = useAuthStore();
 
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const watchedName = watch("name");
@@ -47,7 +47,7 @@ export default function EditProfileCard({
       <Card theme={cardTheme.editProfile}>
         <Label id="profile-image" className="cursor-pointer">
           <Avatar
-            img={imagePreview || profile?.profile_img_url || ""}
+            img={imagePreview || userData?.avatarUrl || ""}
             alt="User Profile"
             size="lg"
             rounded
@@ -68,7 +68,7 @@ export default function EditProfileCard({
                   {...register("name", {
                     required: "이름을 입력해주세요.",
                   })}
-                  placeholder={profile?.name}
+                  placeholder={userData?.name}
                   rightIcon={CheckIcon}
                   className="max-w-40"
                   theme={{
@@ -85,7 +85,7 @@ export default function EditProfileCard({
               </>
             ) : (
               <>
-                <h3 className="text-xl font-bold">{profile?.name}</h3>
+                <h3 className="text-xl font-bold">{userData?.name}</h3>
                 <PencilIcon
                   className="size-4 cursor-pointer fill-zinc-400"
                   onClick={toggleEditName}
@@ -94,7 +94,7 @@ export default function EditProfileCard({
             )}
           </div>
           <h5 className="text-md text-gray-500 dark:text-gray-400">
-            {profile?.email}
+            {userData?.email}
           </h5>
         </div>
       </Card>

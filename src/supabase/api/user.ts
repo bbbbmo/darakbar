@@ -13,23 +13,22 @@ export const getCurrentUser = async () => {
 };
 
 /**
- * @description 유저 프로필 이미지 가져오기
+ * @description 유저 프로필 가져오기
  * @param userId 유저 아이디
- * @returns 유저 프로필 이미지 주소
  */
 export const getUserProfile = async (userId: string) => {
   const { data, error } = await supabase
     .from("userinfo")
     .select("*")
-    .eq("id", userId);
+    .eq("id", userId).single();
   if (error) {
     throw new Error(`유저 프로필 가져오기 중 에러 발생 ${error.message}`);
   }
-  if (!data || data.length === 0) {
+  if (!data) {
     throw new Error("유저 정보를 찾을 수 없습니다.");
   }
   if (data) {
-    return data[0].profile_img_url;
+    return data;
   }
 };
 
