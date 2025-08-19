@@ -10,6 +10,8 @@ export const useCreateUserRecipe = () => {
   return useMutation({
     mutationFn: async (formData: CreateRecipeForm) => {
       const user = await getCurrentUser();
+      console.log(user.user.id);
+
       await createValidatedUserRecipe(formData, user.user.id);
     },
     onSuccess: () => {

@@ -8,7 +8,7 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import supabase from "../../../../supabase/supabase";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/stores/authStore";
 import { useQueryClient } from "@tanstack/react-query";
 import AppSnackBar from "../../AppSnackBar/AppSnackBar";
@@ -66,20 +66,20 @@ export default function UserProfile() {
         </DropdownHeader>
         {userData ? (
           <>
-            <DropdownItem>
-              <Link to="/edit-profile">정보수정</Link>
+            <DropdownItem onClick={() => navigate("/edit-profile")}>
+              정보수정
             </DropdownItem>
             <DropdownDivider />
             <DropdownItem onClick={signOut}>로그아웃</DropdownItem>
           </>
         ) : (
           <>
-            <DropdownItem>
-              <Link to="/signin">로그인</Link>
+            <DropdownItem onClick={() => navigate("/signin")}>
+              로그인
             </DropdownItem>
             <DropdownDivider />
-            <DropdownItem>
-              <Link to="/signup">회원가입</Link>
+            <DropdownItem onClick={() => navigate("/signup")}>
+              회원가입
             </DropdownItem>
           </>
         )}
