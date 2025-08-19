@@ -20,6 +20,8 @@ export default function IngredientForm() {
     name: "ingredients",
   });
 
+  console.log(fields);
+
   return (
     <ThemeProvider theme={buttonTheme}>
       <FormDescription>
@@ -67,57 +69,60 @@ export default function IngredientForm() {
           />
         </FormItem>
         {/* 재료 입력 */}
-        {fields?.map((field, index) => (
-          <FormItem key={field.id} label={`재료 ${index + 1}`} required>
-            <div className="flex items-center gap-2">
-              <TextInput
-                type="text"
-                placeholder="추가적인 재료를 입력해 주세요"
-                className="h-10 grow"
-                {...register(`ingredients.${index}.name`)}
-                aria-invalid={!!errors.ingredients?.[index]?.name}
-              />
+        {fields?.slice(1).map((field, index) => {
+          const actualIndex = index + 1;
+          return (
+            <FormItem key={field.id} label={`재료 ${actualIndex}`} required>
+              <div className="flex items-center gap-2">
+                <TextInput
+                  type="text"
+                  placeholder="추가적인 재료를 입력해 주세요"
+                  className="h-10 grow"
+                  {...register(`ingredients.${actualIndex}.name`)}
+                  aria-invalid={!!errors.ingredients?.[actualIndex]?.name}
+                />
 
-              <TextInput
-                className="w-22"
-                type="number"
-                step={0.25}
-                placeholder="용량 및 개수"
-                {...register(`ingredients.${index}.amount`, {
-                  valueAsNumber: true,
-                })}
-                aria-invalid={!!errors.ingredients?.[index]?.amount}
-              />
+                <TextInput
+                  className="w-22"
+                  type="number"
+                  step={0.25}
+                  placeholder="용량 및 개수"
+                  {...register(`ingredients.${actualIndex}.amount`, {
+                    valueAsNumber: true,
+                  })}
+                  aria-invalid={!!errors.ingredients?.[actualIndex]?.amount}
+                />
 
-              <Select
-                className="w-28"
-                {...register(`ingredients.${index}.unit`)}
-                aria-invalid={!!errors.ingredients?.[index]?.unit}
-              >
-                {unitOptions.map((unit) => (
-                  <option key={unit.value} value={unit.value}>
-                    {unit.label}
-                  </option>
-                ))}
-              </Select>
-              {index !== 0 && (
-                <button
-                  className="ml-2 cursor-pointer"
-                  onClick={() => remove(index)}
+                <Select
+                  className="w-28"
+                  {...register(`ingredients.${actualIndex}.unit`)}
+                  aria-invalid={!!errors.ingredients?.[actualIndex]?.unit}
                 >
-                  <XCircleIcon className="size-5" />
-                </button>
-              )}
-            </div>
-            <FormErrorMessage
-              error={
-                errors.ingredients?.[index]?.amount ||
-                errors.ingredients?.[index]?.unit ||
-                errors.ingredients?.[index]?.name
-              }
-            />
-          </FormItem>
-        ))}
+                  {unitOptions.map((unit) => (
+                    <option key={unit.value} value={unit.value}>
+                      {unit.label}
+                    </option>
+                  ))}
+                </Select>
+                {index !== 0 && (
+                  <button
+                    className="ml-2 cursor-pointer"
+                    onClick={() => remove(actualIndex)}
+                  >
+                    <XCircleIcon className="size-5" />
+                  </button>
+                )}
+              </div>
+              <FormErrorMessage
+                error={
+                  errors.ingredients?.[actualIndex]?.amount ||
+                  errors.ingredients?.[actualIndex]?.unit ||
+                  errors.ingredients?.[actualIndex]?.name
+                }
+              />
+            </FormItem>
+          );
+        })}
       </div>
       {/* 재료 추가 버튼 */}
       <div className="mt-2">

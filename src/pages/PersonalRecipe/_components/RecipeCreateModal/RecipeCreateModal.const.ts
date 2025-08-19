@@ -18,6 +18,7 @@ export const emptyIngredient = {
   name: "",
   amount: 0,
   unit: "oz",
+  is_base_liquor: false,
 };
 
 export type FunnelStep = {
@@ -40,9 +41,6 @@ export const 재료입력: FunnelStep = {
   getNextStep: () => 기본정보입력,
   getPrevStep: () => null,
   fieldsToValidate: [
-    "baseLiquor.name",
-    "baseLiquor.amount",
-    "baseLiquor.unit",
     "ingredients",
   ],
 };

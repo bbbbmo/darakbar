@@ -16,6 +16,7 @@ import {
 } from "./RecipeCreateModal.schemes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateUserRecipe } from "./_hooks/useCreateUserRecipe";
+import { emptyIngredient } from "./RecipeCreateModal.const";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
@@ -32,8 +33,14 @@ export default function RecipeCreateModal() {
 
   const methods = useForm<CreateRecipeForm>({
     resolver: zodResolver(CreateRecipeFormSchema),
-    mode: "onSubmit", // 필요시 "onChange" / "onBlur"
-    shouldUnregister: false, // 스텝 UI 전환 시 값 유지
+    mode: "onSubmit",
+    shouldUnregister: false,
+    defaultValues: {
+      ingredients: [
+        { ...emptyIngredient, is_base_liquor: true },
+        emptyIngredient,
+      ],
+    },
   });
 
   const createUserRecipe = () => {
