@@ -18,13 +18,7 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
-      retry: (failureCount, error) => {
-        // 404 에러는 재시도하지 않음
-        if (error instanceof Error && error.message.includes("404")) {
-          return false;
-        }
-        return failureCount < 3;
-      },
+      retry: false,
     },
   },
 });
