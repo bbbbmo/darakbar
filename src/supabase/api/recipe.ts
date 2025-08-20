@@ -116,7 +116,8 @@ type IngredientInput = {
 export const createCompleteUserRecipe = async (
   recipeData: UserRecipeInput,
   ingredients: IngredientInput[],
-  userId: string
+  userId: string,
+
 ) => {
   try {
     // 1. 레시피 기본 정보 생성
@@ -188,6 +189,10 @@ export const getUserRecipesWithIngredients = async (userId: string) => {
           id,
           name
         )
+      ),
+       userinfo (
+        name,
+        profile_img_url
       )
     `)
     .eq("user_id", userId)

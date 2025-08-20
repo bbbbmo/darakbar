@@ -5,7 +5,6 @@ const useFunnelStep = () => {
   const [currentStep, setCurrentStep] = useState<FunnelStep>(
     funnelSteps.재료입력,
   );
-  const Step = currentStep.component;
   const [stepIndex, setStepIndex] = useState<number>(0);
   const maxStep = Object.keys(funnelSteps).length - 1;
 
@@ -27,7 +26,6 @@ const useFunnelStep = () => {
 
   return {
     currentStep,
-    Step,
     maxStep,
     stepIndex,
     handleNextStep,

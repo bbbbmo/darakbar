@@ -1,8 +1,8 @@
-import useCocktailStore from "../recipe-modal.store";
+import { useRecipeStore } from "@/stores/recipe.store";
 import { Button, ButtonGroup, Carousel } from "flowbite-react";
 
 export default function Preview() {
-  const { clickedCardData } = useCocktailStore();
+  const { clickedRecipe } = useRecipeStore();
   return (
     <div className="flex h-full w-full flex-col text-stone-100">
       <div className="h-[70%] w-full bg-gray-800">
@@ -10,7 +10,7 @@ export default function Preview() {
         <Carousel className="bg-secondary" pauseOnHover slideInterval={5000}>
           <img
             className="h-full w-full object-contain"
-            src={clickedCardData?.image_url ?? ""}
+            src={clickedRecipe?.image_url ?? ""}
             alt="칵테일 이미지"
           />
 
@@ -30,8 +30,8 @@ export default function Preview() {
       <div className="mt-3 p-3">
         <div className="flex w-full items-center text-2xl font-bold">
           <span className="italic">
-            {clickedCardData ? clickedCardData.name : "이름 없는 칵테일"} -
-            {clickedCardData?.userinfo?.name ?? "익명"}
+            {clickedRecipe ? clickedRecipe.name : "이름 없는 칵테일"} -
+            {clickedRecipe?.userinfo?.name ?? "익명"}
           </span>
           <ButtonGroup className="ml-auto">
             <Button color="gray">
@@ -63,7 +63,7 @@ export default function Preview() {
           </ButtonGroup>
         </div>
         <article className="text-primary mt-2">
-          {clickedCardData ? clickedCardData.description : "칵테일 설명 없음"}
+          {clickedRecipe ? clickedRecipe.description : "칵테일 설명 없음"}
         </article>
       </div>
     </div>

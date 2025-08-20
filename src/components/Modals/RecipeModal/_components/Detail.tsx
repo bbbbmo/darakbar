@@ -1,11 +1,15 @@
 import { useState } from "react";
-import useCocktailStore from "../recipe-modal.store";
+import { useRecipeStore } from "@/stores/recipe.store";
 
 // 레시피 정보
 export default function Detail() {
-  const { clickedCardData } = useCocktailStore();
+  const { clickedRecipe } = useRecipeStore();
 
   const [activeTab, setActiveTab] = useState<number>(0);
+
+  const baseLiquor = clickedRecipe?.recipe_ingredients?.find(
+    (ingredient) => ingredient.is_base_liquor,
+  )?.ingredients.name;
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
@@ -41,24 +45,26 @@ export default function Detail() {
           </ul>
         </div>
         <section className="p-4 text-xl">
-          {activeTab === 0 && clickedCardData && (
+          {activeTab === 0 && clickedRecipe && (
             <div className="flex flex-col gap-2">
               <div>
                 <strong className="mr-1 font-bold">베이스:</strong>
-                {clickedCardData.base_liquor}
+                {baseLiquor}
               </div>
               <div>
                 <strong className="mr-1 font-bold">잔:</strong>
-                {clickedCardData.glass_type}
+                {clickedRecipe.glass_type}
               </div>
             </div>
           )}
           {activeTab === 1 &&
-            clickedCardData &&
-            clickedCardData.ingredients.map((ingredient) => (
-              <div key={clickedCardData.id}>{ingredient}</div>
+            clickedRecipe &&
+            clickedRecipe.recipe_ingredients?.map((ingredient) => (
+              <div key={ingredient.ingredients.id}>
+                {ingredient.ingredients.name}
+              </div>
             ))}
-          {activeTab === 2 && clickedCardData && clickedCardData.instructions}
+          {activeTab === 2 && clickedRecipe && clickedRecipe.instructions}
         </section>
       </div>
     </div>

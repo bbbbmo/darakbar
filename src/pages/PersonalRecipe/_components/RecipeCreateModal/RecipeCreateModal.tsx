@@ -21,14 +21,8 @@ import { emptyIngredient } from "./RecipeCreateModal.const";
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
   const [progress, setProgress] = useState<number>(0);
-  const {
-    currentStep,
-    Step,
-    maxStep,
-    stepIndex,
-    handleNextStep,
-    handlePrevStep,
-  } = useFunnelStep();
+  const { currentStep, maxStep, stepIndex, handleNextStep, handlePrevStep } =
+    useFunnelStep();
   const { mutate } = useCreateUserRecipe();
 
   const methods = useForm<CreateRecipeForm>({
@@ -52,7 +46,7 @@ export default function RecipeCreateModal() {
     // 마지막이면 제출
     if (currentStep.isFinal) {
       methods.handleSubmit(createUserRecipe)();
-      return;
+      methods.reset();
     }
     // 현재 스텝 필드만 부분 검증
     const ok = await methods.trigger(currentStep.fieldsToValidate, {
@@ -70,7 +64,7 @@ export default function RecipeCreateModal() {
       <ModalBody className="bg-primary">
         <FormProvider {...methods}>
           <form>
-            <Step />
+            <currentStep.component />
           </form>
         </FormProvider>
       </ModalBody>

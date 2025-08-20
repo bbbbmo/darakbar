@@ -20,8 +20,6 @@ export default function IngredientForm() {
     name: "ingredients",
   });
 
-  console.log(fields);
-
   return (
     <ThemeProvider theme={buttonTheme}>
       <FormDescription>

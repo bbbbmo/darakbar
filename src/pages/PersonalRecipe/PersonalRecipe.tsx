@@ -3,7 +3,10 @@ import GridList from "@/components/GridList";
 import RecipeCard from "@/components/Cards/RecipeCard/RecipeCard";
 import RecipeModal from "@/components/Modals/RecipeModal/RecipeModal";
 import PersonalRecipeHeader from "./_components/PersonalRecipeHeader";
-import { useUserRecipe } from "./_hooks/useUserRecipe";
+import {
+  UserRecipeWithIngredients,
+  useUserRecipe,
+} from "./_hooks/useUserRecipe";
 
 // 클릭 시 모달 내용 수정해야함
 export default function PersonalRecipe() {
@@ -18,10 +21,7 @@ export default function PersonalRecipe() {
           {(recipe) => (
             <RecipeCard
               key={recipe.id}
-              title={recipe.name || ""}
-              image={
-                typeof recipe.image_url === "string" ? recipe.image_url : null
-              }
+              recipe={recipe as UserRecipeWithIngredients}
               loading={readQuery.isLoading}
             />
           )}

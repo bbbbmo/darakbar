@@ -4,28 +4,22 @@ import Stars from "./_components/Stars";
 import { cardTheme } from "@/flowbite/themes/card.theme";
 import { buttonTheme } from "@/flowbite/themes/button.theme";
 import CardSkeleton from "../CardSkeleton";
+import { UserRecipeWithIngredients } from "@/pages/PersonalRecipe/_hooks/useUserRecipe";
+import { useRecipeStore } from "@/stores/recipe.store";
 
 type RecipeCardProps = {
-  title: string;
-  image: string | null;
-  rating?: number;
-  creater?: string;
+  recipe: UserRecipeWithIngredients;
+  loading: boolean;
   className?: string;
-  loading?: boolean;
 };
 
-const RecipeCard = ({
-  title,
-  image,
-  rating = 0,
-  creater,
-  className,
-  loading,
-}: RecipeCardProps) => {
+const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
   const { open } = useModalStore();
+  const { setClickedRecipe } = useRecipeStore();
 
   const showCocktail = () => {
     open("recipe");
+    setClickedRecipe(recipe);
   };
 
   return (
@@ -38,21 +32,21 @@ const RecipeCard = ({
             theme={cardTheme.cocktail}
             className={`${className}`}
             imgAlt="Cocktail Image"
-            imgSrc={image ? image : undefined}
+            imgSrc={recipe.image_url ? recipe.image_url : undefined}
           >
             <section>
               {/* 칵테일 이름 */}
               <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                {title}
+                {recipe.name}
               </h5>
               {/* ⭐️ stars */}
-              <Stars rating={rating} />
+              <Stars rating={0} />
 
               <div className="flex items-center justify-between">
                 {/* 등록한 사람 */}
-                {creater ? (
+                {recipe.userinfo ? (
                   <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {creater}
+                    {recipe.userinfo?.name}
                   </span>
                 ) : null}
                 {/* 레시피 보기 버튼 */}
