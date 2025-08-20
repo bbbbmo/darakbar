@@ -9,7 +9,7 @@ import {
 } from "flowbite-react";
 import supabase from "../../../../supabase/supabase";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/stores/authStore";
+import { useAuthStore } from "@/stores/auth.store";
 import { useQueryClient } from "@tanstack/react-query";
 import AppSnackBar from "../../AppSnackBar/AppSnackBar";
 import { useState } from "react";

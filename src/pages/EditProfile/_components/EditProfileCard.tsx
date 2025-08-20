@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 import { getImagePreview } from "@/utils/file/setImagePreview";
-import { useAuthStore } from "@/stores/authStore";
+import { useAuthStore } from "@/stores/auth.store";
 
 type EditProfileCardProps = {
   register: UseFormRegister<EditProfileFormData>;
