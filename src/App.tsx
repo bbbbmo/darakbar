@@ -1,9 +1,8 @@
-import { Outlet } from "react-router-dom";
-import AppNavBar from "./components/App/AppNavBar/AppNavBar";
-import AppFooter from "./components/App/AppFooter";
+import AppNavBar from "./app/components/App/AppNavBar/AppNavBar";
+import AppFooter from "./app/components/App/AppFooter";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AppWrapper from "./components/App/AppWrapper";
+import AppWrapper from "./app/components/App/AppWrapper";
 
 type AppProps = {
   header?: ReactNode;
@@ -28,7 +27,7 @@ function App({ header, body, footer }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <AppWrapper>
         {header || <AppNavBar />}
-        <main className="flex-grow">{body || <Outlet />}</main>
+        <main className="flex-grow">{body}</main>
         {footer || <AppFooter />}
       </AppWrapper>
     </QueryClientProvider>
