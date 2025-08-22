@@ -1,8 +1,8 @@
-import AppNavBar from "./app/components/App/AppNavBar/AppNavBar";
-import AppFooter from "./app/components/App/AppFooter";
+import AppNavBar from "./app/_components/App/AppNavBar/AppNavBar";
+import AppFooter from "./app/_components/App/AppFooter";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AppWrapper from "./app/components/App/AppWrapper";
+import AppWrapper from "./app/_components/App/AppWrapper";
 
 type AppProps = {
   header?: ReactNode;

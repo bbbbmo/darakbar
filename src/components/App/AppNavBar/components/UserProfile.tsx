@@ -7,7 +7,7 @@ import {
   DropdownItem,
   NavbarToggle,
 } from "flowbite-react";
-import supabase from "../../../../supabase/supabase";
+import supabase from "../../../../../lib/supabase/supabase";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/app/stores/auth.store";
 import { useQueryClient } from "@tanstack/react-query";

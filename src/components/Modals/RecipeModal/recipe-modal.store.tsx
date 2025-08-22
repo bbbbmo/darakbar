@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Cocktail } from "../../../types/recipe";
+import { Cocktail } from "../../../../types/recipe";
 
 type CocktailStore = {
   allCocktails: Cocktail[] | null;

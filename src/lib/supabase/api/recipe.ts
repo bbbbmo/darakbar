@@ -1,5 +1,5 @@
 import {  Recipe, RecipeIngredient } from "@/app/types/recipe";
-import supabase from "../supabase";
+import supabase from "../../lib/supabase/supabase";
 import { CreateRecipeForm, CreateRecipeFormSchema } from "@/pages/PersonalRecipe/_components/RecipeCreateModal/RecipeCreateModal.schemes";
 import { uploadToStorage } from "./storage";
 
