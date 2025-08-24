@@ -1,5 +1,5 @@
-import { useCurrentUser } from "@/app/hooks/useCurrentUserQuery";
-import { getUserRecipesWithIngredients } from "@/app/supabase/api/recipe";
+import { useCurrentUser } from "@hooks/useCurrentUserQuery";
+import { getUserRecipesWithIngredients } from "@lib/supabase/api/recipe";
 import { useQuery } from "@tanstack/react-query";
 
 export type UserRecipeWithIngredients = {

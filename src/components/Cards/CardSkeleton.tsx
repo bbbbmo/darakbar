@@ -1,4 +1,4 @@
-import { cardTheme } from "@/app/flowbite/themes/card.theme";
+import { cardTheme } from "@lib/flowbite/themes/card.theme";
 import { Card, ThemeProvider } from "flowbite-react";
 
 export default function CardSkeleton() {

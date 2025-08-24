@@ -1,3 +1,5 @@
+"use client";
+
 import { UserIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
@@ -7,17 +9,18 @@ import {
   DropdownItem,
   NavbarToggle,
 } from "flowbite-react";
-import supabase from "../../../../../lib/supabase/supabase";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/app/stores/auth.store";
+import supabase from "@lib/supabase/supabase";
+import { useAuthStore } from "@stores/auth.store";
 import { useQueryClient } from "@tanstack/react-query";
 import AppSnackBar from "../../AppSnackBar/AppSnackBar";
 import { useState } from "react";
 import { AppSnackBarColor } from "../../AppSnackBar/AppSnackBar.types";
 import { AuthError } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function UserProfile() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { userData } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +35,7 @@ export default function UserProfile() {
       if (error) {
         throw new Error(`로그아웃 에러 발생 ${error.message}`);
       }
-      navigate("/");
+      router.push("/");
     } catch (error: unknown) {
       if (error instanceof AuthError) {
         setSignOutError(error.message);
@@ -66,20 +69,20 @@ export default function UserProfile() {
         </DropdownHeader>
         {userData ? (
           <>
-            <DropdownItem onClick={() => navigate("/edit-profile")}>
-              정보수정
+            <DropdownItem>
+              <Link href="/edit-profile">정보수정</Link>
             </DropdownItem>
             <DropdownDivider />
             <DropdownItem onClick={signOut}>로그아웃</DropdownItem>
           </>
         ) : (
           <>
-            <DropdownItem onClick={() => navigate("/signin")}>
-              로그인
+            <DropdownItem>
+              <Link href="/signin">로그인</Link>
             </DropdownItem>
             <DropdownDivider />
-            <DropdownItem onClick={() => navigate("/signup")}>
-              회원가입
+            <DropdownItem>
+              <Link href="/signup">회원가입</Link>
             </DropdownItem>
           </>
         )}

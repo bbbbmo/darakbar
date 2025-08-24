@@ -1,11 +1,13 @@
+"use client";
+
 import { Button, Card, ThemeProvider } from "flowbite-react";
 import useModalStore from "../../Modals/modalStore";
 import Stars from "./_components/Stars";
-import { cardTheme } from "@/app/flowbite/themes/card.theme";
-import { buttonTheme } from "@/app/flowbite/themes/button.theme";
+import { cardTheme } from "@lib/flowbite/themes/card.theme";
+import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import CardSkeleton from "../CardSkeleton";
-import { UserRecipeWithIngredients } from "@/pages/PersonalRecipe/_hooks/useUserRecipe";
-import { useRecipeStore } from "@/app/stores/recipe.store";
+import { UserRecipeWithIngredients } from "@/app/personal-recipe/_hooks/useUserRecipe";
+import { useRecipeStore } from "@stores/recipe.store";
 
 type RecipeCardProps = {
   recipe: UserRecipeWithIngredients;
