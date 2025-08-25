@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "flowbite-react patch",
     "db:types": "npx supabase gen types typescript --project-id btkztlafowtisbypxsre --schema public > src/supabase/database.types.ts"
   },
   "dependencies": {
