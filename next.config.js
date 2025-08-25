@@ -1,8 +1,9 @@
+const path = require("path");
+const withFlowbiteReact = require("flowbite-react/plugin/nextjs");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  outputFileTracingRoot: path.join(__dirname),
   images: {
     domains: ["localhost"],
   },
@@ -15,4 +16,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withFlowbiteReact(nextConfig);
