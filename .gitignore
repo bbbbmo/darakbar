@@ -26,3 +26,8 @@ dist-ssr
 .env
 .cursor
 database.types.ts
+
+.next/
+.turbo/
+.vercel/
+.eslintcache
