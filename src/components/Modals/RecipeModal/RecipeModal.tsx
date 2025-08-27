@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Modal,
@@ -10,7 +12,7 @@ import useModalStore from "../modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useState } from "react";
-import { buttonTheme } from "@/app/flowbite/themes/button.theme";
+import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 
 type Content = "preview" | "detail";
 

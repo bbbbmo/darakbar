@@ -1,10 +1,11 @@
-import useModalStore from "@/app/components/Modals/modalStore";
+"use client";
+
+import useModalStore from "@components/Modals/modalStore";
 import { Button, Card, ThemeProvider } from "flowbite-react";
 import RecipeCreateModal from "./RecipeCreateModal/RecipeCreateModal";
-import { buttonTheme } from "@/app/flowbite/themes/button.theme";
-
-import { cardTheme } from "@/app/flowbite/themes/card.theme";
-import BlurText from "@/app/reactbits/BlurText";
+import { buttonTheme } from "@lib/flowbite/themes/button.theme";
+import { cardTheme } from "@lib/flowbite/themes/card.theme";
+import BlurText from "@components/Reactbits/BlurText";
 
 export default function PersonalRecipeHeader() {
   const { open } = useModalStore();

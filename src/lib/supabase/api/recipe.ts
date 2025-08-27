@@ -1,6 +1,6 @@
-import {  Recipe, RecipeIngredient } from "@/app/types/recipe";
-import supabase from "../../lib/supabase/supabase";
-import { CreateRecipeForm, CreateRecipeFormSchema } from "@/pages/PersonalRecipe/_components/RecipeCreateModal/RecipeCreateModal.schemes";
+import { Recipe, RecipeIngredient } from "@/types/recipe.types";
+import supabase from "@lib/supabase/supabase";
+import { CreateRecipeForm, CreateRecipeFormSchema } from "@app/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes";
 import { uploadToStorage } from "./storage";
 
 export const getRecipes = async (userId?: string) => {
@@ -345,7 +345,7 @@ export const getRecipeStats = async (userId: string) => {
       .eq("user_id", userId)
       .eq("is_user_recipe", true);
 
-    const recipeIds = userRecipes?.map(recipe => recipe.id) || [];
+    const recipeIds = userRecipes?.map((recipe: any) => recipe.id) || [];
     
     const { data: ingredientStats } = await supabase
       .from("recipe_ingredients")
