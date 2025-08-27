@@ -1,6 +1,6 @@
 import { Recipe, RecipeIngredient } from "@/types/recipe.types";
 import supabase from "@lib/supabase/supabase";
-import { CreateRecipeForm, CreateRecipeFormSchema } from "@app/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes";
+import { CreateRecipeForm, CreateRecipeFormSchema } from "@/app/(main)/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes";
 import { uploadToStorage } from "./storage";
 
 export const getRecipes = async (userId?: string) => {

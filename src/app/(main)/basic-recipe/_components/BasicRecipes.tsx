@@ -5,7 +5,7 @@ import RecipeCard from "@components/Cards/RecipeCard/RecipeCard";
 import {
   UserRecipeWithIngredients,
   useUserRecipe,
-} from "@/app/personal-recipe/_hooks/useUserRecipe";
+} from "@/app/(main)/personal-recipe/_hooks/useUserRecipe";
 
 export default function BasicRecipes() {
   // TODO: 추후 기본 레시피 가져오도록 변경

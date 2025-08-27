@@ -1,3 +1,5 @@
+"use client";
+
 import AppSnackBar from "@components/App/AppSnackBar/AppSnackBar";
 import { AppSnackBarColor } from "@components/App/AppSnackBar/AppSnackBar.types";
 import FormItem from "@components/Forms/FormItem";

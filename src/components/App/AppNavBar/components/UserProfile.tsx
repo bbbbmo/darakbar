@@ -78,11 +78,11 @@ export default function UserProfile() {
         ) : (
           <>
             <DropdownItem>
-              <Link href="/signin">로그인</Link>
+              <Link href="/sign-in">로그인</Link>
             </DropdownItem>
             <DropdownDivider />
             <DropdownItem>
-              <Link href="/signup">회원가입</Link>
+              <Link href="/sign-up">회원가입</Link>
             </DropdownItem>
           </>
         )}
