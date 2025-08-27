@@ -1,9 +1,9 @@
 import { Textarea } from "flowbite-react";
-import FormItem from "@/app/components/Forms/FormItem";
-import FormDescription from "@/app/components/Forms/FormDescription";
+import FormItem from "@components/Forms/FormItem";
+import FormDescription from "@components/Forms/FormDescription";
 import { useFormContext } from "react-hook-form";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormErrorMessage from "@/app/components/Forms/FormErrorMessage";
+import FormErrorMessage from "@components/Forms/FormErrorMessage";
 
 export default function DescriptionForm() {
   const {

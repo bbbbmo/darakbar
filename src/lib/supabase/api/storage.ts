@@ -1,4 +1,4 @@
-import supabase from "../../lib/supabase/supabase";
+import supabase from "@lib/supabase/supabase";
 
 /**
  * @description supabase storage에 파일 업로드

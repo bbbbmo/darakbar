@@ -1,5 +1,5 @@
 import { User } from "@supabase/supabase-js";
-import supabase from "../../lib/supabase/supabase";
+import supabase from "@lib/supabase/supabase";
 import { uploadToStorage } from "./storage";
 
 export const getCurrentUser = async () => {

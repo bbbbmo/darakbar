@@ -1,12 +1,12 @@
 import { Select, TextInput, Button, ThemeProvider } from "flowbite-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import FormItem from "@/app/components/Forms/FormItem";
-import FormDescription from "@/app/components/Forms/FormDescription";
+import FormItem from "@components/Forms/FormItem";
+import FormDescription from "@components/Forms/FormDescription";
 import { emptyIngredient, unitOptions } from "../../RecipeCreateModal.const";
-import { buttonTheme } from "@/app/flowbite/themes/button.theme";
+import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormErrorMessage from "@/app/components/Forms/FormErrorMessage";
+import FormErrorMessage from "@components/Forms/FormErrorMessage";
 
 export default function IngredientForm() {
   const {

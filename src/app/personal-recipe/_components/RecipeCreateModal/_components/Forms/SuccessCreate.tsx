@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { showConfetti } from "@/app/utils/showConfetti";
-import FormDescription from "@/app/components/Forms/FormDescription";
+import { showConfetti } from "@utils/showConfetti";
+import FormDescription from "@components/Forms/FormDescription";
 
 /**
  * @description 칵테일 등록 완료 화면

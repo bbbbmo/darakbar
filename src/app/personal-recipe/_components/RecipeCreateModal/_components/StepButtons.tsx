@@ -1,7 +1,7 @@
 import { Button, ThemeProvider } from "flowbite-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FunnelStep } from "../RecipeCreateModal.const";
-import { buttonTheme } from "@/app/flowbite/themes/button.theme";
+import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 
 type StepButtonsProps = {
   currentStep: FunnelStep;

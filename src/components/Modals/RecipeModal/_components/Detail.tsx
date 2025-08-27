@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRecipeStore } from "@/app/stores/recipe.store";
+import { useRecipeStore } from "@stores/recipe.store";
 
 // 레시피 정보
 export default function Detail() {
@@ -8,7 +8,7 @@ export default function Detail() {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const baseLiquor = clickedRecipe?.recipe_ingredients?.find(
-    (ingredient) => ingredient.is_base_liquor,
+    (ingredient: any) => ingredient.is_base_liquor,
   )?.ingredients.name;
 
   const handleTabClick = (index: number) => {

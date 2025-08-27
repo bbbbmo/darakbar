@@ -1,11 +1,11 @@
 import { TextInput } from "flowbite-react";
 import { useFormContext } from "react-hook-form";
-import type { BasicInfoForm } from "../../RecipeCreateModal.type";
-import FormItem from "@/app/components/Forms/FormItem";
-import FormFileInput from "@/app/components/Forms/FormFileInput";
+import type { BasicInfoForm } from "../../RecipeCreateModal.schemes";
+import FormItem from "@components/Forms/FormItem";
+import FormFileInput from "@components/Forms/FormFileInput";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormDescription from "@/app/components/Forms/FormDescription";
-import FormErrorMessage from "@/app/components/Forms/FormErrorMessage";
+import FormDescription from "@components/Forms/FormDescription";
+import FormErrorMessage from "@components/Forms/FormErrorMessage";
 
 // TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm() {

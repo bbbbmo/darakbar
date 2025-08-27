@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCurrentUser } from "@/app/supabase/api/user";
+import { getCurrentUser } from "@lib/supabase/api/user";
 
 export const useCurrentUser = () => {
   const {

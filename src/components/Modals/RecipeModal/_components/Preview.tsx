@@ -1,4 +1,4 @@
-import { useRecipeStore } from "@/app/stores/recipe.store";
+import { useRecipeStore } from "@stores/recipe.store";
 import { Button, ButtonGroup, Carousel } from "flowbite-react";
 
 export default function Preview() {
