@@ -35,7 +35,7 @@ export default function UserProfile() {
       if (error) {
         throw new Error(`로그아웃 에러 발생 ${error.message}`);
       }
-      router.push("/");
+      router.push("/home");
     } catch (error: unknown) {
       if (error instanceof AuthError) {
         setSignOutError(error.message);

@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AppWrapper from "@/components/App/AppWrapper";
-import AppNavBar from "@/components/App/AppNavBar/AppNavBar";
-import AppFooter from "@/components/App/AppFooter";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,11 +19,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <Providers>
-          <AppWrapper>
-            <AppNavBar />
-            <main className="flex-grow">{children}</main>
-            <AppFooter />
-          </AppWrapper>
+          <main className="flex min-h-screen flex-col bg-zinc-900">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

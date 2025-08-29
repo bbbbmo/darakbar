@@ -1,16 +1,18 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
 import { Button } from "flowbite-react";
 import { useState } from "react";
 import EditProfileCard from "./EditProfileCard";
-import FormPasswordInput from "@/app/components/Forms/FormPasswordInput";
+import FormPasswordInput from "@components/Forms/FormPasswordInput";
 import {
   updateUserProfile,
   uploadUserProfileImage,
-} from "@/app/supabase/api/user";
-import AppSnackBar from "@/app/components/App/AppSnackBar/AppSnackBar";
-import { AppSnackBarColor } from "@/app/components/App/AppSnackBar/AppSnackBar.types";
-import { useCurrentUser } from "@/app/hooks/useCurrentUserQuery";
+} from "@lib/supabase/api/user";
+import AppSnackBar from "@components/App/AppSnackBar/AppSnackBar";
+import { AppSnackBarColor } from "@components/App/AppSnackBar/AppSnackBar.types";
+import { useCurrentUser } from "@hooks/useCurrentUserQuery";
 
 export default function EditProfileForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

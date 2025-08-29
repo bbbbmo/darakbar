@@ -1,11 +1,18 @@
+import AppFooter from "@/components/App/AppFooter";
+import AppNavBar from "@/components/App/AppNavBar/AppNavBar";
+
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main className="mt-10 flex h-full flex-col justify-center gap-10">
-      {children}
-    </main>
+    <>
+      <AppNavBar />
+      <section className="mt-10 flex h-full flex-grow flex-col justify-center gap-10 px-15">
+        {children}
+      </section>
+      <AppFooter />
+    </>
   );
 }

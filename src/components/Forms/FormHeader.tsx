@@ -1,3 +1,5 @@
+"use client";
+
 type FormHeaderProps = {
   title: string;
 };

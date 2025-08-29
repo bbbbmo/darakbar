@@ -6,11 +6,11 @@ import UserRecipes from "./_components/UserRecipes";
 export default function PersonalRecipe() {
   return (
     <>
-      <div className="wrapper w-full px-15">
+      <section className="w-full">
         <PersonalRecipeHeader />
         {/* 레시피 카드 */}
         <UserRecipes />
-      </div>
+      </section>
       <RecipeModal />
     </>
   );

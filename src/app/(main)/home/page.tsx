@@ -5,11 +5,11 @@ import RandomRecipes from "./_components/RandomRecipes";
 
 export default function HomePage() {
   return (
-    <main className="mt-10 flex h-full flex-col justify-center gap-10">
+    <>
       <Suspense fallback={<Loading />}>
         <IntroSection />
         <RandomRecipes />
       </Suspense>
-    </main>
+    </>
   );
 }

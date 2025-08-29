@@ -6,7 +6,7 @@ type NavMenu = {
 export const navMenuList: NavMenu[] = [
   {
     text: "Home",
-    url: "/",
+    url: "/home",
   },
   {
     text: "나만의 레시피",

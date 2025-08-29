@@ -19,7 +19,7 @@ export default function RandomRecipes() {
     <Card className="bg-primary w-full">
       <div className="grid w-full grid-cols-3 gap-20">
         {randomCocktails.map((cocktail) => (
-          <RecipeCard key={cocktail.id} recipe={cocktail} loading={true} />
+          <RecipeCard key={cocktail.id} recipe={cocktail} loading={false} />
         ))}
       </div>
     </Card>
