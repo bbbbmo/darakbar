@@ -69,20 +69,20 @@ export default function UserProfile() {
         </DropdownHeader>
         {userData ? (
           <>
-            <DropdownItem>
-              <Link href="/edit-profile">정보수정</Link>
+            <DropdownItem as={Link} href="/edit-profile">
+              정보수정
             </DropdownItem>
             <DropdownDivider />
             <DropdownItem onClick={signOut}>로그아웃</DropdownItem>
           </>
         ) : (
           <>
-            <DropdownItem>
-              <Link href="/sign-in">로그인</Link>
+            <DropdownItem as={Link} href="/sign-in">
+              로그인
             </DropdownItem>
             <DropdownDivider />
-            <DropdownItem>
-              <Link href="/sign-up">회원가입</Link>
+            <DropdownItem as={Link} href="/sign-up">
+              회원가입
             </DropdownItem>
           </>
         )}
