@@ -23,11 +23,26 @@ dist-ssr
 *.sln
 *.sw?
 
+# Environment variables
 .env
 .cursor
 database.types.ts
+
+# Misc
+.DS_Store
+*.pem
+
+# Vercel
+.vercel
 
 .next/
 .turbo/
 .vercel/
 .eslintcache
+
+# Production
+/build
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
