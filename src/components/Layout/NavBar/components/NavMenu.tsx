@@ -1,6 +1,6 @@
 "use client";
 
-import { navMenuList } from "../AppNavBar.const";
+import { navMenuList } from "../NavBar.const";
 import { NavbarCollapse } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

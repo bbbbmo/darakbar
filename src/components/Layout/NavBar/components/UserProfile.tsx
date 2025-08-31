@@ -12,9 +12,9 @@ import {
 import supabase from "@lib/supabase/supabase";
 import { useAuthStore } from "@stores/auth.store";
 import { useQueryClient } from "@tanstack/react-query";
-import AppSnackBar from "../../AppSnackBar/AppSnackBar";
+import AppSnackBar from "../../../SnackBar/SnackBar";
 import { useState } from "react";
-import { AppSnackBarColor } from "../../AppSnackBar/AppSnackBar.types";
+import { AppSnackBarColor } from "../../../SnackBar/SnackBar.types";
 import { AuthError } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import Link from "next/link";

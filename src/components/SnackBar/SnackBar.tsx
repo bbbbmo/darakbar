@@ -1,6 +1,6 @@
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-import { AppSnackBarColor } from "./AppSnackBar.types";
+import { AppSnackBarColor } from "./SnackBar.types";
 import { useEffect, useState } from "react";
 
 export type AppSnackBarProps = {

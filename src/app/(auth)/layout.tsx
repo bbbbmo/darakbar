@@ -12,6 +12,8 @@ export default function AuthLayout({
         alt="logo"
         width={200}
         height={200}
+        priority={true}
+        className="h-auto w-auto"
       />
       {children}
     </main>

@@ -15,6 +15,7 @@ export default function AppNavBar() {
             className="h-auto w-9"
             width={36}
             height={36}
+            priority={false}
           />
           <Image
             src="/images/logo/logo-text.png"
@@ -22,6 +23,7 @@ export default function AppNavBar() {
             className="h-auto w-20"
             width={80}
             height={80}
+            priority={true}
           />
         </section>
       </NavbarBrand>

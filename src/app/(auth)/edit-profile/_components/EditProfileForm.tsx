@@ -10,8 +10,8 @@ import {
   updateUserProfile,
   uploadUserProfileImage,
 } from "@lib/supabase/api/user";
-import AppSnackBar from "@components/App/AppSnackBar/AppSnackBar";
-import { AppSnackBarColor } from "@components/App/AppSnackBar/AppSnackBar.types";
+import AppSnackBar from "@/components/SnackBar/SnackBar";
+import { AppSnackBarColor } from "@/components/SnackBar/SnackBar.types";
 import { useCurrentUser } from "@hooks/useCurrentUserQuery";
 
 export default function EditProfileForm() {

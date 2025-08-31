@@ -1,5 +1,5 @@
-import AppFooter from "@/components/App/AppFooter";
-import AppNavBar from "@/components/App/AppNavBar/AppNavBar";
+import AppFooter from "@/components/Layout/Footer";
+import AppNavBar from "@/components/Layout/NavBar/NavBar";
 
 export default function MainLayout({
   children,

@@ -1,7 +1,5 @@
-"use client";
-
-import HomeContent from "./(main)/home/page";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  return <HomeContent />;
+  redirect("/home");
 }

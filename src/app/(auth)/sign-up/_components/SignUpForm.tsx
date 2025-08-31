@@ -1,7 +1,7 @@
 "use client";
 
-import AppSnackBar from "@components/App/AppSnackBar/AppSnackBar";
-import { AppSnackBarColor } from "@components/App/AppSnackBar/AppSnackBar.types";
+import AppSnackBar from "@/components/SnackBar/SnackBar";
+import { AppSnackBarColor } from "@/components/SnackBar/SnackBar.types";
 import FormItem from "@components/Forms/FormItem";
 import { Button, HelperText, TextInput, ThemeProvider } from "flowbite-react";
 import { useState } from "react";
