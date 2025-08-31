@@ -2,10 +2,8 @@
 
 import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
 import GridList from "@/components/GridList";
-import {
-  UserRecipeWithIngredients,
-  useUserRecipe,
-} from "../_hooks/useUserRecipe";
+import { UserRecipe } from "@/types/recipe.types";
+import { useUserRecipe } from "../_hooks/useUserRecipe";
 
 export default function UserRecipes() {
   const { readQuery } = useUserRecipe();
@@ -14,7 +12,7 @@ export default function UserRecipes() {
       {(recipe: any) => (
         <RecipeCard
           key={recipe.id}
-          recipe={recipe as UserRecipeWithIngredients}
+          recipe={recipe as UserRecipe}
           loading={readQuery.isLoading}
         />
       )}

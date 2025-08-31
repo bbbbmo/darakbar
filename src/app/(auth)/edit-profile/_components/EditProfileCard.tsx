@@ -1,4 +1,6 @@
-import { cardTheme } from "@/app/flowbite/themes/card.theme";
+"use client";
+
+import { cardTheme } from "@lib/flowbite/themes/card.theme";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
@@ -12,8 +14,8 @@ import {
 import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { EditProfileFormData } from "./EditProfileForm.types";
-import { getImagePreview } from "@/app/utils/file/setImagePreview";
-import { useAuthStore } from "@/app/stores/auth.store";
+import { getImagePreview } from "@utils/file/setImagePreview";
+import { useAuthStore } from "@stores/auth.store";
 
 type EditProfileCardProps = {
   register: UseFormRegister<EditProfileFormData>;

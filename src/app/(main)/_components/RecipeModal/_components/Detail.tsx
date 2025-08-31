@@ -1,13 +1,15 @@
+import { UserRecipe } from "@/types/recipe.types";
 import { useState } from "react";
-import { useRecipeStore } from "@stores/recipe.store";
+
+type DetailProps = {
+  recipe: UserRecipe | null;
+};
 
 // 레시피 정보
-export default function Detail() {
-  const { clickedRecipe } = useRecipeStore();
-
+export default function Detail({ recipe }: DetailProps) {
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  const baseLiquor = clickedRecipe?.recipe_ingredients?.find(
+  const baseLiquor = recipe?.recipe_ingredients?.find(
     (ingredient: any) => ingredient.is_base_liquor,
   )?.ingredients.name;
 
@@ -45,7 +47,7 @@ export default function Detail() {
           </ul>
         </div>
         <section className="p-4 text-xl">
-          {activeTab === 0 && clickedRecipe && (
+          {activeTab === 0 && recipe && (
             <div className="flex flex-col gap-2">
               <div>
                 <strong className="mr-1 font-bold">베이스:</strong>
@@ -53,18 +55,18 @@ export default function Detail() {
               </div>
               <div>
                 <strong className="mr-1 font-bold">잔:</strong>
-                {clickedRecipe.glass_type}
+                {recipe.glass_type}
               </div>
             </div>
           )}
           {activeTab === 1 &&
-            clickedRecipe &&
-            clickedRecipe.recipe_ingredients?.map((ingredient: any) => (
+            recipe &&
+            recipe.recipe_ingredients?.map((ingredient: any) => (
               <div key={ingredient.ingredients.id}>
                 {ingredient.ingredients.name}
               </div>
             ))}
-          {activeTab === 2 && clickedRecipe && clickedRecipe.instructions}
+          {activeTab === 2 && recipe && recipe.instructions}
         </section>
       </div>
     </div>

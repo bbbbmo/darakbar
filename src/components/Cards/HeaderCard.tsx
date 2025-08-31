@@ -6,16 +6,18 @@ type HeaderCardProps = {
   title: string;
   message: string;
   children?: React.ReactNode;
+  className?: string;
 };
 
 export default function HeaderCard({
   title,
   message,
   children,
+  className,
 }: HeaderCardProps) {
   return (
     <ThemeProvider theme={cardTheme}>
-      <Card theme={cardTheme.card} className="mt-10">
+      <Card theme={cardTheme.card} className={className}>
         <BlurText
           text={title}
           delay={150}

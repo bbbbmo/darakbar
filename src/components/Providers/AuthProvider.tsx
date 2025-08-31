@@ -1,9 +1,9 @@
-import { useAuthStore } from "@/app/stores/auth.store";
-import supabase from "@/app/supabase/supabase";
+import { useAuthStore } from "@stores/auth.store";
+import supabase from "@lib/supabase/supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import LoadingScreen from "./LoadingScreen";
+import Loading from "@/app/loading";
+import { redirect } from "next/navigation";
 
 export default function AuthProvider({
   children,
@@ -44,7 +44,9 @@ export default function AuthProvider({
     };
   }, [setAuth, setReady, queryClient]);
 
-  if (!isReady) return <LoadingScreen />;
+  if (!isReady) return <Loading />;
 
-  return <>{session === null ? <Navigate to="/signin" /> : <>{children}</>}</>;
+  if (session === null) redirect("/sign-in");
+
+  return <>{children}</>;
 }

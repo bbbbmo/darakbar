@@ -1,8 +1,11 @@
-import { useRecipeStore } from "@stores/recipe.store";
+import { UserRecipe } from "@/types/recipe.types";
 import { Button, ButtonGroup, Carousel } from "flowbite-react";
 
-export default function Preview() {
-  const { clickedRecipe } = useRecipeStore();
+type PreviewProps = {
+  recipe: UserRecipe | null;
+};
+
+export default function Preview({ recipe }: PreviewProps) {
   return (
     <div className="flex h-full w-full flex-col text-stone-100">
       <div className="h-[70%] w-full bg-gray-800">
@@ -10,7 +13,7 @@ export default function Preview() {
         <Carousel className="bg-secondary" pauseOnHover slideInterval={5000}>
           <img
             className="h-full w-full object-contain"
-            src={clickedRecipe?.image_url ?? ""}
+            src={recipe?.image_url ?? ""}
             alt="칵테일 이미지"
           />
 
@@ -30,8 +33,8 @@ export default function Preview() {
       <div className="mt-3 p-3">
         <div className="flex w-full items-center text-2xl font-bold">
           <span className="italic">
-            {clickedRecipe ? clickedRecipe.name : "이름 없는 칵테일"} -
-            {clickedRecipe?.userinfo?.name ?? "익명"}
+            {recipe ? recipe.name : "이름 없는 칵테일"} -
+            {recipe?.userinfo?.name ?? "익명"}
           </span>
           <ButtonGroup className="ml-auto">
             <Button color="gray">
@@ -63,7 +66,7 @@ export default function Preview() {
           </ButtonGroup>
         </div>
         <article className="text-primary mt-2">
-          {clickedRecipe ? clickedRecipe.description : "칵테일 설명 없음"}
+          {recipe ? recipe.description : "칵테일 설명 없음"}
         </article>
       </div>
     </div>

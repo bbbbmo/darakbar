@@ -13,16 +13,24 @@ import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useEffect, useState } from "react";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
+import { useQuery } from "@tanstack/react-query";
+import { getRecipeById } from "@/lib/supabase/api/recipe";
 
 type Content = "preview" | "detail";
 
 type RecipeModalProps = {
-  id: string;
+  id: number;
 };
 
 export default function RecipeModal({ id }: RecipeModalProps) {
   const [content, setContent] = useState<Content>("preview");
   const { modals, close } = useModalStore();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["get-recipe-by-id", id],
+    queryFn: () => getRecipeById(id),
+    enabled: !!id,
+  });
 
   useEffect(() => {
     if (!id) return;
@@ -33,7 +41,11 @@ export default function RecipeModal({ id }: RecipeModalProps) {
         <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
         <ModalBody className="bg-primary">
           <div className="flex h-[60vh] max-h-140">
-            {content === "preview" ? <Preview /> : <Detail />}
+            {content === "preview" ? (
+              <Preview recipe={data?.data ?? null} />
+            ) : (
+              <Detail recipe={data?.data ?? null} />
+            )}
           </div>
         </ModalBody>
         <ModalFooter className="bg-primary">

@@ -5,12 +5,12 @@ import Stars from "./_components/Stars";
 import { cardTheme } from "@lib/flowbite/themes/card.theme";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import CardSkeleton from "../../../../components/Cards/CardSkeleton";
-import { UserRecipeWithIngredients } from "@/app/(main)/personal-recipe/_hooks/useUserRecipe";
+import { UserRecipe } from "@/types/recipe.types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type RecipeCardProps = {
-  recipe: UserRecipeWithIngredients;
+  recipe: UserRecipe;
   loading: boolean;
   className?: string;
 };
@@ -39,11 +39,9 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
 
               <div className="flex items-center justify-between">
                 {/* 등록한 사람 */}
-                {recipe.userinfo ? (
-                  <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {recipe.userinfo?.name}
-                  </span>
-                ) : null}
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                  {recipe.userinfo ? recipe.userinfo.name : "유저 정보 없음"}
+                </span>
                 {/* 레시피 보기 버튼 */}
                 <ThemeProvider theme={buttonTheme}>
                   <Button
