@@ -1,9 +1,11 @@
-import RecipeModal from "@/components/Modals/RecipeModal/RecipeModal";
+import RecipeModal from "@/app/(main)/_components/RecipeModal/RecipeModal";
 
 type BasicRecipeModalProps = {
-  recipeId: string;
+  params: {
+    recipeId: string;
+  };
 };
 
-export default function BasicRecipeModal({ recipeId }: BasicRecipeModalProps) {
-  return <RecipeModal id={recipeId} />;
+export default function BasicRecipeModal({ params }: BasicRecipeModalProps) {
+  return <RecipeModal id={params.recipeId} />;
 }

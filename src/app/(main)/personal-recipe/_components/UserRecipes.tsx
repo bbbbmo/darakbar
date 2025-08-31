@@ -1,6 +1,6 @@
 "use client";
 
-import RecipeCard from "@/components/Cards/RecipeCard/RecipeCard";
+import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
 import GridList from "@/components/GridList";
 import {
   UserRecipeWithIngredients,

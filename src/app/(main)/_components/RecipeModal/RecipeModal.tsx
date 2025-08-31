@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ThemeProvider,
 } from "flowbite-react";
-import useModalStore from "../modalStore";
+import useModalStore from "../../../../components/Modals/modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useEffect, useState } from "react";

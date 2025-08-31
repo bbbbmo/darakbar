@@ -4,7 +4,7 @@ import { Button, Card, ThemeProvider } from "flowbite-react";
 import Stars from "./_components/Stars";
 import { cardTheme } from "@lib/flowbite/themes/card.theme";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
-import CardSkeleton from "../CardSkeleton";
+import CardSkeleton from "../../../../components/Cards/CardSkeleton";
 import { UserRecipeWithIngredients } from "@/app/(main)/personal-recipe/_hooks/useUserRecipe";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

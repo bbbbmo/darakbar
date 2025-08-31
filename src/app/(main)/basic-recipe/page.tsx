@@ -1,5 +1,5 @@
 import SearchBar from "@components/SearchBar";
-import RecipeModal from "@components/Modals/RecipeModal/RecipeModal";
+import RecipeModal from "@/app/(main)/_components/RecipeModal/RecipeModal";
 // Zustand
 
 import BasicRecipes from "./_components/BasicRecipes";

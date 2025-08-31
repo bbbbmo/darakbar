@@ -1,7 +1,7 @@
 "use client";
 
 import { UserRecipeWithIngredients } from "@/app/(main)/personal-recipe/_hooks/useUserRecipe";
-import RecipeCard from "@/components/Cards/RecipeCard/RecipeCard";
+import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
 import { Card } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { mockCocktails } from "../home.const";
