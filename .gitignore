@@ -25,6 +25,9 @@ dist-ssr
 
 # Environment variables
 .env
+.env.local
+.env.development
+.env.production
 .cursor
 database.types.ts
 
@@ -36,6 +39,7 @@ database.types.ts
 .vercel
 
 .next/
+.next/trace
 .turbo/
 .vercel/
 .eslintcache
