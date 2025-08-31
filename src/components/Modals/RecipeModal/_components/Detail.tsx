@@ -59,7 +59,7 @@ export default function Detail() {
           )}
           {activeTab === 1 &&
             clickedRecipe &&
-            clickedRecipe.recipe_ingredients?.map((ingredient) => (
+            clickedRecipe.recipe_ingredients?.map((ingredient: any) => (
               <div key={ingredient.ingredients.id}>
                 {ingredient.ingredients.name}
               </div>

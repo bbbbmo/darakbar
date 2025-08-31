@@ -1,13 +1,13 @@
 "use client";
 
 import { Button, Card, ThemeProvider } from "flowbite-react";
-import useModalStore from "../../Modals/modalStore";
 import Stars from "./_components/Stars";
 import { cardTheme } from "@lib/flowbite/themes/card.theme";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import CardSkeleton from "../CardSkeleton";
 import { UserRecipeWithIngredients } from "@/app/(main)/personal-recipe/_hooks/useUserRecipe";
-import { useRecipeStore } from "@stores/recipe.store";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type RecipeCardProps = {
   recipe: UserRecipeWithIngredients;
@@ -16,14 +16,7 @@ type RecipeCardProps = {
 };
 
 const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
-  const { open } = useModalStore();
-  const { setClickedRecipe } = useRecipeStore();
-
-  const showCocktail = () => {
-    open("recipe");
-    setClickedRecipe(recipe);
-  };
-
+  const pathname = usePathname();
   return (
     <>
       {loading ? (
@@ -57,9 +50,8 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
                     theme={buttonTheme.button}
                     color="primary"
                     className="ml-auto"
-                    onClick={showCocktail}
                   >
-                    레시피 보기
+                    <Link href={`/${pathname}/${recipe.id}`}>레시피 보기</Link>
                   </Button>
                 </ThemeProvider>
               </div>

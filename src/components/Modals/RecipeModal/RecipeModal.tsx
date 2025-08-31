@@ -11,14 +11,22 @@ import {
 import useModalStore from "../modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 
 type Content = "preview" | "detail";
 
-export default function RecipeModal() {
+type RecipeModalProps = {
+  id: string;
+};
+
+export default function RecipeModal({ id }: RecipeModalProps) {
   const [content, setContent] = useState<Content>("preview");
   const { modals, close } = useModalStore();
+
+  useEffect(() => {
+    if (!id) return;
+  }, [id]);
   return (
     <ThemeProvider theme={buttonTheme}>
       <Modal show={modals.recipe} onClose={() => close("recipe")} size="2xl">
