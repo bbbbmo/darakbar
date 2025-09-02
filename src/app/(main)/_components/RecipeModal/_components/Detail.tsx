@@ -1,3 +1,5 @@
+"use client";
+
 import { UserRecipe } from "@/types/recipe.types";
 import { useState } from "react";
 
@@ -9,7 +11,10 @@ type DetailProps = {
 export default function Detail({ recipe }: DetailProps) {
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  const baseLiquor = recipe?.recipe_ingredients?.find(
+  const recipeIngredients = Array.isArray(recipe?.recipe_ingredients)
+    ? recipe?.recipe_ingredients
+    : [];
+  const baseLiquor = recipeIngredients?.find(
     (ingredient: any) => ingredient.is_base_liquor,
   )?.ingredients.name;
 
@@ -60,8 +65,8 @@ export default function Detail({ recipe }: DetailProps) {
             </div>
           )}
           {activeTab === 1 &&
-            recipe &&
-            recipe.recipe_ingredients?.map((ingredient: any) => (
+            recipeIngredients &&
+            recipeIngredients?.map((ingredient: any) => (
               <div key={ingredient.ingredients.id}>
                 {ingredient.ingredients.name}
               </div>

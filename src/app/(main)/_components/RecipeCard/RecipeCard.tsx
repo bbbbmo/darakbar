@@ -49,11 +49,7 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
                     color="primary"
                     className="ml-auto"
                   >
-                    <Link
-                      href={`${process.env.NEXT_PUBLIC_BASE_URL}/${pathname}/${recipe.id}`}
-                    >
-                      레시피 보기
-                    </Link>
+                    <Link href={`${pathname}/${recipe.id}`}>레시피 보기</Link>
                   </Button>
                 </ThemeProvider>
               </div>

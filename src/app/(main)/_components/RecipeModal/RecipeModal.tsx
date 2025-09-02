@@ -8,13 +8,13 @@ import {
   ModalHeader,
   ThemeProvider,
 } from "flowbite-react";
-import useModalStore from "../../../../components/Modals/modalStore";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useEffect, useState } from "react";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipeById } from "@/lib/supabase/api/recipe";
+import { useRouter } from "next/navigation";
 
 type Content = "preview" | "detail";
 
@@ -24,20 +24,24 @@ type RecipeModalProps = {
 
 export default function RecipeModal({ id }: RecipeModalProps) {
   const [content, setContent] = useState<Content>("preview");
-  const { modals, close } = useModalStore();
+  const router = useRouter();
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["get-recipe-by-id", id],
     queryFn: () => getRecipeById(id),
     enabled: !!id,
   });
+
+  const onClose = () => {
+    router.back();
+  };
 
   useEffect(() => {
     if (!id) return;
   }, [id]);
   return (
     <ThemeProvider theme={buttonTheme}>
-      <Modal show={modals.recipe} onClose={() => close("recipe")} size="2xl">
+      <Modal show={true} onClose={onClose} size="2xl">
         <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
         <ModalBody className="bg-primary">
           <div className="flex h-[60vh] max-h-140">

@@ -1,5 +1,6 @@
 import { UserRecipe } from "@/types/recipe.types";
 import { Button, ButtonGroup, Carousel } from "flowbite-react";
+import Image from "next/image";
 
 type PreviewProps = {
   recipe: UserRecipe | null;
@@ -8,28 +9,21 @@ type PreviewProps = {
 export default function Preview({ recipe }: PreviewProps) {
   return (
     <div className="flex h-full w-full flex-col text-stone-100">
-      <div className="h-[70%] w-full bg-gray-800">
-        {/* TODO: 이미지 여러개 추가 */}
-        <Carousel className="bg-secondary" pauseOnHover slideInterval={5000}>
-          <img
-            className="h-full w-full object-contain"
-            src={recipe?.image_url ?? ""}
-            alt="칵테일 이미지"
-          />
+      {/* TODO: 이미지 여러개 추가 */}
+      {recipe?.image_url ? (
+        <Image
+          className="h-auto w-full object-contain"
+          src={recipe?.image_url}
+          width={1000}
+          height={1000}
+          alt="칵테일 이미지"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-zinc-900">
+          이미지 없음
+        </div>
+      )}
 
-          <img
-            className="h-full w-full object-contain"
-            src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
-            alt="예시 이미지 1"
-          />
-
-          <img
-            className="h-full w-full object-contain"
-            src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-            alt="예시 이미지 2"
-          />
-        </Carousel>
-      </div>
       <div className="mt-3 p-3">
         <div className="flex w-full items-center text-2xl font-bold">
           <span className="italic">
