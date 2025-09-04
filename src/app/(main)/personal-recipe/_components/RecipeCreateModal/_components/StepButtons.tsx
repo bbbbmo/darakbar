@@ -1,7 +1,8 @@
-import { Button, ThemeProvider } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FunnelStep } from "../RecipeCreateModal.const";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 type StepButtonsProps = {
   currentStep: FunnelStep;
@@ -19,10 +20,10 @@ export default function StepButtons({
   //   window.location.reload();
   // };
   return (
-    <ThemeProvider theme={buttonTheme}>
+    <>
       {currentStep.prevText ? (
         <Button
-          theme={buttonTheme.button}
+          theme={basicTheme.button}
           onClick={handlePrevStep}
           className="flex gap-1"
         >
@@ -39,6 +40,6 @@ export default function StepButtons({
       >
         {currentStep.nextText} <ArrowRightIcon className="size-4" />
       </Button>
-    </ThemeProvider>
+    </>
   );
 }

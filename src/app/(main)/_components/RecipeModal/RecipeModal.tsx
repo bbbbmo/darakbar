@@ -6,15 +6,15 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  ThemeProvider,
 } from "flowbite-react";
 import Preview from "./_components/Preview";
 import Detail from "./_components/Detail";
 import { useEffect, useState } from "react";
-import { buttonTheme } from "@lib/flowbite/themes/button.theme";
+// import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipeById } from "@/lib/supabase/api/recipe";
 import { useRouter } from "next/navigation";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 type Content = "preview" | "detail";
 
@@ -40,30 +40,28 @@ export default function RecipeModal({ id }: RecipeModalProps) {
     if (!id) return;
   }, [id]);
   return (
-    <ThemeProvider theme={buttonTheme}>
-      <Modal show={true} onClose={onClose} size="2xl">
-        <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
-        <ModalBody className="bg-primary">
-          <div className="flex h-[60vh] max-h-140">
-            {content === "preview" ? (
-              <Preview recipe={data?.data ?? null} />
-            ) : (
-              <Detail recipe={data?.data ?? null} />
-            )}
-          </div>
-        </ModalBody>
-        <ModalFooter className="bg-primary">
+    <Modal show={true} onClose={onClose} size="2xl" theme={basicTheme.modal}>
+      <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
+      <ModalBody className="bg-primary">
+        <div className="flex h-[60vh] max-h-140">
           {content === "preview" ? (
-            <Button color="primary" onClick={() => setContent("detail")}>
-              레시피 자세히보기
-            </Button>
+            <Preview recipe={data?.data ?? null} />
           ) : (
-            <Button color="primary" onClick={() => setContent("preview")}>
-              기본 정보로 돌아가기
-            </Button>
+            <Detail recipe={data?.data ?? null} />
           )}
-        </ModalFooter>
-      </Modal>
-    </ThemeProvider>
+        </div>
+      </ModalBody>
+      <ModalFooter className="bg-primary">
+        {content === "preview" ? (
+          <Button color="primary" onClick={() => setContent("detail")}>
+            레시피 자세히보기
+          </Button>
+        ) : (
+          <Button color="primary" onClick={() => setContent("preview")}>
+            기본 정보로 돌아가기
+          </Button>
+        )}
+      </ModalFooter>
+    </Modal>
   );
 }

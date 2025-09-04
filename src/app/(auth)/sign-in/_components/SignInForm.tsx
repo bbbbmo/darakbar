@@ -1,16 +1,16 @@
 "use client";
 
 import FormItem from "@components/Forms/FormItem";
-import { Button, HelperText, TextInput, ThemeProvider } from "flowbite-react";
+import { Button, HelperText, TextInput } from "flowbite-react";
 import { SignInFormData } from "./SignInForm.types";
 import { useForm } from "react-hook-form";
 import supabase from "@lib/supabase/supabase";
 import { useState } from "react";
 import AppSnackBar from "@/components/SnackBar/SnackBar";
 import { AppSnackBarColor } from "@/components/SnackBar/SnackBar.types";
-import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useRouter } from "next/navigation";
 import GoToButton from "@/components/Buttons/GoToButton";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 export default function SignForm() {
   const [error, setError] = useState<string | null>(null);
@@ -100,11 +100,9 @@ export default function SignForm() {
             </HelperText>
           )}
         </FormItem>
-        <ThemeProvider theme={buttonTheme}>
-          <Button theme={buttonTheme.button} type="submit" disabled={isLoading}>
-            {isLoading ? "로그인 중..." : "로그인"}
-          </Button>
-        </ThemeProvider>
+        <Button theme={basicTheme.button} type="submit" disabled={isLoading}>
+          {isLoading ? "로그인 중..." : "로그인"}
+        </Button>
         {error && (
           <AppSnackBar
             color={AppSnackBarColor.FAILURE}

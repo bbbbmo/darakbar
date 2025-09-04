@@ -1,10 +1,9 @@
-import { Select, TextInput, Button, ThemeProvider } from "flowbite-react";
+import { Select, TextInput, Button } from "flowbite-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import FormItem from "@components/Forms/FormItem";
 import FormDescription from "@components/Forms/FormDescription";
 import { emptyIngredient, unitOptions } from "../../RecipeCreateModal.const";
-import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
 import FormErrorMessage from "@components/Forms/FormErrorMessage";
 
@@ -21,7 +20,7 @@ export default function IngredientForm() {
   });
 
   return (
-    <ThemeProvider theme={buttonTheme}>
+    <>
       <FormDescription>
         나만의 특별한 레시피를 위한 재료를 입력해 주세요!
       </FormDescription>
@@ -136,6 +135,6 @@ export default function IngredientForm() {
           재료 추가
         </Button>
       </div>
-    </ThemeProvider>
+    </>
   );
 }

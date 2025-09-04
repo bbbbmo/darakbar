@@ -12,6 +12,7 @@ import FormPasswordInput from "@components/Forms/FormPasswordInput";
 import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useRouter } from "next/navigation";
 import GoToButton from "@/components/Buttons/GoToButton";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 export default function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
@@ -90,11 +91,9 @@ export default function SignUpForm() {
         </FormItem>
         <FormPasswordInput register={register} errors={errors} watch={watch} />
         {error && <p className="text-red-500">{error}</p>} {/* Error 표시 */}
-        <ThemeProvider theme={buttonTheme}>
-          <Button theme={buttonTheme.button} type="submit" disabled={isLoading}>
-            {isLoading ? "가입중..." : "회원가입"}
-          </Button>
-        </ThemeProvider>
+        <Button theme={basicTheme.button} type="submit" disabled={isLoading}>
+          {isLoading ? "가입중..." : "회원가입"}
+        </Button>
         {error && (
           <AppSnackBar
             color={AppSnackBarColor.FAILURE}

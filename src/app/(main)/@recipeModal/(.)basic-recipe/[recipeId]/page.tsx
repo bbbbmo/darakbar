@@ -1,4 +1,6 @@
 import RecipeModal from "@/app/(main)/_components/RecipeModal/RecipeModal";
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 
 type BasicRecipeModalProps = {
   params: Promise<{
@@ -13,5 +15,9 @@ export default async function BasicRecipeModal({
 
   if (!recipeId) return null;
 
-  return <RecipeModal id={parseInt(recipeId)} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <RecipeModal id={parseInt(recipeId)} />;
+    </Suspense>
+  );
 }
