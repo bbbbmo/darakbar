@@ -19,9 +19,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <Providers>
-          <main className="flex min-h-screen flex-col bg-zinc-900">
-            {children}
-          </main>
+          <main className="min-h-screen w-full bg-zinc-900">{children}</main>
         </Providers>
       </body>
     </html>

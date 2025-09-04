@@ -9,13 +9,13 @@ export default function MainLayout({
   recipeModal: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <AppNavBar />
-      <section className="mt-10 flex h-full flex-grow flex-col justify-center gap-10 px-15">
+      <section className="mt-10 flex flex-1 flex-col gap-10 px-15">
         {children}
       </section>
       {recipeModal}
       <AppFooter />
-    </>
+    </div>
   );
 }
