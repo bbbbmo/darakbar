@@ -8,8 +8,14 @@ import FormErrorMessage from "@components/Forms/FormErrorMessage";
 export default function DescriptionForm() {
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext<CreateRecipeForm>();
+
+  const watchedDescription = watch("description");
+  const watchedInstructions = watch("instructions");
+  console.log(watchedDescription);
+  console.log(watchedInstructions);
 
   return (
     <>

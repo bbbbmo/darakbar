@@ -30,20 +30,24 @@ export const basicTheme = createTheme({
     },
 
     button: {
-        color: {
-          default:
-            "bg-zinc-600 text-white hover:bg-zinc-700 focus:ring-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:focus:ring-zinc-800",
-          primary:
-            "bg-amber-400 text-neutral-900 hover:bg-amber-600 focus:ring-amber-300 dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-amber-300",
-        },
+      color: {
+        default:
+          "bg-zinc-600 text-white hover:bg-zinc-700 focus:ring-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:focus:ring-zinc-800",
+        primary:
+          "bg-amber-400 text-neutral-900 hover:bg-amber-600 focus:ring-amber-300 dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-amber-300",
       },
+    },
 
-      modal: {
-        root: {
+    modal: {
+      root: {
+        base: "bg-primary text-gray-300",
           show: {
             on: "flex bg-zinc-900/70", // 오버레이 색상/투명도
             off: "hidden",
           },
-        },
       },
+      header: {
+        title: "text-gray-300",
+      }
+    },
   });

@@ -14,10 +14,6 @@ export default function StepButtons({
   handlePrevStep,
   handleNextStep,
 }: StepButtonsProps) {
-  // TODO: 확인하러 가기 버튼 클릭 시 페이지 새로고침, 더 좋은 방안이 있다면 변경하자
-  // const reloadPage = () => {
-  //   window.location.reload();
-  // };
   return (
     <>
       {currentStep.prevText ? (

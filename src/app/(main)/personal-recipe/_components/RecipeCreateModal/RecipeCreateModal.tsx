@@ -18,7 +18,8 @@ import {
 } from "./RecipeCreateModal.schemes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateUserRecipe } from "./_hooks/useCreateUserRecipe";
-import { emptyIngredient } from "./RecipeCreateModal.const";
+import { emptyIngredient, funnelSteps } from "./RecipeCreateModal.const";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 export default function RecipeCreateModal() {
   const { modals, close } = useModalStore();
@@ -45,24 +46,35 @@ export default function RecipeCreateModal() {
   };
 
   const onClickNext = async () => {
-    // 마지막이면 제출
-    if (currentStep.isFinal) {
-      methods.handleSubmit(createUserRecipe)();
-      methods.reset();
-    }
     // 현재 스텝 필드만 부분 검증
     const ok = await methods.trigger(currentStep.fieldsToValidate, {
       shouldFocus: true,
     });
     if (ok) handleNextStep();
+    // 마지막이면 제출
+    if (currentStep === funnelSteps.설명입력) {
+      methods.handleSubmit(createUserRecipe)();
+      methods.reset();
+    }
+
+    if (currentStep === funnelSteps.레시피등록완료) {
+      close("create");
+    }
   };
 
   useEffect(() => {
     setProgress(Math.round(((stepIndex + 1) / maxStep) * 100));
   }, [stepIndex]);
   return (
-    <Modal show={modals.create} onClose={() => close("create")} size="2xl">
-      <ModalHeader className="bg-primary w-full">칵테일 등록하기</ModalHeader>
+    <Modal
+      show={modals.create}
+      theme={basicTheme.modal}
+      size="2xl"
+      onClose={() => close("create")}
+    >
+      <ModalHeader className="bg-primary w-full text-gray-300">
+        칵테일 등록하기
+      </ModalHeader>
       <ModalBody className="bg-primary">
         <FormProvider {...methods}>
           <form>

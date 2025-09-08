@@ -12,7 +12,11 @@ export default function BasicInfoForm() {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<CreateRecipeForm>();
+
+  const watchedImage = watch("image");
+  console.log(watchedImage);
 
   return (
     <>
@@ -33,7 +37,8 @@ export default function BasicInfoForm() {
 
         {/* 칵테일 이미지 등록 */}
         <FormItem label="칵테일 이미지 등록" required>
-          <FormFileInput />
+          <FormFileInput registeration={register("image")} />
+          <FormErrorMessage error={errors.image} />
         </FormItem>
 
         {/* 칵테일 잔 유형 입력 */}
