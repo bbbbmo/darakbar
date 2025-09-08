@@ -16,7 +16,7 @@ export default function IntroSection() {
         delay={150}
         animateBy="words"
         direction="top"
-        className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+        className="mb-8 text-4xl font-bold tracking-tight text-gray-300 dark:text-white"
       />
       <p className="text-primary">
         <span>

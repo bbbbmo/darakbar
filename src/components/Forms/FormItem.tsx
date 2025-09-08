@@ -22,7 +22,7 @@ export default function FormItem({
 }: FormItemProps) {
   return (
     <div className={`flex flex-col gap-3 rounded-lg p-2 ${wrapperClassName}`}>
-      <Label className={`font-bold ${labelClassName}`}>
+      <Label className={`font-bold text-gray-300 ${labelClassName}`}>
         {label}
         {required && <FormRequiredMark />}
       </Label>

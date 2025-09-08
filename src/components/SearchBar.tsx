@@ -7,11 +7,10 @@ import clsx from "clsx";
 
 type SearchBarProps = {
   className?: string;
-  onSearch: (value: string) => void;
 };
 
 // TODO: 검색 기능 추가
-export default function SearchBar({ className, onSearch }: SearchBarProps) {
+export default function SearchBar({ className }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   return (
     <section className={clsx("flex gap-3", className)}>
@@ -21,10 +20,7 @@ export default function SearchBar({ className, onSearch }: SearchBarProps) {
         icon={MagnifyingGlassIcon}
         placeholder="이름 또는 재료 검색"
       />
-      <Button
-        className="btn-primary flex w-20 items-center justify-center gap-1 rounded-xl font-bold"
-        onClick={() => onSearch(inputRef.current?.value ?? "")}
-      >
+      <Button className="btn-primary flex w-20 items-center justify-center gap-1 rounded-xl font-bold">
         검색
       </Button>
     </section>

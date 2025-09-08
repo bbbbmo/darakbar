@@ -3,7 +3,7 @@ import { createTheme } from "flowbite-react";
 export const basicTheme = createTheme({
     card: {
       root: {
-        base: "bg-primary shadow-2xl",
+        base: "bg-primary shadow-2xl ",
       },
     },
   
@@ -22,7 +22,7 @@ export const basicTheme = createTheme({
   
     cocktail: {
       root: {
-        base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103 max-h-130",
+        base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103 max-h-130 text-gray-300",
       },
       img: {
         base: "max-h-80",
@@ -32,7 +32,7 @@ export const basicTheme = createTheme({
     button: {
         color: {
           default:
-            "bg-zinc-600 text-white hover:bg-zinc-800 focus:ring-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:focus:ring-zinc-800",
+            "bg-zinc-600 text-white hover:bg-zinc-700 focus:ring-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:focus:ring-zinc-800",
           primary:
             "bg-amber-400 text-neutral-900 hover:bg-amber-600 focus:ring-amber-300 dark:bg-amber-400 dark:hover:bg-amber-600 dark:focus:ring-amber-300",
         },

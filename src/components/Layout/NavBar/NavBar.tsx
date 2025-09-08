@@ -1,13 +1,21 @@
+"use client";
+
 import { Navbar, NavbarBrand } from "flowbite-react";
 
 import UserProfile from "./components/UserProfile";
 import NavMenu from "./components/NavMenu";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function AppNavBar() {
+  const router = useRouter();
+
+  const goHomePage = () => {
+    router.push("/home");
+  };
   return (
     <Navbar fluid className="!bg-zinc-900 !opacity-95">
-      <NavbarBrand>
+      <NavbarBrand onClick={goHomePage} className="cursor-pointer">
         <section className="flex items-center gap-2">
           <Image
             src="/images/logo/logo-icon.png"
@@ -27,6 +35,7 @@ export default function AppNavBar() {
           />
         </section>
       </NavbarBrand>
+
       <section className="flex md:order-2">
         <UserProfile />
       </section>

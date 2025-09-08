@@ -9,15 +9,15 @@ export const navMenuList: NavMenu[] = [
     url: "/home",
   },
   {
+    text: "다락바 탐방",
+    url: "/bar-search",
+  },
+  {
     text: "나만의 레시피",
     url: "/personal-recipe",
   },
   {
     text: "레시피 탐색",
     url: "/basic-recipe",
-  },
-  {
-    text: "다락바 탐방",
-    url: "/bar-search",
   },
 ];

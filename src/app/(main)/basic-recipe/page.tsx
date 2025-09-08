@@ -6,7 +6,7 @@ export default function RecipeNavigation() {
   return (
     <>
       <BasicRecipeHeader />
-      <SearchBar onSearch={() => {}} />
+      <SearchBar className="ml-auto" />
       {/* 레시피 카드 */}
       <BasicRecipes />
     </>

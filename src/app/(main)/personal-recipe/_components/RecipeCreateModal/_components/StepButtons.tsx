@@ -1,7 +1,6 @@
 import { Button } from "flowbite-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FunnelStep } from "../RecipeCreateModal.const";
-import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 type StepButtonsProps = {
@@ -34,7 +33,7 @@ export default function StepButtons({
       )}
 
       <Button
-        theme={buttonTheme.button}
+        theme={basicTheme.button}
         onClick={handleNextStep}
         className="flex gap-1"
       >

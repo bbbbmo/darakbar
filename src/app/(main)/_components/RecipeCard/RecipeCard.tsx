@@ -29,7 +29,7 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
         >
           <section>
             {/* 칵테일 이름 */}
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="text-3xl font-semibold tracking-tight dark:text-white">
               {recipe.name}
             </h5>
             {/* ⭐️ stars */}
@@ -37,7 +37,7 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
 
             <div className="flex items-center justify-between">
               {/* 등록한 사람 */}
-              <span className="text-3xl font-bold text-gray-900 dark:text-white">
+              <span className="text-xl font-bold dark:text-white">
                 {recipe.userinfo ? recipe.userinfo.name : "유저 정보 없음"}
               </span>
               {/* 레시피 보기 버튼 */}

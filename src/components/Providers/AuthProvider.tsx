@@ -1,9 +1,11 @@
+"use client";
+
 import { useAuthStore } from "@stores/auth.store";
 import supabase from "@lib/supabase/supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Loading from "@/app/loading";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 export default function AuthProvider({
   children,
@@ -13,7 +15,10 @@ export default function AuthProvider({
   const setAuth = useAuthStore((state) => state.setAuth);
   const setReady = useAuthStore((state) => state.setReady);
   const { session, isReady } = useAuthStore();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
+  const isAuthPage =
+    pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up");
 
   useEffect(() => {
     let mounted = true;
@@ -46,7 +51,7 @@ export default function AuthProvider({
 
   if (!isReady) return <Loading />;
 
-  if (session === null) redirect("/sign-in");
+  if (session === null && !isAuthPage) redirect("/sign-in");
 
   return <>{children}</>;
 }

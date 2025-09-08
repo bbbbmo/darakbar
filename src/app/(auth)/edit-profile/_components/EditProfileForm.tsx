@@ -75,6 +75,7 @@ export default function EditProfileForm() {
           color={AppSnackBarColor.FAILURE}
           subject="프로필 수정 실패"
           message={error}
+          position="bottom"
         />
       )}
     </form>

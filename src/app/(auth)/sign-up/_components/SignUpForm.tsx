@@ -3,13 +3,12 @@
 import AppSnackBar from "@/components/SnackBar/SnackBar";
 import { AppSnackBarColor } from "@/components/SnackBar/SnackBar.types";
 import FormItem from "@components/Forms/FormItem";
-import { Button, HelperText, TextInput, ThemeProvider } from "flowbite-react";
+import { Button, HelperText, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SignUpFormData } from "./SignUpForm.types";
 import supabase from "@lib/supabase/supabase";
 import FormPasswordInput from "@components/Forms/FormPasswordInput";
-import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useRouter } from "next/navigation";
 import GoToButton from "@/components/Buttons/GoToButton";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
@@ -99,6 +98,7 @@ export default function SignUpForm() {
             color={AppSnackBarColor.FAILURE}
             subject="회원가입 실패"
             message={error}
+            position="bottom"
           />
         )}
       </form>

@@ -108,6 +108,7 @@ export default function SignForm() {
             color={AppSnackBarColor.FAILURE}
             subject="로그인 실패"
             message={error}
+            position="bottom"
           />
         )}
       </form>

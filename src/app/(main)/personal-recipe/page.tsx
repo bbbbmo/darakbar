@@ -1,3 +1,4 @@
+import SearchBar from "@/components/SearchBar";
 import PersonalRecipeHeader from "./_components/PersonalRecipeHeader";
 import UserRecipes from "./_components/UserRecipes";
 
@@ -6,6 +7,7 @@ export default function PersonalRecipe() {
   return (
     <>
       <PersonalRecipeHeader />
+      <SearchBar className="ml-auto" />
       {/* 레시피 카드 */}
       <UserRecipes />
     </>
