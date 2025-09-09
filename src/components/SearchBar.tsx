@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useRef } from "react";
 import { Button, TextInput } from "flowbite-react";
 import clsx from "clsx";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 type SearchBarProps = {
   className?: string;
@@ -17,6 +18,8 @@ export default function SearchBar({ className }: SearchBarProps) {
       <TextInput
         ref={inputRef}
         type="text"
+        theme={basicTheme.textInput}
+        color="primary"
         icon={MagnifyingGlassIcon}
         placeholder="이름 또는 재료 검색"
       />

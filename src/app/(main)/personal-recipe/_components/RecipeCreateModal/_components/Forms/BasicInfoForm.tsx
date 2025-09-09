@@ -6,6 +6,7 @@ import FormFileInput from "@components/Forms/FormFileInput";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
 import FormDescription from "@components/Forms/FormDescription";
 import FormErrorMessage from "@components/Forms/FormErrorMessage";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 // TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm() {
@@ -28,6 +29,8 @@ export default function BasicInfoForm() {
         <FormItem label="나만의 칵테일 이름" required>
           <TextInput
             type="text"
+            theme={basicTheme.textInput}
+            color="primary"
             placeholder="ex) 초코 바나나 펀치, 레인보우 샤베트 등"
             {...register("name")}
             aria-invalid={!!errors.name}
@@ -46,6 +49,8 @@ export default function BasicInfoForm() {
         <FormItem label="잔 유형 (선택)">
           <TextInput
             type="text"
+            theme={basicTheme.textInput}
+            color="primary"
             className="grow"
             placeholder="ex) 허리케인 글라스, 칵테일 글라스 등"
             {...register("glassType")}

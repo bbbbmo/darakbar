@@ -4,6 +4,7 @@ import FormDescription from "@components/Forms/FormDescription";
 import { useFormContext } from "react-hook-form";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
 import FormErrorMessage from "@components/Forms/FormErrorMessage";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 export default function DescriptionForm() {
   const {
@@ -25,6 +26,8 @@ export default function DescriptionForm() {
       <div className="flex flex-col gap-2">
         <FormItem label="제조법" required>
           <Textarea
+            theme={basicTheme.textarea}
+            color="primary"
             placeholder="ex) 1. 라임과 레몬을 반으로 슬라이스 한다."
             {...register("instructions")}
             aria-invalid={!!errors.instructions}
@@ -33,6 +36,8 @@ export default function DescriptionForm() {
         </FormItem>
         <FormItem label="맛과 향 설명">
           <Textarea
+            theme={basicTheme.textarea}
+            color="primary"
             placeholder="ex) 열대과일의 상큼한 맛과 오렌지 향"
             {...register("description")}
             aria-invalid={!!errors.description}

@@ -6,6 +6,7 @@ import FormDescription from "@components/Forms/FormDescription";
 import { emptyIngredient, unitOptions } from "../../RecipeCreateModal.const";
 import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
 import FormErrorMessage from "@components/Forms/FormErrorMessage";
+import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 
 export default function IngredientForm() {
   const {
@@ -30,6 +31,8 @@ export default function IngredientForm() {
           <div className="flex items-center gap-2">
             <TextInput
               type="text"
+              theme={basicTheme.textInput}
+              color="primary"
               placeholder="메인이 되는 술이나 재료를 입력해 주세요"
               className="h-10 grow"
               {...register("ingredients.0.name")}
@@ -38,6 +41,8 @@ export default function IngredientForm() {
             <TextInput
               className="w-22"
               type="number"
+              theme={basicTheme.textInput}
+              color="primary"
               step={0.25}
               placeholder="용량"
               {...register("ingredients.0.amount", {
@@ -47,6 +52,8 @@ export default function IngredientForm() {
             />
             <Select
               className="w-28"
+              theme={basicTheme.select}
+              color="primary"
               {...register("ingredients.0.unit")}
               aria-invalid={!!errors.ingredients?.[0]?.unit}
             >
@@ -73,6 +80,8 @@ export default function IngredientForm() {
               <div className="flex items-center gap-2">
                 <TextInput
                   type="text"
+                  theme={basicTheme.textInput}
+                  color="primary"
                   placeholder="추가적인 재료를 입력해 주세요"
                   className="h-10 grow"
                   {...register(`ingredients.${actualIndex}.name`)}
@@ -82,6 +91,8 @@ export default function IngredientForm() {
                 <TextInput
                   className="w-22"
                   type="number"
+                  theme={basicTheme.textInput}
+                  color="primary"
                   step={0.25}
                   placeholder="용량 및 개수"
                   {...register(`ingredients.${actualIndex}.amount`, {
@@ -92,6 +103,8 @@ export default function IngredientForm() {
 
                 <Select
                   className="w-28"
+                  theme={basicTheme.select}
+                  color="primary"
                   {...register(`ingredients.${actualIndex}.unit`)}
                   aria-invalid={!!errors.ingredients?.[actualIndex]?.unit}
                 >
