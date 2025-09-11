@@ -22,10 +22,19 @@ export const basicTheme = createTheme({
   
     cocktail: {
       root: {
-        base: "bg-secondary !shadow-2xl transition delay-150 duration-400 ease-in-out hover:-translate-y-1 hover:scale-103 max-h-130 text-gray-300",
+        base: "bg-secondary !shadow-2xl transition delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:scale-103 max-h-130 text-gray-300",
       },
       img: {
         base: "max-h-80",
+      },
+    },
+
+    bar: {
+      root: {
+        base: "group bg-secondary !shadow-2xl transition delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:scale-103 text-gray-300",
+      },
+      img: {
+        base: "h-80",
       },
     },
 

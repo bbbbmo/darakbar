@@ -1,8 +1,10 @@
 "use client";
 
 import CardSkeleton from "@/components/Cards/CardSkeleton";
+import Tags from "@/components/Tags";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 import { Button, Card } from "flowbite-react";
+import { HiClock, HiOutlinePhone } from "react-icons/hi";
 
 type BarCardProps = {
   barInfo: any;
@@ -17,23 +19,50 @@ export default function BarCard({ barInfo, loading, className }: BarCardProps) {
         <CardSkeleton />
       ) : (
         <Card
-          theme={basicTheme.cocktail}
+          theme={basicTheme.bar}
           className={`${className}`}
           imgAlt="Bar Image"
           imgSrc={barInfo.image_url ?? undefined}
         >
           <section>
             {/* 칵테일 이름 */}
-            <h5 className="text-3xl font-semibold tracking-tight dark:text-white">
-              {barInfo.name}
-            </h5>
-            <div>{barInfo.address}</div>
-            <div>{barInfo.description}</div>
-            <div>{barInfo.tags}</div>
-            <div>{barInfo.business_hours}</div>
-            <div>{barInfo.phone_number}</div>
-            <div>{barInfo.signature_menus}</div>
-            <Button>자세히 보기</Button>
+            <header className="text-3xl font-semibold tracking-tight dark:text-white">
+              <div className="transition group-hover:text-amber-400">
+                {barInfo.name}
+              </div>
+              <span className="text-sm">{barInfo.address}</span>
+            </header>
+            <div className="my-4 text-gray-400">
+              <p className="flex flex-col gap-2">
+                {barInfo.description.length > 30
+                  ? `${barInfo.description.substring(0, 30)}...`
+                  : barInfo.description}
+                <Tags tags={barInfo.tags} />
+                <div className="flex items-center gap-2 text-sm">
+                  <HiClock size={16} />
+                  {barInfo.business_hours}
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <HiOutlinePhone
+                    size={16}
+                    className="fill-zinc-800 text-zinc-800"
+                  />
+                  {barInfo.phone_number}
+                </div>
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm">
+                시그니처 메뉴 {barInfo.signature_menus.length}개
+              </span>
+              <Button
+                className="ml-auto"
+                theme={basicTheme.button}
+                color="primary"
+              >
+                자세히 보기
+              </Button>
+            </div>
           </section>
         </Card>
       )}
