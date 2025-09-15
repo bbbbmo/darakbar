@@ -3,11 +3,12 @@
 import CardSkeleton from "@/components/Cards/CardSkeleton";
 import Tags from "@/components/Tags";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { BarInfo } from "@/mocks/bars.mocks";
 import { Button, Card } from "flowbite-react";
 import { HiClock, HiOutlinePhone } from "react-icons/hi";
 
 type BarCardProps = {
-  barInfo: any;
+  barInfo: BarInfo;
   loading: boolean;
   className?: string;
 };
@@ -22,7 +23,7 @@ export default function BarCard({ barInfo, loading, className }: BarCardProps) {
           theme={basicTheme.bar}
           className={`${className}`}
           imgAlt="Bar Image"
-          imgSrc={barInfo.image_url ?? undefined}
+          imgSrc={barInfo.image_urls?.[0] ?? undefined}
         >
           <section>
             {/* 칵테일 이름 */}
