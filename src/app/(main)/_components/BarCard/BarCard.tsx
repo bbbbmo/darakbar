@@ -11,9 +11,15 @@ type BarCardProps = {
   barInfo: BarInfo;
   loading: boolean;
   className?: string;
+  onClick?: () => void;
 };
 
-export default function BarCard({ barInfo, loading, className }: BarCardProps) {
+export default function BarCard({
+  barInfo,
+  loading,
+  className,
+  onClick,
+}: BarCardProps) {
   return (
     <>
       {loading ? (
@@ -60,6 +66,7 @@ export default function BarCard({ barInfo, loading, className }: BarCardProps) {
                 className="ml-auto"
                 theme={basicTheme.button}
                 color="primary"
+                onClick={onClick}
               >
                 자세히 보기
               </Button>

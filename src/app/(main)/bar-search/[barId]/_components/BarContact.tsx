@@ -12,7 +12,7 @@ export default function BarContact({ bar }: { bar: BarInfo }) {
   return (
     <Card>
       <SubTitleText title="연락처 및 정보" />
-      <p className="flex flex-col gap-2">
+      <p className="mt-4 flex flex-col gap-2">
         <span className="flex items-center gap-2">
           <HiOutlinePhone size={16} className="text-zinc-500" />
           {bar.phone_number}

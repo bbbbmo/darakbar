@@ -4,13 +4,14 @@ import Image from "next/image";
 // TODO: 이미지 여러개 추가
 export default function BarImage({ bar }: { bar: BarInfo }) {
   return (
-    <section>
+    <div className="relative h-[400px] w-full">
       <Image
         src={bar.image_urls?.[0] ?? ""}
         alt={bar.name}
-        width={400}
-        height={400}
+        fill
+        sizes="100vw"
+        className="rounded-lg object-cover"
       />
-    </section>
+    </div>
   );
 }

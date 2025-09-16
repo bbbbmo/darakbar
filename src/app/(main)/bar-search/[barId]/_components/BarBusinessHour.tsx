@@ -13,7 +13,7 @@ export default function BarBusinessHour({ bar }: { bar: BarInfo }) {
         icon={<HiOutlineClock size={24} className="text-amber-400" />}
         title="운영 시간"
       />
-      <p className="flex flex-col gap-2">
+      <p className="mt-4 flex flex-col gap-2">
         {bar.business_hours_detail?.significant}
       </p>
     </Card>
