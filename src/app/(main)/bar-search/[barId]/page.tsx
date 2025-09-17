@@ -3,9 +3,9 @@ import BarImage from "./_components/BarImage";
 import BarDescription from "./_components/BarDescription";
 import BarBusinessHour from "./_components/BarBusinessHour";
 import BarContact from "./_components/BarContact";
-import Link from "next/link";
-import { HiOutlineArrowLeft } from "react-icons/hi";
 import BarSignatureMenus from "./_components/BarSignatureMenus";
+import BackToListButton from "./_components/BackToListButton";
+import MenuFeedbackCard from "./_components/MenuFeedbackCard";
 
 export default async function BarDetailPage({
   params,
@@ -20,12 +20,7 @@ export default async function BarDetailPage({
 
   return (
     <>
-      <Link
-        href="/bar-search"
-        className="flex items-center gap-3 text-zinc-500 transition-all duration-300 hover:scale-101 hover:text-zinc-600"
-      >
-        <HiOutlineArrowLeft size={20} />바 목록으로 돌아가기
-      </Link>
+      <BackToListButton />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
           <BarImage bar={bar} />
@@ -40,9 +35,8 @@ export default async function BarDetailPage({
         <div className="lg:col-span-2">
           <BarSignatureMenus bar={bar} />
         </div>
-        {/* TODO: 풋터 추가 */}
-        <footer></footer>
       </div>
+      <MenuFeedbackCard />
     </>
   );
 }

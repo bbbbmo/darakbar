@@ -1,9 +1,11 @@
+"use client";
+
 import SubTitleText from "@/components/SubTitleText";
 import Tags from "@/components/Tags";
 import TitleText from "@/components/TitleText";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 import { BarInfo } from "@/mocks/bars.mocks";
 import { Card } from "flowbite-react";
+import Image from "next/image";
 import { LiaCocktailSolid } from "react-icons/lia";
 
 export default function BarSignatureMenus({ bar }: { bar: BarInfo }) {
@@ -15,7 +17,18 @@ export default function BarSignatureMenus({ bar }: { bar: BarInfo }) {
       />
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
         {bar.signature_menus.map((menu) => (
-          <Card key={menu.id} imgSrc={menu.image_url} imgAlt={menu.name}>
+          <Card
+            className="relative!"
+            key={menu.id}
+            renderImage={() => (
+              <Image
+                src={menu.image_url}
+                alt={menu.name}
+                fill
+                className="h-auto object-cover"
+              />
+            )}
+          >
             <div className="flex flex-col gap-8">
               <div className="flex justify-between font-semibold">
                 <div className="flex flex-col gap-2">

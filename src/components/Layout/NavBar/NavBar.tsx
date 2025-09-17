@@ -14,7 +14,7 @@ export default function AppNavBar() {
     router.push("/home");
   };
   return (
-    <Navbar fluid className="!bg-zinc-900 !opacity-95">
+    <Navbar fluid className="sticky top-0 z-50 !bg-zinc-900 !opacity-95">
       <NavbarBrand onClick={goHomePage} className="cursor-pointer">
         <section className="flex items-center gap-2">
           <Image

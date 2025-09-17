@@ -11,6 +11,7 @@ export default function BarImage({ bar }: { bar: BarInfo }) {
         fill
         sizes="100vw"
         className="rounded-lg object-cover"
+        priority={true}
       />
     </div>
   );
