@@ -2,7 +2,7 @@ import SubTitleText from "@/components/SubTitleText";
 import Tags from "@/components/Tags";
 import TitleText from "@/components/TitleText";
 import { BarInfo } from "@/mocks/bars.mocks";
-import { HiOutlineLocationMarker, HiStar } from "react-icons/hi";
+import { HiLocationMarker, HiStar } from "react-icons/hi";
 
 export default function BarDescription({ bar }: { bar: BarInfo }) {
   return (
@@ -16,9 +16,14 @@ export default function BarDescription({ bar }: { bar: BarInfo }) {
           </span>
         </div>
         <p className="flex flex-col gap-2 text-zinc-500">
-          <span className="flex items-center gap-2 text-xl">
-            <HiOutlineLocationMarker size={20} />
-            강남구, 서울
+          <span className="group flex cursor-pointer items-center gap-2 text-xl">
+            <HiLocationMarker
+              size={20}
+              className="text-red-500 transition-transform duration-200 ease-out group-hover:scale-110 group-hover:text-red-600"
+            />
+            <span className="decoration-zinc-600 decoration-2 underline-offset-4 group-hover:underline">
+              강남구, 서울
+            </span>
           </span>
           <span>{bar.address}</span>
         </p>
