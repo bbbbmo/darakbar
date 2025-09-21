@@ -1,8 +1,10 @@
+"use client";
+
 import SubTitleText from "@/components/SubTitleText";
 import { Button, Card } from "flowbite-react";
 import { HiOutlineCamera, HiOutlineUpload } from "react-icons/hi";
 
-export default function MenuFeedbackCard() {
+export default function FeedbackTab() {
   return (
     <Card className="flex flex-col items-center border-neutral-600 bg-neutral-800 py-8">
       <div className="flex w-full justify-center">

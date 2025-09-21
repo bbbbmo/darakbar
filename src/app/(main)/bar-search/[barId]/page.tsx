@@ -5,7 +5,7 @@ import BarBusinessHour from "./_components/BarBusinessHour";
 import BarContact from "./_components/BarContact";
 import BarSignatureMenus from "./_components/BarSignatureMenus";
 import BackToListButton from "./_components/BackToListButton";
-import MenuFeedbackCard from "./_components/MenuFeedbackCard";
+import BarFooter from "./_components/BarFooter.tsx/BarFooter";
 
 export default async function BarDetailPage({
   params,
@@ -36,7 +36,7 @@ export default async function BarDetailPage({
           <BarSignatureMenus bar={bar} />
         </div>
       </div>
-      <MenuFeedbackCard />
+      <BarFooter />
     </>
   );
 }
