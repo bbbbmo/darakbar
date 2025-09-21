@@ -1,6 +1,6 @@
 "use client";
 
-import KakaoMap from "@/components/KakaoMap/KakaoMap";
+import BarSearchMap from "@/components/KakaoMap/BarSearchMap";
 // import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { Spinner } from "flowbite-react";
 import { Suspense } from "react";
@@ -34,6 +34,7 @@ export default function BarMap() {
   //       </div>
   //     );
   //   }
+
   return (
     <Suspense
       fallback={
@@ -42,7 +43,7 @@ export default function BarMap() {
         </div>
       }
     >
-      <KakaoMap />
+      <BarSearchMap />
     </Suspense>
   );
 }

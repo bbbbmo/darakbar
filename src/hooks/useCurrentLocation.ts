@@ -1,4 +1,4 @@
-import { Location } from "@/components/KakaoMap/KakaoMap";
+import { Location } from "@/components/KakaoMap/BarSearchMap";
 import { useState } from "react";
 
 export const useCurrentLocation = () => {

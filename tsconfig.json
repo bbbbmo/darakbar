@@ -28,7 +28,8 @@
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"],
       "@lib/*": ["src/lib/*"]
-    }
+    },
+    "types": ["kakao.maps.d.ts"]
   },
   "include": [
     "next-env.d.ts",
