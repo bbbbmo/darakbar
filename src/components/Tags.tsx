@@ -17,7 +17,7 @@ export default function Tags({ tags }: TagsProps) {
   ];
 
   return (
-    <div className="flex flex-row gap-2">
+    <span className="flex flex-row gap-2">
       {tags.map((tag: string, index: number) => {
         const color = colors[index % colors.length];
         return (
@@ -26,6 +26,6 @@ export default function Tags({ tags }: TagsProps) {
           </Badge>
         );
       })}
-    </div>
+    </span>
   );
 }

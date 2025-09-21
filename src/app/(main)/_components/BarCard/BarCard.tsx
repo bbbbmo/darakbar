@@ -40,7 +40,7 @@ export default function BarCard({
               <span className="text-sm">{barInfo.address}</span>
             </header>
             <div className="my-4 text-gray-400">
-              <p className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
                 {barInfo.description.length > 30
                   ? `${barInfo.description.substring(0, 30)}...`
                   : barInfo.description}
@@ -56,7 +56,7 @@ export default function BarCard({
                   />
                   {barInfo.phone_number}
                 </div>
-              </p>
+              </div>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm">
