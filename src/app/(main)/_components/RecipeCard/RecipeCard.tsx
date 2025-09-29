@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Card } from "flowbite-react";
-import Stars from "./_components/Stars";
+import Stars from "../../../../components/Stars";
 import CardSkeleton from "../../../../components/Cards/CardSkeleton";
 import { UserRecipe } from "@/types/recipe.types";
 import Link from "next/link";

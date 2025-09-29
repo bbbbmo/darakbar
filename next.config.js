@@ -5,7 +5,7 @@ const withFlowbiteReact = require("flowbite-react/plugin/nextjs");
 const nextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   images: {
-    domains: ["localhost", "images.unsplash.com"],
+    domains: ["localhost", "images.unsplash.com, example.com"],
   },
   webpack: (config) => {
     config.resolve.fallback = {
