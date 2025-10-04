@@ -1,0 +1,25 @@
+name: build action test
+run-name: {{ github. actor }} has been added new commit.
+
+on:
+	push:
+		branches-ignore:
+			- 'main'
+			
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        working-directory: ./src
+        run: npm ci
+      - name: Build project
+        working-directory: ./src
+        run: npm run build
+   
