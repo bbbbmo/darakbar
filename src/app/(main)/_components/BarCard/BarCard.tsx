@@ -40,23 +40,23 @@ export default function BarCard({
               <span className="text-sm">{barInfo.address}</span>
             </header>
             <div className="my-4 text-gray-400">
-              <div className="flex flex-col gap-2">
-                {barInfo.description.length > 30
-                  ? `${barInfo.description.substring(0, 30)}...`
-                  : barInfo.description}
+              <p className="flex flex-col gap-2">
+                <span className="md:line-clamp-1 lg:line-clamp-2">
+                  {barInfo.description || ""}
+                </span>
                 <Tags tags={barInfo.tags} />
-                <div className="flex items-center gap-2 text-sm">
+                <span className="flex items-center gap-2 text-sm">
                   <HiClock size={16} />
                   {barInfo.business_hours}
-                </div>
-                <div className="flex items-center gap-2 text-sm">
+                </span>
+                <span className="flex items-center gap-2 text-sm">
                   <HiOutlinePhone
                     size={16}
                     className="fill-zinc-800 text-zinc-800"
                   />
                   {barInfo.phone_number}
-                </div>
-              </div>
+                </span>
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm">

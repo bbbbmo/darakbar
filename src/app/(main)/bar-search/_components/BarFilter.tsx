@@ -1,8 +1,11 @@
+"use client";
+
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
 import { Button, Card, TextInput } from "flowbite-react";
 import { HiAdjustments } from "react-icons/hi";
 import { barFilterSelect } from "./BarFilter.const";
 import FormOption from "@/components/Forms/FormOption";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 export default function BarFilter() {
   return (
@@ -15,10 +18,11 @@ export default function BarFilter() {
             필터 초기화
           </Button>
         </h2>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
           <TextInput
             theme={basicTheme.textInput}
             color="primary"
+            icon={MagnifyingGlassIcon}
             placeholder="바 이름 검색"
           />
           {barFilterSelect.map((select) => (

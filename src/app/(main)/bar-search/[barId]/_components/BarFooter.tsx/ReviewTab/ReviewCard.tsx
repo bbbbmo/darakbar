@@ -12,6 +12,7 @@ import {
   HiTrash,
 } from "react-icons/hi";
 import { ReviewTag } from "./ReviewCard.const";
+import dayjs from "dayjs";
 
 export type Review = {
   id: number;
@@ -75,7 +76,7 @@ export default function ReviewCard({ review }: { review: Review }) {
             {review.likeCount}개
           </div>
         </div>
-        <span>{review.createdAt} 작성</span>
+        <span>{dayjs(review.createdAt).format("YYYY.MM.DD")} 작성</span>
       </div>
     </Card>
   );
