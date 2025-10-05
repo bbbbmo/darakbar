@@ -5,14 +5,17 @@ import Image from "next/image";
 export default function BarImage({ bar }: { bar: BarInfo }) {
   return (
     <div className="relative h-[400px] w-full">
-      <Image
-        src={bar.image_urls?.[0] ?? ""}
-        alt={bar.name}
-        fill
-        sizes="100vw"
-        className="rounded-lg object-cover"
-        priority={true}
-      />
+      {bar.image_urls?.map((image, index) => (
+        <Image
+          key={index}
+          src={image}
+          alt={bar.name}
+          fill
+          sizes="100vw"
+          className="rounded-lg object-cover"
+          priority={true}
+        />
+      ))}
     </div>
   );
 }

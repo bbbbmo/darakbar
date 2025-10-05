@@ -16,15 +16,15 @@ export default function HeaderCard({
   className,
 }: HeaderCardProps) {
   return (
-    <Card theme={basicTheme.card} className={className}>
+    <Card theme={basicTheme.card} className={`py-4 ${className}`}>
       <BlurText
         text={title}
         delay={150}
         animateBy="words"
         direction="top"
-        className="mb-8 text-4xl font-bold tracking-tight text-gray-300 dark:text-white"
+        className="mb-8 text-4xl font-bold tracking-tight dark:text-white"
       />
-      <p className="text-primary">
+      <p className="text-zinc-500">
         <span>{message}</span>
         {children}
       </p>

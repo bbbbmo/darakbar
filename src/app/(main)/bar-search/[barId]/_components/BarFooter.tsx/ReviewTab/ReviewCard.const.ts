@@ -1,16 +1,31 @@
 import { Review } from "./ReviewCard";
+import { faker } from "@faker-js/faker";
+
+export type ReviewTag = 
+  "친절해요" |
+  "분위기좋아요" |
+  "재방문의사있음" |
+  "조용한분위기" |
+  "가성비굿" |
+  "대기있음" |
+  "무난해요" |
+  "생일추천" |
+  "라이브좋아요" |
+  "인테리어예쁨" |
+  "시끄러움";
+
 
 export const mockReviews: Review[] = [
     {
       id: 1,
       userName: "김바텐",
-      profileImageUrl: "https://example.com/avatars/kim.png",
+      profileImageUrl: faker.image.avatar(),
       visitDate: "2025-08-15",
       rating: 5,
       comment: "칵테일 맛도 훌륭하고 바텐더가 정말 친절했어요!",
       createdAt: "2025-09-20T12:34:56Z",
       likeCount: 18,
-      imageUrl: "https://example.com/photos/review-1.jpg",
+      imageUrl: faker.image.urlLoremFlickr({ category: 'food' }),
       tags: ["친절해요", "분위기좋아요", "재방문의사있음"]
     },
     {
@@ -28,19 +43,19 @@ export const mockReviews: Review[] = [
     {
       id: 3,
       userName: "Park",
-      profileImageUrl: "https://example.com/avatars/park.jpg",
+      profileImageUrl: faker.image.avatar(),
       visitDate: "2025-09-10",
       rating: 3,
       comment: "전반적으로 무난. 하이볼은 괜찮았어요.",
       createdAt: "2025-09-23T19:45:12Z",
       likeCount: 3,
-      imageUrl: "https://example.com/photos/review-3.png",
+      imageUrl: faker.image.urlLoremFlickr({ category: 'drink' }),
       tags: ["무난해요"]
     },
     {
       id: 4,
       userName: "Jin",
-      profileImageUrl: "https://example.com/avatars/jin.webp",
+      profileImageUrl: faker.image.avatar(),
       visitDate: "2025-09-18",
       rating: 5,
       comment: "생일 이벤트로 갔는데 음악과 조명이 최고!",
@@ -58,7 +73,7 @@ export const mockReviews: Review[] = [
       comment: "기대보다 시끄러웠고 예약 확인이 늦었어요.",
       createdAt: "2025-09-25T08:27:19Z",
       likeCount: 1,
-      imageUrl: "https://example.com/photos/review-5.jpg",
+      imageUrl: faker.image.urlLoremFlickr({ category: 'nightlife' }),
       tags: ["시끄러움", "대기있음"]
     }
   ];

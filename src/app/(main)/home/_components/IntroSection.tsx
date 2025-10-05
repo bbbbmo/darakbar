@@ -16,9 +16,9 @@ export default function IntroSection() {
         delay={150}
         animateBy="words"
         direction="top"
-        className="mb-8 text-4xl font-bold tracking-tight text-gray-300 dark:text-white"
+        className="mb-8 text-4xl font-bold tracking-tight dark:text-white"
       />
-      <p className="text-primary">
+      <p className="text-zinc-500">
         <span>
           다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
           레시피들이 숨어있는 공간입니다.

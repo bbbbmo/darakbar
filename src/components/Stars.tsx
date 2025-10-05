@@ -11,7 +11,7 @@ type StarsProps = {
 export default function Stars({ rating, size, showRatingChip }: StarsProps) {
   const safeRating = Math.max(0, Math.min(MAX_STARS, Math.round(rating)));
   return (
-    <div className="mt-2.5 mb-5 flex items-center">
+    <div className="flex items-center">
       <div className="flex items-center rtl:space-x-reverse">
         {Array.from({ length: MAX_STARS }).map((_, i) => (
           <HiStar

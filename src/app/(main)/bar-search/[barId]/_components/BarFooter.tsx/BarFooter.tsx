@@ -3,7 +3,7 @@
 import { TabItem, Tabs, TabsRef } from "flowbite-react";
 import { useRef, useState } from "react";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import ReviewTab from "./ReviewTab";
+import ReviewTab from "./ReviewTab/ReviewTab";
 import PhotoTab from "./PhotoTab";
 import FeedbackTab from "./FeedbackTab";
 
