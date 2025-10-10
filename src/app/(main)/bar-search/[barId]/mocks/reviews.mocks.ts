@@ -1,23 +1,12 @@
-import { Review } from "./ReviewCard";
 import { faker } from "@faker-js/faker";
+import { Review } from "../_types/review.schemes";
 
-export type ReviewTag = 
-  "친절해요" |
-  "분위기좋아요" |
-  "재방문의사있음" |
-  "조용한분위기" |
-  "가성비굿" |
-  "대기있음" |
-  "무난해요" |
-  "생일추천" |
-  "라이브좋아요" |
-  "인테리어예쁨" |
-  "시끄러움";
 
 
 export const mockReviews: Review[] = [
     {
       id: 1,
+      barId: 1,
       userName: "김바텐",
       profileImageUrl: faker.image.avatar(),
       visitDate: "2025-08-15",
@@ -30,6 +19,7 @@ export const mockReviews: Review[] = [
     },
     {
       id: 2,
+      barId: 1,
       userName: "이밤",
       profileImageUrl: null,
       visitDate: "2025-09-01",
@@ -42,6 +32,7 @@ export const mockReviews: Review[] = [
     },
     {
       id: 3,
+      barId: 2,
       userName: "Park",
       profileImageUrl: faker.image.avatar(),
       visitDate: "2025-09-10",
@@ -54,6 +45,7 @@ export const mockReviews: Review[] = [
     },
     {
       id: 4,
+      barId: 3,
       userName: "Jin",
       profileImageUrl: faker.image.avatar(),
       visitDate: "2025-09-18",
@@ -66,6 +58,7 @@ export const mockReviews: Review[] = [
     },
     {
       id: 5,
+      barId: 4,
       userName: "Sora",
       profileImageUrl: null,
       visitDate: "2025-09-20",

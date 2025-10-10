@@ -1,11 +1,11 @@
-import { mockBars } from "@/mocks/bars.mocks";
+import { mockBars } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import BarImage from "./_components/BarImage";
 import BarDescription from "./_components/BarDescription";
 import BarBusinessHour from "./_components/BarBusinessHour";
 import BarContact from "./_components/BarContact";
 import BarSignatureMenus from "./_components/BarSignatureMenus";
 import BackToListButton from "./_components/BackToListButton";
-import BarFooter from "./_components/BarFooter.tsx/BarFooter";
+import BarFooter from "./_components/BarFooter/BarFooter";
 
 export default async function BarDetailPage({
   params,

@@ -1,7 +1,7 @@
 "use client";
 
 import GridList from "@/components/GridList";
-import { mockBars } from "@/mocks/bars.mocks";
+import { mockBars } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import BarCard from "../../_components/BarCard/BarCard";
 import { useRouter } from "next/navigation";
 

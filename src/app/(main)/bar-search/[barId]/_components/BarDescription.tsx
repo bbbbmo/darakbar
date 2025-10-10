@@ -1,7 +1,7 @@
 import SubTitleText from "@/components/SubTitleText";
 import Tags from "@/components/Tags";
 import TitleText from "@/components/TitleText";
-import { BarInfo } from "@/mocks/bars.mocks";
+import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import { HiLocationMarker, HiStar } from "react-icons/hi";
 
 export default function BarDescription({ bar }: { bar: BarInfo }) {

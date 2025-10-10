@@ -3,7 +3,7 @@
 import CardSkeleton from "@/components/Cards/CardSkeleton";
 import Tags from "@/components/Tags";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import { BarInfo } from "@/mocks/bars.mocks";
+import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import { Button, Card } from "flowbite-react";
 import { HiClock, HiOutlinePhone } from "react-icons/hi";
 

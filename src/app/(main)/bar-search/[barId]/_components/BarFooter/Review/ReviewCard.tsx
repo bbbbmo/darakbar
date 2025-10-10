@@ -11,21 +11,8 @@ import {
   HiPencil,
   HiTrash,
 } from "react-icons/hi";
-import { ReviewTag } from "./ReviewCard.const";
 import dayjs from "dayjs";
-
-export type Review = {
-  id: number;
-  userName: string;
-  profileImageUrl: string | null;
-  visitDate: string;
-  rating: number;
-  comment: string;
-  createdAt: string;
-  likeCount: number;
-  imageUrl: string | null;
-  tags: ReviewTag[];
-};
+import { Review } from "../../../_types/review.schemes";
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (

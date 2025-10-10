@@ -1,7 +1,7 @@
 "use client";
 
 import SubTitleText from "@/components/SubTitleText";
-import { BarInfo } from "@/mocks/bars.mocks";
+import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import { Card } from "flowbite-react";
 import { BsInstagram } from "react-icons/bs";
 import { HiOutlineGlobeAlt, HiOutlinePhone } from "react-icons/hi";

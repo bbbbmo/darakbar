@@ -1,9 +1,9 @@
 "use client";
 
 import { TabItem, Tabs, TabsRef } from "flowbite-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import ReviewTab from "./ReviewTab/ReviewTab";
+import ReviewTab from "./Review/ReviewTab";
 import PhotoTab from "./PhotoTab";
 import FeedbackTab from "./FeedbackTab";
 

@@ -3,7 +3,7 @@
 import SubTitleText from "@/components/SubTitleText";
 import Tags from "@/components/Tags";
 import TitleText from "@/components/TitleText";
-import { BarInfo } from "@/mocks/bars.mocks";
+import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import { Card } from "flowbite-react";
 import Image from "next/image";
 import { LiaCocktailSolid } from "react-icons/lia";

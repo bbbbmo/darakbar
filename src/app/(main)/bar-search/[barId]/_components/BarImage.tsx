@@ -1,4 +1,4 @@
-import { BarInfo } from "@/mocks/bars.mocks";
+import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
 import Image from "next/image";
 
 // TODO: 이미지 여러개 추가
