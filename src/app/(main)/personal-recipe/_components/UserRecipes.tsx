@@ -2,7 +2,7 @@
 
 import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
 import GridList from "@/components/GridList";
-import { UserRecipe } from "@/types/recipe.types";
+import { UserRecipe } from "@/types/recipe/recipe.types";
 import { useUserRecipe } from "../_hooks/useUserRecipe";
 
 export default function UserRecipes() {

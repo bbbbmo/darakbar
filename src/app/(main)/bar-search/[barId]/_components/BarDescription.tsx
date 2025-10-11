@@ -1,10 +1,10 @@
-import SubTitleText from "@/components/SubTitleText";
-import Tags from "@/components/Tags";
-import TitleText from "@/components/TitleText";
-import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
-import { HiLocationMarker, HiStar } from "react-icons/hi";
+import SubTitleText from '@/components/SubTitleText'
+import Tags from '@/components/Tags'
+import TitleText from '@/components/TitleText'
+import { Bar } from '@/types/bar/bar.types'
+import { HiLocationMarker, HiStar } from 'react-icons/hi'
 
-export default function BarDescription({ bar }: { bar: BarInfo }) {
+export default function BarDescription({ bar }: { bar: Bar }) {
   return (
     <>
       <section className="flex flex-col gap-3">
@@ -22,7 +22,7 @@ export default function BarDescription({ bar }: { bar: BarInfo }) {
               className="text-red-500 transition-transform duration-200 ease-out group-hover:scale-110 group-hover:text-red-600"
             />
             <span className="decoration-zinc-600 decoration-2 underline-offset-4 group-hover:underline">
-              강남구, 서울
+              {bar.address}
             </span>
           </span>
           <span>{bar.address}</span>
@@ -31,8 +31,8 @@ export default function BarDescription({ bar }: { bar: BarInfo }) {
       </section>
       <section className="flex flex-col gap-3">
         <SubTitleText title="분위기" />
-        <Tags tags={bar.tags} />
+        <Tags tags={bar.bar_tags.map((tag) => tag.name)} />
       </section>
     </>
-  );
+  )
 }

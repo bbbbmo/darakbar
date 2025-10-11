@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import SubTitleText from "@/components/SubTitleText";
-import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
-import { Card } from "flowbite-react";
-import { BsInstagram } from "react-icons/bs";
-import { HiOutlineGlobeAlt, HiOutlinePhone } from "react-icons/hi";
+import SubTitleText from '@/components/SubTitleText'
+import { Bar } from '@/types/bar/bar.types'
+import { Card } from 'flowbite-react'
+import { BsInstagram } from 'react-icons/bs'
+import { HiOutlineGlobeAlt, HiOutlinePhone } from 'react-icons/hi'
 
 // TODO: 화면 사이즈에 맞게 레이아웃 조절
 
-export default function BarContact({ bar }: { bar: BarInfo }) {
+export default function BarContact({ bar }: { bar: Bar }) {
   return (
     <Card>
       <SubTitleText title="연락처 및 정보" />
@@ -31,5 +31,5 @@ export default function BarContact({ bar }: { bar: BarInfo }) {
         </span>
       </p>
     </Card>
-  );
+  )
 }

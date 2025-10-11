@@ -1,6 +1,6 @@
 "use client";
 
-import { UserRecipe } from "@/types/recipe.types";
+import { UserRecipe } from "@/types/recipe/recipe.types";
 import { useState } from "react";
 
 type DetailProps = {

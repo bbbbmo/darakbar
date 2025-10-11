@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import SubTitleText from "@/components/SubTitleText";
-import Tags from "@/components/Tags";
-import TitleText from "@/components/TitleText";
-import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
-import { Card } from "flowbite-react";
-import Image from "next/image";
-import { LiaCocktailSolid } from "react-icons/lia";
+import SubTitleText from '@/components/SubTitleText'
+import Tags from '@/components/Tags'
+import TitleText from '@/components/TitleText'
+import { Bar } from '@/types/bar/bar.types'
+import { Card } from 'flowbite-react'
+import Image from 'next/image'
+import { LiaCocktailSolid } from 'react-icons/lia'
 
-export default function BarSignatureMenus({ bar }: { bar: BarInfo }) {
+export default function BarSignatureMenus({ bar }: { bar: Bar }) {
   return (
     <>
       <TitleText
@@ -16,18 +16,20 @@ export default function BarSignatureMenus({ bar }: { bar: BarInfo }) {
         title="시그니처 칵테일"
       />
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {bar.signature_menus.map((menu) => (
+        {bar.signature_menus.map((menu: any) => (
           <Card
             className="relative!"
             key={menu.id}
-            renderImage={() => (
-              <Image
-                src={menu.image_url}
-                alt={menu.name}
-                fill
-                className="h-auto object-cover"
-              />
-            )}
+            renderImage={() =>
+              menu.image && (
+                <Image
+                  src={menu.image}
+                  alt={menu.name}
+                  fill
+                  className="h-auto object-cover"
+                />
+              )
+            }
           >
             <div className="flex flex-col gap-8">
               <div className="flex justify-between font-semibold">
@@ -47,12 +49,16 @@ export default function BarSignatureMenus({ bar }: { bar: BarInfo }) {
 
               <div>
                 <h3 className="text-md mb-2 font-semibold">재료</h3>
-                <Tags tags={menu.ingredients} />
+                <Tags
+                  tags={menu.ingredients.map(
+                    (ingredient: any) => ingredient.name,
+                  )}
+                />
               </div>
             </div>
           </Card>
         ))}
       </div>
     </>
-  );
+  )
 }

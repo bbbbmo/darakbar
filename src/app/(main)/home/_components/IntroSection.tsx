@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function IntroSection() {
   const router = useRouter();
   const goPersonalRecipePage = () => {
-    router.push("/personal-recipe");
+    router.push("/bar-search");
   };
   return (
     <Card className="bg-primary h-90 w-full">
@@ -20,10 +20,8 @@ export default function IntroSection() {
       />
       <p className="text-zinc-500">
         <span>
-          다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일
-          레시피들이 숨어있는 공간입니다.
-          <br></br>
-          이곳에서 독창적인 레시피와 그 속에 담긴 감성을 보여주세요.
+          다락바는 마치 나만의 작은 다락방처럼, 잊혀진 보물과 같은 칵테일 바들이
+          숨어있는 공간입니다.
         </span>
       </p>
       <Button

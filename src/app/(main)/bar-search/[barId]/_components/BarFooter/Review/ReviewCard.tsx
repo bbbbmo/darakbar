@@ -43,9 +43,9 @@ export default function ReviewCard({ review }: { review: Review }) {
       </div>
 
       <p>{review.comment}</p>
-      {review.imageUrl && (
+      {review.images && (
         <Image
-          src={review.imageUrl}
+          src={review.images[0]}
           alt={review.userName}
           width={100}
           height={100}

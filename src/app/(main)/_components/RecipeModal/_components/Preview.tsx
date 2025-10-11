@@ -1,4 +1,4 @@
-import { UserRecipe } from "@/types/recipe.types";
+import { UserRecipe } from "@/types/recipe/recipe.types";
 import { Button, ButtonGroup, Carousel } from "flowbite-react";
 import Image from "next/image";
 

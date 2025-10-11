@@ -1,11 +1,11 @@
-import { BarInfo } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
-import Image from "next/image";
+import Image from 'next/image'
+import { Bar } from '@/types/bar/bar.types'
 
 // TODO: 이미지 여러개 추가
-export default function BarImage({ bar }: { bar: BarInfo }) {
+export default function BarImage({ bar }: { bar: Bar }) {
   return (
     <div className="relative h-[400px] w-full">
-      {bar.image_urls?.map((image, index) => (
+      {bar.bar_images?.map((image, index) => (
         <Image
           key={index}
           src={image}
@@ -17,5 +17,5 @@ export default function BarImage({ bar }: { bar: BarInfo }) {
         />
       ))}
     </div>
-  );
+  )
 }

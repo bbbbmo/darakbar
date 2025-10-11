@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:types": "npx supabase gen types typescript --project-id btkztlafowtisbypxsre --schema public > src/supabase/database.types.ts"
+    "db:types": "npx supabase gen types typescript --project-id btkztlafowtisbypxsre --schema public > src/types/database.types.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -47,6 +47,7 @@
     "dotenv-cli": "^10.0.0",
     "eslint": "^9.19.0",
     "eslint-config-next": "15.5.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",

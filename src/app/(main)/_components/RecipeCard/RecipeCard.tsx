@@ -3,7 +3,7 @@
 import { Button, Card } from "flowbite-react";
 import Stars from "../../../../components/Stars";
 import CardSkeleton from "../../../../components/Cards/CardSkeleton";
-import { UserRecipe } from "@/types/recipe.types";
+import { UserRecipe } from "@/types/recipe/recipe.types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { basicTheme } from "@/lib/flowbite/themes/basicTheme";

@@ -4,7 +4,7 @@ import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
 import { Card } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { mockCocktails } from "../home.const";
-import { UserRecipe } from "@/types/recipe.types";
+import { UserRecipe } from "@/types/recipe/recipe.types";
 
 export default function RandomRecipes() {
   const [randomCocktails, setRandomCocktails] = useState<UserRecipe[]>([]);

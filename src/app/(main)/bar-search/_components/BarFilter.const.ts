@@ -1,3 +1,6 @@
+import { BarCategorySchemes } from "@/types/bar/bar.types";
+import { AtmosphereTagSchemes } from "@/types/tag/tag.types";
+
 export const regionOptions: string[]  = [
     "모든 지역",
     "서울",
@@ -17,30 +20,6 @@ export const priceRangeOptions: string[]  = [
     "30000원 이하",
 ] as const;
 
-export const barTypeOptions: string[] = [
-    "모든 유형",
-    "클래식 바",
-    "위스키 바/몰트 바",
-    "스피크이지/시크릿 바",
-    "모던 바",
-    "라운지 바",
-    "플레어 바",
-    "웨스턴 바",
-    "카페",
-] as const;
-
-export const atmosphereOptions: string[]  = [
-   "모든 분위기",
-   "모던한",
-   "레트로",
-   "클래식",
-   "바다뷰",
-   "뷰맛집",
-   "아늑한",
-   "고급스러운",
-   "힙한"
-] as const; 
-
 export const sortOptions: string[]  = [
    "모든 정렬",
    "이름 순",
@@ -53,7 +32,7 @@ export const sortOptions: string[]  = [
 export const barFilterSelect: {key: string, options: string[]}[] = [
     {key: "region", options: regionOptions},
     {key: "priceRange", options: priceRangeOptions},
-    {key: "barType", options: barTypeOptions},
-    {key: "atmosphere", options: atmosphereOptions},
+    {key: "barCategory", options: BarCategorySchemes.options},
+    {key: "atmosphere", options: AtmosphereTagSchemes.options},
     {key: "sort", options: sortOptions},
 ]
