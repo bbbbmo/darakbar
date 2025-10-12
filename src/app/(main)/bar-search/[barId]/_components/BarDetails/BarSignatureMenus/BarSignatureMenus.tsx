@@ -14,14 +14,14 @@ export default function BarSignatureMenus({
 }) {
   if (!barDetail) return null
 
-  const [visibleCount, setVisibleCount] = useState(6)
+  const [visibleCount, setVisibleCount] = useState(4)
 
   const totalMenus = barDetail.signature_menus.length
   const visibleMenus = barDetail.signature_menus.slice(0, visibleCount)
   const hasMore = visibleCount < totalMenus
 
   const handleLoadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 6, totalMenus))
+    setVisibleCount((prev) => Math.min(prev + 4, totalMenus))
   }
 
   return (

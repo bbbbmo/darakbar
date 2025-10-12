@@ -5,17 +5,23 @@ import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 export default function BarImage({ barDetail }: { barDetail: BarDetail }) {
   return (
     <div className="relative h-[400px] w-full">
-      {barDetail?.bar_images?.map((image, index) => (
-        <Image
-          key={index}
-          src={image}
-          alt={barDetail.name}
-          fill
-          sizes="100vw"
-          className="rounded-lg object-cover"
-          priority={true}
-        />
-      ))}
+      {barDetail?.bar_images && barDetail?.bar_images?.length > 0 ? (
+        barDetail?.bar_images?.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+            alt={barDetail.name}
+            fill
+            sizes="100vw"
+            className="rounded-lg object-cover"
+            priority={true}
+          />
+        ))
+      ) : (
+        <div className="flex h-full w-full items-center justify-center text-zinc-500">
+          이미지 없음
+        </div>
+      )}
     </div>
   )
 }
