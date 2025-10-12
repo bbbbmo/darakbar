@@ -1,18 +1,19 @@
-"use client";
+'use client'
 
-import CardSkeleton from "@/components/Cards/CardSkeleton";
-import Tags from "@/components/Tags";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import { Button, Card } from "flowbite-react";
-import { HiClock, HiOutlinePhone } from "react-icons/hi";
-import { Bar } from "@/types/bar/bar.types";
+import CardSkeleton from '@/components/Cards/CardSkeleton'
+import Tags from '@/components/Tags'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { Button, Card } from 'flowbite-react'
+import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'
+import { Bar } from '@/types/bar/bar.types'
+import { getOpenStatus } from '../../bar-search/_utils/formatBusinessHour'
 
 type BarCardProps = {
-  barInfo: Bar;
-  loading: boolean;
-  className?: string;
-  onClick?: () => void;
-};
+  barInfo: Bar
+  loading: boolean
+  className?: string
+  onClick?: () => void
+}
 
 export default function BarCard({
   barInfo,
@@ -29,38 +30,41 @@ export default function BarCard({
           theme={basicTheme.bar}
           className={`${className}`}
           imgAlt="Bar Image"
-          imgSrc={barInfo.barImages?.[0] ?? undefined}
+          imgSrc={barInfo.bar_images?.[0] ?? undefined}
         >
           <section>
             {/* 칵테일 이름 */}
-            <header className="text-3xl font-semibold tracking-tight dark:text-white">
-              <div className="transition group-hover:text-amber-400">
+            <header className="flex flex-col gap-2 text-3xl font-semibold tracking-tight dark:text-white">
+              <span className="transition group-hover:text-amber-400">
                 {barInfo.name}
+              </span>
+              <div className="flex items-center gap-1">
+                <HiLocationMarker size={16} className="text-gray-400" />
+                <span className="text-sm">{barInfo.address || '미제공'}</span>
               </div>
-              <span className="text-sm">{barInfo.address}</span>
             </header>
             <div className="my-4 text-gray-400">
               <p className="flex flex-col gap-2">
                 <span className="md:line-clamp-1 lg:line-clamp-2">
-                  {barInfo.description || ""}
+                  {barInfo.description || '미제공'}
                 </span>
-                <Tags tags={barInfo.atmosphere} />
+                <Tags tags={barInfo.bar_tags.map((tag) => tag.tags.name)} />
                 <span className="flex items-center gap-2 text-sm">
                   <HiClock size={16} />
-                  {/* {barInfo.businessHours} */}
+                  {getOpenStatus(barInfo.business_hours)}
                 </span>
                 <span className="flex items-center gap-2 text-sm">
                   <HiOutlinePhone
                     size={16}
                     className="fill-zinc-800 text-zinc-800"
                   />
-                  {barInfo.phoneNumber}
+                  {barInfo.phone_number || '미제공'}
                 </span>
               </p>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm">
-                시그니처 메뉴 {barInfo.signatureMenus.length}개
+                시그니처 메뉴 {barInfo.signature_menus.length}개
               </span>
               <Button
                 className="ml-auto"
@@ -75,5 +79,5 @@ export default function BarCard({
         </Card>
       )}
     </>
-  );
+  )
 }

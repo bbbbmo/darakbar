@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import SubTitleText from "@/components/SubTitleText";
-import { Bar } from "@/types/bar/bar.types";
-import { Card } from "flowbite-react";
-import { HiOutlineClock } from "react-icons/hi";
+import SubTitleText from '@/components/SubTitleText'
+import { Bar } from '@/lib/supabase/api/bar/getBars'
+import { Card } from 'flowbite-react'
+import { HiOutlineClock } from 'react-icons/hi'
 
 // TODO: 운영 시간 표시 로직 추가
 export default function BarBusinessHour({ bar }: { bar: Bar }) {
-  const barId = bar.id;
+  if (!bar) return null
 
   return (
     <Card>
@@ -19,5 +19,5 @@ export default function BarBusinessHour({ bar }: { bar: Bar }) {
         {/* {bar.businessHoursDetail?.significant} */}
       </p>
     </Card>
-  );
+  )
 }

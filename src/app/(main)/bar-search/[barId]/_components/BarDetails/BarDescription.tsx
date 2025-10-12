@@ -31,7 +31,7 @@ export default function BarDescription({ bar }: { bar: Bar }) {
       </section>
       <section className="flex flex-col gap-3">
         <SubTitleText title="분위기" />
-        <Tags tags={bar.bar_tags.map((tag) => tag.name)} />
+        <Tags tags={bar.bar_tags.map((tag) => tag.tags.name)} />
       </section>
     </>
   )

@@ -1,22 +1,22 @@
-import { mockBars } from "@/app/(main)/bar-search/[barId]/mocks/bars.mocks";
-import BarImage from "./_components/BarImage";
-import BarDescription from "./_components/BarDescription";
-import BarBusinessHour from "./_components/BarBusinessHour";
-import BarContact from "./_components/BarContact";
-import BarSignatureMenus from "./_components/BarSignatureMenus";
-import BackToListButton from "./_components/BackToListButton";
-import BarFooter from "./_components/BarFooter/BarFooter";
+import { mockBars } from '@/app/(main)/bar-search/[barId]/mocks/bars.mocks'
+import BarImage from './_components/BarDetails/BarImage'
+import BarDescription from './_components/BarDetails/BarDescription'
+import BarBusinessHour from './_components/BarDetails/BarBusinessHour'
+import BarContact from './_components/BarDetails/BarContact'
+import BarSignatureMenus from './_components/BarDetails/BarSignatureMenus'
+import BackToListButton from './_components/BackToListButton'
+import BarFooter from './_components/BarFooter/BarFooter'
 
 export default async function BarDetailPage({
   params,
 }: {
-  params: { barId: number };
+  params: { barId: number }
 }) {
-  const { barId } = await params;
-  const bar = mockBars.find((bar) => bar.id === Number(barId));
+  const { barId } = await params
+  const bar = mockBars.find((bar) => bar.id === Number(barId))
 
-  console.log(bar);
-  if (!bar) return null;
+  console.log(bar)
+  if (!bar) return null
 
   return (
     <>
@@ -38,5 +38,5 @@ export default async function BarDetailPage({
       </div>
       <BarFooter />
     </>
-  );
+  )
 }
