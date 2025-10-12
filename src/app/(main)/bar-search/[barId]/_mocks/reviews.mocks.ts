@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { Review } from '@/types/review/review.types'
 
-export const mockReviews: Review[] = [
+export const mockReviews = [
   {
     id: 1,
     bar_id: 1,

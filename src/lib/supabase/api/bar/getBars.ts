@@ -8,7 +8,11 @@ export type getBarsQueryParams = {
   // atmosphere?: AtmosphereTag
 }
 
-export type Bar = Awaited<ReturnType<typeof getBars>>['data']
+export type Bar = Awaited<
+  ReturnType<typeof getBars>
+>['data'] extends (infer T)[]
+  ? T
+  : never
 
 export const getBars = async (params?: getBarsQueryParams) => {
   let query = supabase.from('bars').select(`

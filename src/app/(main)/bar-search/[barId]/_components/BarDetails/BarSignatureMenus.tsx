@@ -3,12 +3,18 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
 import TitleText from '@/components/TitleText'
-import { Bar } from '@/types/bar/bar.types'
+import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { Card } from 'flowbite-react'
 import Image from 'next/image'
 import { LiaCocktailSolid } from 'react-icons/lia'
 
-export default function BarSignatureMenus({ bar }: { bar: Bar }) {
+export default function BarSignatureMenus({
+  barDetail,
+}: {
+  barDetail: BarDetail
+}) {
+  if (!barDetail) return null
+
   return (
     <>
       <TitleText
@@ -16,7 +22,7 @@ export default function BarSignatureMenus({ bar }: { bar: Bar }) {
         title="시그니처 칵테일"
       />
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {bar.signature_menus.map((menu: any) => (
+        {barDetail.signature_menus.map((menu) => (
           <Card
             className="relative!"
             key={menu.id}
@@ -42,7 +48,7 @@ export default function BarSignatureMenus({ bar }: { bar: Bar }) {
                     ₩ {menu.price.toLocaleString()}
                   </span>
                   <span className="text-md ml-auto text-zinc-500">
-                    {menu.abv}% ABV
+                    {`${menu.abv != null ? `${menu.abv}% ABV` : '미제공'}`}
                   </span>
                 </div>
               </div>
@@ -50,8 +56,8 @@ export default function BarSignatureMenus({ bar }: { bar: Bar }) {
               <div>
                 <h3 className="text-md mb-2 font-semibold">재료</h3>
                 <Tags
-                  tags={menu.ingredients.map(
-                    (ingredient: any) => ingredient.name,
+                  tags={menu.signature_menu_ingredients?.map(
+                    (ingredient) => ingredient.ingredients?.name,
                   )}
                 />
               </div>

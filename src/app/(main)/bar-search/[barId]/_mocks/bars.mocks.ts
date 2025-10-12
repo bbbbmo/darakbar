@@ -1,6 +1,4 @@
-import { Bar } from '@/types/bar/bar.types'
-
-export const mockBars: Bar[] = [
+export const mockBars = [
   {
     id: 1,
     name: '루프탑 하이볼',

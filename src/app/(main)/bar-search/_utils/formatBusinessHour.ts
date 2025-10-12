@@ -1,4 +1,3 @@
-import { BusinessHourDetail } from '@/types/bar/business-hour.types'
 import dayjs from 'dayjs'
 
 export const formatToHHmm = (time: string | null | undefined) => {
@@ -6,9 +5,33 @@ export const formatToHHmm = (time: string | null | undefined) => {
   return time.split(':').slice(0, 2).join(':')
 }
 
-export const getOpenStatus = (
-  businessHours: Omit<BusinessHourDetail, 'barId'>[],
-): string => {
+export const sortBusinessHoursByDay = (businessHours: any[]) => {
+  const dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+  return businessHours.sort(
+    (a, b) => dayOrder.indexOf(a.day_of_week) - dayOrder.indexOf(b.day_of_week),
+  )
+}
+
+export const formatDayToKorean = (day: string) => {
+  switch (day) {
+    case 'mon':
+      return '월요일'
+    case 'tue':
+      return '화요일'
+    case 'wed':
+      return '수요일'
+    case 'thu':
+      return '목요일'
+    case 'fri':
+      return '금요일'
+    case 'sat':
+      return '토요일'
+    case 'sun':
+      return '일요일'
+  }
+}
+
+export const getOpenStatus = (businessHours: any[]): string => {
   const now = dayjs()
   const today = now.format('ddd')
   const todayBusinessHour = businessHours.find(

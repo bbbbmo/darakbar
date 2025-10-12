@@ -1,31 +1,31 @@
-import { Badge } from "flowbite-react";
+import { Badge } from 'flowbite-react'
 
 type TagsProps = {
-  tags: string[];
-};
+  tags: string[]
+}
 
 export default function Tags({ tags }: TagsProps) {
   const colors = [
-    "failure",
-    "indigo",
-    "success",
-    "warning",
-    "info",
-    "Dark",
-    "pink",
-    "purple",
-  ];
+    'failure',
+    'indigo',
+    'success',
+    'warning',
+    'info',
+    'Dark',
+    'pink',
+    'purple',
+  ]
 
   return (
     <span className="flex flex-row gap-2">
       {tags.map((tag: string, index: number) => {
-        const color = colors[index % colors.length];
+        const color = colors[index % colors.length]
         return (
-          <Badge key={tag} color={color}>
+          <Badge key={index} color={color}>
             {tag}
           </Badge>
-        );
+        )
       })}
     </span>
-  );
+  )
 }

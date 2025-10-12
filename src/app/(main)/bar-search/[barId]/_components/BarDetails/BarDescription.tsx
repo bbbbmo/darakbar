@@ -1,18 +1,24 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
 import TitleText from '@/components/TitleText'
-import { Bar } from '@/types/bar/bar.types'
+import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { HiLocationMarker, HiStar } from 'react-icons/hi'
 
-export default function BarDescription({ bar }: { bar: Bar }) {
+export default function BarDescription({
+  barDetail,
+}: {
+  barDetail: BarDetail
+}) {
+  if (!barDetail) return null
+
   return (
     <>
       <section className="flex flex-col gap-3">
         <div className="flex items-center">
-          <TitleText title={bar.name} />
+          <TitleText title={barDetail.name} />
           <span className="text-md ml-auto flex items-center text-2xl">
             <HiStar size={28} className="fill-amber-400" />
-            {bar.rating}
+            {barDetail.rating}
           </span>
         </div>
         <p className="flex flex-col gap-2 text-zinc-500">
@@ -22,16 +28,16 @@ export default function BarDescription({ bar }: { bar: Bar }) {
               className="text-red-500 transition-transform duration-200 ease-out group-hover:scale-110 group-hover:text-red-600"
             />
             <span className="decoration-zinc-600 decoration-2 underline-offset-4 group-hover:underline">
-              {bar.address}
+              {barDetail.address}
             </span>
           </span>
-          <span>{bar.address}</span>
+          <span>{barDetail.address}</span>
         </p>
-        <p className="text-xl">{bar.description}</p>
+        <p className="text-xl">{barDetail.description}</p>
       </section>
       <section className="flex flex-col gap-3">
         <SubTitleText title="분위기" />
-        <Tags tags={bar.bar_tags.map((tag) => tag.tags.name)} />
+        <Tags tags={barDetail.bar_tags.map((tag) => tag.tags.name)} />
       </section>
     </>
   )
