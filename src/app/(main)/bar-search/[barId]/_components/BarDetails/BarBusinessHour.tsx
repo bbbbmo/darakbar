@@ -34,7 +34,7 @@ export default function BarBusinessHour({
             {hour.is_closed ? (
               <span className="text-sm font-semibold text-red-400">휴무</span>
             ) : (
-              <span className="text-sm text-zinc-400">{`${formatToHHmm(hour.open_time)} - ${formatToHHmm(hour.close_time)} ${hour.last_order_time ? `(라스트 오더 ${formatToHHmm(hour.last_order_time)})` : ''}`}</span>
+              <span className="text-sm text-zinc-300">{`${formatToHHmm(hour.open_time)} - ${formatToHHmm(hour.close_time)} ${hour.last_order_time ? `(라스트 오더 ${formatToHHmm(hour.last_order_time)})` : ''}`}</span>
             )}
           </div>
         ))}
