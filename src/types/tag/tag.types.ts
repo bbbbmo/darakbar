@@ -37,7 +37,7 @@ export type TagCategory = z.infer<typeof TagCategorySchemes>
 
 export const TagSchemes = z.object({
   id: z.number(),
-  name: z.union([AtmosphereTagSchemes, ReviewTagSchemes]),
+  name: z.string(),
   category: TagCategorySchemes,
 })
 
