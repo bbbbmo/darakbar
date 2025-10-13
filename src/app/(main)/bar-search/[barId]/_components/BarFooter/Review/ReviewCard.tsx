@@ -12,9 +12,8 @@ import {
   HiTrash,
 } from 'react-icons/hi'
 import dayjs from 'dayjs'
-import { Review } from '@/lib/supabase/api/review/getReviews'
 
-export default function ReviewCard({ review }: { review: Review }) {
+export default function ReviewCard({ review }: { review: any }) {
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
       <div className="flex justify-between">
@@ -54,13 +53,13 @@ export default function ReviewCard({ review }: { review: Review }) {
       <Tags tags={review.tags} />
       <div className="flex justify-between text-zinc-500">
         <div className="flex gap-8">
-          <div className="flex items-center gap-1">
-            <HiOutlineThumbUp size={20} className="cursor-pointer" />
-            {review.likeCount}개
+          <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
+            <HiOutlineThumbUp size={20} />
+            {review.likeCount || 0}개
           </div>
-          <div className="flex items-center gap-1">
-            <HiOutlineChat size={20} className="cursor-pointer" />
-            {review.likeCount}개
+          <div className="lex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
+            <HiOutlineChat size={20} />
+            {review.commentCount || 0}개
           </div>
         </div>
         <span>{dayjs(review.createdAt).format('YYYY.MM.DD')} 작성</span>
