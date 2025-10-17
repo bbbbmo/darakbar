@@ -1,20 +1,17 @@
 'use client'
 
 import TitleText from '@/components/TitleText'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { LiaCocktailSolid } from 'react-icons/lia'
 import { useState } from 'react'
 import SignatureMenuCard from './SignatureMenuCard'
 import { Button } from 'flowbite-react'
+import { useBarDetailStore } from '../../../_stores/bar-detail.store'
 
-export default function BarSignatureMenus({
-  barDetail,
-}: {
-  barDetail: BarDetail
-}) {
+export default function BarSignatureMenus() {
+  const barDetail = useBarDetailStore((state) => state.barDetail)
+  const [visibleCount, setVisibleCount] = useState<number>(4)
+
   if (!barDetail) return null
-
-  const [visibleCount, setVisibleCount] = useState(4)
 
   const totalMenus = barDetail.signature_menus.length
   const visibleMenus = barDetail.signature_menus.slice(0, visibleCount)

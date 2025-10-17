@@ -10,6 +10,8 @@ import BarFooter from './BarFooter/BarFooter'
 import { useQuery } from '@tanstack/react-query'
 import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { useBar } from '../_providers/BarProviders'
+import { useEffect } from 'react'
+import { useBarDetailStore } from '../_stores/bar-detail.store'
 
 export default function BarDetailContent() {
   const { barId } = useBar()
@@ -17,6 +19,14 @@ export default function BarDetailContent() {
     queryKey: ['bar', barId],
     queryFn: () => getBarDetail(barId),
   })
+
+  const setBarDetail = useBarDetailStore((state) => state.setBarDetail)
+
+  useEffect(() => {
+    if (barDetail?.data) {
+      setBarDetail(barDetail.data)
+    }
+  }, [barDetail])
 
   console.log('🔍 BarDetailContent query result:', barDetail)
   if (!barDetail?.data) return null
@@ -26,17 +36,17 @@ export default function BarDetailContent() {
       <BackToListButton />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
-          <BarImage barDetail={barDetail.data} />
+          <BarImage />
         </div>
         <div className="flex flex-col gap-8">
-          <BarDescription barDetail={barDetail.data} />
-          <BarContact barDetail={barDetail.data} />
+          <BarDescription />
+          <BarContact />
         </div>
         <div className="lg:col-span-2">
-          <BarBusinessHour barDetail={barDetail.data} />
+          <BarBusinessHour />
         </div>
         <div className="lg:col-span-2">
-          <BarSignatureMenus barDetail={barDetail.data} />
+          <BarSignatureMenus />
         </div>
       </div>
       <BarFooter />

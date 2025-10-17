@@ -1,14 +1,11 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
 import TitleText from '@/components/TitleText'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { HiLocationMarker, HiStar } from 'react-icons/hi'
+import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
-export default function BarDescription({
-  barDetail,
-}: {
-  barDetail: BarDetail
-}) {
+export default function BarDescription() {
+  const barDetail = useBarDetailStore((state) => state.barDetail)
   if (!barDetail) return null
 
   return (

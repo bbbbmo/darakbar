@@ -9,13 +9,11 @@ import {
   formatToHHmm,
   sortBusinessHoursByDay,
 } from '../../../_utils/formatBusinessHour'
+import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 // TODO: 운영 시간 표시 로직 추가
-export default function BarBusinessHour({
-  barDetail,
-}: {
-  barDetail: BarDetail
-}) {
+export default function BarBusinessHour() {
+  const barDetail = useBarDetailStore((state) => state.barDetail)
   if (!barDetail) return null
 
   return (

@@ -1,8 +1,10 @@
 import Image from 'next/image'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 // TODO: 이미지 여러개 추가
-export default function BarImage({ barDetail }: { barDetail: BarDetail }) {
+export default function BarImage() {
+  const barDetail = useBarDetailStore((state) => state.barDetail)
+
   return (
     <div className="relative h-[400px] w-full">
       {barDetail?.bar_images && barDetail?.bar_images?.length > 0 ? (

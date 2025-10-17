@@ -1,14 +1,16 @@
 'use client'
 
 import SubTitleText from '@/components/SubTitleText'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+
 import { Card } from 'flowbite-react'
 import { BsInstagram } from 'react-icons/bs'
 import { HiOutlineGlobeAlt, HiOutlinePhone } from 'react-icons/hi'
+import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 // TODO: 화면 사이즈에 맞게 레이아웃 조절
 
-export default function BarContact({ barDetail }: { barDetail: BarDetail }) {
+export default function BarContact() {
+  const barDetail = useBarDetailStore((state) => state.barDetail)
   if (!barDetail) return null
 
   return (

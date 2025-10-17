@@ -6,17 +6,13 @@ import { Button, Pagination } from 'flowbite-react'
 import { useState } from 'react'
 import ReviewCard from './ReviewCard'
 import { mockReviews } from '../../../_mocks/reviews.mocks'
-import { useAuthStore } from '@/stores/auth.store'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import {
-  postBarReview,
-  PostBarReviewBody,
-} from '@/lib/supabase/api/review/postBarReview'
+import { useQuery } from '@tanstack/react-query'
+
 import { useBar } from '../../../_providers/BarProviders'
 import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
-import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
 import UploadCard from '../../../../../../../components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
+import { useModal } from '@/components/Providers/ModalProvider'
 
 export default function ReviewTab() {
   const rating = 4.5
@@ -24,48 +20,18 @@ export default function ReviewTab() {
   const totalPages = Math.ceil(mockReviews.length / 5)
 
   const { barId } = useBar()
-  const { userData } = useAuthStore()
-  const { invalidateQueries } = useInvalidateQueries()
+  const { open, close } = useModal()
 
   const { data: reviews } = useQuery({
     queryKey: ['bar-reviews', barId],
     queryFn: () => getBarReviews(barId),
   })
 
-  const { mutate: createReviewMutation } = useMutation({
-    mutationFn: ({
-      userId,
-      body,
-    }: {
-      userId: string
-      body: PostBarReviewBody
-    }) => postBarReview({ barId: barId, userId, body }),
-    onSuccess: () => {
-      invalidateQueries([['bar-reviews', barId]])
-    },
-  })
-
-  const createReview = () => {
-    try {
-      if (!userData) {
-        throw new Error('로그인 후 리뷰를 작성할 수 있습니다.')
-      }
-      if (!barId) {
-        throw new Error('바 정보가 없습니다.')
-      }
-      const body = {
-        rating: 4,
-        body: 'test',
-        images: [],
-        tagIds: [10, 11, 12],
-      }
-      createReviewMutation({ userId: userData.id, body })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   const onPageChange = (page: number) => setCurrentPage(page)
+
+  const openReviewWriteModal = () => {
+    open('ReviewWriteModal', { barId, close })
+  }
   return (
     <div className="px-4">
       <section className="mb-4">
@@ -94,7 +60,7 @@ export default function ReviewTab() {
             <Button
               color="primary"
               className="flex w-40 items-center gap-2"
-              onClick={createReview}
+              onClick={openReviewWriteModal}
             >
               <HiPencil size={20} />
               리뷰 작성하기
