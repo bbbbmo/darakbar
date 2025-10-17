@@ -15,6 +15,8 @@ import {
 import { useBar } from '../../../_providers/BarProviders'
 import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
+import UploadCard from '../../../../../../../components/Cards/UploadCard'
+import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 
 export default function ReviewTab() {
   const rating = 4.5
@@ -73,15 +75,10 @@ export default function ReviewTab() {
         </div>
         <div className="flex items-center justify-between">
           <span>리뷰 {reviews?.data?.length || 0}개</span>
-          <div className="flex items-center gap-2">
-            <Button color="primary" onClick={createReview}>
-              리뷰 작성하기
-            </Button>
-            <FormOption
-              className="min-w-28"
-              options={['최신순', '평점순', '좋아요순']}
-            />
-          </div>
+          <FormOption
+            className="min-w-28"
+            options={['최신순', '평점순', '좋아요순']}
+          />
         </div>
       </section>
       <div className="flex flex-col gap-4">
@@ -89,6 +86,21 @@ export default function ReviewTab() {
           reviews.data.map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}
+        <UploadCard
+          icon={<HiOutlineChat size={40} className="text-gray-400" />}
+          title="이곳을 방문해 보셨나요? "
+          description="다른 사용자들에게 도움이 될 수 있도록 리뷰를 남겨주세요"
+          action={
+            <Button
+              color="primary"
+              className="flex w-40 items-center gap-2"
+              onClick={createReview}
+            >
+              <HiPencil size={20} />
+              리뷰 작성하기
+            </Button>
+          }
+        />
       </div>
       <div className="mt-4 flex overflow-x-auto sm:justify-center">
         <Pagination
