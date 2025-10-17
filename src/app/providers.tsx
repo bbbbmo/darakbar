@@ -1,11 +1,20 @@
 // app/providers.tsx
-"use client";
+'use client'
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AuthProvider from "@/components/Providers/AuthProvider";
-import { useState } from "react";
-import { ThemeProvider } from "flowbite-react";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AuthProvider from '@/components/Providers/AuthProvider'
+import { useState } from 'react'
+import { ThemeProvider } from 'flowbite-react'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import {
+  ModalProvider,
+  ModalRegistry,
+} from '@/components/Providers/ModalProvider'
+import ReviewWriteModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewWriteModal'
+
+const modalRegistry: ModalRegistry = {
+  ReviewWriteModal: ReviewWriteModal,
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
   // useState로 감싸야 Client HMR 시 QueryClient가 재생성되지 않음
@@ -22,13 +31,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
           },
         },
       }),
-  );
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <ThemeProvider theme={basicTheme}>{children}</ThemeProvider>
+        <ThemeProvider theme={basicTheme}>
+          <ModalProvider registry={modalRegistry}>
+            {children}
+            <div id="modal-root" />
+          </ModalProvider>
+        </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
-  );
+  )
 }

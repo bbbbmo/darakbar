@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Button,
@@ -6,45 +6,45 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-} from "flowbite-react";
-import Preview from "./_components/Preview";
-import Detail from "./_components/Detail";
-import { useEffect, useState } from "react";
+} from 'flowbite-react'
+import Preview from './_components/Preview'
+import Detail from './_components/Detail'
+import { useEffect, useState } from 'react'
 // import { buttonTheme } from "@lib/flowbite/themes/button.theme";
-import { useQuery } from "@tanstack/react-query";
-import { getRecipeById } from "@/lib/supabase/api/recipe";
-import { useRouter } from "next/navigation";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { useQuery } from '@tanstack/react-query'
+import { getRecipeById } from '@/lib/supabase/api/recipe/recipe'
+import { useRouter } from 'next/navigation'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 
-type Content = "preview" | "detail";
+type Content = 'preview' | 'detail'
 
 type RecipeModalProps = {
-  id: number;
-};
+  id: number
+}
 
 export default function RecipeModal({ id }: RecipeModalProps) {
-  const [content, setContent] = useState<Content>("preview");
-  const router = useRouter();
+  const [content, setContent] = useState<Content>('preview')
+  const router = useRouter()
 
   const { data } = useQuery({
-    queryKey: ["get-recipe-by-id", id],
+    queryKey: ['get-recipe-by-id', id],
     queryFn: () => getRecipeById(id),
     enabled: !!id,
-  });
+  })
 
   const onClose = () => {
-    router.back();
-  };
+    router.back()
+  }
 
   useEffect(() => {
-    if (!id) return;
-  }, [id]);
+    if (!id) return
+  }, [id])
   return (
     <Modal show={true} onClose={onClose} size="2xl" theme={basicTheme.modal}>
       <ModalHeader className="bg-primary">칵테일 레시피</ModalHeader>
       <ModalBody className="bg-primary">
         <div className="flex h-[60vh] max-h-140">
-          {content === "preview" ? (
+          {content === 'preview' ? (
             <Preview recipe={data?.data ?? null} />
           ) : (
             <Detail recipe={data?.data ?? null} />
@@ -52,16 +52,16 @@ export default function RecipeModal({ id }: RecipeModalProps) {
         </div>
       </ModalBody>
       <ModalFooter className="bg-primary">
-        {content === "preview" ? (
-          <Button color="primary" onClick={() => setContent("detail")}>
+        {content === 'preview' ? (
+          <Button color="primary" onClick={() => setContent('detail')}>
             레시피 자세히보기
           </Button>
         ) : (
-          <Button color="primary" onClick={() => setContent("preview")}>
+          <Button color="primary" onClick={() => setContent('preview')}>
             기본 정보로 돌아가기
           </Button>
         )}
       </ModalFooter>
     </Modal>
-  );
+  )
 }
