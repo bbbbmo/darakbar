@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query'
 import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import BarDetailContent from './_components/BarDetailContent'
+import { BarProvider } from './_providers/BarProviders'
 
 export default async function BarDetailPage({
   params,
@@ -21,8 +22,10 @@ export default async function BarDetailPage({
   })
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <BarDetailContent barId={barId} />
-    </HydrationBoundary>
+    <BarProvider barId={barId}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <BarDetailContent />
+      </HydrationBoundary>
+    </BarProvider>
   )
 }

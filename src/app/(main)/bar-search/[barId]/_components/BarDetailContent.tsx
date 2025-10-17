@@ -9,8 +9,10 @@ import BackToListButton from './BarDetails/BackToListButton'
 import BarFooter from './BarFooter/BarFooter'
 import { useQuery } from '@tanstack/react-query'
 import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+import { useBar } from '../_providers/BarProviders'
 
-export default function BarDetailContent({ barId }: { barId: number }) {
+export default function BarDetailContent() {
+  const { barId } = useBar()
   const { data: barDetail } = useQuery({
     queryKey: ['bar', barId],
     queryFn: () => getBarDetail(barId),
