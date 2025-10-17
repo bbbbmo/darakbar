@@ -1,6 +1,5 @@
 'use client'
 
-import Stars from '@/components/Stars'
 import Tags from '@/components/Tags'
 import { Avatar, Card, Dropdown, DropdownItem } from 'flowbite-react'
 import Image from 'next/image'
@@ -12,21 +11,19 @@ import {
   HiTrash,
 } from 'react-icons/hi'
 import dayjs from 'dayjs'
+import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 
-export default function ReviewCard({ review }: { review: any }) {
+export default function ReviewCard({ review }: { review: BarReview }) {
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
       <div className="flex justify-between">
-        <Avatar img={review.profileImageUrl || ''} rounded>
+        <Avatar img={review.userinfo?.profile_img_url || ''} rounded>
           <div className="font-medium dark:text-white">
             <div className="flex items-center gap-2">
-              {review.userName}{' '}
+              {review.userinfo?.name}{' '}
               <span className="text-sm text-gray-500 dark:text-gray-400">
-                {review.visitDate} 방문
+                {dayjs(review.created_at).format('YYYY.MM.DD')} 방문
               </span>
-            </div>
-            <div>
-              <Stars rating={review.rating} />
             </div>
           </div>
         </Avatar>
@@ -41,28 +38,28 @@ export default function ReviewCard({ review }: { review: any }) {
         </Dropdown>
       </div>
 
-      <p>{review.comment}</p>
-      {review.images && (
+      <p>{review.body}</p>
+      {review.images && review.images.length > 0 && (
         <Image
           src={review.images[0]}
-          alt={review.user_name}
+          alt={'리뷰 이미지'}
           width={100}
           height={100}
         />
       )}
-      <Tags tags={review.tags} />
+      <Tags tags={review.review_tags.map((tag) => tag.tags?.name || '')} />
       <div className="flex justify-between text-zinc-500">
-        <div className="flex gap-8">
+        <div className="flex gap-5">
           <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
             <HiOutlineThumbUp size={20} />
-            {review.likeCount || 0}개
+            {review.like_count || 0}개
           </div>
-          <div className="lex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
+          <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
             <HiOutlineChat size={20} />
-            {review.commentCount || 0}개
+            {review.comment_count || 0}개
           </div>
         </div>
-        <span>{dayjs(review.createdAt).format('YYYY.MM.DD')} 작성</span>
+        <span>{dayjs(review.created_at).format('YYYY.MM.DD')} 작성</span>
       </div>
     </Card>
   )

@@ -1,10 +1,37 @@
 import supabase from '../../supabase'
 
+export type BarReview = NonNullable<
+  Awaited<ReturnType<typeof getBarReviews>>['data']
+>[0]
+
 export const getBarReviews = async (barId: number) => {
   const { data, error } = await supabase
     .from('reviews')
-    .select('*')
+    .select(
+      `
+      id,
+      userinfo(
+        id,
+        name,
+        profile_img_url
+      ),
+      rating,
+      body,
+      images,
+      review_tags(
+        tags(
+          id,
+          name
+        )
+      ),
+      like_count,
+      comment_count,
+      created_at,
+      updated_at
+    `,
+    )
     .eq('bar_id', barId)
     .order('created_at', { ascending: false })
+
   return { data, error }
 }
