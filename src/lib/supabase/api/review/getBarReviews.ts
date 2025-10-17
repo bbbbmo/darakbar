@@ -26,6 +26,7 @@ export const getBarReviews = async (barId: number) => {
       ),
       like_count,
       comment_count,
+      visit_date,
       created_at,
       updated_at
     `,

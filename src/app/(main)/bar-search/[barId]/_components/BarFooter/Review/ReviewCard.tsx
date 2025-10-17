@@ -22,7 +22,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             <div className="flex items-center gap-2">
               {review.userinfo?.name}{' '}
               <span className="text-sm text-gray-500 dark:text-gray-400">
-                {dayjs(review.created_at).format('YYYY.MM.DD')} 방문
+                {dayjs(review.visit_date).format('YYYY.MM.DD')} 방문
               </span>
             </div>
           </div>
