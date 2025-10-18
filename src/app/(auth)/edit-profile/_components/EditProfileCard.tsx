@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { PencilIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from '@heroicons/react/24/solid'
 import {
   Avatar,
   Card,
@@ -8,55 +8,60 @@ import {
   FileInput,
   Label,
   TextInput,
-} from "flowbite-react";
-import { useEffect, useState } from "react";
-import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
-import { EditProfileFormData } from "./EditProfileForm.types";
-import { getImagePreview } from "@utils/file/setImagePreview";
-import { useAuthStore } from "@stores/auth.store";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+} from 'flowbite-react'
+import { useEffect, useState } from 'react'
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form'
+import { EditProfileFormData } from './EditProfileForm.types'
+import { getImagePreview } from '@utils/file/setImagePreview'
+import { useAuthStore } from '@stores/auth.store'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { getPublicUrl } from '@/lib/supabase/api/storage'
 
 type EditProfileCardProps = {
-  register: UseFormRegister<EditProfileFormData>;
-  watch: UseFormWatch<EditProfileFormData>;
-  errors: FieldErrors<EditProfileFormData>;
-};
+  register: UseFormRegister<EditProfileFormData>
+  watch: UseFormWatch<EditProfileFormData>
+  errors: FieldErrors<EditProfileFormData>
+}
 
 export default function EditProfileCard({
   register,
   watch,
   errors,
 }: EditProfileCardProps) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const { userData } = useAuthStore();
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const { userData } = useAuthStore()
 
-  const [isEditingName, setIsEditingName] = useState<boolean>(false);
-  const watchedName = watch("name");
-  const watchedProfileImage = watch("profileImage");
+  const [isEditingName, setIsEditingName] = useState<boolean>(false)
+  const watchedName = watch('name')
+  const watchedProfileImage = watch('profileImage')
 
   const toggleEditName = () => {
-    setIsEditingName((prev) => !prev);
-  };
+    setIsEditingName((prev) => !prev)
+  }
+
+  useEffect(() => {
+    const fetchImagePreview = async () => {
+      const url = await getPublicUrl(userData?.avatarUrl || '')
+      console.log(url)
+      setImagePreview(url)
+    }
+    fetchImagePreview()
+  }, [userData?.avatarUrl])
 
   useEffect(() => {
     if (watchedProfileImage && watchedProfileImage instanceof File) {
-      getImagePreview(watchedProfileImage).then(setImagePreview);
+      getImagePreview(watchedProfileImage).then(setImagePreview)
     }
-  }, [watchedProfileImage]);
+  }, [watchedProfileImage])
   return (
     <Card theme={basicTheme.editProfile}>
       <Label id="profile-image" className="cursor-pointer">
-        <Avatar
-          img={imagePreview || userData?.avatarUrl || ""}
-          alt="User Profile"
-          size="lg"
-          rounded
-        />
+        <Avatar img={imagePreview || ''} alt="User Profile" size="lg" rounded />
         <FileInput
           id="profile-image"
           className="hidden"
           accept="image/*"
-          {...register("profileImage")}
+          {...register('profileImage')}
         />
       </Label>
       <div className="flex flex-col gap-2">
@@ -65,8 +70,8 @@ export default function EditProfileCard({
             <>
               <TextInput
                 type="text"
-                {...register("name", {
-                  required: "이름을 입력해주세요.",
+                {...register('name', {
+                  required: '이름을 입력해주세요.',
                 })}
                 placeholder={userData?.name}
                 rightIcon={CheckIcon}
@@ -76,8 +81,8 @@ export default function EditProfileCard({
                     rightIcon: {
                       svg:
                         (watchedName && watchedName.length > 0) || errors.name
-                          ? "fill-green-500"
-                          : "fill-red-400",
+                          ? 'fill-green-500'
+                          : 'fill-red-400',
                     },
                   },
                 }}
@@ -98,5 +103,5 @@ export default function EditProfileCard({
         </h5>
       </div>
     </Card>
-  );
+  )
 }

@@ -1,23 +1,22 @@
 'use client'
 
 import Tags from '@/components/Tags'
-import { Avatar, Card, Dropdown, DropdownItem } from 'flowbite-react'
+import { Avatar, Card } from 'flowbite-react'
 import Image from 'next/image'
-import {
-  HiDotsHorizontal,
-  HiOutlineChat,
-  HiOutlineThumbUp,
-  HiPencil,
-  HiTrash,
-} from 'react-icons/hi'
+import { HiOutlineChat, HiOutlineThumbUp } from 'react-icons/hi'
 import dayjs from 'dayjs'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 import { getPublicUrl } from '@/lib/supabase/api/storage'
 import { useEffect, useState } from 'react'
 import Stars from '@/components/Stars'
+import ReviewEditMenu from './ReviewEditMenu'
+import { useAuthStore } from '@/stores/auth.store'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
   const [publicUrl, setPublicUrl] = useState<string | null>(null)
+  const { userData } = useAuthStore()
+
+  const isOwner = userData?.id === review.userinfo?.id
 
   useEffect(() => {
     if (review.images?.[0]) {
@@ -39,15 +38,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             <Stars rating={review.rating} />
           </div>
         </Avatar>
-        <Dropdown
-          arrowIcon={false}
-          inline
-          placement="bottom"
-          label={<HiDotsHorizontal className="cursor-pointer" size={24} />}
-        >
-          <DropdownItem icon={HiPencil}>수정</DropdownItem>
-          <DropdownItem icon={HiTrash}>삭제</DropdownItem>
-        </Dropdown>
+        {isOwner && <ReviewEditMenu reviewId={review.id} />}
       </div>
 
       <p>{review.body}</p>
