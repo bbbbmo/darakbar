@@ -50,7 +50,7 @@ export default function BarCard({
                 <span className="md:line-clamp-1 lg:line-clamp-2">
                   {barInfo.description || '미제공'}
                 </span>
-                <Tags tags={barInfo.bar_tags.map((tag) => tag.tags.name)} />
+                <Tags tags={barInfo.bar_tags.map((tag) => tag.tags)} />
                 <span className="flex items-center gap-2 text-sm">
                   <HiClock size={16} />
                   {getOpenStatus(barInfo.business_hours)}

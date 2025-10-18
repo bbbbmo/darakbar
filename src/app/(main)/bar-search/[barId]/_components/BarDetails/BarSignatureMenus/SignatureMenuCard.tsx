@@ -44,7 +44,7 @@ export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
           <h3 className="text-md mb-2 font-semibold">재료</h3>
           <Tags
             tags={menu.signature_menu_ingredients?.map(
-              (ingredient) => ingredient.ingredients?.name,
+              (ingredient) => ingredient.ingredients,
             )}
           />
         </div>

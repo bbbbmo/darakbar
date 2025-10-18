@@ -47,7 +47,11 @@ export default function ReviewCard({ review }: { review: BarReview }) {
           height={100}
         />
       )}
-      <Tags tags={review.review_tags.map((tag) => tag.tags?.name || '')} />
+      <Tags
+        tags={review.review_tags
+          .map((tag) => tag.tags)
+          .filter((tag) => tag !== null)}
+      />
       <div className="flex justify-between text-zinc-500">
         <div className="flex gap-5">
           <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
