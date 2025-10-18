@@ -1,37 +1,50 @@
-import { FileInput, Label } from "flowbite-react";
-import { useEffect, useState } from "react";
-import { useFormContext, UseFormRegisterReturn } from "react-hook-form";
+import { FileInput, Label } from 'flowbite-react'
+import { useEffect, useState } from 'react'
+import {
+  useFormContext,
+  UseFormRegisterReturn,
+  UseFormSetValue,
+  UseFormTrigger,
+} from 'react-hook-form'
 
 type FormFileInputProps = {
-  className?: string;
-  registeration: UseFormRegisterReturn;
-};
+  className?: string
+  registeration: UseFormRegisterReturn
+  setValue: UseFormSetValue<any>
+  trigger: UseFormTrigger<any>
+}
 
 export default function FormFileInput({
   className,
   registeration,
+  setValue,
+  trigger,
 }: FormFileInputProps) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const { setValue, trigger } = useFormContext();
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
 
   useEffect(() => {
     return () => {
       if (imagePreview) {
-        URL.revokeObjectURL(imagePreview);
+        URL.revokeObjectURL(imagePreview)
       }
-    };
-  }, [imagePreview]);
+    }
+  }, [imagePreview])
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
+    const files = Array.from(e.target.files || [])
 
-    if (imagePreview) URL.revokeObjectURL(imagePreview);
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-      setValue(registeration.name, file);
-      await trigger(registeration.name as any);
+    if (imagePreview) {
+      URL.revokeObjectURL(imagePreview)
     }
-  };
+    if (files.length > 0) {
+      setImagePreview(URL.createObjectURL(files[0]))
+      setValue(registeration.name, files) // 배열로 설정
+      await trigger(registeration.name as any)
+    } else {
+      setValue(registeration.name, null) // 파일이 없으면 null
+      await trigger(registeration.name as any)
+    }
+  }
 
   return (
     <div className={`flex w-full items-center justify-center ${className}`}>
@@ -82,5 +95,5 @@ export default function FormFileInput({
         />
       </Label>
     </div>
-  );
+  )
 }

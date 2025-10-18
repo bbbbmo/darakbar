@@ -4,7 +4,7 @@ import supabase from '../../supabase'
 export const postBarReviewBodySchema = z.object({
   rating: z.number(),
   body: z.string(),
-  images: z.array(z.string()),
+  images: z.array(z.string()).optional(),
   visitDate: z.string(),
   tagIds: z.array(z.number()),
 })

@@ -1,23 +1,25 @@
-import { TextInput } from "flowbite-react";
-import { useFormContext } from "react-hook-form";
-import type { BasicInfoForm } from "../../RecipeCreateModal.schemes";
-import FormItem from "@components/Forms/FormItem";
-import FormFileInput from "@components/Forms/FormFileInput";
-import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormDescription from "@components/Forms/FormDescription";
-import FormErrorMessage from "@components/Forms/FormErrorMessage";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { TextInput } from 'flowbite-react'
+import { useFormContext } from 'react-hook-form'
+import type { BasicInfoForm } from '../../RecipeCreateModal.schemes'
+import FormItem from '@components/Forms/FormItem'
+import FormFileInput from '@components/Forms/FormFileInput'
+import { CreateRecipeForm } from '../../RecipeCreateModal.schemes'
+import FormDescription from '@components/Forms/FormDescription'
+import FormErrorMessage from '@components/Forms/FormErrorMessage'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 
 // TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm() {
   const {
     register,
+    setValue,
+    trigger,
     formState: { errors },
     watch,
-  } = useFormContext<CreateRecipeForm>();
+  } = useFormContext<CreateRecipeForm>()
 
-  const watchedImage = watch("image");
-  console.log(watchedImage);
+  const watchedImage = watch('image')
+  console.log(watchedImage)
 
   return (
     <>
@@ -32,7 +34,7 @@ export default function BasicInfoForm() {
             theme={basicTheme.textInput}
             color="primary"
             placeholder="ex) 초코 바나나 펀치, 레인보우 샤베트 등"
-            {...register("name")}
+            {...register('name')}
             aria-invalid={!!errors.name}
           />
           <FormErrorMessage error={errors.name} />
@@ -40,7 +42,11 @@ export default function BasicInfoForm() {
 
         {/* 칵테일 이미지 등록 */}
         <FormItem label="칵테일 이미지 등록" required>
-          <FormFileInput registeration={register("image")} />
+          <FormFileInput
+            registeration={register('image')}
+            setValue={setValue}
+            trigger={trigger}
+          />
           <FormErrorMessage error={errors.image} />
         </FormItem>
 
@@ -53,12 +59,12 @@ export default function BasicInfoForm() {
             color="primary"
             className="grow"
             placeholder="ex) 허리케인 글라스, 칵테일 글라스 등"
-            {...register("glassType")}
+            {...register('glassType')}
             aria-invalid={!!errors.glassType}
           />
           <FormErrorMessage error={errors.glassType} />
         </FormItem>
       </div>
     </>
-  );
+  )
 }

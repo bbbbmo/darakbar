@@ -12,19 +12,31 @@ import {
 } from 'react-icons/hi'
 import dayjs from 'dayjs'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
+import { getPublicUrl } from '@/lib/supabase/api/storage'
+import { useEffect, useState } from 'react'
+import Stars from '@/components/Stars'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
+  const [publicUrl, setPublicUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (review.images?.[0]) {
+      getPublicUrl(review.images[0]).then((url) => setPublicUrl(url))
+    }
+  }, [review.images])
+
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
       <div className="flex justify-between">
         <Avatar img={review.userinfo?.profile_img_url || ''} rounded>
           <div className="font-medium dark:text-white">
             <div className="flex items-center gap-2">
-              {review.userinfo?.name}{' '}
+              {review.userinfo?.name}
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 {dayjs(review.visit_date).format('YYYY.MM.DD')} 방문
               </span>
             </div>
+            <Stars rating={review.rating} />
           </div>
         </Avatar>
         <Dropdown
@@ -39,13 +51,8 @@ export default function ReviewCard({ review }: { review: BarReview }) {
       </div>
 
       <p>{review.body}</p>
-      {review.images && review.images.length > 0 && (
-        <Image
-          src={review.images[0]}
-          alt={'리뷰 이미지'}
-          width={100}
-          height={100}
-        />
+      {publicUrl && (
+        <Image src={publicUrl} alt={'리뷰 이미지'} width={100} height={100} />
       )}
       <Tags
         tags={review.review_tags
