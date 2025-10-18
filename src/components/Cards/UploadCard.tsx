@@ -8,14 +8,14 @@ export type UploadCardProps = {
   icon: ReactNode
   title: string
   description: string
-  action: ReactNode
+  children: ReactNode
 }
 
 export default function UploadCard({
   icon,
   title,
   description,
-  action,
+  children,
 }: UploadCardProps) {
   return (
     <Card className="flex flex-col items-center border-neutral-600 bg-neutral-800 py-8">
@@ -27,7 +27,7 @@ export default function UploadCard({
       <p className="flex flex-col gap-2 text-gray-400">
         <span>{description}</span>
       </p>
-      <div className="flex w-full justify-center">{action}</div>
+      <div className="flex w-full justify-center">{children}</div>
     </Card>
   )
 }

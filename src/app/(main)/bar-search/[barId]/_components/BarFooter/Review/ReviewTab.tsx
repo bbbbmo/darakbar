@@ -56,17 +56,16 @@ export default function ReviewTab() {
           icon={<HiOutlineChat size={40} className="text-gray-400" />}
           title="이곳을 방문해 보셨나요? "
           description="다른 사용자들에게 도움이 될 수 있도록 리뷰를 남겨주세요"
-          action={
-            <Button
-              color="primary"
-              className="flex w-40 items-center gap-2"
-              onClick={openReviewWriteModal}
-            >
-              <HiPencil size={20} />
-              리뷰 작성하기
-            </Button>
-          }
-        />
+        >
+          <Button
+            color="primary"
+            className="flex w-40 items-center gap-2"
+            onClick={openReviewWriteModal}
+          >
+            <HiPencil size={20} />
+            리뷰 작성하기
+          </Button>
+        </UploadCard>
       </div>
       <div className="mt-4 flex overflow-x-auto sm:justify-center">
         <Pagination
