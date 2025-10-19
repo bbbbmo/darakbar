@@ -6,12 +6,13 @@ import { useMutation } from '@tanstack/react-query'
 import { Dropdown, DropdownItem } from 'flowbite-react'
 import { HiDotsHorizontal, HiPencil, HiTrash } from 'react-icons/hi'
 import { useBar } from '../../../_providers/BarProviders'
+import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 
-export default function ReviewEditMenu({ reviewId }: { reviewId: number }) {
+export default function ReviewEditMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
   const { barId } = useBar()
   const { mutate: deleteReviewMutation } = useMutation({
-    mutationFn: () => deleteBarReview(reviewId),
+    mutationFn: () => deleteBarReview(review.id),
     onSuccess: () => {
       invalidateQueries([['bar-reviews', barId]])
     },

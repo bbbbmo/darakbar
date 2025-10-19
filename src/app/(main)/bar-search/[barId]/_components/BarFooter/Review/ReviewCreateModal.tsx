@@ -24,9 +24,9 @@ import FormFileInput from '@/components/Forms/FormFileInput'
 import Tags from '@/components/Tags'
 import { getReviewTags } from '@/lib/supabase/api/tag/getReviewTags'
 import {
-  ReviewWriteForm,
-  ReviewWriteFormSchema,
-} from './ReviewWriteModal.schemes'
+  ReviewCreateForm,
+  ReviewCreateFormSchema,
+} from './ReviewCreateModal.schemes'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { uploadFiles } from '@/lib/supabase/api/storage'
@@ -60,9 +60,9 @@ export default function ReviewWriteModal({
     setValue,
     trigger,
     formState: { errors },
-  } = useForm<ReviewWriteForm>({
+  } = useForm<ReviewCreateForm>({
     mode: 'onSubmit',
-    resolver: zodResolver(ReviewWriteFormSchema),
+    resolver: zodResolver(ReviewCreateFormSchema),
     defaultValues: {
       rating: 0,
       visitDate: new Date(),
@@ -98,7 +98,7 @@ export default function ReviewWriteModal({
     },
   })
 
-  const createReview = async (data: ReviewWriteForm) => {
+  const createReview = async (data: ReviewCreateForm) => {
     try {
       console.log(data)
       const imageUrls: string[] = []

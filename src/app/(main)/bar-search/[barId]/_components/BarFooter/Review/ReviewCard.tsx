@@ -38,7 +38,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             <Stars rating={review.rating} />
           </div>
         </Avatar>
-        {isOwner && <ReviewEditMenu reviewId={review.id} />}
+        {isOwner && <ReviewEditMenu review={review} />}
       </div>
 
       <p>{review.body}</p>
@@ -61,7 +61,11 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             {review.comment_count || 0}개
           </div>
         </div>
-        <span>{dayjs(review.created_at).format('YYYY.MM.DD')} 작성</span>
+        <span>
+          {review.updated_at
+            ? `${dayjs(review.updated_at).format('YYYY.MM.DD')} 수정됨`
+            : `${dayjs(review.created_at).format('YYYY.MM.DD')} 작성`}
+        </span>
       </div>
     </Card>
   )

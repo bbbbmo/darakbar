@@ -1,8 +1,10 @@
 import z from 'zod'
 
-export const ReviewWriteFormSchema = z.object({
+export const ReviewCreateFormSchema = z.object({
   rating: z.number().min(1, '평점을 선택해주세요'),
-  visitDate: z.date().max(new Date(), '방문 날짜를 선택해주세요'),
+  visitDate: z.date().refine((date) => date <= new Date(), {
+    message: '방문 날짜는 오늘 이전이어야 합니다',
+  }),
   body: z.string().min(1, '리뷰를 입력해주세요'),
   images: z
     .array(z.instanceof(File))
@@ -11,4 +13,4 @@ export const ReviewWriteFormSchema = z.object({
   tagIds: z.array(z.number()).min(1, '태그를 선택해주세요'),
 })
 
-export type ReviewWriteForm = z.infer<typeof ReviewWriteFormSchema>
+export type ReviewCreateForm = z.infer<typeof ReviewCreateFormSchema>

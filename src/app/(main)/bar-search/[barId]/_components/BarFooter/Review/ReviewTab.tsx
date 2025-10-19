@@ -29,8 +29,8 @@ export default function ReviewTab() {
 
   const onPageChange = (page: number) => setCurrentPage(page)
 
-  const openReviewWriteModal = () => {
-    open('ReviewWriteModal', { barId, close })
+  const openReviewCreateModal = () => {
+    open('ReviewCreateModal', { barId, close })
   }
   return (
     <div className="px-4">
@@ -60,7 +60,7 @@ export default function ReviewTab() {
           <Button
             color="primary"
             className="flex w-40 items-center gap-2"
-            onClick={openReviewWriteModal}
+            onClick={openReviewCreateModal}
           >
             <HiPencil size={20} />
             리뷰 작성하기
