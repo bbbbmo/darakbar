@@ -9,7 +9,7 @@ import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 import { getPublicUrl } from '@/lib/supabase/api/storage'
 import { useEffect, useState } from 'react'
 import Stars from '@/components/Stars'
-import ReviewEditMenu from './ReviewEditMenu'
+import ReviewMenu from './ReviewMenu'
 import { useAuthStore } from '@/stores/auth.store'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
@@ -38,7 +38,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             <Stars rating={review.rating} />
           </div>
         </Avatar>
-        {isOwner && <ReviewEditMenu review={review} />}
+        {isOwner && <ReviewMenu review={review} />}
       </div>
 
       <p>{review.body}</p>
