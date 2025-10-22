@@ -1,9 +1,12 @@
 import supabase from '../../supabase'
 
 export const deleteBarReview = async (reviewId: number) => {
+  console.log('deleteBarReview', reviewId)
   const { data, error } = await supabase
     .from('reviews')
     .delete()
     .eq('id', reviewId)
-  return { data, error }
+
+  if (error) throw error
+  return data
 }

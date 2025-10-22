@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
-import { useBarDetailStore } from '../../../../_stores/bar-detail.store'
+import { useBarDetailStore } from '@bar-detail/_stores/bar-detail.store'
 import {
   postBarReview,
   PostBarReviewBody,
@@ -14,7 +14,7 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
 import { uploadFiles } from '@/lib/supabase/api/storage'
-import z from 'zod'
+import { snackBar } from '@/components/Providers/SnackBarProvider'
 
 export type ReviewCreateModalProps = {
   barId: number
@@ -51,10 +51,19 @@ export default function ReviewCreateModal({
     }) => postBarReview({ barId: barId, userId, body }),
     onSuccess: () => {
       invalidateQueries([['bar-reviews', barId]])
+      snackBar.showSuccess(
+        '리뷰 등록 성공',
+        '리뷰가 성공적으로 등록되었습니다.',
+      )
       onClose()
     },
     onError: (error) => {
-      console.error('리뷰 등록 실패', error)
+      snackBar.showError(
+        '리뷰 등록 실패',
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.',
+      )
     },
   })
 
@@ -90,7 +99,12 @@ export default function ReviewCreateModal({
 
       createReviewMutation({ userId: userData.id, body })
     } catch (error) {
-      console.error(error)
+      snackBar.showError(
+        '리뷰 등록 실패',
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.',
+      )
     }
   }
 

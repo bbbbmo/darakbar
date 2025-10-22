@@ -12,6 +12,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 import { uploadFiles } from '@/lib/supabase/api/storage'
+import { snackBar } from '@/components/Providers/SnackBarProvider'
 
 export type ReviewEditModalProps = {
   barId: number
@@ -46,10 +47,19 @@ export default function ReviewEditModal({
       patchBarReview({ reviewId: review.id, userId, body }),
     onSuccess: () => {
       invalidateQueries([['bar-reviews', barId]])
+      snackBar.showSuccess(
+        '리뷰 수정 성공',
+        '리뷰가 성공적으로 수정되었습니다.',
+      )
       onClose()
     },
     onError: (error) => {
-      console.error('리뷰 수정 실패', error)
+      snackBar.showError(
+        '리뷰 수정 실패',
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.',
+      )
     },
   })
 
@@ -90,7 +100,12 @@ export default function ReviewEditModal({
 
       updateReviewMutation({ userId: userData.id, body })
     } catch (error) {
-      console.error(error)
+      snackBar.showError(
+        '리뷰 수정 실패',
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.',
+      )
     }
   })
 

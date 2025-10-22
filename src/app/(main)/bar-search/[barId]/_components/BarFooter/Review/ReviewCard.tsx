@@ -3,26 +3,20 @@
 import Tags from '@/components/Tags'
 import { Avatar, Card } from 'flowbite-react'
 import Image from 'next/image'
-import { HiOutlineChat, HiOutlineThumbUp } from 'react-icons/hi'
+import { HiOutlineThumbUp } from 'react-icons/hi'
 import dayjs from 'dayjs'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
-import { getPublicUrl } from '@/lib/supabase/api/storage'
-import { useEffect, useState } from 'react'
 import Stars from '@/components/Stars'
 import ReviewMenu from './ReviewMenu'
 import { useAuthStore } from '@/stores/auth.store'
+import { useParseFile } from '@/hooks/useParseFile'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
-  const [publicUrl, setPublicUrl] = useState<string | null>(null)
   const { userData } = useAuthStore()
 
   const isOwner = userData?.id === review.userinfo?.id
 
-  useEffect(() => {
-    if (review.images?.[0]) {
-      getPublicUrl(review.images[0]).then((url) => setPublicUrl(url))
-    }
-  }, [review.images])
+  const { publicUrls } = useParseFile(review.images || [])
 
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
@@ -42,9 +36,18 @@ export default function ReviewCard({ review }: { review: BarReview }) {
       </div>
 
       <p>{review.body}</p>
-      {publicUrl && (
-        <Image src={publicUrl} alt={'리뷰 이미지'} width={100} height={100} />
-      )}
+      <div className="flex flex-wrap gap-2">
+        {publicUrls.length > 0 &&
+          publicUrls.map((url, index) => (
+            <Image
+              key={index}
+              src={url}
+              alt={'리뷰 이미지 ' + index + 1}
+              width={100}
+              height={100}
+            />
+          ))}
+      </div>
       <Tags
         tags={review.review_tags
           .map((tag) => tag.tags)
@@ -56,10 +59,10 @@ export default function ReviewCard({ review }: { review: BarReview }) {
             <HiOutlineThumbUp size={20} />
             {review.like_count || 0}개
           </div>
-          <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
+          {/* <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
             <HiOutlineChat size={20} />
             {review.comment_count || 0}개
-          </div>
+          </div> */}
         </div>
         <span>
           {review.updated_at
