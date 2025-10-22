@@ -13,6 +13,7 @@ import {
 import ReviewEditModal from '@bar-detail/_components/BarFooter/Review/Modal/ReviewEditModal'
 import ReviewCreateModal from '@bar-detail/_components/BarFooter/Review/Modal/ReviewCreateModal'
 import ConfirmModal from '@/components/Modals/ConfirmModal'
+import { SnackBarProvider } from '@/components/Providers/SnackBarProvider'
 
 const modalRegistry: ModalRegistry = {
   ReviewCreateModal: ReviewCreateModal,
@@ -42,8 +43,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <AuthProvider>
         <ThemeProvider theme={basicTheme}>
           <ModalProvider registry={modalRegistry}>
-            {children}
-            <div id="modal-root" />
+            <SnackBarProvider>
+              {children}
+              <div id="modal-root" />
+              <div id="snackbar-root" />
+            </SnackBarProvider>
           </ModalProvider>
         </ThemeProvider>
       </AuthProvider>
