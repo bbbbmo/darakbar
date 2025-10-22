@@ -41,6 +41,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
           publicUrls.map((url, index) => (
             <Image
               key={index}
+              className="cursor-pointer rounded-md object-cover transition-all duration-200 ease-in-out hover:scale-103"
               src={url}
               alt={'리뷰 이미지 ' + index + 1}
               width={100}

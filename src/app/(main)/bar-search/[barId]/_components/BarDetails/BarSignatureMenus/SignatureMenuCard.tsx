@@ -1,5 +1,6 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
+import { useParseFile } from '@/hooks/useParseFile'
 import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { Card } from 'flowbite-react'
 import Image from 'next/image'
@@ -9,19 +10,24 @@ type SignatureMenuCardProps = {
 }
 
 export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
+  const { publicUrls } = useParseFile(menu.image || '')
+  const isValidUrl = typeof publicUrls === 'string' && publicUrls.trim() !== ''
+
   return (
     <Card
       className="relative! transition delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:scale-103"
       key={menu.id}
       renderImage={() =>
-        menu.image && (
-          <Image
-            src={menu.image}
-            alt={menu.name}
-            fill
-            className="h-auto object-cover"
-          />
-        )
+        isValidUrl ? (
+          <div className="relative aspect-[2/1] w-full">
+            <Image
+              src={publicUrls}
+              alt={menu.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ) : null
       }
     >
       <div className="flex flex-col gap-8">

@@ -1,4 +1,4 @@
-import { getPublicUrl } from '@/lib/supabase/api/storage'
+import { useParseFile } from '@/hooks/useParseFile'
 import { FileInput, Label } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import {
@@ -23,8 +23,8 @@ export default function FormFileInput({
   existingImages,
 }: FormFileInputProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const [existingImagePreviews, setExistingImagePreviews] = useState<string[]>(
-    [],
+  const { publicUrls: existingImagePreviews } = useParseFile(
+    existingImages || [],
   )
 
   useEffect(() => {
@@ -34,23 +34,6 @@ export default function FormFileInput({
       }
     }
   }, [imagePreview])
-
-  useEffect(() => {
-    if (!existingImages || existingImages.length === 0) {
-      return
-    }
-
-    const loadExistingImages = async () => {
-      const previews = await Promise.all(
-        existingImages.map(async (imagePath) => {
-          return await getPublicUrl(imagePath)
-        }),
-      )
-      setExistingImagePreviews(previews)
-    }
-
-    loadExistingImages()
-  }, [existingImages])
 
   const removeExistingImage = (index: number) => {
     const updatedImages = existingImages?.filter((_, i) => i !== index)
