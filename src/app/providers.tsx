@@ -10,8 +10,8 @@ import {
   ModalProvider,
   ModalRegistry,
 } from '@/components/Providers/ModalProvider'
-import ReviewEditModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewEditModal'
-import ReviewCreateModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewCreateModal'
+import ReviewEditModal from '@bar-detail/_components/BarFooter/Review/Modal/ReviewEditModal'
+import ReviewCreateModal from '@bar-detail/_components/BarFooter/Review/Modal/ReviewCreateModal'
 import ConfirmModal from '@/components/Modals/ConfirmModal'
 
 const modalRegistry: ModalRegistry = {

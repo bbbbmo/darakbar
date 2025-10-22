@@ -1,4 +1,4 @@
-// ReviewCreateModal.tsx
+// ReviewEditModal.tsx
 'use client'
 
 import { useForm } from 'react-hook-form'
@@ -6,25 +6,24 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
-import { useBarDetailStore } from '../../../_stores/bar-detail.store'
-import {
-  postBarReview,
-  PostBarReviewBody,
-} from '@/lib/supabase/api/review/postBarReview'
+import { useBarDetailStore } from '@bar-detail/_stores/bar-detail.store'
+import { patchBarReview } from '@/lib/supabase/api/review/patchBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
+import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 import { uploadFiles } from '@/lib/supabase/api/storage'
-import z from 'zod'
 
-export type ReviewCreateModalProps = {
+export type ReviewEditModalProps = {
   barId: number
+  review: BarReview
   onClose: () => void
 }
 
-export default function ReviewCreateModal({
+export default function ReviewEditModal({
   barId,
+  review,
   onClose,
-}: ReviewCreateModalProps) {
+}: ReviewEditModalProps) {
   const { userData } = useAuthStore()
   const barDetail = useBarDetailStore((state) => state.barDetail)
   const { invalidateQueries } = useInvalidateQueries()
@@ -33,32 +32,28 @@ export default function ReviewCreateModal({
     mode: 'onSubmit',
     resolver: zodResolver(ReviewFormSchema),
     defaultValues: {
-      rating: 0,
-      visitDate: new Date(),
-      body: '',
+      rating: review.rating,
+      body: review.body || '',
       images: null,
-      tagIds: [],
+      existingImages: review.images || [],
+      tagIds: review.review_tags.map((tag) => tag.tags?.id),
+      visitDate: new Date(review.visit_date),
     },
   })
 
-  const { mutate: createReviewMutation } = useMutation({
-    mutationFn: ({
-      userId,
-      body,
-    }: {
-      userId: string
-      body: PostBarReviewBody
-    }) => postBarReview({ barId: barId, userId, body }),
+  const { mutate: updateReviewMutation } = useMutation({
+    mutationFn: ({ userId, body }: { userId: string; body: any }) =>
+      patchBarReview({ reviewId: review.id, userId, body }),
     onSuccess: () => {
       invalidateQueries([['bar-reviews', barId]])
       onClose()
     },
     onError: (error) => {
-      console.error('리뷰 등록 실패', error)
+      console.error('리뷰 수정 실패', error)
     },
   })
 
-  const createReview = async (data: ReviewForm) => {
+  const updateReview = form.handleSubmit(async (data) => {
     try {
       const imageUrls: string[] = []
       if (!userData) {
@@ -67,13 +62,18 @@ export default function ReviewCreateModal({
       if (!barId) {
         throw new Error('바 정보가 없습니다.')
       }
+      if (data.existingImages) {
+        imageUrls.push(...data.existingImages)
+      }
       if (data.images) {
         const results = await uploadFiles(
           data.images,
           `bars/${barId}/review-images/${userData.id}`,
         )
         results.forEach((result) => {
-          imageUrls.push(result.data?.path || '')
+          if (result.data?.path) {
+            imageUrls.push(result.data.path)
+          }
           if (result.error) {
             throw new Error(`이미지 업로드 실패: ${result.error.message}`)
           }
@@ -88,20 +88,21 @@ export default function ReviewCreateModal({
         visitDate: data.visitDate.toISOString(),
       }
 
-      createReviewMutation({ userId: userData.id, body })
+      updateReviewMutation({ userId: userData.id, body })
     } catch (error) {
       console.error(error)
     }
-  }
+  })
 
   return (
     <ReviewFormModal
-      title="리뷰 작성"
-      description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 작성해주세요`}
+      title="리뷰 수정"
+      description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 수정해주세요`}
+      disableRating={true}
       form={form}
-      onSubmit={() => createReview(form.getValues())}
+      onSubmit={updateReview}
       onClose={onClose}
-      submitButtonText="리뷰 등록"
+      submitButtonText="리뷰 수정"
     />
   )
 }

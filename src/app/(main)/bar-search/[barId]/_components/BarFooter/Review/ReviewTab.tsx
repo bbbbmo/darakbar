@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { useBar } from '../../../_providers/BarProviders'
 import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
-import UploadCard from '../../../../../../../components/Cards/UploadCard'
+import UploadCard from '@components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/components/Providers/ModalProvider'
 
