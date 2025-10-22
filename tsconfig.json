@@ -28,7 +28,9 @@
       "@hooks/*": ["src/hooks/*"],
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@bar-search/*": ["src/app/(main)/bar-search/*"],
+      "@bar-detail/*": ["src/app/(main)/bar-search/[barId]/*"]
     },
     "types": ["kakao.maps.d.ts"]
   },
