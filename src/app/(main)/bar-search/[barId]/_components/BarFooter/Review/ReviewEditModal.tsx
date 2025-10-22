@@ -34,7 +34,8 @@ export default function ReviewEditModal({
     defaultValues: {
       rating: review.rating,
       body: review.body || '',
-      images: review.images,
+      images: null,
+      existingImages: review.images || [],
       tagIds: review.review_tags.map((tag) => tag.tags?.id),
       visitDate: new Date(review.visit_date),
     },
@@ -62,13 +63,18 @@ export default function ReviewEditModal({
       if (!barId) {
         throw new Error('바 정보가 없습니다.')
       }
+      if (data.existingImages) {
+        imageUrls.push(...data.existingImages)
+      }
       if (data.images) {
         const results = await uploadFiles(
           data.images,
           `bars/${barId}/review-images/${userData.id}`,
         )
         results.forEach((result) => {
-          imageUrls.push(result.data?.path || '')
+          if (result.data?.path) {
+            imageUrls.push(result.data.path)
+          }
           if (result.error) {
             throw new Error(`이미지 업로드 실패: ${result.error.message}`)
           }

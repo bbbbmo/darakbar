@@ -10,6 +10,7 @@ export const ReviewFormSchema = z.object({
     .array(z.instanceof(File))
     .max(3, '사진은 최대 3장까지 업로드할 수 있습니다')
     .nullable(),
+  existingImages: z.array(z.string()).optional(),
   tagIds: z.array(z.number()).min(1, '태그를 선택해주세요'),
 })
 

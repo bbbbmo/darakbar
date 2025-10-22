@@ -57,6 +57,7 @@ export default function ReviewFormModal({
     formState: { errors },
   } = form
   const watchedRating = watch('rating')
+  const existingImages = watch('existingImages')
 
   const { data: reviewTags } = useQuery({
     queryKey: ['review-tags'],
@@ -129,6 +130,7 @@ export default function ReviewFormModal({
                 registeration={register('images')}
                 setValue={setValue}
                 trigger={trigger}
+                existingImages={existingImages}
               />
             </FormItem>
 
