@@ -1,5 +1,5 @@
 import { Badge } from 'flowbite-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Tag = {
   id: number
@@ -9,10 +9,16 @@ type Tag = {
 type TagsProps = {
   tags: Tag[]
   active?: boolean
+  existingTagIds?: number[]
   setTagIds?: (tagIds: number[]) => void
 }
 
-export default function Tags({ tags, active = false, setTagIds }: TagsProps) {
+export default function Tags({
+  tags,
+  active = false,
+  existingTagIds,
+  setTagIds,
+}: TagsProps) {
   const [selectedTagIds, setSelectedTagIds] = useState<number[]>([])
   const colors = [
     'failure',
@@ -24,6 +30,12 @@ export default function Tags({ tags, active = false, setTagIds }: TagsProps) {
     'pink',
     'purple',
   ]
+
+  useEffect(() => {
+    if (existingTagIds && existingTagIds.length > 0) {
+      setSelectedTagIds(existingTagIds)
+    }
+  }, [existingTagIds])
 
   const handleTagClick = (tagId: number) => {
     let newSelectedTagIds: number[]
