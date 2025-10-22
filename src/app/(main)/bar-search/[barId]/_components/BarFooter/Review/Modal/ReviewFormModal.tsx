@@ -3,6 +3,7 @@
 
 import {
   Button,
+  Card,
   Datepicker,
   Modal,
   ModalBody,
@@ -146,6 +147,12 @@ export default function ReviewFormModal({
                 )}
               />
             </FormItem>
+            <Card className="border-neutral-600 bg-neutral-800">
+              <p className="text-sm text-gray-500">
+                작성하신 리뷰는 다른 사용자들에게 공개됩니다. 허위 정보나
+                부적절한 내용이 포함된 리뷰는 관리자에 의해 삭제될 수 있습니다.
+              </p>
+            </Card>
           </div>
         </form>
       </ModalBody>
