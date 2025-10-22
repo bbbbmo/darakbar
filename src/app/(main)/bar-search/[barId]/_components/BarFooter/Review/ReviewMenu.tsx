@@ -12,7 +12,7 @@ import { useModal } from '@/components/Providers/ModalProvider'
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
   const { barId } = useBar()
-  const { open, close } = useModal()
+  const { open, close, confirm } = useModal()
   const { mutate: deleteReviewMutation } = useMutation({
     mutationFn: () => deleteBarReview(review.id),
     onSuccess: () => {
@@ -22,6 +22,19 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
 
   const openReviewEditModal = () => {
     open('ReviewEditModal', { review, onClose: close })
+  }
+
+  const deleteReview = async () => {
+    await confirm({
+      title: '리뷰 삭제',
+      message: '리뷰를 삭제하시겠습니까?',
+      onConfirm: () => {
+        deleteReviewMutation()
+      },
+      onCancel: () => {
+        return
+      },
+    })
   }
   return (
     <Dropdown
@@ -33,7 +46,7 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
       <DropdownItem icon={HiPencil} onClick={openReviewEditModal}>
         수정
       </DropdownItem>
-      <DropdownItem icon={HiTrash} onClick={() => deleteReviewMutation()}>
+      <DropdownItem icon={HiTrash} onClick={deleteReview}>
         삭제
       </DropdownItem>
     </Dropdown>

@@ -55,7 +55,6 @@ export default function ReviewEditModal({
 
   const updateReview = form.handleSubmit(async (data) => {
     try {
-      console.log(data)
       const imageUrls: string[] = []
       if (!userData) {
         throw new Error('로그인 후 리뷰를 작성할 수 있습니다.')
@@ -89,7 +88,6 @@ export default function ReviewEditModal({
         visitDate: data.visitDate.toISOString(),
       }
 
-      console.log(body)
       updateReviewMutation({ userId: userData.id, body })
     } catch (error) {
       console.error(error)
@@ -100,7 +98,7 @@ export default function ReviewEditModal({
     <ReviewFormModal
       title="리뷰 수정"
       description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 수정해주세요`}
-      showRating={false}
+      disableRating={true}
       form={form}
       onSubmit={updateReview}
       onClose={onClose}

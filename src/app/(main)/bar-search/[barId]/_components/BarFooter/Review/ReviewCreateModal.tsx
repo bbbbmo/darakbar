@@ -14,6 +14,7 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
 import { uploadFiles } from '@/lib/supabase/api/storage'
+import z from 'zod'
 
 export type ReviewCreateModalProps = {
   barId: number
@@ -59,7 +60,6 @@ export default function ReviewCreateModal({
 
   const createReview = async (data: ReviewForm) => {
     try {
-      console.log(data)
       const imageUrls: string[] = []
       if (!userData) {
         throw new Error('로그인 후 리뷰를 작성할 수 있습니다.')
@@ -88,7 +88,6 @@ export default function ReviewCreateModal({
         visitDate: data.visitDate.toISOString(),
       }
 
-      console.log(body)
       createReviewMutation({ userId: userData.id, body })
     } catch (error) {
       console.error(error)
@@ -99,7 +98,6 @@ export default function ReviewCreateModal({
     <ReviewFormModal
       title="리뷰 작성"
       description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 작성해주세요`}
-      showRating={true}
       form={form}
       onSubmit={() => createReview(form.getValues())}
       onClose={onClose}

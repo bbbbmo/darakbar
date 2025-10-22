@@ -30,7 +30,7 @@ export default function ReviewTab() {
   const onPageChange = (page: number) => setCurrentPage(page)
 
   const openReviewCreateModal = () => {
-    open('ReviewCreateModal', { barId, close })
+    open('ReviewCreateModal', { barId, onClose: close })
   }
   return (
     <div className="px-4">

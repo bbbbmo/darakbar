@@ -24,7 +24,7 @@ import { ReviewForm } from './ReviewFormModal.schemes'
 export type ReviewFormModalProps = {
   title: string
   description: string
-  showRating?: boolean
+  disableRating?: boolean
   form: UseFormReturn<ReviewForm>
   onSubmit: () => void
   onClose: () => void
@@ -34,7 +34,7 @@ export type ReviewFormModalProps = {
 export default function ReviewFormModal({
   title,
   description,
-  showRating = true,
+  disableRating = false,
   form,
   onSubmit,
   onClose,
@@ -73,28 +73,26 @@ export default function ReviewFormModal({
         <form id="review-form" onSubmit={onSubmit}>
           <FormDescription>{description}</FormDescription>
           <div className="flex flex-col gap-2">
-            {showRating && (
-              <FormItem label="평점" required>
-                <div className="flex items-center gap-2">
-                  <Controller
-                    name="rating"
-                    control={control}
-                    render={({ field }) => (
-                      <Stars
-                        rating={field.value}
-                        size={24}
-                        active={true}
-                        setRating={field.onChange}
-                      />
-                    )}
-                  />
-                  <span className="text-sm text-gray-500">
-                    {watchedRating > 0 ? ratingInfo[watchedRating - 1] : ''}
-                  </span>
-                </div>
-                <FormErrorMessage error={errors.rating} />
-              </FormItem>
-            )}
+            <FormItem label="평점" required>
+              <div className="flex items-center gap-2">
+                <Controller
+                  name="rating"
+                  control={control}
+                  render={({ field }) => (
+                    <Stars
+                      rating={field.value}
+                      size={24}
+                      active={!disableRating}
+                      setRating={field.onChange}
+                    />
+                  )}
+                />
+                <span className="text-sm text-gray-500">
+                  {watchedRating > 0 ? ratingInfo[watchedRating - 1] : ''}
+                </span>
+              </div>
+              <FormErrorMessage error={errors.rating} />
+            </FormItem>
 
             <FormItem label="방문 날짜" required>
               <Controller
@@ -125,7 +123,7 @@ export default function ReviewFormModal({
               <FormErrorMessage error={errors.body} />
             </FormItem>
 
-            <FormItem label="사진 (최대 3장)" required>
+            <FormItem label="사진 (최대 3장)">
               <FormFileInput
                 registeration={register('images')}
                 setValue={setValue}
@@ -142,6 +140,7 @@ export default function ReviewFormModal({
                   <Tags
                     tags={reviewTags?.data || []}
                     active={true}
+                    existingTagIds={field.value}
                     setTagIds={field.onChange}
                   />
                 )}
