@@ -10,10 +10,14 @@ import {
   ModalProvider,
   ModalRegistry,
 } from '@/components/Providers/ModalProvider'
-import ReviewFormModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewFormModal'
+import ReviewEditModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewEditModal'
+import ReviewCreateModal from './(main)/bar-search/[barId]/_components/BarFooter/Review/ReviewCreateModal'
+import ConfirmModal from '@/components/Modals/ConfirmModal'
 
 const modalRegistry: ModalRegistry = {
-  ReviewFormModal: ReviewFormModal,
+  ReviewCreateModal: ReviewCreateModal,
+  ReviewEditModal: ReviewEditModal,
+  ConfirmModal: ConfirmModal,
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
