@@ -7,6 +7,7 @@ import { Button, Card } from 'flowbite-react'
 import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'
 import { Bar } from '@/lib/supabase/api/bar/getBars'
 import { getOpenStatus } from '../../bar-search/_utils/formatBusinessHour'
+import { useParseFile } from '@/hooks/useParseFile'
 
 type BarCardProps = {
   barInfo: Bar
@@ -23,6 +24,7 @@ export default function BarCard({
 }: BarCardProps) {
   if (!barInfo) return null
 
+  const { publicUrls } = useParseFile(barInfo.bar_images || [])
   return (
     <>
       {loading ? (
@@ -32,7 +34,7 @@ export default function BarCard({
           theme={basicTheme.bar}
           className={`${className}`}
           imgAlt="Bar Image"
-          imgSrc={barInfo.bar_images?.[0] ?? undefined}
+          imgSrc={publicUrls[0]}
         >
           <section>
             {/* 칵테일 이름 */}

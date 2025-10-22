@@ -1,18 +1,20 @@
 import Image from 'next/image'
 import { useBarDetailStore } from '../../_stores/bar-detail.store'
+import { useParseFile } from '@/hooks/useParseFile'
 
 // TODO: 이미지 여러개 추가
 export default function BarImage() {
   const barDetail = useBarDetailStore((state) => state.barDetail)
 
+  const { publicUrls } = useParseFile(barDetail?.bar_images || [])
   return (
     <div className="relative h-[400px] w-full">
-      {barDetail?.bar_images && barDetail?.bar_images?.length > 0 ? (
-        barDetail?.bar_images?.map((image, index) => (
+      {publicUrls.length > 0 ? (
+        publicUrls.map((url, index) => (
           <Image
             key={index}
-            src={image}
-            alt={barDetail.name}
+            src={url}
+            alt={'Bar Image ' + index + 1}
             fill
             sizes="100vw"
             className="rounded-lg object-cover"
