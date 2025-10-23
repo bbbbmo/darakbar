@@ -7,7 +7,7 @@ import BarContact from './BarDetails/BarContact'
 import BarSignatureMenus from './BarDetails/BarSignatureMenus/BarSignatureMenus'
 import BackToListButton from './BarDetails/BackToListButton'
 import BarFooter from './BarFooter/BarFooter'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { useBar } from '../_providers/BarProviders'
 import { useEffect } from 'react'
@@ -15,22 +15,16 @@ import { useBarDetailStore } from '../_stores/bar-detail.store'
 
 export default function BarDetailContent() {
   const { barId } = useBar()
-  const { data: barDetail } = useQuery({
+  const { data: barDetail } = useSuspenseQuery({
     queryKey: ['bar', barId],
     queryFn: () => getBarDetail(barId),
-    enabled: !!barId,
   })
 
   const setBarDetail = useBarDetailStore((state) => state.setBarDetail)
 
   useEffect(() => {
-    if (barDetail?.data) {
-      setBarDetail(barDetail.data)
-    }
+    setBarDetail(barDetail.data)
   }, [barDetail])
-
-  console.log('🔍 BarDetailContent query result:', barDetail)
-  if (!barDetail?.data) return null
 
   return (
     <>

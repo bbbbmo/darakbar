@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { Button, Card } from "flowbite-react";
-import Stars from "../../../../components/Stars";
-import CardSkeleton from "../../../../components/Cards/CardSkeleton";
-import { UserRecipe } from "@/types/recipe/recipe.types";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { Button, Card } from 'flowbite-react'
+import Stars from '../../../../components/Stars'
+import CardSkeleton from '../../../../components/Skeletons/CardSkeleton'
+import { UserRecipe } from '@/types/recipe/recipe.types'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 
 type RecipeCardProps = {
-  recipe: UserRecipe;
-  loading: boolean;
-  className?: string;
-};
+  recipe: UserRecipe
+  loading: boolean
+  className?: string
+}
 
 const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
-  const pathname = usePathname();
+  const pathname = usePathname()
   return (
     <>
       {loading ? (
@@ -38,7 +38,7 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
             <div className="flex items-center justify-between">
               {/* 등록한 사람 */}
               <span className="text-xl font-bold dark:text-white">
-                {recipe.userinfo?.name ?? "유저 정보 없음"}
+                {recipe.userinfo?.name ?? '유저 정보 없음'}
               </span>
               {/* 레시피 보기 버튼 */}
               <Button
@@ -53,7 +53,7 @@ const RecipeCard = ({ recipe, loading, className }: RecipeCardProps) => {
         </Card>
       )}
     </>
-  );
-};
+  )
+}
 
-export default RecipeCard;
+export default RecipeCard

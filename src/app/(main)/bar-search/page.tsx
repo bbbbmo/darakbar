@@ -8,6 +8,8 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 import { getBars } from '@/lib/supabase/api/bar/getBars'
+import { Suspense } from 'react'
+import Loading from '@/app/loading'
 
 export default async function BarSearch() {
   const queryClient = new QueryClient()
@@ -19,10 +21,12 @@ export default async function BarSearch() {
   })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BarSearchHeader />
-      <BarFilter />
-      <BarMap />
-      <BarList />
+      <Suspense fallback={<Loading />}>
+        <BarSearchHeader />
+        <BarFilter />
+        <BarMap />
+        <BarList />
+      </Suspense>
     </HydrationBoundary>
   )
 }

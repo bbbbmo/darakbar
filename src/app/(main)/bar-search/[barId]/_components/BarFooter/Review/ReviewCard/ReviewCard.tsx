@@ -11,13 +11,14 @@ import { useAuthStore } from '@/stores/auth.store'
 import { useParseFile } from '@/hooks/useParseFile'
 
 import ReviewLike from './ReviewLike'
+import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
   const { userData } = useAuthStore()
 
   const isOwner = userData?.id === review.userinfo?.id
 
-  const { publicUrls } = useParseFile(review.images || [])
+  const { publicUrls, isLoading } = useParseFile(review.images || [])
 
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
@@ -39,17 +40,21 @@ export default function ReviewCard({ review }: { review: BarReview }) {
       <p>{review.body}</p>
       <div className="flex flex-wrap gap-2">
         {publicUrls.length > 0 &&
-          publicUrls.map((url, index) => (
-            <Image
-              key={index}
-              className="cursor-pointer rounded-md object-cover transition-all duration-200 ease-in-out hover:scale-103"
-              src={url}
-              alt={'리뷰 이미지 ' + index + 1}
-              width={100}
-              height={100}
-              style={{ width: 'auto', height: 'auto' }}
-            />
-          ))}
+          publicUrls.map((url, index) =>
+            isLoading ? (
+              <ImageSkeleton key={index} width={100} height={100} />
+            ) : (
+              <Image
+                key={index}
+                className="cursor-pointer rounded-md object-cover transition-all duration-200 ease-in-out hover:scale-103"
+                src={url}
+                alt={'리뷰 이미지 ' + index + 1}
+                width={100}
+                height={100}
+                style={{ width: 'auto', height: 'auto' }}
+              />
+            ),
+          )}
       </div>
       <Tags
         tags={review.review_tags

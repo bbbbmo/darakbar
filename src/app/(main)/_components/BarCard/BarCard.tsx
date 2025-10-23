@@ -1,6 +1,6 @@
 'use client'
 
-import CardSkeleton from '@/components/Cards/CardSkeleton'
+import CardSkeleton from '@/components/Skeletons/CardSkeleton'
 import Tags from '@/components/Tags'
 import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 import { Button, Card } from 'flowbite-react'
