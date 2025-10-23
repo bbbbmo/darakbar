@@ -16,6 +16,7 @@ import clsx from 'clsx'
 import { deleteBarReviewLike } from '@/lib/supabase/api/review/likes/deleteBarReviewLike'
 import { postBarReviewLike } from '@/lib/supabase/api/review/likes/postBarReviewLike'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { produce } from 'immer'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
   const { userData } = useAuthStore()
@@ -59,19 +60,17 @@ export default function ReviewCard({ review }: { review: BarReview }) {
       queryClient.setQueryData(
         ['bar-reviews', String(review.bar_id)],
         (old: { data: BarReview[] }) => {
-          return old.data.map((r) => {
-            console.log('r', r)
-            if (r.id === review.id) {
-              return {
-                ...r,
-                like_count: isLiked ? r.like_count - 1 : r.like_count + 1,
-                likes: isLiked
-                  ? r.likes?.filter((like) => like.user_id !== userData?.id)
-                  : [...(r.likes || []), { user_id: userData?.id }],
+          return {
+            ...old,
+            data: produce(old.data, (draft) => {
+              const reviewIndex = draft.findIndex((r) => r.id === review.id)
+              if (reviewIndex !== -1) {
+                isLiked
+                  ? draft[reviewIndex].like_count--
+                  : draft[reviewIndex].like_count++
               }
-            }
-            return r
-          })
+            }),
+          }
         },
       )
 
