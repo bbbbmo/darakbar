@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Badge } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 
@@ -65,11 +66,10 @@ export default function Tags({
           <Badge
             key={tag.id}
             color={active ? 'gray' : color}
-            className={`${
-              active && isSelected
-                ? 'scale-105 bg-amber-400 opacity-100 shadow-md hover:bg-amber-500'
-                : 'opacity-70 hover:opacity-100'
-            }`}
+            className={clsx(
+              isSelected &&
+                `scale-105 bg-amber-400 opacity-100 shadow-md hover:bg-amber-500`,
+            )}
             onClick={() => handleTagClick(tag.id)}
           >
             {tag.name}
