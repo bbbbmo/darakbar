@@ -157,7 +157,7 @@ export default function ReviewFormModal({
         </form>
       </ModalBody>
       <ModalFooter className="bg-primary">
-        <div className="flex gap-2">
+        <div className="ml-auto flex gap-2">
           <Button onClick={onClose}>취소</Button>
           <Button color="primary" type="submit" form="review-form">
             {submitButtonText}
