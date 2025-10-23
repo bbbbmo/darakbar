@@ -7,7 +7,10 @@ import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
 import { useBarDetailStore } from '@bar-detail/_stores/bar-detail.store'
-import { patchBarReview } from '@/lib/supabase/api/review/patchBarReview'
+import {
+  patchBarReview,
+  patchBarReviewBody,
+} from '@/lib/supabase/api/review/patchBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
@@ -43,10 +46,16 @@ export default function ReviewEditModal({
   })
 
   const { mutate: updateReviewMutation } = useMutation({
-    mutationFn: ({ userId, body }: { userId: string; body: any }) =>
-      patchBarReview({ reviewId: review.id, userId, body }),
+    mutationFn: ({
+      userId,
+      body,
+    }: {
+      userId: string
+      body: patchBarReviewBody
+    }) => patchBarReview({ reviewId: review.id, userId, body }),
     onSuccess: () => {
-      invalidateQueries([['bar-reviews', barId]])
+      console.log('barId', barId)
+      invalidateQueries([['bar-reviews', String(barId)]])
       snackBar.showSuccess(
         '리뷰 수정 성공',
         '리뷰가 성공적으로 수정되었습니다.',

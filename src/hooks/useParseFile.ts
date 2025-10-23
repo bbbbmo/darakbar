@@ -1,13 +1,30 @@
 import { snackBar } from '@/components/Providers/SnackBarProvider'
 import { getPublicUrl } from '@/lib/supabase/api/storage'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
 
-export function useParseFile(filePaths: string): { publicUrls: string }
-export function useParseFile(filePaths: string[]): { publicUrls: string[] }
+export function useParseFile(filePaths: string): {
+  publicUrls: string
+  isLoading: boolean
+}
+export function useParseFile(filePaths: string[]): {
+  publicUrls: string[]
+  isLoading: boolean
+}
 export function useParseFile(filePaths: string | string[]) {
   const [publicUrls, setPublicUrls] = useState<string | string[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // 깊은 비교를 위한 안정적인 키 생성
+  const filePathsKey = useMemo(() => {
+    if (Array.isArray(filePaths)) {
+      return JSON.stringify(filePaths)
+    }
+    return filePaths || ''
+  }, [filePaths])
 
   useEffect(() => {
+    setIsLoading(true)
+
     const loadPublicUrls = async () => {
       try {
         if (Array.isArray(filePaths)) {
@@ -33,12 +50,15 @@ export function useParseFile(filePaths: string | string[]) {
             : '알 수 없는 오류가 발생했습니다.',
         )
         setPublicUrls(Array.isArray(filePaths) ? [] : '')
+      } finally {
+        setIsLoading(false)
       }
     }
     loadPublicUrls()
-  }, [filePaths])
+  }, [filePathsKey]) // 안정적인 키 사용
 
   return {
     publicUrls,
+    isLoading,
   }
 }
