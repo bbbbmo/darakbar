@@ -1,4 +1,3 @@
-// ReviewCreateModal.tsx
 'use client'
 
 import { useForm } from 'react-hook-form'
@@ -67,7 +66,7 @@ export default function ReviewCreateModal({
     },
   })
 
-  const createReview = async (data: ReviewForm) => {
+  const createReview = form.handleSubmit(async (data: ReviewForm) => {
     try {
       const imageUrls: string[] = []
       if (!userData) {
@@ -106,14 +105,14 @@ export default function ReviewCreateModal({
           : '알 수 없는 오류가 발생했습니다.',
       )
     }
-  }
+  })
 
   return (
     <ReviewFormModal
       title="리뷰 작성"
       description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 작성해주세요`}
       form={form}
-      onSubmit={() => createReview(form.getValues())}
+      onSubmit={createReview}
       onClose={onClose}
       submitButtonText="리뷰 등록"
     />
