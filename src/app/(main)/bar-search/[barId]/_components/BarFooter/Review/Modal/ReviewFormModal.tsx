@@ -21,6 +21,7 @@ import { getReviewTags } from '@/lib/supabase/api/tag/getReviewTags'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import { ReviewForm } from './ReviewFormModal.schemes'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 
 export type ReviewFormModalProps = {
   title: string
@@ -101,6 +102,8 @@ export default function ReviewFormModal({
                 control={control}
                 render={({ field }) => (
                   <Datepicker
+                    theme={basicTheme.datepicker}
+                    color="primary"
                     language="ko"
                     labelTodayButton="오늘"
                     labelClearButton="초기화"

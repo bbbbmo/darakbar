@@ -11,7 +11,13 @@ type SignatureMenuCardProps = {
 
 export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
   const { publicUrls } = useParseFile(menu.image || '')
-  const isValidUrl = typeof publicUrls === 'string' && publicUrls.trim() !== ''
+
+  // 더 엄격한 URL 검증
+  const isValidUrl =
+    typeof publicUrls === 'string' &&
+    publicUrls.trim() !== '' &&
+    publicUrls.includes('darakbar-storage') &&
+    publicUrls.includes('.') // 파일 확장자가 있는지 확인
 
   return (
     <Card
@@ -24,10 +30,15 @@ export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
               src={publicUrls}
               alt={menu.name}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
-        ) : null
+        ) : (
+          <div className="relative flex aspect-[2/1] w-full items-center justify-center bg-gray-200">
+            <span className="text-gray-500">이미지 없음</span>
+          </div>
+        )
       }
     >
       <div className="flex flex-col gap-8">

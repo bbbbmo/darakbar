@@ -152,10 +152,12 @@ export const basicTheme = createTheme({
   datepicker: {
     root: {
       base: 'relative',
-      input: {
-        colors: {
-          primary:
-            'border-gray-800 bg-gray-700 text-gray-50 placeholder-gray-300 focus:border-gray-900 focus:ring-gray-800',
+      field: {
+        input: {
+          colors: {
+            primary:
+              '!border-gray-800 !bg-gray-700 !text-gray-50 !placeholder-gray-300 !focus:border-gray-900 !focus:ring-gray-800',
+          },
         },
       },
     },
