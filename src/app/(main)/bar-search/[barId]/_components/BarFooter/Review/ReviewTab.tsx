@@ -15,7 +15,6 @@ import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/components/Providers/ModalProvider'
 
 export default function ReviewTab() {
-  const rating = 4.5
   const [currentPage, setCurrentPage] = useState<number>(1)
   const totalPages = Math.ceil(mockReviews.length / 5)
 
@@ -36,8 +35,8 @@ export default function ReviewTab() {
     <div className="px-4">
       <section className="mb-4">
         <div className="flex flex-col gap-2">
-          <span className="text-4xl font-bold">{rating}</span>
-          <Stars rating={rating} size={24} />
+          <span className="text-4xl font-bold">{0.0}</span>
+          <Stars rating={0.0} size={24} />
         </div>
         <div className="flex items-center justify-between">
           <span>리뷰 {reviews?.data?.length || 0}개</span>

@@ -38,6 +38,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }),
   )
 
+  if (typeof window !== 'undefined') {
+    window.__TANSTACK_QUERY_CLIENT__ = queryClient
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -54,3 +58,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
     </QueryClientProvider>
   )
 }
+
+declare global {
+  interface Window {
+    __TANSTACK_QUERY_CLIENT__: import('@tanstack/query-core').QueryClient
+  }
+}
+
+// This code is for all users

@@ -10,6 +10,7 @@ export const getBarReviews = async (barId: number) => {
     .select(
       `
       id,
+      bar_id,
       userinfo(
         id,
         name,
@@ -23,6 +24,12 @@ export const getBarReviews = async (barId: number) => {
           id,
           name
         )
+      ),
+      likes(
+        id,
+        user_id,
+        comment_id,
+        review_id
       ),
       like_count,
       comment_count,

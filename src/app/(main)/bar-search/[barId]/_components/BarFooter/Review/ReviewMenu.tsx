@@ -5,7 +5,6 @@ import { deleteBarReview } from '@/lib/supabase/api/review/deleteBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { Dropdown, DropdownItem } from 'flowbite-react'
 import { HiDotsHorizontal, HiPencil, HiTrash } from 'react-icons/hi'
-import { useBar } from '../../../_providers/BarProviders'
 import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 import { useModal } from '@/components/Providers/ModalProvider'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
@@ -13,12 +12,11 @@ import { PostgrestError } from '@supabase/supabase-js'
 
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
-  const { barId } = useBar()
   const { open, close, confirm } = useModal()
   const { mutate: deleteReviewMutation } = useMutation({
     mutationFn: () => deleteBarReview(review.id),
     onSuccess: () => {
-      invalidateQueries([['bar-reviews', barId]])
+      invalidateQueries([['bar-reviews', review.bar_id]])
       snackBar.showSuccess(
         '리뷰 삭제 성공',
         '리뷰가 성공적으로 삭제되었습니다.',
@@ -35,7 +33,7 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
   })
 
   const openReviewEditModal = () => {
-    open('ReviewEditModal', { barId, review, onClose: close })
+    open('ReviewEditModal', { barId: review.bar_id, review, onClose: close })
   }
 
   const deleteReview = async () => {
