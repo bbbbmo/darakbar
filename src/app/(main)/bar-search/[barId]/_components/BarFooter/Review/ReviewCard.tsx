@@ -60,6 +60,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
         ['bar-reviews', String(review.bar_id)],
         (old: { data: BarReview[] }) => {
           return old.data.map((r) => {
+            console.log('r', r)
             if (r.id === review.id) {
               return {
                 ...r,
@@ -81,11 +82,6 @@ export default function ReviewCard({ review }: { review: BarReview }) {
         ['bar-reviews', String(review.bar_id)],
         context?.previousReviews,
       )
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['bar-reviews', String(review.bar_id)],
-      })
     },
   })
 
