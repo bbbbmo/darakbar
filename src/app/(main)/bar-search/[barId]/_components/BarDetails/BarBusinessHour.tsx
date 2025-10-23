@@ -22,7 +22,7 @@ export default function BarBusinessHour() {
         icon={<HiOutlineClock size={24} className="text-amber-400" />}
         title="운영 시간"
       />
-      <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
         {sortBusinessHoursByDay(barDetail.business_hours)?.map((hour) => (
           <div
             key={hour.id}

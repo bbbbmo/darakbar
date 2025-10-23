@@ -31,11 +31,11 @@ export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
               alt={menu.name}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover"
+              className="rounded-t-lg object-cover"
             />
           </div>
         ) : (
-          <div className="relative flex aspect-[2/1] w-full items-center justify-center bg-gray-200">
+          <div className="relative flex aspect-[2/1] w-full items-center justify-center rounded-t-lg bg-gray-200">
             <span className="text-gray-500">이미지 없음</span>
           </div>
         )
