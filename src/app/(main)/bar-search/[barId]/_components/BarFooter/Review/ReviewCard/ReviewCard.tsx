@@ -47,6 +47,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
               alt={'리뷰 이미지 ' + index + 1}
               width={100}
               height={100}
+              style={{ width: 'auto', height: 'auto' }}
             />
           ))}
       </div>

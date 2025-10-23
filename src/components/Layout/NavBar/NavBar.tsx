@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { Navbar, NavbarBrand } from "flowbite-react";
+import { Navbar, NavbarBrand } from 'flowbite-react'
 
-import UserProfile from "./components/UserProfile";
-import NavMenu from "./components/NavMenu";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import UserProfile from './components/UserProfile'
+import NavMenu from './components/NavMenu'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function AppNavBar() {
-  const router = useRouter();
+  const router = useRouter()
 
   const goHomePage = () => {
-    router.push("/home");
-  };
+    router.push('/home')
+  }
   return (
     <Navbar fluid className="sticky top-0 z-50 !bg-zinc-900 !opacity-95">
       <NavbarBrand onClick={goHomePage} className="cursor-pointer">
@@ -20,17 +20,17 @@ export default function AppNavBar() {
           <Image
             src="/images/logo/logo-icon.png"
             alt="Logo"
-            className="h-auto w-9"
+            style={{ width: 'auto', height: 'auto' }}
             width={36}
-            height={36}
+            height={0}
             priority={false}
           />
           <Image
             src="/images/logo/logo-text.png"
             alt="Logo"
-            className="h-auto w-20"
+            style={{ width: 'auto', height: 'auto' }}
             width={80}
-            height={80}
+            height={0}
             priority={true}
           />
         </section>
@@ -41,5 +41,5 @@ export default function AppNavBar() {
       </section>
       <NavMenu />
     </Navbar>
-  );
+  )
 }
