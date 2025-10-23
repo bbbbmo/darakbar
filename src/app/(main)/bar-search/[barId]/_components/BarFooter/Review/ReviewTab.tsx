@@ -4,7 +4,7 @@ import FormOption from '@/components/Forms/FormOption'
 import Stars from '@/components/Stars'
 import { Button, Pagination } from 'flowbite-react'
 import { useState } from 'react'
-import ReviewCard from './ReviewCard'
+import ReviewCard from './ReviewCard/ReviewCard'
 import { mockReviews } from '../../../_mocks/reviews.mocks'
 import { useQuery } from '@tanstack/react-query'
 
