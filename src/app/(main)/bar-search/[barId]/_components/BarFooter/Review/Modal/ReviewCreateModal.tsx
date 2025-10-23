@@ -33,10 +33,11 @@ export default function ReviewCreateModal({
     resolver: zodResolver(ReviewFormSchema),
     defaultValues: {
       rating: 0,
-      visitDate: new Date(),
       body: '',
       images: null,
+      existingImages: [],
       tagIds: [],
+      visitDate: new Date(),
     },
   })
 
@@ -66,7 +67,7 @@ export default function ReviewCreateModal({
     },
   })
 
-  const createReview = form.handleSubmit(async (data: ReviewForm) => {
+  const createReview = form.handleSubmit(async (data) => {
     try {
       const imageUrls: string[] = []
       if (!userData) {
@@ -81,7 +82,9 @@ export default function ReviewCreateModal({
           `bars/${barId}/review-images/${userData.id}`,
         )
         results.forEach((result) => {
-          imageUrls.push(result.data?.path || '')
+          if (result.data?.path) {
+            imageUrls.push(result.data.path)
+          }
           if (result.error) {
             throw new Error(`이미지 업로드 실패: ${result.error.message}`)
           }

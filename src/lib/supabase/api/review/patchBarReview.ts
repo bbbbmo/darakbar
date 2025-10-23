@@ -1,10 +1,12 @@
 import supabase from '../../supabase'
 import { PostBarReviewBody } from './postBarReview'
 
+export type patchBarReviewBody = Omit<PostBarReviewBody, 'rating'>
+
 export type patchBarReviewParams = {
   reviewId: number
   userId: string
-  body: Omit<PostBarReviewBody, 'rating'>
+  body: patchBarReviewBody
 }
 
 export const patchBarReview = async (params: patchBarReviewParams) => {

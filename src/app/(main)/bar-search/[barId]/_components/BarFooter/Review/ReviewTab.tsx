@@ -24,11 +24,17 @@ export default function ReviewTab() {
   const { data: reviews } = useQuery({
     queryKey: ['bar-reviews', barId],
     queryFn: () => getBarReviews(barId),
+    enabled: !!barId,
   })
 
   const onPageChange = (page: number) => setCurrentPage(page)
 
   const openReviewCreateModal = () => {
+    console.log('모달 열기 시작')
+    if (!barId) {
+      console.error('barId가 없습니다')
+      return
+    }
     open('ReviewCreateModal', { barId, onClose: close })
   }
   return (

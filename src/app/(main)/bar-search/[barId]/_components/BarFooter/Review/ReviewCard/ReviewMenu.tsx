@@ -33,6 +33,7 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
   })
 
   const openReviewEditModal = () => {
+    console.log('review.bar_id', review.bar_id)
     open('ReviewEditModal', { barId: review.bar_id, review, onClose: close })
   }
 
