@@ -16,7 +16,7 @@ export default function BarImage() {
             src={url}
             alt={'Bar Image ' + index + 1}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
             className="rounded-lg object-cover"
             priority={true}
           />

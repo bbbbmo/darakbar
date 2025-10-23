@@ -18,6 +18,7 @@ export default function BarDetailContent() {
   const { data: barDetail } = useQuery({
     queryKey: ['bar', barId],
     queryFn: () => getBarDetail(barId),
+    enabled: !!barId,
   })
 
   const setBarDetail = useBarDetailStore((state) => state.setBarDetail)
