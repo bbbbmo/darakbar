@@ -1,7 +1,7 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
 import TitleText from '@/components/TitleText'
-import { HiLocationMarker, HiStar } from 'react-icons/hi'
+import { HiLocationMarker } from 'react-icons/hi'
 import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 export default function BarDescription() {
@@ -13,10 +13,10 @@ export default function BarDescription() {
       <section className="flex flex-col gap-3">
         <div className="flex items-center">
           <TitleText title={barDetail.name} />
-          <span className="text-md ml-auto flex items-center text-2xl">
+          {/* <span className="text-md ml-auto flex items-center text-2xl">
             <HiStar size={28} className="fill-amber-400" />
             {barDetail.rating}
-          </span>
+          </span> */}
         </div>
         <p className="flex flex-col gap-2 text-zinc-500">
           <span className="group flex cursor-pointer items-center gap-2 text-xl">

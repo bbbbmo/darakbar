@@ -3,7 +3,7 @@
 import FormOption from '@/components/Forms/FormOption'
 import Stars from '@/components/Stars'
 import { Button, Pagination } from 'flowbite-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import ReviewCard from './ReviewCard/ReviewCard'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useBar } from '../../../_providers/BarProviders'
