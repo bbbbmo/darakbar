@@ -7,10 +7,11 @@ import { barFilterSelect } from './BarFilter.const'
 import FormOption from '@/components/Forms/FormOption'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useBarFilterStore } from '../_stores/bar-filter.store'
+import { useState } from 'react'
 
 export default function BarFilter() {
   const { name, setName, resetFilters } = useBarFilterStore()
-
+  const [option, setOption] = useState<string | null>(null)
   return (
     <Card>
       <section className="flex flex-col gap-4">
@@ -31,7 +32,11 @@ export default function BarFilter() {
             onChange={(e) => setName(e.target.value)}
           />
           {barFilterSelect.map((select) => (
-            <FormOption key={select.key} options={select.options} />
+            <FormOption
+              key={select.key}
+              options={select.options}
+              setOption={setOption}
+            />
           ))}
         </div>
       </section>

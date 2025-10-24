@@ -12,3 +12,5 @@ export const reviewTagOptions: string[] = [
   '인테리어예쁨',
   '시끄러움',
 ]
+
+export const reviewSortOptions: string[] = ['최신순', '평점순', '좋아요순']

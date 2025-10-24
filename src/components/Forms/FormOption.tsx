@@ -1,18 +1,23 @@
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import { Select } from "flowbite-react";
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { Select } from 'flowbite-react'
+
+type FormOptionProps = {
+  options: string[]
+  setOption: (option: string) => void
+  className?: string
+}
 
 export default function FormOption({
   options,
+  setOption,
   className,
-}: {
-  options: string[];
-  className?: string;
-}) {
+}: FormOptionProps) {
   return (
     <Select
       theme={basicTheme.select}
       color="primary"
-      className={className || ""}
+      className={className || ''}
+      onChange={(e) => setOption(e.target.value)}
     >
       {options.map((option) => (
         <option key={option} value={option}>
@@ -20,5 +25,5 @@ export default function FormOption({
         </option>
       ))}
     </Select>
-  );
+  )
 }

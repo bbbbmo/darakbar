@@ -13,10 +13,11 @@ import { PostgrestError } from '@supabase/supabase-js'
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
   const { open, close, confirm } = useModal()
+
   const { mutate: deleteReviewMutation } = useMutation({
     mutationFn: () => deleteBarReview(review.id),
     onSuccess: () => {
-      invalidateQueries([['bar-reviews', review.bar_id]])
+      invalidateQueries([['bar-reviews', String(review.bar_id)]])
       snackBar.showSuccess(
         '리뷰 삭제 성공',
         '리뷰가 성공적으로 삭제되었습니다.',
@@ -33,7 +34,6 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
   })
 
   const openReviewEditModal = () => {
-    console.log('review.bar_id', review.bar_id)
     open('ReviewEditModal', { barId: review.bar_id, review, onClose: close })
   }
 

@@ -3,58 +3,81 @@
 import FormOption from '@/components/Forms/FormOption'
 import Stars from '@/components/Stars'
 import { Button, Pagination } from 'flowbite-react'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import ReviewCard from './ReviewCard/ReviewCard'
-import { mockReviews } from '../../../_mocks/reviews.mocks'
-import { useQuery } from '@tanstack/react-query'
-
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useBar } from '../../../_providers/BarProviders'
 import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
 import UploadCard from '@components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/components/Providers/ModalProvider'
+import { reviewSortOptions } from './review.const'
 
 export default function ReviewTab() {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const totalPages = Math.ceil(mockReviews.length / 5)
+  const [sortOption, setSortOption] = useState<string>(reviewSortOptions[0])
 
   const { barId } = useBar()
   const { open, close } = useModal()
 
-  const { data: reviews } = useQuery({
+  const { data: reviews } = useSuspenseQuery({
     queryKey: ['bar-reviews', barId],
     queryFn: () => getBarReviews(barId),
-    enabled: !!barId,
   })
+
+  const openReviewCreateModal = () => {
+    open('ReviewCreateModal', { barId, onClose: close })
+  }
 
   const onPageChange = (page: number) => setCurrentPage(page)
 
-  const openReviewCreateModal = () => {
-    console.log('모달 열기 시작')
-    if (!barId) {
-      console.error('barId가 없습니다')
-      return
+  const sortedReviews = useMemo(() => {
+    if (!reviews?.data) return []
+
+    const sorted = [...reviews.data]
+
+    switch (sortOption) {
+      case '최신순':
+        return sorted.sort(
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        )
+      case '평점순':
+        return sorted.sort((a, b) => b.rating - a.rating)
+      case '좋아요순':
+        return sorted.sort((a, b) => (b.like_count || 0) - (a.like_count || 0))
+      default:
+        return sorted
     }
-    open('ReviewCreateModal', { barId, onClose: close })
-  }
+  }, [reviews?.data, sortOption])
+
+  const totalRating = useMemo(() => {
+    if (!reviews?.data || reviews.data.length === 0) return 0
+
+    return (
+      reviews.data.reduce((acc, review) => acc + review.rating, 0) /
+      reviews.data.length
+    )
+  }, [reviews?.data])
   return (
     <div className="px-4">
       <section className="mb-4">
         <div className="flex flex-col gap-2">
-          <span className="text-4xl font-bold">{0.0}</span>
-          <Stars rating={0.0} size={24} />
+          <span className="text-4xl font-bold">{totalRating}</span>
+          <Stars rating={totalRating} size={24} />
         </div>
         <div className="flex items-center justify-between">
           <span>리뷰 {reviews?.data?.length || 0}개</span>
           <FormOption
             className="min-w-28"
-            options={['최신순', '평점순', '좋아요순']}
+            options={reviewSortOptions}
+            setOption={setSortOption}
           />
         </div>
       </section>
       <div className="flex flex-col gap-4">
         {reviews?.data &&
-          reviews.data.map((review) => (
+          sortedReviews.map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}
         <UploadCard
@@ -75,7 +98,7 @@ export default function ReviewTab() {
       <div className="mt-4 flex overflow-x-auto sm:justify-center">
         <Pagination
           currentPage={currentPage}
-          totalPages={totalPages}
+          totalPages={Math.ceil((reviews?.data?.length || 0) / 5)}
           onPageChange={onPageChange}
           showIcons
         />
