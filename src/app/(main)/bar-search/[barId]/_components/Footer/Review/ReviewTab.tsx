@@ -5,36 +5,28 @@ import Stars from '@/components/Stars'
 import { Button, Pagination } from 'flowbite-react'
 import { useMemo, useState } from 'react'
 import ReviewCard from './ReviewCard/ReviewCard'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useBar } from '../../../_providers/BarProviders'
-import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
 import UploadCard from '@components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/components/Providers/ModalProvider'
 import { reviewSortOptions } from './review.const'
+import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
 
-export default function ReviewTab() {
+export default function ReviewTab({ reviews }: { reviews: BarReview[] }) {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortOption, setSortOption] = useState<string>(reviewSortOptions[0])
 
-  const { barId } = useBar()
   const { open, close } = useModal()
 
-  const { data: reviews } = useSuspenseQuery({
-    queryKey: ['bar-reviews', barId],
-    queryFn: () => getBarReviews(barId),
-  })
-
   const openReviewCreateModal = () => {
-    open('ReviewCreateModal', { barId, onClose: close })
+    open('ReviewCreateModal', { barId: reviews[0].bar_id, onClose: close })
   }
 
   const onPageChange = (page: number) => setCurrentPage(page)
 
   const sortedReviews = useMemo(() => {
-    if (!reviews?.data) return []
+    if (!reviews) return []
 
-    const sorted = [...reviews.data]
+    const sorted = [...reviews]
 
     switch (sortOption) {
       case '최신순':
@@ -49,16 +41,15 @@ export default function ReviewTab() {
       default:
         return sorted
     }
-  }, [reviews?.data, sortOption])
+  }, [reviews, sortOption])
 
   const totalRating = useMemo(() => {
-    if (!reviews?.data || reviews.data.length === 0) return 0
+    if (!reviews || reviews.length === 0) return 0
 
     return (
-      reviews.data.reduce((acc, review) => acc + review.rating, 0) /
-      reviews.data.length
+      reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
     )
-  }, [reviews?.data])
+  }, [reviews])
   return (
     <div className="px-4">
       <section className="mb-4">
@@ -67,7 +58,7 @@ export default function ReviewTab() {
           <Stars rating={totalRating} size={24} />
         </div>
         <div className="flex items-center justify-between">
-          <span>리뷰 {reviews?.data?.length || 0}개</span>
+          <span>리뷰 {reviews?.length || 0}개</span>
           <FormOption
             className="min-w-28"
             options={reviewSortOptions}
@@ -76,7 +67,7 @@ export default function ReviewTab() {
         </div>
       </section>
       <div className="flex flex-col gap-4">
-        {reviews?.data &&
+        {reviews &&
           sortedReviews.map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}
@@ -95,14 +86,16 @@ export default function ReviewTab() {
           </Button>
         </UploadCard>
       </div>
-      <div className="mt-4 flex overflow-x-auto sm:justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil((reviews?.data?.length || 0) / 5)}
-          onPageChange={onPageChange}
-          showIcons
-        />
-      </div>
+      {reviews && reviews.length > 5 && (
+        <div className="mt-4 flex overflow-x-auto sm:justify-center">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil((reviews.length || 0) / 5)}
+            onPageChange={onPageChange}
+            showIcons
+          />
+        </div>
+      )}
     </div>
   )
 }

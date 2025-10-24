@@ -1,14 +1,22 @@
 'use client'
 
-import { Spinner, TabItem, Tabs, TabsRef } from 'flowbite-react'
-import { Suspense, useRef } from 'react'
+import { TabItem, Tabs, TabsRef } from 'flowbite-react'
+import { useRef } from 'react'
 import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 import ReviewTab from './Review/ReviewTab'
 import PhotoTab from './Photo/PhotoTab'
 import FeedbackTab from './FeedBack/FeedbackTab'
+import { useQuery } from '@tanstack/react-query'
+import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
+import { useBar } from '../../_providers/BarProviders'
 
 export default function BarFooter() {
   const tabsRef = useRef<TabsRef>(null)
+  const { barId } = useBar()
+  const { data: reviews } = useQuery({
+    queryKey: ['bar-reviews', barId],
+    queryFn: () => getBarReviews(barId),
+  })
 
   return (
     <Tabs
@@ -19,18 +27,10 @@ export default function BarFooter() {
       variant="fullWidth"
     >
       <TabItem active title="리뷰">
-        <Suspense
-          fallback={
-            <div className="flex h-96 w-full items-center justify-center bg-zinc-900">
-              <Spinner color="warning" aria-label="spinner" size="xl" />
-            </div>
-          }
-        >
-          <ReviewTab />
-        </Suspense>
+        <ReviewTab reviews={reviews?.data || []} />
       </TabItem>
       <TabItem title="사진">
-        <PhotoTab />
+        <PhotoTab reviews={reviews?.data || []} />
       </TabItem>
       <TabItem title="피드백">
         <FeedbackTab />

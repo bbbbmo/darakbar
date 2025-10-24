@@ -1,7 +1,33 @@
-"use client";
+'use client'
 
-import { Card } from "flowbite-react";
+import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
+import { useParseFile } from '@/hooks/useParseFile'
+import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
+import Image from 'next/image'
 
-export default function PhotoTab() {
-  return <Card className="border-neutral-600 bg-neutral-800">PhotoTab</Card>;
+export default function PhotoTab({ reviews }: { reviews: BarReview[] }) {
+  const images = reviews
+    .filter((review) => review.images && review.images.length > 0)
+    .flatMap((review) => review.images)
+
+  const { publicUrls, isLoading } = useParseFile(images as string[])
+
+  return (
+    <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+      {publicUrls.map((url, index) =>
+        isLoading ? (
+          <ImageSkeleton key={index} width={200} height={200} />
+        ) : (
+          <Image
+            key={index}
+            src={url}
+            alt="Photo"
+            width={200}
+            height={200}
+            className="h-auto w-full cursor-pointer rounded-lg object-cover"
+          />
+        ),
+      )}
+    </div>
+  )
 }
