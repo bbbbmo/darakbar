@@ -31,8 +31,7 @@
       "@lib/*": ["src/lib/*"],
       "@bar-search/*": ["src/app/(main)/bar-search/*"],
       "@bar-detail/*": ["src/app/(main)/bar-search/[barId]/*"]
-    },
-    "types": ["kakao.maps.d.ts"]
+    }
   },
   "include": [
     "next-env.d.ts",
