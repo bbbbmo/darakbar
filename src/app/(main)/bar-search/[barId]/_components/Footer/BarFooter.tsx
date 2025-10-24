@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { TabItem, Tabs, TabsRef } from "flowbite-react";
-import { useRef } from "react";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import ReviewTab from "./Review/ReviewTab";
-import PhotoTab from "./PhotoTab";
-import FeedbackTab from "./FeedbackTab";
+import { Spinner, TabItem, Tabs, TabsRef } from 'flowbite-react'
+import { Suspense, useRef } from 'react'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import ReviewTab from './Review/ReviewTab'
+import PhotoTab from './Photo/PhotoTab'
+import FeedbackTab from './FeedBack/FeedbackTab'
 
 export default function BarFooter() {
-  const tabsRef = useRef<TabsRef>(null);
+  const tabsRef = useRef<TabsRef>(null)
 
   return (
     <Tabs
@@ -19,7 +19,15 @@ export default function BarFooter() {
       variant="fullWidth"
     >
       <TabItem active title="리뷰">
-        <ReviewTab />
+        <Suspense
+          fallback={
+            <div className="flex h-96 w-full items-center justify-center bg-zinc-900">
+              <Spinner color="warning" aria-label="spinner" size="xl" />
+            </div>
+          }
+        >
+          <ReviewTab />
+        </Suspense>
       </TabItem>
       <TabItem title="사진">
         <PhotoTab />
@@ -28,5 +36,5 @@ export default function BarFooter() {
         <FeedbackTab />
       </TabItem>
     </Tabs>
-  );
+  )
 }
