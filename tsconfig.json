@@ -40,7 +40,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "postcss.config.mjs",
-    "src/app/(main)/bar-search/[barId]/_components/BarFooter"
+    "src/app/(main)/bar-search/[barId]/_components/Footer"
   ],
   "exclude": ["node_modules"]
 }

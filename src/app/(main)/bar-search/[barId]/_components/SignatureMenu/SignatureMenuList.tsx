@@ -5,9 +5,9 @@ import { LiaCocktailSolid } from 'react-icons/lia'
 import { useState } from 'react'
 import SignatureMenuCard from './SignatureMenuCard'
 import { Button } from 'flowbite-react'
-import { useBarDetailStore } from '../../../_stores/bar-detail.store'
+import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
-export default function BarSignatureMenus() {
+export default function SignatureMenuList() {
   const barDetail = useBarDetailStore((state) => state.barDetail)
   const [visibleCount, setVisibleCount] = useState<number>(4)
 

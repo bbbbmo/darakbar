@@ -1,17 +1,17 @@
 'use client'
 
-import BarImage from './BarDetails/BarImage'
-import BarDescription from './BarDetails/BarDescription'
-import BarBusinessHour from './BarDetails/BarBusinessHour'
-import BarContact from './BarDetails/BarContact'
-import BarSignatureMenus from './BarDetails/BarSignatureMenus/BarSignatureMenus'
-import BackToListButton from './BarDetails/BackToListButton'
-import BarFooter from './BarFooter/BarFooter'
+import BarImage from './BasicInfo/BarImage'
+import BarDescription from './BasicInfo/BarDescription'
+import BarBusinessHour from './BasicInfo/BarBusinessHour'
+import BarContact from './BasicInfo/BarContact'
+import BackToListButton from './BackToListButton'
+import BarFooter from './Footer/BarFooter'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { useBar } from '../_providers/BarProviders'
 import { useEffect } from 'react'
 import { useBarDetailStore } from '../_stores/bar-detail.store'
+import SignatureMenuList from './SignatureMenu/SignatureMenuList'
 
 export default function BarDetailContent() {
   const { barId } = useBar()
@@ -41,7 +41,7 @@ export default function BarDetailContent() {
           <BarBusinessHour />
         </div>
         <div className="lg:col-span-2">
-          <BarSignatureMenus />
+          <SignatureMenuList />
         </div>
       </div>
       <BarFooter />
