@@ -42,7 +42,6 @@ export const getBars = async (params?: getBarsQueryParams) => {
     )
   `)
 
-  console.log(params)
   // if (params?.name) {
   //   query = query.ilike('name', params.name)
   // }
