@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { Footer, FooterCopyright, FooterIcon } from "flowbite-react";
-import { BsFacebook, BsInstagram, BsGithub, BsDribbble } from "react-icons/bs";
+import { Footer, FooterCopyright, FooterIcon } from 'flowbite-react'
+import { BsInstagram, BsGithub, BsEnvelope } from 'react-icons/bs'
 
 export default function AppFooter() {
   return (
@@ -12,13 +12,12 @@ export default function AppFooter() {
         <div className="w-full sm:flex sm:items-center sm:justify-between">
           <FooterCopyright href="/" by="다락바™" year={2025} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            <FooterIcon href="#" icon={BsFacebook} />
             <FooterIcon href="#" icon={BsInstagram} />
             <FooterIcon href="https://github.com/bbbbmo" icon={BsGithub} />
-            <FooterIcon href="#" icon={BsDribbble} />
+            <FooterIcon href="#" icon={BsEnvelope} />
           </div>
         </div>
       </div>
     </Footer>
-  );
+  )
 }

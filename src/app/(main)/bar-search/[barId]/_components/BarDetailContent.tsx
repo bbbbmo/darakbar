@@ -27,7 +27,7 @@ export default function BarDetailContent() {
   }, [barDetail])
 
   return (
-    <>
+    <div className="flex flex-col gap-8 md:px-[8vw]">
       <BackToListButton />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
@@ -45,6 +45,6 @@ export default function BarDetailContent() {
         </div>
       </div>
       <BarFooter />
-    </>
+    </div>
   )
 }

@@ -8,7 +8,7 @@ export default function BarImage() {
 
   const { publicUrls } = useParseFile(barDetail?.bar_images || [])
   return (
-    <div className="relative h-[400px] w-full">
+    <section className="relative h-[400px] w-full">
       {publicUrls.length > 0 ? (
         publicUrls.map((url, index) => (
           <Image
@@ -26,6 +26,6 @@ export default function BarImage() {
           이미지 없음
         </div>
       )}
-    </div>
+    </section>
   )
 }

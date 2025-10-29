@@ -21,7 +21,7 @@ export default function AppNavBar() {
             src="/images/logo/logo-icon.png"
             alt="Logo"
             style={{ width: 'auto', height: 'auto' }}
-            width={36}
+            width={24}
             height={0}
             priority={false}
           />
@@ -29,7 +29,7 @@ export default function AppNavBar() {
             src="/images/logo/logo-text.png"
             alt="Logo"
             style={{ width: 'auto', height: 'auto' }}
-            width={80}
+            width={60}
             height={0}
             priority={true}
           />
