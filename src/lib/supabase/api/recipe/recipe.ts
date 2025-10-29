@@ -3,7 +3,7 @@ import supabase from '@lib/supabase/supabase'
 import {
   CreateRecipeForm,
   CreateRecipeFormSchema,
-} from '@/app/(main)/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes'
+} from '@/app/(main)/(_temp)/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes'
 import { uploadFile } from '@lib/supabase/api/storage'
 
 export const getRecipes = async (userId?: string) => {
