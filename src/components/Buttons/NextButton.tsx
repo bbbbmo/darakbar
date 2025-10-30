@@ -1,11 +1,11 @@
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
 
-type GoToButtonProps = {
-  text: string;
-  onClick: () => void;
-};
+type NextButtonProps = {
+  text: string
+  onClick: () => void
+}
 
-export default function GoToButton({ text, onClick }: GoToButtonProps) {
+export default function NextButton({ text, onClick }: NextButtonProps) {
   return (
     <div className="ml-auto flex gap-2 text-sm">
       <span
@@ -16,5 +16,5 @@ export default function GoToButton({ text, onClick }: GoToButtonProps) {
         <ArrowRightIcon className="size-4" />
       </span>
     </div>
-  );
+  )
 }

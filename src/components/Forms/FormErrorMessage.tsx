@@ -1,12 +1,16 @@
-import { HelperText } from "flowbite-react";
-import { FieldError } from "react-hook-form";
+import { HelperText } from 'flowbite-react'
+import { FieldError } from 'react-hook-form'
 
 type FormErrorMessageProps = {
-  error: FieldError | undefined;
-};
+  error: FieldError | (FieldError | undefined)[] | undefined
+}
 
 export default function FormErrorMessage({ error }: FormErrorMessageProps) {
-  return (
-    error && <HelperText className="!font-medium">{error?.message}</HelperText>
-  );
+  const message = Array.isArray(error)
+    ? error.find((e) => e?.message)?.message
+    : error?.message
+
+  return message ? (
+    <HelperText className="!font-medium">{message}</HelperText>
+  ) : null
 }

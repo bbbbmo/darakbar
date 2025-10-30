@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import AppSnackBar from "@/components/SnackBar/SnackBar";
-import { AppSnackBarColor } from "@/components/SnackBar/SnackBar.types";
-import FormItem from "@components/Forms/FormItem";
-import { Button, HelperText, TextInput } from "flowbite-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { SignUpFormData } from "./SignUpForm.types";
-import supabase from "@lib/supabase/supabase";
-import FormPasswordInput from "@components/Forms/FormPasswordInput";
-import { useRouter } from "next/navigation";
-import GoToButton from "@/components/Buttons/GoToButton";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import AppSnackBar from '@/components/SnackBar/SnackBar'
+import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
+import FormItem from '@components/Forms/FormItem'
+import { Button, HelperText, TextInput } from 'flowbite-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { SignUpFormData } from './SignUpForm.types'
+import supabase from '@lib/supabase/supabase'
+import FormPasswordInput from '@components/Forms/FormPasswordInput'
+import { useRouter } from 'next/navigation'
+import NextButton from '@/components/Buttons/NextButton'
+import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
 
 export default function SignUpForm() {
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter()
 
   const {
     register,
@@ -24,16 +24,16 @@ export default function SignUpForm() {
     formState: { errors },
     reset,
     watch,
-  } = useForm<SignUpFormData>();
+  } = useForm<SignUpFormData>()
 
   const goSignInPage = () => {
-    router.push("/sign-in");
-    reset();
-  };
+    router.push('/sign-in')
+    reset()
+  }
 
   const signUpNewUser = async ({ name, email, password }: SignUpFormData) => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
     try {
       const { error: signUpError } = await supabase.auth.signUp({
         email: email,
@@ -43,21 +43,21 @@ export default function SignUpForm() {
             name: name, // 사용자 이름 설정
           },
         },
-      });
+      })
       if (signUpError) {
-        throw signUpError;
+        throw signUpError
       }
-      goSignInPage();
+      goSignInPage()
     } catch (error) {
       const errorMessage =
         error instanceof Error
           ? error.message
-          : "알 수 없는 오류가 발생했습니다.";
-      setError(errorMessage);
+          : '알 수 없는 오류가 발생했습니다.'
+      setError(errorMessage)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
   return (
     <>
       <form
@@ -66,7 +66,7 @@ export default function SignUpForm() {
       >
         <FormItem label="닉네임" required>
           <TextInput
-            {...register("name", { required: "닉네임을 입력해주세요" })}
+            {...register('name', { required: '닉네임을 입력해주세요' })}
             placeholder="다락바에서 활동할 이름을 정해주세요🍸"
           />
           {errors.name && (
@@ -77,10 +77,10 @@ export default function SignUpForm() {
         </FormItem>
         <FormItem label="이메일" required>
           <TextInput
-            {...register("email", { required: "이메일을 입력해주세요" })}
+            {...register('email', { required: '이메일을 입력해주세요' })}
             type="email"
             placeholder="example@naver.com"
-            color={errors.email ? "failure" : "gray"}
+            color={errors.email ? 'failure' : 'gray'}
           />
           {errors.email && (
             <HelperText className="font-medium">
@@ -91,7 +91,7 @@ export default function SignUpForm() {
         <FormPasswordInput register={register} errors={errors} watch={watch} />
         {error && <p className="text-red-500">{error}</p>} {/* Error 표시 */}
         <Button theme={basicTheme.button} type="submit" disabled={isLoading}>
-          {isLoading ? "가입중..." : "회원가입"}
+          {isLoading ? '가입중...' : '회원가입'}
         </Button>
         {error && (
           <AppSnackBar
@@ -102,7 +102,7 @@ export default function SignUpForm() {
           />
         )}
       </form>
-      <GoToButton text="회원이신가요?" onClick={goSignInPage} />
+      <NextButton text="회원이신가요?" onClick={goSignInPage} />
     </>
-  );
+  )
 }

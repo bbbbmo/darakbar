@@ -1,9 +1,16 @@
-"use client";
+'use client'
+
+import clsx from 'clsx'
 
 type FormHeaderProps = {
-  title: string;
-};
+  title: string
+  className?: string
+}
 
-export default function FormHeader({ title }: FormHeaderProps) {
-  return <h1 className="mb-5 text-4xl font-bold text-amber-400">{title}</h1>;
+export default function FormHeader({ title, className }: FormHeaderProps) {
+  return (
+    <h1 className={clsx('mb-5 text-4xl font-bold text-amber-400', className)}>
+      {title}
+    </h1>
+  )
 }
