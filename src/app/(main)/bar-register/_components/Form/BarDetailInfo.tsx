@@ -61,6 +61,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
       <FormItem label="인스타그램">
         <TextInput
           type="text"
+          color="primary"
           placeholder="https://www.instagram.com/example"
           {...register('instagramUrl')}
           aria-invalid={!!errors.instagramUrl}
@@ -70,6 +71,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
       <FormItem label="웹사이트">
         <TextInput
           type="text"
+          color="primary"
           placeholder="https://www.example.com"
           {...register('websiteUrl')}
           aria-invalid={!!errors.websiteUrl}

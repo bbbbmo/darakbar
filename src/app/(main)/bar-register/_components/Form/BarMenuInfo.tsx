@@ -9,6 +9,7 @@ import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import { emptySignatureCocktail } from '../BarRegister.const'
 import { HiXCircle } from 'react-icons/hi'
+import { FaWonSign, FaPercent } from 'react-icons/fa6'
 import { Fragment } from 'react'
 import clsx from 'clsx'
 import PrevButton from '@/components/Buttons/PrevButton'
@@ -50,7 +51,7 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
           메뉴 추가
         </Button>
       </div>
-      <div className="scroll-none flex flex-col gap-2 overflow-y-auto">
+      <div className="scroll-none flex max-h-[50vh] flex-col gap-2 overflow-y-auto">
         {fields.map((field, index) => (
           <Fragment key={field.id}>
             <p
@@ -70,10 +71,15 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
               )}
             </p>
             <FormItem key={field.id} label="칵테일 이름" required>
-              <TextInput type="text" placeholder="칵테일 이름을 입력해주세요" />
+              <TextInput
+                type="text"
+                color="primary"
+                placeholder="칵테일 이름을 입력해주세요"
+              />
             </FormItem>
             <FormItem label="설명" required>
               <Textarea
+                color="primary"
                 placeholder="칵테일 설명을 입력해주세요"
                 {...register(`signatureCocktails.${index}.description`)}
                 aria-invalid={!!errors.signatureCocktails?.[index]?.description}
@@ -96,6 +102,8 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
               <FormItem label="가격" required wrapperClassName="flex-1">
                 <TextInput
                   type="text"
+                  color="primary"
+                  rightIcon={FaWonSign}
                   placeholder="가격을 입력해주세요"
                   {...register(`signatureCocktails.${index}.price`)}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.price}
@@ -104,6 +112,8 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
               <FormItem label="알코올 도수" required wrapperClassName="flex-1">
                 <TextInput
                   type="text"
+                  color="primary"
+                  rightIcon={FaPercent}
                   placeholder="알코올 도수를 입력해주세요"
                   {...register(`signatureCocktails.${index}.abv`)}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.abv}

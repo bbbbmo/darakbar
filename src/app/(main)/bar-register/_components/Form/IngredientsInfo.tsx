@@ -37,6 +37,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
           >
             <TextInput
               type="text"
+              color="primary"
               placeholder={`재료 ${ingIndex + 1}의 이름을 입력해주세요`}
               {...register(
                 `signatureCocktails.${index}.ingredients.${ingIndex}.name`,
@@ -63,7 +64,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         ))}
       </FormItem>
 
-      <Button type="button" size="xs" onClick={() => append({ name: '' })}>
+      <Button type="button" onClick={() => append({ name: '' })}>
         <HiPlusSm size={20} className="text-gray-300" />
         재료 추가
       </Button>

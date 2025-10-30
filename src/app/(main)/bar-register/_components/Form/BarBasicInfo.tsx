@@ -25,6 +25,7 @@ export default function BarBasicInfo(props: BarBasicInfoProps) {
       <FormItem label="바 이름" required>
         <TextInput
           type="text"
+          color="primary"
           placeholder="바 이름을 입력해주세요"
           {...register('name')}
           aria-invalid={!!errors.name}
@@ -34,6 +35,7 @@ export default function BarBasicInfo(props: BarBasicInfoProps) {
       <FormItem label="바 주소" required>
         <TextInput
           type="text"
+          color="primary"
           placeholder="바 주소를 입력해주세요"
           {...register('address')}
           aria-invalid={!!errors.address}
@@ -43,6 +45,7 @@ export default function BarBasicInfo(props: BarBasicInfoProps) {
       <FormItem label="바 전화번호" required>
         <TextInput
           type="text"
+          color="primary"
           placeholder="010-0000-0000"
           {...register('phoneNumber')}
           aria-invalid={!!errors.phoneNumber}
@@ -51,6 +54,7 @@ export default function BarBasicInfo(props: BarBasicInfoProps) {
       </FormItem>
       <FormItem label="바 설명" required>
         <Textarea
+          color="primary"
           placeholder="이곳에 대한 대략적인 설명을 입력해주세요🍸"
           {...register('description')}
           aria-invalid={!!errors.description}
