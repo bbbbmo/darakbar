@@ -13,7 +13,7 @@ export const emptySignatureCocktail: SignatureCocktailForm = {
   image: null,
   price: 0,
   abv: 0,
-  ingredients: [],
+  ingredients: [{ name: '' }],
 }
 
 export const barRegisterDefaultValues: BarRegisterForm = {

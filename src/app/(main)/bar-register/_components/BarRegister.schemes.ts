@@ -1,5 +1,12 @@
-import { FileInputSchema, TagSchema } from '@/types/default.schemes'
+import { FileInputSchema } from '@/types/default.schemes'
 import z from 'zod'
+
+export const IngredientSchema = z.object({
+  name: z
+    .string()
+    .min(1, '재료명을 입력해주세요')
+    .max(15, '재료명은 15자 이하로 입력해주세요'),
+})
 
 export const SignatureCocktailFormSchema = z.object({
   name: z.string().min(1, '칵테일 이름을 입력해주세요'),
@@ -10,12 +17,7 @@ export const SignatureCocktailFormSchema = z.object({
   image: FileInputSchema.nullable().optional(),
   price: z.number().positive('가격은 0보다 커야 합니다'),
   abv: z.number().positive('알코올 도수는 0보다 커야 합니다'),
-  ingredients: z.array(
-    z
-      .string()
-      .min(1, '재료명을 입력해주세요')
-      .max(15, '재료명은 15자 이하로 입력해주세요'),
-  ),
+  ingredients: z.array(IngredientSchema),
 })
 
 export type SignatureCocktailForm = z.infer<typeof SignatureCocktailFormSchema>

@@ -52,7 +52,7 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
       </div>
       <div className="scroll-none flex flex-col gap-2 overflow-y-auto">
         {fields.map((field, index) => (
-          <Fragment key={index}>
+          <Fragment key={field.id}>
             <p
               className={clsx(
                 'flex items-center justify-between gap-2 text-lg font-bold',
@@ -117,7 +117,6 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
               />
             </div>
             {/* 재료: 배열 입력 */}
-
             <IngredientsInfo index={index} />
 
             {index !== fields.length - 1 && (

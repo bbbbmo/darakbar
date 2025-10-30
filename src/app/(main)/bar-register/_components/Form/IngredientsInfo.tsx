@@ -3,7 +3,8 @@ import { BarRegisterForm } from '../BarRegister.schemes'
 import { Button, TextInput } from 'flowbite-react'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import FormItem from '@/components/Forms/FormItem'
-import { HiXCircle } from 'react-icons/hi'
+import { HiPlusSm, HiXCircle } from 'react-icons/hi'
+import clsx from 'clsx'
 
 type IngredientsInfoProps = {
   index: number
@@ -14,31 +15,31 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
   const {
     control,
     register,
+
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
-  const {
-    fields: ingredientFields,
-    append: appendIngredient,
-    remove: removeIngredient,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     // 중첩 배열 경로: 타입 한계를 회피하기 위해 any 캐스팅
-    name: `signatureCocktails.${index}.ingredients` as any,
+    name: `signatureCocktails.${index}.ingredients`,
   })
 
   return (
-    <div className="flex flex-col gap-2">
-      {ingredientFields.map((ingField, ingIndex) => (
-        <div
-          key={ingField.id}
-          className="flex items-center justify-between gap-2"
-        >
-          <FormItem label={`재료 ${ingIndex + 1}`} required>
+    <>
+      <FormItem label={'재료'} required>
+        {fields.map((field, ingIndex) => (
+          <div
+            key={field.id}
+            className={clsx(
+              'flex items-center justify-between gap-2',
+              ingIndex !== 0 && 'mt-1',
+            )}
+          >
             <TextInput
               type="text"
-              placeholder="재료명을 입력해주세요"
+              placeholder={`재료 ${ingIndex + 1}의 이름을 입력해주세요`}
               {...register(
-                `signatureCocktails.${index}.ingredients.${ingIndex}` as const,
+                `signatureCocktails.${index}.ingredients.${ingIndex}.name`,
               )}
               aria-invalid={!!errors.signatureCocktails?.[index]?.ingredients}
               className="flex-1"
@@ -46,28 +47,26 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
             <FormErrorMessage
               error={
                 errors.signatureCocktails?.[index]?.ingredients?.[ingIndex]
+                  ?.name
               }
             />
-          </FormItem>
-          {ingIndex !== 0 && (
-            <button
-              className="cursor-pointer"
-              onClick={() => removeIngredient(ingIndex)}
-            >
-              <HiXCircle size={20} className="text-gray-500" />
-            </button>
-          )}
-        </div>
-      ))}
-      <div className="ml-auto">
-        <Button
-          size="xs"
-          color="light"
-          onClick={() => appendIngredient('' as string)}
-        >
-          재료 추가
-        </Button>
-      </div>
-    </div>
+            {ingIndex !== 0 && (
+              <button
+                type="button"
+                className="cursor-pointer"
+                onClick={() => remove(ingIndex)}
+              >
+                <HiXCircle size={20} className="text-gray-500" />
+              </button>
+            )}
+          </div>
+        ))}
+      </FormItem>
+
+      <Button type="button" size="xs" onClick={() => append({ name: '' })}>
+        <HiPlusSm size={20} className="text-gray-300" />
+        재료 추가
+      </Button>
+    </>
   )
 }
