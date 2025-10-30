@@ -64,7 +64,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         ))}
       </FormItem>
 
-      <Button type="button" onClick={() => append({ name: '' })}>
+      <Button type="button" size="md" onClick={() => append({ name: '' })}>
         <HiPlusSm size={20} className="text-gray-300" />
         재료 추가
       </Button>

@@ -1,6 +1,21 @@
 import { FileInputSchema } from '@/types/default.schemes'
 import z from 'zod'
 
+export const BusinessHourSchema = z.object({
+  dayOfWeek: z.enum(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']),
+  openTime: z.string().min(1, '영업 시작 시간을 입력해주세요'),
+  closeTime: z.string().min(1, '영업 종료 시간을 입력해주세요'),
+  lastOrderTime: z.string().min(1, '라스트 오더 시간을 입력해주세요'),
+  isClosed: z.boolean(),
+  significant: z
+    .string()
+    .min(1, '특이사항을 입력해주세요 ex) 매월 첫번째 월요일 정기 휴무')
+    .nullable()
+    .optional(),
+})
+
+export type BusinessHourForm = z.infer<typeof BusinessHourSchema>
+
 export const IngredientSchema = z.object({
   name: z
     .string()
@@ -42,7 +57,8 @@ export const BarRegisterFormSchema = z.object({
   atmosphereTagIds: z.array(z.number()).nullable(),
   instagramUrl: z.string().nullable().optional(),
   websiteUrl: z.string().nullable().optional(),
-  signatureCocktails: SignatureCocktailFormSchema.array(),
+  signatureCocktails: z.array(SignatureCocktailFormSchema),
+  businessHours: z.array(BusinessHourSchema),
 })
 
 export type BarRegisterForm = z.infer<typeof BarRegisterFormSchema>
