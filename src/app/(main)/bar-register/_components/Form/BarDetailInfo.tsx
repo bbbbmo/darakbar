@@ -12,7 +12,7 @@ import { getAtmosphereTags } from '@/lib/supabase/api/tag/getAtmosphereTags'
 import { TextInput } from 'flowbite-react'
 import NextButton from '@/components/Buttons/NextButton'
 import { useFormContext } from 'react-hook-form'
-import { BarRegisterForm } from './BarRegister.schemes'
+import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import PrevButton from '@/components/Buttons/PrevButton'
 

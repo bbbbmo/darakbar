@@ -1,10 +1,10 @@
 'use client'
 
 import { Card } from 'flowbite-react'
-import BarBasicInfo from './BarBasicInfo'
+import BarBasicInfo from './Form/BarBasicInfo'
 import { useFunnel } from '@/hooks/useFunnel'
-import BarDetailInfo from './BarDetailInfo'
-import BarMenuInfo from './BarMenuInfo'
+import BarDetailInfo from './Form/BarDetailInfo'
+import BarMenuInfo from './Form/BarMenuInfo'
 import { FormProvider, useForm } from 'react-hook-form'
 import { BarRegisterForm, BarRegisterFormSchema } from './BarRegister.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'

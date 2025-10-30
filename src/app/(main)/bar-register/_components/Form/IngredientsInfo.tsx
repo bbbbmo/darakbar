@@ -1,5 +1,5 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { BarRegisterForm } from './BarRegister.schemes'
+import { BarRegisterForm } from '../BarRegister.schemes'
 import { Button, TextInput } from 'flowbite-react'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import FormItem from '@/components/Forms/FormItem'

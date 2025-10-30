@@ -4,7 +4,7 @@ import FormHeader from '@/components/Forms/FormHeader'
 import FormItem from '@/components/Forms/FormItem'
 import { TextInput, Textarea } from 'flowbite-react'
 import { useFormContext } from 'react-hook-form'
-import { BarRegisterForm } from './BarRegister.schemes'
+import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 
 type BarBasicInfoProps = {
