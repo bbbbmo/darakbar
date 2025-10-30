@@ -5,13 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
-import { useBarDetailStore } from '@bar-detail/_stores/bar-detail.store'
+import { useBarDetailStore } from '@/app/(main)/bar-search/[barId]/_stores/bar-detail.store'
 import {
   postBarReview,
   PostBarReviewBody,
 } from '@/lib/supabase/api/review/postBarReview'
 import { useMutation } from '@tanstack/react-query'
-import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
+import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { uploadFiles } from '@/lib/supabase/api/storage'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
 

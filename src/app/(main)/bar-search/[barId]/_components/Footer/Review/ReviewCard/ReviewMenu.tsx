@@ -1,6 +1,6 @@
 'use client'
 
-import { useInvalidateQueries } from '@/hooks/useInvalidateQueries'
+import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { deleteBarReview } from '@/lib/supabase/api/review/deleteBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { Dropdown, DropdownItem } from 'flowbite-react'

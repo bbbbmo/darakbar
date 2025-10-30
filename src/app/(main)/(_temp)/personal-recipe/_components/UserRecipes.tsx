@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import RecipeCard from "@/app/(main)/_components/RecipeCard/RecipeCard";
-import GridList from "@/components/GridList";
-import { UserRecipe } from "@/types/recipe/recipe.types";
-import { useUserRecipe } from "../_hooks/useUserRecipe";
+import RecipeCard from '@/app/(main)/_components/RecipeCard/RecipeCard'
+import GridList from '@/components/GridList'
+import { UserRecipe } from '@/types/recipe/recipe.types'
+import { useUserRecipe } from '../_hooks/useUserRecipe'
 
 export default function UserRecipes() {
-  const { readQuery } = useUserRecipe();
+  const { readQuery } = useUserRecipe()
   return (
     <GridList items={readQuery.data?.data ?? []}>
       {(recipe: any) => (
@@ -17,5 +17,5 @@ export default function UserRecipes() {
         />
       )}
     </GridList>
-  );
+  )
 }

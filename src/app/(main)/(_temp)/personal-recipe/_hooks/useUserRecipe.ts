@@ -1,4 +1,4 @@
-import { useCurrentUser } from '@hooks/useCurrentUserQuery'
+import { useCurrentUser } from '@/hooks/tanstack-query/useCurrentUserQuery'
 import { getUserRecipesWithIngredients } from '@lib/supabase/api/recipe/recipe'
 import { useQuery } from '@tanstack/react-query'
 
