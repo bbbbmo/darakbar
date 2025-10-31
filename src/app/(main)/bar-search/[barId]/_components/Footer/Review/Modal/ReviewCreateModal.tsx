@@ -6,13 +6,10 @@ import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
 import { useBarDetailStore } from '@/app/(main)/bar-search/[barId]/_stores/bar-detail.store'
-import {
-  postBarReview,
-  PostBarReviewBody,
-} from '@/lib/supabase/api/review/postBarReview'
+import { postBarReview, PostBarReviewBody } from '@api/review/postBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
-import { uploadFiles } from '@/lib/supabase/api/storage'
+import { uploadFiles } from '@api/storage'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
 
 export type ReviewCreateModalProps = {

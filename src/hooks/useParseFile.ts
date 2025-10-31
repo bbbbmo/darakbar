@@ -1,6 +1,6 @@
 import { snackBar } from '@/components/Providers/SnackBarProvider'
-import { getPublicUrl } from '@/lib/supabase/api/storage'
-import { useEffect, useState, useMemo, useRef } from 'react'
+import { getPublicUrl } from '@api/storage'
+import { useEffect, useState, useMemo } from 'react'
 
 export function useParseFile(filePaths: string): {
   publicUrls: string

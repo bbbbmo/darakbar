@@ -7,7 +7,7 @@ import ReviewTab from './Review/ReviewTab'
 import PhotoTab from './Photo/PhotoTab'
 import FeedbackTab from './FeedBack/FeedbackTab'
 import { useQuery } from '@tanstack/react-query'
-import { getBarReviews } from '@/lib/supabase/api/review/getBarReviews'
+import { getBarReviews } from '@/api/review/getBarReviews'
 import { useBar } from '../../_providers/BarProviders'
 
 export default function BarFooter() {

@@ -12,7 +12,7 @@ import Detail from './_components/Detail'
 import { useEffect, useState } from 'react'
 // import { buttonTheme } from "@lib/flowbite/themes/button.theme";
 import { useQuery } from '@tanstack/react-query'
-import { getRecipeById } from '@/lib/supabase/api/recipe/recipe'
+import { getRecipeById } from '@api/recipe/recipe'
 import { useRouter } from 'next/navigation'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 

@@ -3,7 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
-import { getBarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+import { getBarDetail } from '@api/bar/getBarDetail'
 import BarDetailContent from './_components/BarDetailContent'
 import { BarProvider } from './_providers/BarProviders'
 

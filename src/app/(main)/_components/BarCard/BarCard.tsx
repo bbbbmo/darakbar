@@ -5,7 +5,7 @@ import Tags from '@/components/Tags'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Button, Card } from 'flowbite-react'
 import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'
-import { Bar } from '@/lib/supabase/api/bar/getBars'
+import { Bar } from '@api/bar/getBars'
 import { getOpenStatus } from '../../bar-search/_utils/formatBusinessHour'
 import { useParseFile } from '@/hooks/useParseFile'
 

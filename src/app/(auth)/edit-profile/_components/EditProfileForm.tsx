@@ -6,10 +6,7 @@ import { Button } from 'flowbite-react'
 import { useState } from 'react'
 import EditProfileCard from './EditProfileCard'
 import FormPasswordInput from '@components/Forms/FormPasswordInput'
-import {
-  updateUserProfile,
-  uploadUserProfileImage,
-} from '@lib/supabase/api/user'
+import { updateUserProfile, uploadUserProfileImage } from '@api/user'
 import AppSnackBar from '@/components/SnackBar/SnackBar'
 import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
 import { useCurrentUser } from '@/hooks/tanstack-query/useCurrentUserQuery'

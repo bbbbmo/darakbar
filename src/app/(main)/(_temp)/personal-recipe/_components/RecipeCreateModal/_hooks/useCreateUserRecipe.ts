@@ -1,7 +1,7 @@
-import { getCurrentUser } from '@lib/supabase/api/user'
+import { getCurrentUser } from '@api/user'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreateRecipeForm } from '../RecipeCreateModal.schemes'
-import { createValidatedUserRecipe } from '@lib/supabase/api/recipe/recipe'
+import { createValidatedUserRecipe } from '@api/recipe/recipe'
 
 export const useCreateUserRecipe = () => {
   const queryClient = useQueryClient()

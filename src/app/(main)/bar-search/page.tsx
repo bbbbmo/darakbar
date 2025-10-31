@@ -7,7 +7,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
-import { getBars } from '@/lib/supabase/api/bar/getBars'
+import { getBars } from '@api/bar/getBars'
 
 export default async function BarSearch() {
   const queryClient = new QueryClient()

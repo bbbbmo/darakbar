@@ -1,7 +1,7 @@
 import SubTitleText from '@/components/SubTitleText'
 import Tags from '@/components/Tags'
 import { useParseFile } from '@/hooks/useParseFile'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+import { BarDetail } from '@api/bar/getBarDetail'
 import { Card } from 'flowbite-react'
 import Image from 'next/image'
 

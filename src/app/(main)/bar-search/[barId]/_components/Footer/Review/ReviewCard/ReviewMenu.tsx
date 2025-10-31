@@ -1,11 +1,11 @@
 'use client'
 
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
-import { deleteBarReview } from '@/lib/supabase/api/review/deleteBarReview'
+import { deleteBarReview } from '@api/review/deleteBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { Dropdown, DropdownItem } from 'flowbite-react'
 import { HiDotsHorizontal, HiPencil, HiTrash } from 'react-icons/hi'
-import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
+import { BarReview } from '@api/review/getBarReviews'
 import { useModal } from '@/components/Providers/ModalProvider'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
 import { PostgrestError } from '@supabase/supabase-js'

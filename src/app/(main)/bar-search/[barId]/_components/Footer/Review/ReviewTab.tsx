@@ -9,7 +9,7 @@ import UploadCard from '@components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/components/Providers/ModalProvider'
 import { reviewSortOptions } from './review.const'
-import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
+import { BarReview } from '@/api/review/getBarReviews'
 
 export default function ReviewTab({ reviews }: { reviews: BarReview[] }) {
   const [currentPage, setCurrentPage] = useState<number>(1)

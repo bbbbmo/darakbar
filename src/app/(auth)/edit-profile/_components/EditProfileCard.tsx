@@ -15,7 +15,7 @@ import { EditProfileFormData } from './EditProfileForm.types'
 import { getImagePreview } from '@utils/file/setImagePreview'
 import { useAuthStore } from '@stores/auth.store'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
-import { getPublicUrl } from '@/lib/supabase/api/storage'
+import { getPublicUrl } from '@api/storage'
 
 type EditProfileCardProps = {
   register: UseFormRegister<EditProfileFormData>

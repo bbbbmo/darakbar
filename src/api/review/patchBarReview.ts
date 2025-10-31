@@ -1,4 +1,4 @@
-import supabase from '../../supabase'
+import supabase from '@lib/supabase/supabase'
 import { PostBarReviewBody } from './postBarReview'
 
 export type patchBarReviewBody = Omit<PostBarReviewBody, 'rating'>

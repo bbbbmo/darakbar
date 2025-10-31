@@ -1,5 +1,5 @@
 import { useCurrentUser } from '@/hooks/tanstack-query/useCurrentUserQuery'
-import { getUserRecipesWithIngredients } from '@lib/supabase/api/recipe/recipe'
+import { getUserRecipesWithIngredients } from '@api/recipe/recipe'
 import { useQuery } from '@tanstack/react-query'
 
 // TODO: userInfo 못가져옴

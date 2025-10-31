@@ -1,7 +1,6 @@
 'use client'
 
 import SubTitleText from '@/components/SubTitleText'
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
 import { Card } from 'flowbite-react'
 import { HiOutlineClock } from 'react-icons/hi'
 import {

@@ -1,4 +1,4 @@
-import { getUserProfile } from '@lib/supabase/api/user'
+import { getUserProfile } from '@api/user'
 import { useQuery } from '@tanstack/react-query'
 
 export const useProfileQuery = (userId: string) => {

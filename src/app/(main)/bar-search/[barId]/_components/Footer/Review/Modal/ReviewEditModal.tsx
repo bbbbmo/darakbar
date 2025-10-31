@@ -7,14 +7,11 @@ import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
 import { useBarDetailStore } from '@/app/(main)/bar-search/[barId]/_stores/bar-detail.store'
-import {
-  patchBarReview,
-  patchBarReviewBody,
-} from '@/lib/supabase/api/review/patchBarReview'
+import { patchBarReview, patchBarReviewBody } from '@/api/review/patchBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
-import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
-import { uploadFiles } from '@/lib/supabase/api/storage'
+import { BarReview } from '@api/review/getBarReviews'
+import { uploadFiles } from '@api/storage'
 import { snackBar } from '@/components/Providers/SnackBarProvider'
 
 export type ReviewEditModalProps = {

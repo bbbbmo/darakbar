@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCurrentUser } from "@lib/supabase/api/user";
+import { useQuery } from '@tanstack/react-query'
+import { getCurrentUser } from '@api/user'
 
 export const useCurrentUser = () => {
   const {
@@ -7,13 +7,13 @@ export const useCurrentUser = () => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: getCurrentUser,
-  });
+  })
 
-  const userId = userData?.user?.id 
-  const userEmail = userData?.user?.email 
-  const userName = userData?.user?.user_metadata?.name 
+  const userId = userData?.user?.id
+  const userEmail = userData?.user?.email
+  const userName = userData?.user?.user_metadata?.name
 
-  return { userId, userEmail, userName, userData, isLoading, error };
-};
+  return { userId, userEmail, userName, userData, isLoading, error }
+}

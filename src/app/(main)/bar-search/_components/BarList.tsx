@@ -4,7 +4,7 @@ import GridList from '@/components/GridList'
 import BarCard from '../../_components/BarCard/BarCard'
 import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { getBars } from '@/lib/supabase/api/bar/getBars'
+import { getBars } from '@api/bar/getBars'
 
 export default function BarList() {
   const router = useRouter()

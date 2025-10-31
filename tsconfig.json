@@ -29,6 +29,7 @@
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"],
       "@lib/*": ["src/lib/*"],
+      "@api/*": ["src/api/*"],
       "@bar-search/*": ["src/app/(main)/bar-search/*"],
       "@bar-detail/*": ["src/app/(main)/bar-search/[barId]/*"]
     },

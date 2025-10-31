@@ -1,4 +1,4 @@
-import { BarDetail } from '@/lib/supabase/api/bar/getBarDetail'
+import { BarDetail } from '@api/bar/getBarDetail'
 import { create } from 'zustand'
 
 type BarDetailState = {

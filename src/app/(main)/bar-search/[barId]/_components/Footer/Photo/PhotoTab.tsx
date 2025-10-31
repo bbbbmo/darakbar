@@ -2,7 +2,7 @@
 
 import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
 import { useParseFile } from '@/hooks/useParseFile'
-import { BarReview } from '@/lib/supabase/api/review/getBarReviews'
+import { BarReview } from '@/api/review/getBarReviews'
 import Image from 'next/image'
 
 export default function PhotoTab({ reviews }: { reviews: BarReview[] }) {
