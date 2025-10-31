@@ -10,7 +10,7 @@ import { postBarReview, PostBarReviewBody } from '@api/review/postBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { uploadFiles } from '@api/storage'
-import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 
 export type ReviewCreateModalProps = {
   barId: number

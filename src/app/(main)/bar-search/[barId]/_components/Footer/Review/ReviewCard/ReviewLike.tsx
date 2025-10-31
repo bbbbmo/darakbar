@@ -1,4 +1,4 @@
-import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { BarReview } from '@api/review/getBarReviews'
 import { deleteBarReviewLike } from '@api/review/likes/deleteBarReviewLike'
 import { postBarReviewLike } from '@api/review/likes/postBarReviewLike'

@@ -12,7 +12,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { BarReview } from '@api/review/getBarReviews'
 import { uploadFiles } from '@api/storage'
-import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 
 export type ReviewEditModalProps = {
   barId: number

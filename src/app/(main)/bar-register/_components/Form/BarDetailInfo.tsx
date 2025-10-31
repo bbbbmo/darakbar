@@ -8,13 +8,13 @@ import { barCategoryOptions } from '@/const/bar-options.const'
 import FormOption from '@/components/Forms/FormOption'
 import Tags from '@/components/Tags'
 import { useQuery } from '@tanstack/react-query'
-import { getAtmosphereTags } from '@api/tag/getAtmosphereTags'
 import { TextInput } from 'flowbite-react'
 import NextButton from '@/components/Buttons/NextButton'
 import { useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import PrevButton from '@/components/Buttons/PrevButton'
+import { tagKeys } from '@/api/queries/tagKeys'
 
 type BarDetailInfoProps = {
   onPrevStep: () => void
@@ -23,10 +23,7 @@ type BarDetailInfoProps = {
 
 export default function BarDetailInfo(props: BarDetailInfoProps) {
   const { onPrevStep, onNextStep } = props
-  const { data: atmosphereTags } = useQuery({
-    queryKey: ['atmosphere-tags'],
-    queryFn: getAtmosphereTags,
-  })
+  const { data: atmosphereTags } = useQuery(tagKeys.atmospheres)
   const {
     register,
     setValue,

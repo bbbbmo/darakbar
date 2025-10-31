@@ -7,16 +7,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
-import { getBars } from '@api/bar/getBars'
+import { queries } from '@/api/queries'
 
 export default async function BarSearch() {
   const queryClient = new QueryClient()
 
   // 서버에서 데이터 프리페치
-  await queryClient.prefetchQuery({
-    queryKey: ['bars'],
-    queryFn: () => getBars(),
-  })
+  await queryClient.prefetchQuery(queries.bar.all)
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <BarSearchHeader />

@@ -83,17 +83,19 @@ export const uploadUserProfileImage = async (file: File, userId: string) => {
     const fileName = `${userId}-${Date.now()}.${fileExt}`
     const filePath = `${userId}/profile/${fileName}`
 
-    const { path, error: uploadError } = await uploadFile(file, filePath)
+    const { data, error: uploadError } = await uploadFile(file, filePath)
 
-    if (uploadError) {
-      throw new Error(`이미지 업로드 실패: ${uploadError.message}`)
+    if (uploadError || !data) {
+      throw new Error(
+        `이미지 업로드 실패${uploadError ? `: ${uploadError.message}` : ''}`,
+      )
     }
 
     // 데이터베이스에 프로필 이미지 URL 업데이트
     const { error: updateError } = await supabase
       .from('userinfo')
       .update({
-        profile_img_url: path,
+        profile_img_url: data.path,
       })
       .eq('id', userId)
 
@@ -101,7 +103,7 @@ export const uploadUserProfileImage = async (file: File, userId: string) => {
       throw new Error(`프로필 이미지 URL 업데이트 실패: ${updateError.message}`)
     }
 
-    return path
+    return data.path
   } catch (error) {
     throw new Error(`프로필 이미지 업로드 에러: ${error}`)
   }

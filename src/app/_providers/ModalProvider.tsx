@@ -1,7 +1,7 @@
 // ModalContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import ModalHost from '../Modals/ModalHost'
+import ModalHost from '../../components/Modals/ModalHost'
 
 export type ModalEntry = {
   id: string

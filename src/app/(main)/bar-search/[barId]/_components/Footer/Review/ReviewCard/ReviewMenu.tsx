@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query'
 import { Dropdown, DropdownItem } from 'flowbite-react'
 import { HiDotsHorizontal, HiPencil, HiTrash } from 'react-icons/hi'
 import { BarReview } from '@api/review/getBarReviews'
-import { useModal } from '@/components/Providers/ModalProvider'
-import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { useModal } from '@/app/_providers/ModalProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { PostgrestError } from '@supabase/supabase-js'
 
 export default function ReviewMenu({ review }: { review: BarReview }) {

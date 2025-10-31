@@ -1,4 +1,4 @@
-import { snackBar } from '@/components/Providers/SnackBarProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { getPublicUrl } from '@api/storage'
 import { useEffect, useState, useMemo } from 'react'
 

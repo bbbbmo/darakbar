@@ -2,18 +2,15 @@
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import AuthProvider from '@/components/Providers/AuthProvider'
+import AuthProvider from '@/app/_providers/AuthProvider'
 import { useState } from 'react'
 import { ThemeProvider } from 'flowbite-react'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
-import {
-  ModalProvider,
-  ModalRegistry,
-} from '@/components/Providers/ModalProvider'
+import { ModalProvider, ModalRegistry } from '@/app/_providers/ModalProvider'
 import ReviewEditModal from '@/app/(main)/bar-search/[barId]/_components/Footer/Review/Modal/ReviewEditModal'
 import ReviewCreateModal from '@/app/(main)/bar-search/[barId]/_components/Footer/Review/Modal/ReviewCreateModal'
 import ConfirmModal from '@/components/Modals/ConfirmModal'
-import { SnackBarProvider } from '@/components/Providers/SnackBarProvider'
+import { SnackBarProvider } from '@/app/_providers/SnackBarProvider'
 import { queryClientOptions } from '@/lib/tanstack-query/tanstack-query'
 
 const modalRegistry: ModalRegistry = {

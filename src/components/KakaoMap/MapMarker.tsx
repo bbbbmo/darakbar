@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useKakaoMap } from '@/components/Providers/MapProvider'
+import { useKakaoMap } from '@/app/_providers/MapProvider'
 
 type MapMarkerProps = {
   imageSrc?: string

@@ -17,11 +17,11 @@ import FormItem from '@/components/Forms/FormItem'
 import Stars from '@/components/Stars'
 import FormFileInput from '@/components/Forms/FormFileInput'
 import Tags from '@/components/Tags'
-import { getReviewTags } from '@api/tag/getReviewTags'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import { ReviewForm } from './ReviewFormModal.schemes'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
+import { tagKeys } from '@/api/queries/tagKeys'
 
 export type ReviewFormModalProps = {
   title: string
@@ -61,10 +61,7 @@ export default function ReviewFormModal({
   const watchedRating = watch('rating')
   const existingImages = watch('existingImages')
 
-  const { data: reviewTags } = useQuery({
-    queryKey: ['review-tags'],
-    queryFn: getReviewTags,
-  })
+  const { data: reviewTags } = useQuery(tagKeys.reviews)
 
   return (
     <Modal show={true} onClose={onClose} size="2xl">

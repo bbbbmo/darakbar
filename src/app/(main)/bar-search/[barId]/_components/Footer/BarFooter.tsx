@@ -7,16 +7,13 @@ import ReviewTab from './Review/ReviewTab'
 import PhotoTab from './Photo/PhotoTab'
 import FeedbackTab from './FeedBack/FeedbackTab'
 import { useQuery } from '@tanstack/react-query'
-import { getBarReviews } from '@/api/review/getBarReviews'
 import { useBar } from '../../_providers/BarProviders'
+import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
 export default function BarFooter() {
   const tabsRef = useRef<TabsRef>(null)
   const { barId } = useBar()
-  const { data: reviews } = useQuery({
-    queryKey: ['bar-reviews', barId],
-    queryFn: () => getBarReviews(barId),
-  })
+  const { data: reviews } = useQuery(barReviewsKeys.all(barId))
 
   return (
     <Tabs

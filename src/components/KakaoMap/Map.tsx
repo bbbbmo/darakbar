@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { useEffect } from 'react'
-import { useKakaoMap } from '@/components/Providers/MapProvider'
+import { useKakaoMap } from '@/app/_providers/MapProvider'
 
 type MapProps = {
   center?: { lat: number; lng: number }

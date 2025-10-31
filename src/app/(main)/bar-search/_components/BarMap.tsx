@@ -1,6 +1,6 @@
 import Map from '@/components/KakaoMap/Map'
 import MapMarker from '@/components/KakaoMap/MapMarker'
-import MapProvider from '@/components/Providers/MapProvider'
+import MapProvider from '@/app/_providers/MapProvider'
 
 export default function BarMap() {
   return (

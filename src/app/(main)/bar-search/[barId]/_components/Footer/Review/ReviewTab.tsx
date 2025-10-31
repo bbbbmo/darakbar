@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react'
 import ReviewCard from './ReviewCard/ReviewCard'
 import UploadCard from '@components/Cards/UploadCard'
 import { HiOutlineChat, HiPencil } from 'react-icons/hi'
-import { useModal } from '@/components/Providers/ModalProvider'
+import { useModal } from '@/app/_providers/ModalProvider'
 import { reviewSortOptions } from './review.const'
 import { BarReview } from '@/api/review/getBarReviews'
 

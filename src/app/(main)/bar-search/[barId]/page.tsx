@@ -3,9 +3,9 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
-import { getBarDetail } from '@api/bar/getBarDetail'
 import BarDetailContent from './_components/BarDetailContent'
 import { BarProvider } from './_providers/BarProviders'
+import { queries } from '@/api/queries'
 
 export default async function BarDetailPage({
   params,
@@ -16,10 +16,7 @@ export default async function BarDetailPage({
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery({
-    queryKey: ['bar', barId],
-    queryFn: () => getBarDetail(barId),
-  })
+  await queryClient.prefetchQuery(queries.bar.detail(barId))
 
   return (
     <BarProvider barId={barId}>
