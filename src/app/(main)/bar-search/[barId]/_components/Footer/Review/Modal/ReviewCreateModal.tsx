@@ -11,6 +11,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { uploadFiles } from '@api/storage'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
+import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
 export type ReviewCreateModalProps = {
   barId: number
@@ -47,7 +48,7 @@ export default function ReviewCreateModal({
       body: PostBarReviewBody
     }) => postBarReview({ barId: barId, userId, body }),
     onSuccess: () => {
-      invalidateQueries([['bar-reviews', barId]])
+      invalidateQueries([barReviewsKeys.all(barId).queryKey])
       snackBar.showSuccess(
         '리뷰 등록 성공',
         '리뷰가 성공적으로 등록되었습니다.',

@@ -8,6 +8,7 @@ import { HiHeart } from 'react-icons/hi'
 import { produce } from 'immer'
 import clsx from 'clsx'
 import { UserData } from '@/stores/auth.store'
+import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
 type ReviewLikeProps = {
   review: BarReview
@@ -28,13 +29,12 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
       queryKey: ['bar-reviews', String(review.bar_id)],
     })
 
-    const previousReviews = queryClient.getQueryData([
-      'bar-reviews',
-      String(review.bar_id),
-    ])
+    const previousReviews = queryClient.getQueryData(
+      barReviewsKeys.all(review.bar_id).queryKey,
+    )
 
     queryClient.setQueryData(
-      ['bar-reviews', String(review.bar_id)],
+      barReviewsKeys.all(review.bar_id).queryKey,
       (old: { data: BarReview[] }) => {
         return {
           ...old,
@@ -58,7 +58,7 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
     onMutate: optimisticUpdate(1),
     onError: (_err, _variables, context) => {
       queryClient.setQueryData(
-        ['bar-reviews', String(review.bar_id)],
+        barReviewsKeys.all(review.bar_id).queryKey,
         context?.previousReviews,
       )
     },
@@ -74,7 +74,7 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
     onMutate: optimisticUpdate(-1),
     onError: (_err, _variables, context) => {
       queryClient.setQueryData(
-        ['bar-reviews', String(review.bar_id)],
+        barReviewsKeys.all(review.bar_id).queryKey,
         context?.previousReviews,
       )
     },

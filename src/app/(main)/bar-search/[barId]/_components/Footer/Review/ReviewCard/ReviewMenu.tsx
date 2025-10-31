@@ -9,6 +9,7 @@ import { BarReview } from '@api/review/getBarReviews'
 import { useModal } from '@/app/_providers/ModalProvider'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { PostgrestError } from '@supabase/supabase-js'
+import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
@@ -17,7 +18,7 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
   const { mutate: deleteReviewMutation } = useMutation({
     mutationFn: () => deleteBarReview(review.id),
     onSuccess: () => {
-      invalidateQueries([['bar-reviews', String(review.bar_id)]])
+      invalidateQueries([barReviewsKeys.all(review.bar_id).queryKey])
       snackBar.showSuccess(
         '리뷰 삭제 성공',
         '리뷰가 성공적으로 삭제되었습니다.',

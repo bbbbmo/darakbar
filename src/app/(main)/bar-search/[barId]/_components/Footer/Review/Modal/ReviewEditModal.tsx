@@ -13,6 +13,7 @@ import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQuerie
 import { BarReview } from '@api/review/getBarReviews'
 import { uploadFiles } from '@api/storage'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
+import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
 export type ReviewEditModalProps = {
   barId: number
@@ -52,7 +53,7 @@ export default function ReviewEditModal({
     }) => patchBarReview({ reviewId: review.id, userId, body }),
     onSuccess: () => {
       console.log('barId', barId)
-      invalidateQueries([['bar-reviews', String(barId)]])
+      invalidateQueries([barReviewsKeys.all(barId).queryKey])
       snackBar.showSuccess(
         '리뷰 수정 성공',
         '리뷰가 성공적으로 수정되었습니다.',

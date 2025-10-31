@@ -1,4 +1,4 @@
-import supabase from '../../supabase'
+import supabase from '@lib/supabase/supabase'
 
 export const deleteBarReview = async (reviewId: number) => {
   console.log('deleteBarReview', reviewId)
