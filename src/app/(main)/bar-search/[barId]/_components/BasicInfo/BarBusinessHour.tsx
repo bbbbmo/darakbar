@@ -7,7 +7,7 @@ import {
   formatDayToKorean,
   formatToHHmm,
   sortBusinessHoursByDay,
-} from '../../../_utils/formatBusinessHour'
+} from '@utils/formatBusinessHour'
 import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 // TODO: 운영 시간 표시 로직 추가
