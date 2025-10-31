@@ -30,6 +30,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
     trigger,
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
+
   return (
     <>
       <FormHeader title="상세 정보 입력" />

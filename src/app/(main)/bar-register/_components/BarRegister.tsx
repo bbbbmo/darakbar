@@ -1,3 +1,4 @@
+// src/app/(main)/bar-register/_components/BarRegister.tsx
 'use client'
 
 import { Card } from 'flowbite-react'
@@ -13,6 +14,7 @@ import { barRegisterDefaultValues, barRegisterSteps } from './BarRegister.const'
 
 export default function BarRegister() {
   const { Funnel, Step, setStep } = useFunnel(barRegisterSteps['기본정보'])
+
   const methods = useForm<BarRegisterForm>({
     resolver: zodResolver(BarRegisterFormSchema),
     mode: 'onSubmit',
