@@ -25,7 +25,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
   })
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <FormItem label={'재료'} required>
         {fields.map((field, ingIndex) => (
           <div
@@ -64,10 +64,15 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         ))}
       </FormItem>
 
-      <Button type="button" size="md" onClick={() => append({ name: '' })}>
-        <HiPlusSm size={20} className="text-gray-300" />
+      <Button
+        type="button"
+        color="primary"
+        size="md"
+        onClick={() => append({ name: '' })}
+      >
+        <HiPlusSm size={20} className="text-zinc-800" />
         재료 추가
       </Button>
-    </>
+    </div>
   )
 }

@@ -48,10 +48,10 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
           size="xs"
           onClick={() => append(emptySignatureCocktail)}
         >
-          메뉴 추가
+          메뉴 입력 추가
         </Button>
       </div>
-      <div className="scroll-none flex max-h-[50vh] flex-col gap-2 overflow-y-auto">
+      <div className="scroll-none flex max-h-[70vh] flex-col gap-2 overflow-y-auto">
         {fields.map((field, index) => (
           <Fragment key={field.id}>
             <p
