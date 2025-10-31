@@ -4,7 +4,7 @@ import {
   priceRangeOptions,
   regionOptions,
   sortOptions,
-} from '@/const/bar.const'
+} from '@/const/bar-options.const'
 
 export const barFilterSelect: { key: string; options: string[] }[] = [
   { key: 'region', options: regionOptions },
