@@ -26,7 +26,7 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
 
   const optimisticUpdate = (likeCount: 1 | -1) => async () => {
     await queryClient.cancelQueries({
-      queryKey: ['bar-reviews', String(review.bar_id)],
+      queryKey: barReviewsKeys.all(review.bar_id).queryKey,
     })
 
     const previousReviews = queryClient.getQueryData(

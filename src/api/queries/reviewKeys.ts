@@ -3,7 +3,7 @@ import { getBarReviews } from '../review/getBarReviews'
 
 export const barReviewsKeys = createQueryKeys('bar-reviews', {
   all: (barId: number) => ({
-    queryKey: [barId],
+    queryKey: [String(barId)],
     queryFn: () => getBarReviews(barId),
   }),
 })

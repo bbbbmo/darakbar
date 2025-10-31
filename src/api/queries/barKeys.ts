@@ -8,7 +8,7 @@ export const barKeys = createQueryKeys('bar', {
     queryFn: () => getBars(),
   },
   detail: (barId: number) => ({
-    queryKey: [barId],
+    queryKey: [String(barId)],
     queryFn: () => getBarDetail(barId),
   }),
 })
