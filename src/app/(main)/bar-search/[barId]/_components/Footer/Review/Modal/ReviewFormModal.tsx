@@ -21,7 +21,7 @@ import { getReviewTags } from '@/lib/supabase/api/tag/getReviewTags'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import { ReviewForm } from './ReviewFormModal.schemes'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export type ReviewFormModalProps = {
   title: string

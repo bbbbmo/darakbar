@@ -1,4 +1,4 @@
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Select } from 'flowbite-react'
 
 type FormOptionProps = {

@@ -1,5 +1,5 @@
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
-import { Card } from "flowbite-react";
+import { basicTheme } from '@/lib/flowbite/basicTheme'
+import { Card } from 'flowbite-react'
 
 export default function CardSkeleton() {
   return (
@@ -28,5 +28,5 @@ export default function CardSkeleton() {
       </div>
       <span className="sr-only">Loading...</span>
     </Card>
-  );
+  )
 }

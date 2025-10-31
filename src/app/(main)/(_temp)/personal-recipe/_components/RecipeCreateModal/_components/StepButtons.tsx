@@ -1,13 +1,13 @@
-import { Button } from "flowbite-react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
-import { FunnelStep } from "../RecipeCreateModal.const";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { Button } from 'flowbite-react'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
+import { FunnelStep } from '../RecipeCreateModal.const'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type StepButtonsProps = {
-  currentStep: FunnelStep;
-  handlePrevStep: () => void;
-  handleNextStep: () => void;
-};
+  currentStep: FunnelStep
+  handlePrevStep: () => void
+  handleNextStep: () => void
+}
 
 export default function StepButtons({
   currentStep,
@@ -36,5 +36,5 @@ export default function StepButtons({
         {currentStep.nextText} <ArrowRightIcon className="size-4" />
       </Button>
     </>
-  );
+  )
 }

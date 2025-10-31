@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { useRef } from "react";
-import { Button, TextInput } from "flowbite-react";
-import clsx from "clsx";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { useRef } from 'react'
+import { Button, TextInput } from 'flowbite-react'
+import clsx from 'clsx'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type SearchBarProps = {
-  className?: string;
-};
+  className?: string
+}
 
 // TODO: 검색 기능 추가
 export default function SearchBar({ className }: SearchBarProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null)
   return (
-    <section className={clsx("flex gap-3", className)}>
+    <section className={clsx('flex gap-3', className)}>
       <TextInput
         ref={inputRef}
         type="text"
@@ -27,5 +27,5 @@ export default function SearchBar({ className }: SearchBarProps) {
         검색
       </Button>
     </section>
-  );
+  )
 }

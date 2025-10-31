@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Modal,
@@ -6,31 +6,31 @@ import {
   ModalBody,
   ModalFooter,
   Progress,
-} from "flowbite-react";
-import useModalStore from "@components/Modals/modalStore";
-import { useEffect, useState } from "react";
-import StepButtons from "./_components/StepButtons";
-import useFunnelStep from "./_hooks/useFunnelStep";
-import { FormProvider, useForm } from "react-hook-form";
+} from 'flowbite-react'
+import useModalStore from '@components/Modals/modalStore'
+import { useEffect, useState } from 'react'
+import StepButtons from './_components/StepButtons'
+import useFunnelStep from './_hooks/useFunnelStep'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   CreateRecipeForm,
   CreateRecipeFormSchema,
-} from "./RecipeCreateModal.schemes";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateUserRecipe } from "./_hooks/useCreateUserRecipe";
-import { emptyIngredient, funnelSteps } from "./RecipeCreateModal.const";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+} from './RecipeCreateModal.schemes'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useCreateUserRecipe } from './_hooks/useCreateUserRecipe'
+import { emptyIngredient, funnelSteps } from './RecipeCreateModal.const'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function RecipeCreateModal() {
-  const { modals, close } = useModalStore();
-  const [progress, setProgress] = useState<number>(0);
+  const { modals, close } = useModalStore()
+  const [progress, setProgress] = useState<number>(0)
   const { currentStep, maxStep, stepIndex, handleNextStep, handlePrevStep } =
-    useFunnelStep();
-  const { mutate } = useCreateUserRecipe();
+    useFunnelStep()
+  const { mutate } = useCreateUserRecipe()
 
   const methods = useForm<CreateRecipeForm>({
     resolver: zodResolver(CreateRecipeFormSchema),
-    mode: "onSubmit",
+    mode: 'onSubmit',
     shouldUnregister: false,
     defaultValues: {
       ingredients: [
@@ -38,39 +38,39 @@ export default function RecipeCreateModal() {
         emptyIngredient,
       ],
     },
-  });
+  })
 
   const createUserRecipe = () => {
-    const finalData = methods.getValues();
-    mutate(finalData);
-  };
+    const finalData = methods.getValues()
+    mutate(finalData)
+  }
 
   const onClickNext = async () => {
     // 현재 스텝 필드만 부분 검증
     const ok = await methods.trigger(currentStep.fieldsToValidate, {
       shouldFocus: true,
-    });
-    if (ok) handleNextStep();
+    })
+    if (ok) handleNextStep()
     // 마지막이면 제출
     if (currentStep === funnelSteps.설명입력) {
-      methods.handleSubmit(createUserRecipe)();
-      methods.reset();
+      methods.handleSubmit(createUserRecipe)()
+      methods.reset()
     }
 
     if (currentStep === funnelSteps.레시피등록완료) {
-      close("create");
+      close('create')
     }
-  };
+  }
 
   useEffect(() => {
-    setProgress(Math.round(((stepIndex + 1) / maxStep) * 100));
-  }, [stepIndex]);
+    setProgress(Math.round(((stepIndex + 1) / maxStep) * 100))
+  }, [stepIndex])
   return (
     <Modal
       show={modals.create}
       theme={basicTheme.modal}
       size="2xl"
-      onClose={() => close("create")}
+      onClose={() => close('create')}
     >
       <ModalHeader className="bg-primary w-full text-gray-300">
         칵테일 등록하기
@@ -99,5 +99,5 @@ export default function RecipeCreateModal() {
         </div>
       </ModalFooter>
     </Modal>
-  );
+  )
 }

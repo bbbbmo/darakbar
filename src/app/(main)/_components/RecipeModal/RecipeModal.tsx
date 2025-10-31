@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getRecipeById } from '@/lib/supabase/api/recipe/recipe'
 import { useRouter } from 'next/navigation'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type Content = 'preview' | 'detail'
 

@@ -14,7 +14,7 @@ import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form'
 import { EditProfileFormData } from './EditProfileForm.types'
 import { getImagePreview } from '@utils/file/setImagePreview'
 import { useAuthStore } from '@stores/auth.store'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { getPublicUrl } from '@/lib/supabase/api/storage'
 
 type EditProfileCardProps = {

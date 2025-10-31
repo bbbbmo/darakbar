@@ -1,22 +1,22 @@
-import { Textarea } from "flowbite-react";
-import FormItem from "@components/Forms/FormItem";
-import FormDescription from "@components/Forms/FormDescription";
-import { useFormContext } from "react-hook-form";
-import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormErrorMessage from "@components/Forms/FormErrorMessage";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { Textarea } from 'flowbite-react'
+import FormItem from '@components/Forms/FormItem'
+import FormDescription from '@components/Forms/FormDescription'
+import { useFormContext } from 'react-hook-form'
+import { CreateRecipeForm } from '../../RecipeCreateModal.schemes'
+import FormErrorMessage from '@components/Forms/FormErrorMessage'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function DescriptionForm() {
   const {
     register,
     watch,
     formState: { errors },
-  } = useFormContext<CreateRecipeForm>();
+  } = useFormContext<CreateRecipeForm>()
 
-  const watchedDescription = watch("description");
-  const watchedInstructions = watch("instructions");
-  console.log(watchedDescription);
-  console.log(watchedInstructions);
+  const watchedDescription = watch('description')
+  const watchedInstructions = watch('instructions')
+  console.log(watchedDescription)
+  console.log(watchedInstructions)
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function DescriptionForm() {
             theme={basicTheme.textarea}
             color="primary"
             placeholder="ex) 1. 라임과 레몬을 반으로 슬라이스 한다."
-            {...register("instructions")}
+            {...register('instructions')}
             aria-invalid={!!errors.instructions}
           />
           <FormErrorMessage error={errors.instructions} />
@@ -39,12 +39,12 @@ export default function DescriptionForm() {
             theme={basicTheme.textarea}
             color="primary"
             placeholder="ex) 열대과일의 상큼한 맛과 오렌지 향"
-            {...register("description")}
+            {...register('description')}
             aria-invalid={!!errors.description}
           />
           <FormErrorMessage error={errors.description} />
         </FormItem>
       </div>
     </>
-  );
+  )
 }

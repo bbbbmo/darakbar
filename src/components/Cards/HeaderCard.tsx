@@ -1,13 +1,13 @@
-import { Card } from "flowbite-react";
-import BlurText from "../Reactbits/BlurText";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { Card } from 'flowbite-react'
+import BlurText from '../Reactbits/BlurText'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type HeaderCardProps = {
-  title: string;
-  message: string;
-  children?: React.ReactNode;
-  className?: string;
-};
+  title: string
+  message: string
+  children?: React.ReactNode
+  className?: string
+}
 
 export default function HeaderCard({
   title,
@@ -29,5 +29,5 @@ export default function HeaderCard({
         {children}
       </p>
     </Card>
-  );
+  )
 }

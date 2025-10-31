@@ -1,24 +1,24 @@
-import { Select, TextInput, Button } from "flowbite-react";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { XCircleIcon } from "@heroicons/react/24/solid";
-import FormItem from "@components/Forms/FormItem";
-import FormDescription from "@components/Forms/FormDescription";
-import { emptyIngredient, unitOptions } from "../../RecipeCreateModal.const";
-import { CreateRecipeForm } from "../../RecipeCreateModal.schemes";
-import FormErrorMessage from "@components/Forms/FormErrorMessage";
-import { basicTheme } from "@/lib/flowbite/themes/basicTheme";
+import { Select, TextInput, Button } from 'flowbite-react'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { XCircleIcon } from '@heroicons/react/24/solid'
+import FormItem from '@components/Forms/FormItem'
+import FormDescription from '@components/Forms/FormDescription'
+import { emptyIngredient, unitOptions } from '../../RecipeCreateModal.const'
+import { CreateRecipeForm } from '../../RecipeCreateModal.schemes'
+import FormErrorMessage from '@components/Forms/FormErrorMessage'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function IngredientForm() {
   const {
     register,
     control,
     formState: { errors },
-  } = useFormContext<CreateRecipeForm>();
+  } = useFormContext<CreateRecipeForm>()
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "ingredients",
-  });
+    name: 'ingredients',
+  })
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function IngredientForm() {
               color="primary"
               placeholder="메인이 되는 술이나 재료를 입력해 주세요"
               className="h-10 grow"
-              {...register("ingredients.0.name")}
+              {...register('ingredients.0.name')}
               aria-invalid={!!errors.ingredients?.[0]?.name}
             />
             <TextInput
@@ -45,7 +45,7 @@ export default function IngredientForm() {
               color="primary"
               step={0.25}
               placeholder="용량"
-              {...register("ingredients.0.amount", {
+              {...register('ingredients.0.amount', {
                 valueAsNumber: true,
               })}
               aria-invalid={!!errors.ingredients?.[0]?.amount}
@@ -54,7 +54,7 @@ export default function IngredientForm() {
               className="w-28"
               theme={basicTheme.select}
               color="primary"
-              {...register("ingredients.0.unit")}
+              {...register('ingredients.0.unit')}
               aria-invalid={!!errors.ingredients?.[0]?.unit}
             >
               {unitOptions.map((unit) => (
@@ -74,7 +74,7 @@ export default function IngredientForm() {
         </FormItem>
         {/* 재료 입력 */}
         {fields?.slice(1).map((field, index) => {
-          const actualIndex = index + 1;
+          const actualIndex = index + 1
           return (
             <FormItem key={field.id} label={`재료 ${actualIndex}`} required>
               <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ export default function IngredientForm() {
                 }
               />
             </FormItem>
-          );
+          )
         })}
       </div>
       {/* 재료 추가 버튼 */}
@@ -149,5 +149,5 @@ export default function IngredientForm() {
         </Button>
       </div>
     </>
-  );
+  )
 }

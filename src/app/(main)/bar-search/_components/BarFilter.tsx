@@ -1,6 +1,6 @@
 'use client'
 
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Button, Card, TextInput } from 'flowbite-react'
 import { HiAdjustments } from 'react-icons/hi'
 import { barFilterSelect } from './BarFilter.const'

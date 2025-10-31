@@ -11,7 +11,7 @@ import supabase from '@lib/supabase/supabase'
 import FormPasswordInput from '@components/Forms/FormPasswordInput'
 import { useRouter } from 'next/navigation'
 import NextButton from '@/components/Buttons/NextButton'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function SignUpForm() {
   const [error, setError] = useState<string | null>(null)

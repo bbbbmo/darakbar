@@ -6,7 +6,7 @@ import CardSkeleton from '../../../../components/Skeletons/CardSkeleton'
 import { UserRecipe } from '@/types/recipe/recipe.types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type RecipeCardProps = {
   recipe: UserRecipe

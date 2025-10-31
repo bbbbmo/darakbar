@@ -6,7 +6,7 @@ import FormFileInput from '@components/Forms/FormFileInput'
 import { CreateRecipeForm } from '../../RecipeCreateModal.schemes'
 import FormDescription from '@components/Forms/FormDescription'
 import FormErrorMessage from '@components/Forms/FormErrorMessage'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 // TODO: 칵테일 이미지 미리보기 추가
 export default function BasicInfoForm() {

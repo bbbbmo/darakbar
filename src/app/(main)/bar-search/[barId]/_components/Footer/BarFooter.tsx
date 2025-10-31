@@ -2,7 +2,7 @@
 
 import { TabItem, Tabs, TabsRef } from 'flowbite-react'
 import { useRef } from 'react'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 import ReviewTab from './Review/ReviewTab'
 import PhotoTab from './Photo/PhotoTab'
 import FeedbackTab from './FeedBack/FeedbackTab'

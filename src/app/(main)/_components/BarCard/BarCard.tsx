@@ -2,7 +2,7 @@
 
 import CardSkeleton from '@/components/Skeletons/CardSkeleton'
 import Tags from '@/components/Tags'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Button, Card } from 'flowbite-react'
 import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'
 import { Bar } from '@/lib/supabase/api/bar/getBars'

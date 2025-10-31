@@ -10,7 +10,7 @@ import AppSnackBar from '@/components/SnackBar/SnackBar'
 import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
 import { useRouter } from 'next/navigation'
 import NextButton from '@/components/Buttons/NextButton'
-import { basicTheme } from '@/lib/flowbite/themes/basicTheme'
+import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function SignForm() {
   const [error, setError] = useState<string | null>(null)
