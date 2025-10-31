@@ -12,7 +12,7 @@ import { getAtmosphereTags } from '@/lib/supabase/api/tag/getAtmosphereTags'
 import { TextInput } from 'flowbite-react'
 import NextButton from '@/components/Buttons/NextButton'
 import { useFormContext } from 'react-hook-form'
-import { BarRegisterForm } from './BarRegister.schemes'
+import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import PrevButton from '@/components/Buttons/PrevButton'
 
@@ -61,6 +61,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
       <FormItem label="인스타그램">
         <TextInput
           type="text"
+          color="primary"
           placeholder="https://www.instagram.com/example"
           {...register('instagramUrl')}
           aria-invalid={!!errors.instagramUrl}
@@ -70,6 +71,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
       <FormItem label="웹사이트">
         <TextInput
           type="text"
+          color="primary"
           placeholder="https://www.example.com"
           {...register('websiteUrl')}
           aria-invalid={!!errors.websiteUrl}

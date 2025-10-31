@@ -1,14 +1,15 @@
 'use client'
 
 import { Card } from 'flowbite-react'
-import BarBasicInfo from './BarBasicInfo'
+import BarBasicInfo from './Form/BarBasicInfo'
 import { useFunnel } from '@/hooks/useFunnel'
-import BarDetailInfo from './BarDetailInfo'
-import BarMenuInfo from './BarMenuInfo'
+import BarDetailInfo from './Form/BarDetailInfo'
+import BarMenuInfo from './Form/BarMenuInfo'
 import { FormProvider, useForm } from 'react-hook-form'
 import { BarRegisterForm, BarRegisterFormSchema } from './BarRegister.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { barRegisterDefaultValues } from './BarRegister.const'
+import BarBusinessHourInfo from './Form/BarBusinessHourInfo'
 
 export default function BarRegister() {
   const { Funnel, Step, setStep } = useFunnel('기본정보')
@@ -36,6 +37,12 @@ export default function BarRegister() {
             <Step name="메뉴정보">
               <BarMenuInfo
                 onPrevStep={() => setStep('상세정보')}
+                onNextStep={() => setStep('운영시간정보')}
+              />
+            </Step>
+            <Step name="운영시간정보">
+              <BarBusinessHourInfo
+                onPrevStep={() => setStep('메뉴정보')}
                 onNextStep={() => setStep('완료')}
               />
             </Step>
