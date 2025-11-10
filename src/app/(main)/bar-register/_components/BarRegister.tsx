@@ -2,11 +2,11 @@
 'use client'
 
 import { Card } from 'flowbite-react'
-import BarBasicInfo from './Form/BarBasicInfo'
+import BarBasicInfo from './Steps/BarBasicInfo'
 import { useFunnel } from '@/hooks/useFunnel'
-import BarDetailInfo from './Form/BarDetailInfo'
-import BarMenuInfo from './Form/BarMenuInfo'
-import BarBusinessHourInfo from './Form/BarBusinessHourInfo'
+import BarDetailInfo from './Steps/BarDetailInfo'
+import BarMenuInfo from './Steps/BarMenuInfo'
+import BarBusinessHourInfo from './Steps/BarBusinessHourInfo'
 import { FormProvider, useForm } from 'react-hook-form'
 import { BarRegisterForm, BarRegisterFormSchema } from './BarRegister.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -21,6 +21,16 @@ export default function BarRegister() {
     shouldUnregister: false,
     defaultValues: barRegisterDefaultValues,
   })
+
+  const registerBarInfo = async () => {
+    const formData = methods.getValues()
+    console.log(formData)
+  }
+
+  const handleSubmit = async () => {
+    await registerBarInfo()
+    setStep(barRegisterSteps['완료'])
+  }
 
   return (
     <div className="flex justify-center">
@@ -51,7 +61,7 @@ export default function BarRegister() {
                 onPrevStep={() =>
                   setStep(barRegisterSteps['시그니처칵테일정보'])
                 }
-                onNextStep={() => setStep(barRegisterSteps['완료'])}
+                onNextStep={handleSubmit}
               />
             </Step>
           </Funnel>
