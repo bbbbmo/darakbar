@@ -59,23 +59,31 @@ export default function Tags({
 
   return (
     <span className="flex flex-row flex-wrap gap-2">
-      {tags.map((tag: Tag, index) => {
-        const color = colors[index % colors.length]
-        const isSelected = selectedTagIds.includes(tag.id)
-        return (
-          <Badge
-            key={tag.id}
-            color={active ? 'gray' : color}
-            className={clsx(
-              isSelected &&
-                `scale-105 bg-amber-400 opacity-100 shadow-md hover:bg-amber-500`,
-            )}
-            onClick={() => handleTagClick(tag.id)}
-          >
-            {tag.name}
-          </Badge>
-        )
-      })}
+      {active
+        ? tags.map((tag: Tag) => {
+            const isSelected = selectedTagIds.includes(tag.id)
+            return (
+              <Badge
+                key={tag.id}
+                color="gray"
+                className={clsx(
+                  isSelected &&
+                    `scale-105 bg-amber-400 opacity-100 shadow-md hover:bg-amber-500`,
+                )}
+                onClick={() => handleTagClick(tag.id)}
+              >
+                {tag.name}
+              </Badge>
+            )
+          })
+        : tags.map((tag: Tag, index) => {
+            const color = colors[index % colors.length]
+            return (
+              <Badge key={tag.id} color={color}>
+                {tag.name}
+              </Badge>
+            )
+          })}
     </span>
   )
 }
