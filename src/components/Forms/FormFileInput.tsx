@@ -20,12 +20,10 @@ export default function FormFileInput({
   registeration,
   setValue,
   trigger,
-  existingImages,
+  existingImages = [],
 }: FormFileInputProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const { publicUrls: existingImagePreviews } = useParseFile(
-    existingImages || [],
-  )
+  const { publicUrls: existingImagePreviews } = useParseFile(existingImages)
 
   useEffect(() => {
     return () => {
@@ -47,7 +45,8 @@ export default function FormFileInput({
       URL.revokeObjectURL(imagePreview)
     }
     if (files.length > 0) {
-      setImagePreview(URL.createObjectURL(files[0]))
+      const previewUrl = URL.createObjectURL(files[0])
+      setImagePreview(previewUrl)
       setValue(registeration.name, files) // 배열로 설정
       await trigger(registeration.name as any)
     } else {
@@ -123,7 +122,8 @@ export default function FormFileInput({
             id="dropzone-file"
             className="hidden"
             accept="image/*"
-            {...registeration}
+            ref={registeration.ref}
+            name={registeration.name}
             onChange={onChange}
           />
         </Label>
