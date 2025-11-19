@@ -1,71 +1,22 @@
-import { User } from '@supabase/supabase-js'
-import supabase from '@lib/supabase/supabase'
-import { uploadFile } from './storage'
-
-export const getCurrentUser = async () => {
-  const { data, error } = await supabase.auth.getUser()
-
-  if (error || !data.user) {
-    throw new Error(error?.message || '유저 정보를 가져올 수 없습니다.')
-  }
-
-  return { user: data.user } // User 객체
-}
+import supabase from '@/lib/supabase/supabase'
+import { imageFileValidation } from '@/utils/file/imageFileValidation'
+import { uploadFile } from '../storage'
 
 /**
- * @description 유저 프로필 가져오기
+ * @description 유저 아바타 URL 가져오기
  * @param userId 유저 아이디
  */
-export const getUserProfile = async (userId: string) => {
+export const getUserAvatarUrl = async (userId: string) => {
   const { data, error } = await supabase
     .from('userinfo')
-    .select('*')
+    .select('profile_img_url')
     .eq('id', userId)
     .single()
   if (error) {
-    throw new Error(`유저 프로필 가져오기 중 에러 발생 ${error.message}`)
-  }
-  if (!data) {
-    throw new Error('유저 정보를 찾을 수 없습니다.')
-  }
-  if (data) {
-    return data
-  }
-}
-
-/**
- * @description 이미지 파일 유효성 검사
- * @param file 업로드할 이미지 파일
- */
-const imageFileValidation = (file: File) => {
-  // 파일 유효성 검사
-  if (!file) {
-    throw new Error('파일이 선택되지 않았습니다.')
+    throw new Error(`유저 프로필 이미지 가져오기 중 에러 발생 ${error.message}`)
   }
 
-  // 이미지 파일 타입 체크
-  if (!file.type.startsWith('image/')) {
-    throw new Error('이미지 파일만 업로드 가능합니다.')
-  }
-
-  // 파일 크기 체크 (1MB 이하)
-  if (file.size > 1024 * 1024) {
-    throw new Error('파일 크기는 1MB를 넘을 수 없습니다.')
-  }
-
-  // 파일 확장자 체크
-  const allowedTypes = [
-    'image/jpeg',
-    'image/jpg',
-    'image/png',
-    'image/gif',
-    'image/webp',
-  ]
-  if (!allowedTypes.includes(file.type)) {
-    throw new Error(
-      '지원하지 않는 이미지 형식입니다. (JPEG, PNG, GIF, WebP만 지원)',
-    )
-  }
+  return data?.profile_img_url ?? null
 }
 
 /**
@@ -74,7 +25,7 @@ const imageFileValidation = (file: File) => {
  * @param userId 유저 아이디
  * @returns 업로드된 이미지 URL
  */
-export const uploadUserProfileImage = async (file: File, userId: string) => {
+export const postUserAvatar = async (file: File, userId: string) => {
   try {
     imageFileValidation(file)
 
@@ -110,39 +61,10 @@ export const uploadUserProfileImage = async (file: File, userId: string) => {
 }
 
 /**
- * @description 유저 프로필 수정
- * @param newName 새로운 이름
- * @param newEmail 새로운 이메일
- * @param newPassword 새로운 비밀번호
- * @returns 수정된 유저 정보
- */
-export const updateUserProfile = async (
-  newName?: string | null,
-  newEmail?: string | null,
-  newPassword?: string | null,
-): Promise<User> => {
-  const { data, error } = await supabase.auth.updateUser({
-    ...(newEmail && { email: newEmail }),
-    ...(newPassword && { password: newPassword }),
-    ...(newName
-      ? {
-          data: {
-            ...(newName && { name: newName }),
-          },
-        }
-      : {}),
-  })
-  if (error) {
-    throw new Error(`유저 프로필 수정 중 에러 발생 ${error.message}`)
-  }
-  return data.user
-}
-
-/**
  * @description 유저 프로필 이미지 삭제
  * @param userId 유저 아이디
  */
-export const deleteUserProfileImage = async (userId: string) => {
+export const deleteUserAvatar = async (userId: string) => {
   try {
     const filePath = `${userId}/profile`
     // Storage에서 기존 이미지 파일들 삭제

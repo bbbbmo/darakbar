@@ -1,13 +1,14 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { getCurrentUser, getUserProfile } from '../user'
+import { getUser } from '../user/user'
+import { getUserAvatarUrl } from '../user/userAvatar'
 
 export const userKeys = createQueryKeys('user', {
   currentUser: {
     queryKey: null,
-    queryFn: () => getCurrentUser(),
+    queryFn: () => getUser(),
   },
-  profile: (userId: string) => ({
+  avatar: (userId: string) => ({
     queryKey: [userId],
-    queryFn: () => getUserProfile(userId),
+    queryFn: () => getUserAvatarUrl(userId),
   }),
 })
