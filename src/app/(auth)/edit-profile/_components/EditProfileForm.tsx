@@ -8,24 +8,24 @@ import {
   Button,
   Card,
   FileInput,
+  HelperText,
   Label,
   TextInput,
 } from 'flowbite-react'
 import { useState } from 'react'
-import FormPasswordInput from '@components/Forms/FormPasswordInput'
-import { updateUserProfile, uploadUserProfileImage } from '@api/user'
+import { patchUser } from '@/api/user/user'
+import { postUserAvatar } from '@/api/user/userAvatar'
 import AppSnackBar from '@/components/SnackBar/SnackBar'
 import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
-import { useCurrentUser } from '@/hooks/tanstack-query/useCurrentUserQuery'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { basicTheme } from '@/lib/flowbite/basicTheme'
 import FormItem from '@/components/Forms/FormItem'
+import { useAuthStore } from '@/stores/auth.store'
 
 export default function EditProfileForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const { userId, userName, userEmail } = useCurrentUser()
+  const { userData } = useAuthStore()
 
   const {
     register,
@@ -36,10 +36,8 @@ export default function EditProfileForm() {
     resolver: zodResolver(EditProfileFormSchema),
     mode: 'onSubmit',
     defaultValues: {
-      name: userName || '',
-      email: userEmail || '',
-      password: '',
-      confirmPassword: '',
+      name: userData?.name || '',
+      email: userData?.email || '',
       profileImage: null,
     },
   })
@@ -55,10 +53,10 @@ export default function EditProfileForm() {
   const patchUserProfile = async (data: EditProfileForm) => {
     try {
       setIsLoading(true)
-      if (data.profileImage && userId) {
-        await uploadUserProfileImage(data.profileImage, userId)
+      if (data.profileImage && userData?.id) {
+        await postUserAvatar(data.profileImage, userData.id)
       }
-      await updateUserProfile(data.name, data.email, data.password)
+      await patchUser(data.name, data.email, data.password)
     } catch (error) {
       const errorMessage =
         error instanceof Error
@@ -97,6 +95,11 @@ export default function EditProfileForm() {
                 {...register('name')}
                 placeholder="이름을 입력해주세요"
               />
+              {errors.name && (
+                <HelperText className="font-medium">
+                  {errors.name.message}
+                </HelperText>
+              )}
             </FormItem>
           </div>
           <FormItem label="이메일">
@@ -104,16 +107,14 @@ export default function EditProfileForm() {
               {...register('email')}
               placeholder="이메일을 입력해주세요"
             />
+            {errors.email && (
+              <HelperText className="font-medium">
+                {errors.email.message}
+              </HelperText>
+            )}
           </FormItem>
         </div>
       </Card>
-
-      <FormPasswordInput
-        register={register}
-        watch={watch}
-        errors={errors}
-        required={false}
-      />
       <div className="flex justify-end gap-3">
         <Button className="btn-primary">회원 탈퇴</Button>
         <Button type="submit" disabled={isLoading}>

@@ -1,4 +1,4 @@
-import { getCurrentUser } from '@api/user'
+import { getUser } from '@/api/user/user'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreateRecipeForm } from '../RecipeCreateModal.schemes'
 import { createValidatedUserRecipe } from '@api/recipe/recipe'
@@ -8,8 +8,7 @@ export const useCreateUserRecipe = () => {
 
   return useMutation({
     mutationFn: async (formData: CreateRecipeForm) => {
-      const user = await getCurrentUser()
-      console.log(user.user.id)
+      const user = await getUser()
 
       await createValidatedUserRecipe(formData, user.user.id)
     },

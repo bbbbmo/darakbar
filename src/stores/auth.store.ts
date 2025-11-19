@@ -21,7 +21,11 @@ export type UserData = {
 }
 
 type AuthActions = {
-  setAuth: (payload: { user: User | null; session: Session | null }) => void
+  setAuth: (payload: {
+    user: User | null
+    avatarUrl: string | null
+    session: Session | null
+  }) => void
   setReady: (ready: boolean) => void
   reset: () => void // 로컬 상태만 초기화
 }
@@ -30,14 +34,14 @@ export const useAuthStore = create<AuthState & AuthActions>()((set) => ({
   userData: null,
   session: null,
   isReady: false,
-  setAuth: ({ user, session }) =>
+  setAuth: ({ user, avatarUrl, session }) =>
     set({
       userData: user
         ? {
             id: user.id,
             email: user.email ?? '',
             name: user.user_metadata.name ?? '',
-            avatarUrl: user.user_metadata.avatar_url ?? '',
+            avatarUrl: avatarUrl ?? '',
           }
         : null,
       session,
