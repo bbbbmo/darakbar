@@ -1,6 +1,6 @@
 import supabase from '@/lib/supabase/supabase'
 import { imageFileValidation } from '@/utils/file/imageFileValidation'
-import { uploadFile } from '../storage'
+import { uploadFile } from '../file/storage'
 
 /**
  * @description 유저 아바타 URL 가져오기

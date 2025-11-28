@@ -1,6 +1,8 @@
+'use client'
+
 import { useParseFile } from '@/hooks/useParseFile'
 import { FileInput, Label } from 'flowbite-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import {
   UseFormRegisterReturn,
   UseFormSetValue,
@@ -22,23 +24,17 @@ export default function FormFileInput({
   trigger,
   existingImages = [],
 }: FormFileInputProps) {
+  const uniqueId = useId()
+  const dropzoneId = `dropzone-file-${uniqueId}`
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const { publicUrls: existingImagePreviews } = useParseFile(existingImages)
-
-  useEffect(() => {
-    return () => {
-      if (imagePreview) {
-        URL.revokeObjectURL(imagePreview)
-      }
-    }
-  }, [imagePreview])
 
   const removeExistingImage = (index: number) => {
     const updatedImages = existingImages?.filter((_, i) => i !== index)
     setValue('existingImages', updatedImages)
   }
 
-  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const fileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
 
     if (imagePreview) {
@@ -46,6 +42,7 @@ export default function FormFileInput({
     }
     if (files.length > 0) {
       const previewUrl = URL.createObjectURL(files[0])
+      console.log(previewUrl)
       setImagePreview(previewUrl)
       setValue(registeration.name, files) // 배열로 설정
       await trigger(registeration.name as any)
@@ -54,6 +51,14 @@ export default function FormFileInput({
       await trigger(registeration.name as any)
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview)
+      }
+    }
+  }, [imagePreview])
 
   return (
     <div className={`flex w-full flex-col gap-2 ${className}`}>
@@ -81,7 +86,7 @@ export default function FormFileInput({
 
       <div className={`flex w-full items-center justify-center ${className}`}>
         <Label
-          htmlFor="dropzone-file"
+          htmlFor={dropzoneId}
           className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-600 bg-gray-700 hover:bg-gray-600 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
         >
           {imagePreview ? (
@@ -119,12 +124,12 @@ export default function FormFileInput({
             </div>
           )}
           <FileInput
-            id="dropzone-file"
+            id={dropzoneId}
             className="hidden"
             accept="image/*"
             ref={registeration.ref}
             name={registeration.name}
-            onChange={onChange}
+            onChange={fileChange}
           />
         </Label>
       </div>

@@ -1,5 +1,5 @@
 import { snackBar } from '@/app/_providers/SnackBarProvider'
-import { getPublicUrl } from '@api/storage'
+import { getPublicUrl } from '@/api/file/storage'
 import { useEffect, useState, useMemo } from 'react'
 
 export function useParseFile(filePaths: string): {

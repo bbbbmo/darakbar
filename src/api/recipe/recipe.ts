@@ -4,7 +4,7 @@ import {
   CreateRecipeForm,
   CreateRecipeFormSchema,
 } from '@/app/(main)/(_temp)/personal-recipe/_components/RecipeCreateModal/RecipeCreateModal.schemes'
-import { uploadFile } from '@api/storage'
+import { uploadFile } from '@/api/file/storage'
 
 export const getRecipes = async (userId?: string) => {
   let query = supabase

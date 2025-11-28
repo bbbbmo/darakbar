@@ -1,6 +1,8 @@
 import supabase from '@lib/supabase/supabase'
 import { v4 as uuidv4 } from 'uuid'
 
+export const STORAGE_NAME = 'darakbar-storage' as const
+
 /**
  * @description supabase storage에 파일 업로드
  * @param file 업로드할 파일
@@ -12,7 +14,7 @@ export const uploadFile = async (file: File, basePath: string) => {
   const safeFileName = `${uuidv4()}.${fileExtension}`
   const filePath = `${basePath}/${safeFileName}`
   const { data, error } = await supabase.storage
-    .from('darakbar-storage')
+    .from(STORAGE_NAME)
     .upload(filePath, file, {
       cacheControl: '3600', // 파일 캐시 시간 (초 단위)
       upsert: false,
@@ -38,7 +40,7 @@ export const uploadFiles = async (files: File[], filePath: string) => {
 
 export const getPublicUrl = async (filePath: string) => {
   const { data } = await supabase.storage
-    .from('darakbar-storage')
+    .from(STORAGE_NAME)
     .getPublicUrl(filePath)
 
   return data.publicUrl

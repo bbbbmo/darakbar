@@ -30,7 +30,6 @@ export default function EditProfileForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EditProfileFormSchema),

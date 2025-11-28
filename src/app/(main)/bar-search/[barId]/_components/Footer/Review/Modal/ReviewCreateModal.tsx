@@ -9,7 +9,7 @@ import { useBarDetailStore } from '@/app/(main)/bar-search/[barId]/_stores/bar-d
 import { postBarReview, PostBarReviewBody } from '@api/review/postBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
-import { uploadFiles } from '@api/storage'
+import { uploadFiles } from '@/api/file/storage'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
