@@ -42,13 +42,6 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
           trigger={trigger}
         />
       </FormItem>
-      <FormItem label="바 카테고리" required>
-        <FormOption
-          options={barCategoryOptions}
-          setOption={(option) => setValue('category', option)}
-        />
-        <FormErrorMessage error={errors.category} />
-      </FormItem>
       <FormItem label="바 분위기" required>
         <Tags
           tags={atmosphereTags?.data || []}

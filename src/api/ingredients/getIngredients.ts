@@ -12,5 +12,10 @@ export const getIngredients = async (name?: string) => {
   }
 
   const { data, error } = await query
-  return { data, error }
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

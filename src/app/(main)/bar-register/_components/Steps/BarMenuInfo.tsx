@@ -108,6 +108,9 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
                   {...register(`signatureCocktails.${index}.price`)}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.price}
                 />
+                <FormErrorMessage
+                  error={errors.signatureCocktails?.[index]?.price}
+                />
               </FormItem>
               <FormItem label="알코올 도수" required wrapperClassName="flex-1">
                 <TextInput
@@ -118,14 +121,12 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
                   {...register(`signatureCocktails.${index}.abv`)}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.abv}
                 />
+                <FormErrorMessage
+                  error={errors.signatureCocktails?.[index]?.abv}
+                />
               </FormItem>
-              <FormErrorMessage
-                error={
-                  errors.signatureCocktails?.[index]?.price ||
-                  errors.signatureCocktails?.[index]?.abv
-                }
-              />
             </div>
+
             {/* 재료: 배열 입력 */}
             <IngredientsInfo index={index} />
 

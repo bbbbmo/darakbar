@@ -1,6 +1,7 @@
 import supabase from '@/lib/supabase/supabase'
 import { imageFileValidation } from '@/utils/file/imageFileValidation'
-import { uploadFile } from '../file/storage'
+import { getPublicUrl, uploadFile } from '../file/storage'
+import { getUserProfileImagePath } from '../file/getStoragePath'
 
 /**
  * @description 유저 아바타 URL 가져오기
@@ -16,7 +17,12 @@ export const getUserAvatarUrl = async (userId: string) => {
     throw new Error(`유저 프로필 이미지 가져오기 중 에러 발생 ${error.message}`)
   }
 
-  return data?.profile_img_url ?? null
+  if (!data?.profile_img_url) {
+    return null
+  }
+
+  const publicUrl = await getPublicUrl(data.profile_img_url)
+  return publicUrl
 }
 
 /**
@@ -29,24 +35,14 @@ export const postUserAvatar = async (file: File, userId: string) => {
   try {
     imageFileValidation(file)
 
-    // 파일명 생성 (중복 방지)
-    const fileExt = file.name.split('.').pop()
-    const fileName = `${userId}-${Date.now()}.${fileExt}`
-    const filePath = `${userId}/profile/${fileName}`
-
-    const { data, error: uploadError } = await uploadFile(file, filePath)
-
-    if (uploadError || !data) {
-      throw new Error(
-        `이미지 업로드 실패${uploadError ? `: ${uploadError.message}` : ''}`,
-      )
-    }
+    const filePath = getUserProfileImagePath(userId)
+    const publicUrl = await uploadFile(file, filePath)
 
     // 데이터베이스에 프로필 이미지 URL 업데이트
     const { error: updateError } = await supabase
       .from('userinfo')
       .update({
-        profile_img_url: data.path,
+        profile_img_url: publicUrl,
       })
       .eq('id', userId)
 
@@ -54,7 +50,7 @@ export const postUserAvatar = async (file: File, userId: string) => {
       throw new Error(`프로필 이미지 URL 업데이트 실패: ${updateError.message}`)
     }
 
-    return data.path
+    return publicUrl
   } catch (error) {
     throw new Error(`프로필 이미지 업로드 에러: ${error}`)
   }

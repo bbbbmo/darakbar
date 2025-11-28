@@ -11,20 +11,26 @@ import {
 } from 'flowbite-react'
 import supabase from '@lib/supabase/supabase'
 import { useAuthStore } from '@stores/auth.store'
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import AppSnackBar from '../../../SnackBar/SnackBar'
 import { useState } from 'react'
 import { AppSnackBarColor } from '../../../SnackBar/SnackBar.types'
 import { AuthError } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { queries } from '@/api/queries'
 
 export default function UserProfile() {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const { userData, session } = useAuthStore()
+  const { userData } = useAuthStore()
   const [isOpen, setIsOpen] = useState(false)
   const [signOutError, setSignOutError] = useState<string | null>(null)
+
+  const { data: profileImage } = useQuery({
+    ...queries.user.avatar(userData?.id || ''),
+    enabled: !!userData?.id, // userId가 있을 때만 쿼리 실행
+  })
 
   /** 로그아웃, 에러 발생 시 alert */
   const signOut = async () => {
@@ -53,8 +59,8 @@ export default function UserProfile() {
         arrowIcon={false}
         inline
         label={
-          userData?.avatarUrl ? (
-            <Avatar alt="User Avatar" img={userData.avatarUrl} rounded />
+          profileImage ? (
+            <Avatar alt="User Avatar" img={profileImage} rounded />
           ) : (
             <UserIcon className="user-icon size-6" />
           )

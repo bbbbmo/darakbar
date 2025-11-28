@@ -12,25 +12,57 @@ import {
   Label,
   TextInput,
 } from 'flowbite-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { patchUser } from '@/api/user/user'
 import { postUserAvatar } from '@/api/user/userAvatar'
-import AppSnackBar from '@/components/SnackBar/SnackBar'
-import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormItem from '@/components/Forms/FormItem'
 import { useAuthStore } from '@/stores/auth.store'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { queries } from '@/api/queries'
+import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 
 export default function EditProfileForm() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const { userData } = useAuthStore()
+
+  const { data: profileImageUrl } = useQuery({
+    ...queries.user.avatar(userData?.id || ''),
+    enabled: !!userData?.id, // userId가 있을 때만 쿼리 실행
+  })
+
+  const { invalidateQueries } = useInvalidateQueries()
+
+  const { mutate: patchUserMutaition, isPending } = useMutation({
+    mutationFn: async (data: EditProfileForm) => {
+      if (data.profileImage && userData?.id) {
+        await postUserAvatar(data.profileImage, userData?.id || '')
+      }
+      await patchUser(data.name, data.email)
+    },
+    onSuccess: () => {
+      snackBar.showSuccess(
+        '프로필 수정 성공',
+        '프로필이 성공적으로 수정되었습니다.',
+      )
+      invalidateQueries([queries.user.avatar(userData?.id || '').queryKey])
+    },
+    onError: (error) => {
+      snackBar.showError(
+        '프로필 수정 실패',
+        error instanceof Error
+          ? error.message
+          : '알 수 없는 오류가 발생했습니다.',
+      )
+    },
+  })
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: zodResolver(EditProfileFormSchema),
     mode: 'onSubmit',
@@ -45,32 +77,23 @@ export default function EditProfileForm() {
     const file = e.target.files?.[0]
     if (file) {
       setImagePreview(URL.createObjectURL(file))
-      register('profileImage').onChange(e)
+      setValue('profileImage', file)
     }
   }
 
-  const patchUserProfile = async (data: EditProfileForm) => {
-    try {
-      setIsLoading(true)
-      if (data.profileImage && userData?.id) {
-        await postUserAvatar(data.profileImage, userData.id)
-      }
-      await patchUser(data.name, data.email, data.password)
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : '알 수 없는 오류가 발생했습니다.'
-      setError(errorMessage)
-    } finally {
-      setIsLoading(false)
+  useEffect(() => {
+    if (profileImageUrl) {
+      setImagePreview(profileImageUrl)
     }
-  }
+  }, [profileImageUrl])
 
   return (
     <form
       className="flex flex-col gap-4"
-      onSubmit={handleSubmit(patchUserProfile)}
+      onSubmit={handleSubmit((data) => {
+        console.log('data', data)
+        patchUserMutaition(data)
+      })}
     >
       <Card className="bg-secondary shadow-2xl">
         <div className="flex flex-col gap-2">
@@ -116,18 +139,10 @@ export default function EditProfileForm() {
       </Card>
       <div className="flex justify-end gap-3">
         <Button className="btn-primary">회원 탈퇴</Button>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? '저장 중...' : '저장하기'}
+        <Button type="submit" disabled={isPending}>
+          {isPending ? '저장 중...' : '저장하기'}
         </Button>
       </div>
-      {error && (
-        <AppSnackBar
-          color={AppSnackBarColor.FAILURE}
-          subject="프로필 수정 실패"
-          message={error}
-          position="bottom"
-        />
-      )}
     </form>
   )
 }

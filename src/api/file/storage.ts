@@ -12,8 +12,10 @@ export const STORAGE_NAME = 'darakbar-storage' as const
 export const uploadFile = async (
   file: File | null | undefined,
   basePath: string,
-) => {
-  if (!file) return null
+): Promise<string> => {
+  if (!file) {
+    throw new Error('파일이 선택되지 않았습니다.')
+  }
 
   const fileExtension = file.name.split('.').pop()
   const safeFileName = `${uuidv4()}.${fileExtension}`
@@ -29,7 +31,7 @@ export const uploadFile = async (
     throw error
   }
 
-  return data
+  return data.path
 }
 
 /**
@@ -41,12 +43,16 @@ export const uploadFile = async (
 export const uploadFiles = async (
   files: (File | null | undefined)[] | null | undefined,
   filePath: string,
-) => {
-  if (!files || files.length === 0) return []
+): Promise<string[]> => {
+  if (!files || files.length === 0) {
+    throw new Error('파일이 선택되지 않았습니다.')
+  }
 
   const validFiles = files.filter((file): file is File => file instanceof File)
 
-  if (validFiles.length === 0) return []
+  if (validFiles.length === 0) {
+    throw new Error('파일 형식이 올바르지 않습니다.')
+  }
 
   const uploadPromises = validFiles.map((file) => {
     return uploadFile(file, filePath)
@@ -56,6 +62,10 @@ export const uploadFiles = async (
   return results
 }
 
+/**
+ * @description 파일 공개 URL 가져오기
+ * @param filePath 파일 경로
+ */
 export const getPublicUrl = async (filePath: string) => {
   const { data } = await supabase.storage
     .from(STORAGE_NAME)

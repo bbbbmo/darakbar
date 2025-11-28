@@ -9,7 +9,6 @@ import Stars from '@/components/Stars'
 import ReviewMenu from './ReviewMenu'
 import { useAuthStore } from '@/stores/auth.store'
 import { useParseFile } from '@/hooks/useParseFile'
-
 import ReviewLike from './ReviewLike'
 import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
 
@@ -18,12 +17,17 @@ export default function ReviewCard({ review }: { review: BarReview }) {
 
   const isOwner = userData?.id === review.userinfo?.id
 
-  const { publicUrls, isLoading } = useParseFile(review.images || [])
+  const { publicUrls: avatarUrl } = useParseFile(
+    review.userinfo?.profile_img_url || '',
+  )
+
+  const { publicUrls: reviewImages, isLoading: isReviewImagesLoading } =
+    useParseFile(review.images || [])
 
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
       <div className="flex justify-between">
-        <Avatar img={review.userinfo?.profile_img_url || ''} rounded>
+        <Avatar img={typeof avatarUrl === 'string' ? avatarUrl : ''} rounded>
           <div className="font-medium dark:text-white">
             <div className="flex items-center gap-2">
               {review.userinfo?.name}
@@ -39,9 +43,9 @@ export default function ReviewCard({ review }: { review: BarReview }) {
 
       <p>{review.body}</p>
       <div className="flex flex-wrap gap-2">
-        {publicUrls.length > 0 &&
-          publicUrls.map((url, index) =>
-            isLoading ? (
+        {reviewImages.length > 0 &&
+          reviewImages.map((url, index) =>
+            isReviewImagesLoading ? (
               <ImageSkeleton key={index} width={100} height={100} />
             ) : (
               <Image

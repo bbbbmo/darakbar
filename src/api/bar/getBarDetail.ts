@@ -14,7 +14,6 @@ export const getBarDetail = async (id: number) => {
         website_url, 
         instagram_url, 
         description, 
-        category, 
         phone_number, 
         bar_images,
         signature_menus(

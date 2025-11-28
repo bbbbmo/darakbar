@@ -17,7 +17,6 @@ export const getBars = async (params?: getBarsQueryParams) => {
     rating, 
     address, 
     description, 
-    category, 
     phone_number, 
     bar_images,
     signature_menus(

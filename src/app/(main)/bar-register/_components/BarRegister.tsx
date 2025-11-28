@@ -7,13 +7,18 @@ import { useFunnel } from '@/hooks/useFunnel'
 import BarDetailInfo from './Steps/BarDetailInfo'
 import BarMenuInfo from './Steps/BarMenuInfo'
 import BarBusinessHourInfo from './Steps/BarBusinessHourInfo'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FieldErrors, FormProvider, useForm } from 'react-hook-form'
 import { BarRegisterForm, BarRegisterFormSchema } from './BarRegister.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { barRegisterDefaultValues, barRegisterSteps } from './BarRegister.const'
+import { postBar } from '@/api/bar/postBar'
+import { useMutation } from '@tanstack/react-query'
+import { useAuthStore } from '@/stores/auth.store'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 
 export default function BarRegister() {
   const { Funnel, Step, setStep } = useFunnel(barRegisterSteps['기본정보'])
+  const { userData } = useAuthStore()
 
   const methods = useForm<BarRegisterForm>({
     resolver: zodResolver(BarRegisterFormSchema),
@@ -22,15 +27,42 @@ export default function BarRegister() {
     defaultValues: barRegisterDefaultValues,
   })
 
-  const registerBarInfo = async () => {
-    const formData = methods.getValues()
-    console.log(formData)
-  }
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (formData: BarRegisterForm) => {
+      if (!userData?.id) {
+        throw new Error('로그인이 필요합니다.')
+      }
 
-  const handleSubmit = async () => {
-    await registerBarInfo()
-    setStep(barRegisterSteps['완료'])
-  }
+      const result = await postBar(body)
+      if (result.error) {
+        throw result.error
+      }
+      return result.data
+    },
+    onSuccess: () => {
+      snackBar.showSuccess('바 등록 성공', '바가 성공적으로 등록되었습니다.')
+      setStep(barRegisterSteps['완료'])
+    },
+    onError: (error) => {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : '바 등록 중 오류가 발생했습니다.'
+      snackBar.showError('바 등록 실패', errorMessage)
+    },
+  })
+
+  const registerBarInfo = methods.handleSubmit(
+    async (data) => {
+      mutate(data)
+    },
+    (errors: FieldErrors<BarRegisterForm>) => {
+      const firstError = Object.values(errors)[0]
+      if (firstError?.message) {
+        snackBar.showError('입력 오류', firstError.message)
+      }
+    },
+  )
 
   return (
     <div className="flex justify-center">
@@ -61,7 +93,7 @@ export default function BarRegister() {
                 onPrevStep={() =>
                   setStep(barRegisterSteps['시그니처칵테일정보'])
                 }
-                onNextStep={handleSubmit}
+                onNextStep={registerBarInfo}
               />
             </Step>
           </Funnel>

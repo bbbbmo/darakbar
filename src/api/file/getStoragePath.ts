@@ -9,3 +9,7 @@ export const getSignatureCocktailImagePath = (barId: number) => {
 export const getReviewImagePath = (barId: number, userId: string) => {
   return `/bars/${barId}/review-images/${userId}`
 }
+
+export const getUserProfileImagePath = (userId: string) => {
+  return `/users/${userId}/profile`
+}

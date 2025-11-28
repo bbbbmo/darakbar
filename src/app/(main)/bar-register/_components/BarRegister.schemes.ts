@@ -16,12 +16,7 @@ export const BusinessHourSchema = z.object({
 
 export type BusinessHourForm = z.infer<typeof BusinessHourSchema>
 
-export const IngredientSchema = z.object({
-  name: z
-    .string()
-    .min(1, '재료명을 입력해주세요')
-    .max(15, '재료명은 15자 이하로 입력해주세요'),
-})
+export const IngredientSchema = z.string()
 
 export const SignatureCocktailFormSchema = z.object({
   name: z.string().min(1, '칵테일 이름을 입력해주세요'),
@@ -53,7 +48,7 @@ export const BarRegisterFormSchema = z.object({
     .max(3, '바 이미지는 최대 3장까지 업로드할 수 있습니다')
     .nullable()
     .optional(),
-  category: z.string().nullable(),
+  category: z.array(z.string()).nullable(),
   atmosphereTagIds: z.array(z.number()).nullable(),
   instagramUrl: z.string().nullable().optional(),
   websiteUrl: z.string().nullable().optional(),

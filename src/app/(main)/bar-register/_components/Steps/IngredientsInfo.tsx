@@ -1,27 +1,28 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
-import { Button, TextInput } from 'flowbite-react'
+import { Button, Select, TextInput } from 'flowbite-react'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import FormItem from '@/components/Forms/FormItem'
 import { HiPlusSm, HiXCircle } from 'react-icons/hi'
 import clsx from 'clsx'
+import { useQuery } from '@tanstack/react-query'
+import { queries } from '@/api/queries'
+import FormOption from '@/components/Forms/FormOption'
 
 type IngredientsInfoProps = {
   index: number
 }
 
 export default function IngredientsInfo(props: IngredientsInfoProps) {
+  const { data: ingredients } = useQuery({
+    ...queries.ingredient.all,
+  })
   const { index } = props
-  const {
-    control,
-    register,
-
-    formState: { errors },
-  } = useFormContext<BarRegisterForm>()
+  const { control, register } = useFormContext<BarRegisterForm>()
   const { fields, append, remove } = useFieldArray({
     control,
     // 중첩 배열 경로: 타입 한계를 회피하기 위해 any 캐스팅
-    name: `signatureCocktails.${index}.ingredients`,
+    name: `signatureCocktails.${index}.ingredients` as any,
   })
 
   return (
@@ -35,22 +36,19 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
               ingIndex !== 0 && 'mt-1',
             )}
           >
-            <TextInput
-              type="text"
+            <Select
               color="primary"
-              placeholder={`재료 ${ingIndex + 1}의 이름을 입력해주세요`}
+              className="w-full"
               {...register(
-                `signatureCocktails.${index}.ingredients.${ingIndex}.name`,
+                `signatureCocktails.${index}.ingredients.${ingIndex}`,
               )}
-              aria-invalid={!!errors.signatureCocktails?.[index]?.ingredients}
-              className="flex-1"
-            />
-            <FormErrorMessage
-              error={
-                errors.signatureCocktails?.[index]?.ingredients?.[ingIndex]
-                  ?.name
-              }
-            />
+            >
+              {ingredients?.map((ingredient) => (
+                <option key={ingredient.id} value={ingredient.id}>
+                  {ingredient.name}
+                </option>
+              ))}
+            </Select>
             {ingIndex !== 0 && (
               <button
                 type="button"
@@ -68,7 +66,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         type="button"
         color="primary"
         size="md"
-        onClick={() => append({ name: '' })}
+        onClick={() => append('')}
       >
         <HiPlusSm size={20} className="text-zinc-800" />
         재료 추가
