@@ -1,13 +1,11 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
-import { Button, Select, TextInput } from 'flowbite-react'
-import FormErrorMessage from '@/components/Forms/FormErrorMessage'
+import { Button, Select } from 'flowbite-react'
 import FormItem from '@/components/Forms/FormItem'
 import { HiPlusSm, HiXCircle } from 'react-icons/hi'
 import clsx from 'clsx'
 import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
-import FormOption from '@/components/Forms/FormOption'
 
 type IngredientsInfoProps = {
   index: number
@@ -66,7 +64,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         type="button"
         color="primary"
         size="md"
-        onClick={() => append('')}
+        onClick={() => append({ ingredientId: null })}
       >
         <HiPlusSm size={20} className="text-zinc-800" />
         재료 추가

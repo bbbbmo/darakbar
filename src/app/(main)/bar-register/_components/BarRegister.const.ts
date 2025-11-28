@@ -28,7 +28,11 @@ export const emptySignatureCocktail: SignatureCocktailForm = {
   image: null,
   price: 0,
   abv: 0,
-  ingredients: [],
+  ingredients: [
+    {
+      ingredientId: null,
+    },
+  ],
 }
 
 export const emptyBusinessHour: BusinessHourForm[] = [

@@ -16,7 +16,14 @@ export const BusinessHourSchema = z.object({
 
 export type BusinessHourForm = z.infer<typeof BusinessHourSchema>
 
-export const IngredientSchema = z.string()
+export const IngredientSchema = z.object({
+  ingredientId: z
+    .number()
+    .nullable()
+    .refine((value) => value !== null, {
+      message: '재료를 선택해주세요',
+    }),
+})
 
 export const SignatureCocktailFormSchema = z.object({
   name: z.string().min(1, '칵테일 이름을 입력해주세요'),

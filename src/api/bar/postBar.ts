@@ -10,7 +10,7 @@ export const postBar = async (body: BarRegisterForm) => {
     p_instagram_url: body.instagramUrl,
     p_description: body.description,
     p_phone_number: body.phoneNumber,
-    p_bar_images: [],
+    p_bar_images: [], // 나중에 업데이트
     // signature_menus 테이블
     p_signature_cocktails: body.signatureCocktails.map((cocktail) => ({
       ...cocktail,
