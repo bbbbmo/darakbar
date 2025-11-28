@@ -9,7 +9,12 @@ export const STORAGE_NAME = 'darakbar-storage' as const
  * @param filePath 업로드할 파일 경로
  * @returns 업로드된 파일 데이터와 에러
  */
-export const uploadFile = async (file: File, basePath: string) => {
+export const uploadFile = async (
+  file: File | null | undefined,
+  basePath: string,
+) => {
+  if (!file) return null
+
   const fileExtension = file.name.split('.').pop()
   const safeFileName = `${uuidv4()}.${fileExtension}`
   const filePath = `${basePath}/${safeFileName}`
@@ -20,7 +25,11 @@ export const uploadFile = async (file: File, basePath: string) => {
       upsert: false,
     })
 
-  return { data, error }
+  if (error) {
+    throw error
+  }
+
+  return data
 }
 
 /**
@@ -29,8 +38,17 @@ export const uploadFile = async (file: File, basePath: string) => {
  * @param filePath 업로드할 파일 경로
  * @returns 업로드 결과 배열
  */
-export const uploadFiles = async (files: File[], filePath: string) => {
-  const uploadPromises = files.map((file) => {
+export const uploadFiles = async (
+  files: (File | null | undefined)[] | null | undefined,
+  filePath: string,
+) => {
+  if (!files || files.length === 0) return []
+
+  const validFiles = files.filter((file): file is File => file instanceof File)
+
+  if (validFiles.length === 0) return []
+
+  const uploadPromises = validFiles.map((file) => {
     return uploadFile(file, filePath)
   })
 
