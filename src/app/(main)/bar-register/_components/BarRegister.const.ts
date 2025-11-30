@@ -100,7 +100,6 @@ export const barRegisterDefaultValues: BarRegisterForm = {
   phoneNumber: '',
   description: '',
   barImages: null,
-  category: null,
   atmosphereTagIds: [],
   instagramUrl: null,
   websiteUrl: null,

@@ -6,7 +6,6 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import Loading from '@/app/loading'
 import { redirect, usePathname } from 'next/navigation'
-import { getUserAvatarUrl } from '@/api/user/userAvatar'
 
 export default function AuthProvider({
   children,

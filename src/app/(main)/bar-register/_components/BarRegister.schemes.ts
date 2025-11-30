@@ -10,8 +10,7 @@ export const BusinessHourSchema = z.object({
   significant: z
     .string()
     .min(1, '특이사항을 입력해주세요 ex) 매월 첫번째 월요일 정기 휴무')
-    .nullable()
-    .optional(),
+    .nullable(),
 })
 
 export type BusinessHourForm = z.infer<typeof BusinessHourSchema>
@@ -31,7 +30,7 @@ export const SignatureCocktailFormSchema = z.object({
     .string()
     .min(1, '칵테일 설명을 입력해주세요')
     .max(200, '칵테일 설명은 200자 이하로 입력해주세요'),
-  image: FileInputSchema.nullable().optional(),
+  image: FileInputSchema.nullable(),
   price: z.number().positive('가격은 0보다 커야 합니다'),
   abv: z.number().positive('알코올 도수는 0보다 커야 합니다'),
   ingredients: z.array(IngredientSchema),
@@ -51,14 +50,12 @@ export const BarRegisterFormSchema = z.object({
     .min(1, '바 설명을 입력해주세요')
     .max(200, '바 설명은 200자 이하로 입력해주세요'),
   barImages: z
-    .array(FileInputSchema.nullable().optional())
+    .array(FileInputSchema.nullable())
     .max(3, '바 이미지는 최대 3장까지 업로드할 수 있습니다')
-    .nullable()
-    .optional(),
-  category: z.array(z.string()).nullable(),
+    .nullable(),
   atmosphereTagIds: z.array(z.number()).nullable(),
-  instagramUrl: z.string().nullable().optional(),
-  websiteUrl: z.string().nullable().optional(),
+  instagramUrl: z.string().nullable(),
+  websiteUrl: z.string().nullable(),
   signatureCocktails: z.array(SignatureCocktailFormSchema),
   businessHours: z.array(BusinessHourSchema),
 })
