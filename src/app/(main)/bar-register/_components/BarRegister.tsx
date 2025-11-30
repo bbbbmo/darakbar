@@ -34,13 +34,10 @@ export default function BarRegister() {
       if (!userData?.id) {
         throw new Error('로그인이 필요합니다.')
       }
-      console.log('formData', formData)
-
       await postBar(formData)
     },
     onSuccess: () => {
       snackBar.showSuccess('바 등록 성공', '바가 성공적으로 등록되었습니다.')
-      setStep(barRegisterSteps['완료'])
       invalidateQueries([queries.bar.all.queryKey])
     },
     onError: (error) => {

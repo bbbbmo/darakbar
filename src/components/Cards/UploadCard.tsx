@@ -5,7 +5,7 @@ import { Card } from 'flowbite-react'
 import { ReactNode } from 'react'
 
 export type UploadCardProps = {
-  icon: ReactNode
+  icon?: ReactNode
   title: string
   description: string
   children: ReactNode

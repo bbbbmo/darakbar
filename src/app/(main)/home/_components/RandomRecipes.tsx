@@ -1,23 +1,18 @@
 'use client'
 
-import RecipeCard from '@/app/(main)/_components/RecipeCard/RecipeCard'
 import { Card } from 'flowbite-react'
-import { useEffect, useState } from 'react'
-import { mockCocktails } from '../home.const'
-import { UserRecipe } from '@/types/recipe/recipe.types'
+import BarCard from '../../_components/BarCard/BarCard'
+import { useQuery } from '@tanstack/react-query'
+import { queries } from '@/api/queries'
 
 export default function RandomRecipes() {
-  const [randomCocktails, setRandomCocktails] = useState<UserRecipe[]>([])
+  const { data: bars, isLoading } = useQuery(queries.bar.all)
 
-  useEffect(() => {
-    setRandomCocktails(mockCocktails)
-    // getRandomCocktails();
-  }, [])
   return (
     <Card className="bg-primary w-full">
       <div className="grid w-full grid-cols-3 gap-20">
-        {randomCocktails.map((cocktail) => (
-          <RecipeCard key={cocktail.id} recipe={cocktail} loading={false} />
+        {bars?.data?.slice(0, 3).map((bar) => (
+          <BarCard key={bar.id} barInfo={bar} loading={isLoading} />
         ))}
       </div>
     </Card>

@@ -8,6 +8,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
+import BarSearchFooter from './_components/BarSearchFooter'
 
 export default async function BarSearch() {
   const queryClient = new QueryClient()
@@ -20,6 +21,7 @@ export default async function BarSearch() {
       <BarFilter />
       <BarMap />
       <BarList />
+      <BarSearchFooter />
     </HydrationBoundary>
   )
 }
