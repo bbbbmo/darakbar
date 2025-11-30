@@ -38,7 +38,10 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
               color="primary"
               className="w-full"
               {...register(
-                `signatureCocktails.${index}.ingredients.${ingIndex}`,
+                `signatureCocktails.${index}.ingredients.${ingIndex}.ingredientId`,
+                {
+                  valueAsNumber: true,
+                },
               )}
             >
               {ingredients?.map((ingredient) => (

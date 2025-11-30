@@ -7,10 +7,7 @@ export const BusinessHourSchema = z.object({
   closeTime: z.string().min(1, '영업 종료 시간을 입력해주세요'),
   lastOrderTime: z.string().min(1, '라스트 오더 시간을 입력해주세요'),
   isClosed: z.boolean(),
-  significant: z
-    .string()
-    .min(1, '특이사항을 입력해주세요 ex) 매월 첫번째 월요일 정기 휴무')
-    .nullable(),
+  significant: z.string().nullable(),
 })
 
 export type BusinessHourForm = z.infer<typeof BusinessHourSchema>
@@ -53,7 +50,7 @@ export const BarRegisterFormSchema = z.object({
     .array(FileInputSchema.nullable())
     .max(3, '바 이미지는 최대 3장까지 업로드할 수 있습니다')
     .nullable(),
-  atmosphereTagIds: z.array(z.number()).nullable(),
+  atmosphereTagIds: z.array(z.number()).min(1, '분위기 태그를 선택해주세요'),
   instagramUrl: z.string().nullable(),
   websiteUrl: z.string().nullable(),
   signatureCocktails: z.array(SignatureCocktailFormSchema),

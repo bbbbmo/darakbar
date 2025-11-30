@@ -75,6 +75,11 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
                 type="text"
                 color="primary"
                 placeholder="칵테일 이름을 입력해주세요"
+                {...register(`signatureCocktails.${index}.name`)}
+                aria-invalid={!!errors.signatureCocktails?.[index]?.name}
+              />
+              <FormErrorMessage
+                error={errors.signatureCocktails?.[index]?.name}
               />
             </FormItem>
             <FormItem label="설명" required>
@@ -101,11 +106,15 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
             <div className="flex w-full gap-2">
               <FormItem label="가격" required wrapperClassName="flex-1">
                 <TextInput
-                  type="text"
+                  type="number"
                   color="primary"
+                  min={0}
+                  step={1000}
                   rightIcon={FaWonSign}
                   placeholder="가격을 입력해주세요"
-                  {...register(`signatureCocktails.${index}.price`)}
+                  {...register(`signatureCocktails.${index}.price`, {
+                    valueAsNumber: true,
+                  })}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.price}
                 />
                 <FormErrorMessage
@@ -114,11 +123,15 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
               </FormItem>
               <FormItem label="알코올 도수" required wrapperClassName="flex-1">
                 <TextInput
-                  type="text"
+                  type="number"
                   color="primary"
+                  min={0}
+                  step={1}
                   rightIcon={FaPercent}
                   placeholder="알코올 도수를 입력해주세요"
-                  {...register(`signatureCocktails.${index}.abv`)}
+                  {...register(`signatureCocktails.${index}.abv`, {
+                    valueAsNumber: true,
+                  })}
                   aria-invalid={!!errors.signatureCocktails?.[index]?.abv}
                 />
                 <FormErrorMessage

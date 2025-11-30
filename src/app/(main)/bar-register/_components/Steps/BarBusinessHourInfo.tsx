@@ -1,11 +1,10 @@
-import NextButton from '@/components/Buttons/NextButton'
 import PrevButton from '@/components/Buttons/PrevButton'
 import FormDescription from '@/components/Forms/FormDescription'
 import FormHeader from '@/components/Forms/FormHeader'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import FormItem from '@/components/Forms/FormItem'
-import { TextInput } from 'flowbite-react'
+import { Button, TextInput } from 'flowbite-react'
 import FormErrorMessage from '@/components/Forms/FormErrorMessage'
 import { Fragment } from 'react'
 import { formatDayToKorean } from '@/utils/formatBusinessHour'
@@ -130,7 +129,7 @@ export default function BarBusinessHourInfo(props: BarBusinessHourInfoProps) {
       </div>
       <div className="mt-5 flex justify-between">
         <PrevButton text="이전 단계로 이동" onClick={onPrevStep} />
-        <NextButton text="등록하기" onClick={onNextStep} />
+        <Button onClick={onNextStep}>등록하기</Button>
       </div>
     </>
   )

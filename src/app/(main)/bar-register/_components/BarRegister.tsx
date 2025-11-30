@@ -1,4 +1,3 @@
-// src/app/(main)/bar-register/_components/BarRegister.tsx
 'use client'
 
 import { Card } from 'flowbite-react'
@@ -15,9 +14,12 @@ import { postBar } from '@/api/bar/postBar'
 import { useMutation } from '@tanstack/react-query'
 import { useAuthStore } from '@/stores/auth.store'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
+import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
+import { queries } from '@/api/queries'
 
 export default function BarRegister() {
   const { Funnel, Step, setStep } = useFunnel(barRegisterSteps['기본정보'])
+  const { invalidateQueries } = useInvalidateQueries()
   const { userData } = useAuthStore()
 
   const methods = useForm<BarRegisterForm>({
@@ -32,16 +34,14 @@ export default function BarRegister() {
       if (!userData?.id) {
         throw new Error('로그인이 필요합니다.')
       }
+      console.log('formData', formData)
 
-      const result = await postBar(body)
-      if (result.error) {
-        throw result.error
-      }
-      return result.data
+      await postBar(formData)
     },
     onSuccess: () => {
       snackBar.showSuccess('바 등록 성공', '바가 성공적으로 등록되었습니다.')
       setStep(barRegisterSteps['완료'])
+      invalidateQueries([queries.bar.all.queryKey])
     },
     onError: (error) => {
       const errorMessage =
@@ -52,17 +52,9 @@ export default function BarRegister() {
     },
   })
 
-  const registerBarInfo = methods.handleSubmit(
-    async (data) => {
-      mutate(data)
-    },
-    (errors: FieldErrors<BarRegisterForm>) => {
-      const firstError = Object.values(errors)[0]
-      if (firstError?.message) {
-        snackBar.showError('입력 오류', firstError.message)
-      }
-    },
-  )
+  const registerBarInfo = () => {
+    mutate(methods.getValues())
+  }
 
   return (
     <div className="flex justify-center">
