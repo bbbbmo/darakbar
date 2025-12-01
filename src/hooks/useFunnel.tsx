@@ -14,6 +14,7 @@ export const useFunnel = (defaultStep: string) => {
 
   const Funnel = (props: {
     children: React.ReactNode
+    onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
   }): ReactElement | null => {
     const childrenArray = Children.toArray(props.children) // 모든 자식 배열로 변환
     const targetStep = childrenArray.find((child) => {
@@ -22,7 +23,7 @@ export const useFunnel = (defaultStep: string) => {
         (child.props as { name?: string }).name === step // 자식의 name 속성이 step과 일치하는지 확인
       )
     }) as ReactElement | undefined
-    return <>{targetStep}</>
+    return <form onSubmit={props.onSubmit}>{targetStep}</form>
   }
 
   return { Funnel, Step, setStep, step }
