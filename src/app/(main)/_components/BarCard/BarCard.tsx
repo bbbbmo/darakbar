@@ -6,8 +6,9 @@ import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Button, Card } from 'flowbite-react'
 import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'
 import { Bar } from '@api/bar/getBars'
-import { getOpenStatus } from '../../../../utils/formatBusinessHour'
+import { getOpenStatus } from '@/utils/formatBusinessHour'
 import { useParseFile } from '@/hooks/useParseFile'
+import Image from 'next/image'
 
 type BarCardProps = {
   barInfo: Bar
@@ -33,8 +34,23 @@ export default function BarCard({
         <Card
           theme={basicTheme.bar}
           className={`${className}`}
-          imgAlt="Bar Image"
-          imgSrc={publicUrls[0]}
+          renderImage={() =>
+            publicUrls && publicUrls.length > 0 ? (
+              <div className="relative h-80 w-full">
+                <Image
+                  src={publicUrls[0]}
+                  alt="Bar Image"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="rounded-t-lg object-cover"
+                />
+              </div>
+            ) : (
+              <div className="relative flex h-80 w-full items-center justify-center rounded-t-lg bg-gray-200">
+                <span className="text-gray-500">이미지 없음</span>
+              </div>
+            )
+          }
         >
           <section>
             {/* 칵테일 이름 */}

@@ -26,9 +26,6 @@ export const basicTheme = createTheme({
     root: {
       base: 'group bg-secondary !shadow-2xl transition delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:scale-103 ',
     },
-    img: {
-      base: 'h-80',
-    },
   },
 
   button: {
