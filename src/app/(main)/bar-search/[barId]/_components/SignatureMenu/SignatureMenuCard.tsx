@@ -42,12 +42,12 @@ export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
       }
     >
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between font-semibold">
+        <div className="flex justify-between gap-4 font-semibold">
           <div className="flex flex-col gap-2">
             <SubTitleText title={menu.name} />
             <p className="text-md text-zinc-500">{menu.description}</p>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-shrink-0 flex-col gap-1">
             <span className="text-2xl text-amber-400">
               ₩ {menu.price.toLocaleString()}
             </span>
