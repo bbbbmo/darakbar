@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 @source "../../.flowbite-react/class-list.json";
@@ -13,8 +14,8 @@
 } */
 
 @font-face {
-  font-family: "Nanum";
-  src: url("/fonts/나눔손글씨성실체.ttf") format("truetype");
+  font-family: 'Nanum';
+  src: url('/fonts/나눔손글씨성실체.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
 }
@@ -32,13 +33,13 @@
       system-ui,
       -apple-system,
       BlinkMacSystemFont,
-      "Segoe UI",
+      'Segoe UI',
       Roboto,
       Oxygen,
       Ubuntu,
       Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
+      'Open Sans',
+      'Helvetica Neue',
       sans-serif;
     color: #ffffff;
   }
@@ -99,7 +100,7 @@
 }
 
 .font-unpen {
-  font-family: "Nanum", serif;
+  font-family: 'Nanum', serif;
   text-align: center;
   font-weight: 700;
 }
