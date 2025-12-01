@@ -15,14 +15,11 @@ export default function BarList() {
   // 하이드레이션된 데이터 사용 + 필터링
   const { data: bars, isLoading } = useQuery(queries.bar.all)
 
-  console.log('🔍 BarList query result:', bars)
-
   const goToBarDetail = (barId: number) => {
     router.push(`/bar-search/${barId}`)
   }
 
   return (
-    // 정렬 3개까지
     <GridList items={bars?.data ?? []}>
       {(bar) => (
         <BarCard

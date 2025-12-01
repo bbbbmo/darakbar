@@ -1,6 +1,6 @@
 import {
   atmosphereOptions,
-  barCategoryOptions,
+  // barCategoryOptions,
   priceRangeOptions,
   regionOptions,
   sortOptions,
@@ -9,7 +9,7 @@ import {
 export const barFilterSelect: { key: string; options: string[] }[] = [
   { key: 'region', options: regionOptions },
   { key: 'priceRange', options: priceRangeOptions },
-  { key: 'barCategory', options: barCategoryOptions },
+  // { key: 'barCategory', options: barCategoryOptions },
   { key: 'atmosphere', options: atmosphereOptions },
   { key: 'sort', options: sortOptions },
 ]

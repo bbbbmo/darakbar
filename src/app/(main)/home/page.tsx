@@ -1,11 +1,9 @@
-import IntroSection from './_components/IntroSection'
-import RandomRecipes from './_components/RandomRecipes'
+import LandingHeader from './_components/LandingHeader'
 
 export default function HomePage() {
   return (
     <>
-      <IntroSection />
-      <RandomRecipes />
+      <LandingHeader />
     </>
   )
 }
