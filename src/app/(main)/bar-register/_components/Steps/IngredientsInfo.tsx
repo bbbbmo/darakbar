@@ -6,6 +6,7 @@ import { HiPlusSm, HiXCircle } from 'react-icons/hi'
 import clsx from 'clsx'
 import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
+import React from 'react'
 
 type IngredientsInfoProps = {
   index: number
@@ -22,6 +23,21 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
     // 중첩 배열 경로: 타입 한계를 회피하기 위해 any 캐스팅
     name: `signatureCocktails.${index}.ingredients` as any,
   })
+
+  const addIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    append({ ingredientId: null })
+  }
+
+  const removeIngredient = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    ingIndex: number,
+  ) => {
+    e.preventDefault()
+    e.stopPropagation()
+    remove(ingIndex)
+  }
 
   return (
     <div className="flex flex-col gap-2">
@@ -54,7 +70,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
               <button
                 type="button"
                 className="cursor-pointer"
-                onClick={() => remove(ingIndex)}
+                onClick={(e) => removeIngredient(e, ingIndex)}
               >
                 <HiXCircle size={20} className="text-gray-500" />
               </button>
@@ -63,12 +79,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
         ))}
       </FormItem>
 
-      <Button
-        type="button"
-        color="primary"
-        size="md"
-        onClick={() => append({ ingredientId: null })}
-      >
+      <Button type="button" color="primary" size="md" onClick={addIngredient}>
         <HiPlusSm size={20} className="text-zinc-800" />
         재료 추가
       </Button>

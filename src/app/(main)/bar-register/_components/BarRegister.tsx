@@ -6,7 +6,7 @@ import { useFunnel } from '@/hooks/useFunnel'
 import BarDetailInfo from './Steps/BarDetailInfo'
 import BarMenuInfo from './Steps/BarMenuInfo'
 import BarBusinessHourInfo from './Steps/BarBusinessHourInfo'
-import { FieldErrors, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { BarRegisterForm, BarRegisterFormSchema } from './BarRegister.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { barRegisterDefaultValues, barRegisterSteps } from './BarRegister.const'
@@ -49,15 +49,24 @@ export default function BarRegister() {
     },
   })
 
-  const registerBarInfo = () => {
-    mutate(methods.getValues())
+  const registerBarInfo = async () => {
+    const isValid = await methods.trigger()
+    if (isValid) {
+      mutate(methods.getValues())
+    } else {
+      const firstError = Object.values(methods.formState.errors)[0]
+      snackBar.showError(
+        '입력 오류',
+        firstError?.message ?? '모든 필드를 올바르게 입력해주세요.',
+      )
+    }
   }
 
   return (
     <div className="flex justify-center">
       <Card className="w-2xl p-8">
         <FormProvider {...methods}>
-          <Funnel>
+          <Funnel onSubmit={(e) => e.preventDefault()}>
             <Step name={barRegisterSteps['기본정보']}>
               <BarBasicInfo
                 onNextStep={() => setStep(barRegisterSteps['상세정보'])}

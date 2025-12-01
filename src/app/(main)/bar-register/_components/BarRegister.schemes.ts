@@ -30,7 +30,17 @@ export const SignatureCocktailFormSchema = z.object({
   image: FileInputSchema.nullable(),
   price: z.number().positive('가격은 0보다 커야 합니다'),
   abv: z.number().positive('알코올 도수는 0보다 커야 합니다'),
-  ingredients: z.array(IngredientSchema),
+  ingredients: z.array(IngredientSchema).refine(
+    (ingredients) => {
+      const ingredientIds = ingredients.map(
+        (ingredient) => ingredient.ingredientId,
+      )
+      return ingredientIds.length === new Set(ingredientIds).size
+    },
+    {
+      message: '중복된 재료를 선택할 수 없습니다',
+    },
+  ),
 })
 
 export type SignatureCocktailForm = z.infer<typeof SignatureCocktailFormSchema>
