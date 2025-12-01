@@ -28,7 +28,6 @@ export default function BarDescription() {
               {barDetail.address}
             </span>
           </span>
-          <span>{barDetail.address}</span>
         </p>
         <p className="text-xl">{barDetail.description}</p>
       </section>

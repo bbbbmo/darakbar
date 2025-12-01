@@ -11,9 +11,9 @@ export default function MainLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <AppNavBar />
-      <section className="mt-10 flex flex-1 flex-col gap-10 px-15 xl:px-[5vw]">
+      <div className="mt-10 flex flex-1 flex-col gap-10 px-15 xl:px-[5vw]">
         {children}
-      </section>
+      </div>
       {recipeModal}
       <AppFooter />
     </div>
