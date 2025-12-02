@@ -31,10 +31,11 @@ export const postBar = async (
     // bar_tags 테이블
     p_atmosphere_tag_ids: body.atmosphereTagIds,
     // signature_menus 테이블
-    p_signature_cocktails: body.signatureCocktails.map((cocktail) => ({
-      ...cocktail,
-      image: null, // 나중에 업데이트
-    })),
+    p_signature_cocktails:
+      body.signatureCocktails.map((cocktail) => ({
+        ...cocktail,
+        image: null, // 나중에 업데이트
+      })) || null,
     // business_hours 테이블
     p_business_hours: body.businessHours,
   })
@@ -102,11 +103,12 @@ const uploadAndUpdateBarImages = async (
 
     // 칵테일 이미지 업로드
     const cocktailImagePaths: string[] = []
-    const validCocktailImages = body.signatureCocktails
-      .map((cocktail) => cocktail.image)
-      .filter((file): file is File => file instanceof File)
+    const validCocktailImages =
+      body.signatureCocktails
+        .map((cocktail) => cocktail.image)
+        .filter((file): file is File => file instanceof File) || null
 
-    if (validCocktailImages.length > 0) {
+    if (validCocktailImages && validCocktailImages.length > 0) {
       const uploadedPaths = await uploadFiles(
         validCocktailImages,
         cocktailImagePath,

@@ -39,6 +39,8 @@ export default function BarRegister() {
     onSuccess: () => {
       snackBar.showSuccess('바 등록 성공', '바가 성공적으로 등록되었습니다.')
       invalidateQueries([queries.bar.all.queryKey])
+      methods.reset()
+      setStep(barRegisterSteps['기본정보'])
     },
     onError: (error) => {
       const errorMessage =
@@ -64,8 +66,8 @@ export default function BarRegister() {
 
   return (
     <div className="flex justify-center">
-      <Card className="w-2xl p-8">
-        <FormProvider {...methods}>
+      <FormProvider {...methods}>
+        <Card className="w-2xl p-8">
           <Funnel onSubmit={(e) => e.preventDefault()}>
             <Step name={barRegisterSteps['기본정보']}>
               <BarBasicInfo
@@ -95,8 +97,8 @@ export default function BarRegister() {
               />
             </Step>
           </Funnel>
-        </FormProvider>
-      </Card>
+        </Card>
+      </FormProvider>
     </div>
   )
 }
