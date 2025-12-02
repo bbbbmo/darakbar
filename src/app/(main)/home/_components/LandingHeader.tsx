@@ -5,11 +5,12 @@ import Image from 'next/image'
 export default function LandingHeader() {
   return (
     <section className="flex flex-col items-center gap-4 pt-10">
-      <div className="absolute inset-0 z-0 h-[50vh] w-full">
+      <div className="absolute inset-0 z-0 h-110 w-full">
         <Image
           src="/images/background/julian-di-pietrantonio-Kz06PX2yu7U-unsplash.jpg"
           alt="Landing Header Image"
           fill
+          priority
           className="object-cover brightness-[0.75]"
         />
       </div>
