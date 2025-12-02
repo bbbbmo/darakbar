@@ -11,7 +11,7 @@ export default function RandomBars() {
   const { data: bars, isLoading } = useQuery(queries.bar.all)
 
   const filteredBars =
-    bars?.data?.filter((bar) => bar.bar_images).slice(0, 3) || []
+    bars?.data?.filter((bar) => bar.bar_images).slice(0, 6) || []
 
   const goToBarSearch = () => {
     router.push('/bar-search')
@@ -33,7 +33,7 @@ export default function RandomBars() {
         바 탐색하기
       </Button>
       <div className="relative overflow-hidden">
-        <div className="animate-infinite-scroll-reverse flex w-fit gap-6">
+        <div className="animate-infinite-scroll-reverse flex w-fit gap-8">
           {[...filteredBars, ...filteredBars].map((bar, index) => (
             <BarCard
               key={`${bar.id}-${index}`}

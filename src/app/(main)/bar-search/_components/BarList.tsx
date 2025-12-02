@@ -1,6 +1,6 @@
 'use client'
 
-import GridList from '@/components/ui/GridList'
+import GridList from '@/components/ui/layout/GridList'
 import BarCard from '../../../../components/bar/BarCard'
 import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'

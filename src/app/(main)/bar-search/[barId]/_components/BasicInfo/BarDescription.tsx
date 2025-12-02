@@ -6,6 +6,7 @@ import { useBarDetailStore } from '../../_stores/bar-detail.store'
 
 export default function BarDescription() {
   const barDetail = useBarDetailStore((state) => state.barDetail)
+
   if (!barDetail) return null
 
   return (
