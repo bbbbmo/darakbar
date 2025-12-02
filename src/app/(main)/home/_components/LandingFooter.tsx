@@ -8,7 +8,7 @@ export default function LandingFooter() {
   return (
     <UploadCard
       title="궁금한 점이 있나요?"
-      description="서비스 이용 중 불편한 점이나 제안하고 싶은 아이디어가 있다면 연락해주세요"
+      description="서비스 이용 중 불편한 점이나 제안하고 싶은 아이디어가 있다면 연락해주세요!"
     >
       <a
         href={CONTACT_LINK}
