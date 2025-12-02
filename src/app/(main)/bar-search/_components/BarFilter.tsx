@@ -8,10 +8,16 @@ import FormOption from '@/components/ui/forms/FormOption'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useBarFilterStore } from '../_stores/bar-filter.store'
 import { useState } from 'react'
+import { Bar } from '@/api/bar/getBars'
 
-export default function BarFilter() {
+type BarFilterProps = {
+  bars: Bar[]
+}
+
+export default function BarFilter({ bars }: BarFilterProps) {
   const { name, setName, resetFilters } = useBarFilterStore()
   const [option, setOption] = useState<string | null>(null)
+
   return (
     <Card>
       <section className="flex flex-col gap-4">
@@ -40,7 +46,9 @@ export default function BarFilter() {
           ))}
         </div>
       </section>
-      <p className="text-center text-gray-300">0개의 바가 검색되었습니다.</p>
+      <p className="text-center text-gray-300">
+        {bars.length || 0}개의 바가 검색되었습니다.
+      </p>
     </Card>
   )
 }

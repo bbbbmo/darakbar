@@ -1,7 +1,4 @@
-import BarFilter from './_components/BarFilter'
 import BarSearchHeader from './_components/BarSearchHeader'
-import BarList from './_components/BarList'
-import BarMap from './_components/BarMap'
 import {
   dehydrate,
   HydrationBoundary,
@@ -9,6 +6,7 @@ import {
 } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
 import BarSearchFooter from './_components/BarSearchFooter'
+import BarSearchBody from './_components/BarSearchBody'
 
 export default async function BarSearch() {
   const queryClient = new QueryClient()
@@ -18,9 +16,7 @@ export default async function BarSearch() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <BarSearchHeader />
-      <BarFilter />
-      <BarMap />
-      <BarList />
+      <BarSearchBody />
       <BarSearchFooter />
     </HydrationBoundary>
   )

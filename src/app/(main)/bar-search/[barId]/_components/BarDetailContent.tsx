@@ -4,7 +4,7 @@ import BarImage from './BasicInfo/BarImage'
 import BarDescription from './BasicInfo/BarDescription'
 import BarBusinessHour from './BasicInfo/BarBusinessHour'
 import BarContact from './BasicInfo/BarContact'
-import BackToListButton from '../../../../../components/bar/BackToListButton'
+import BackToListButton from '@/components/bar/BackToListButton'
 import BarFooter from './Footer/BarFooter'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
@@ -20,6 +20,10 @@ export default function BarDetailContent() {
   )
 
   const setBarDetail = useBarDetailStore((state) => state.setBarDetail)
+
+  const showSignatureMenuList =
+    barDetail.data?.signature_menus &&
+    barDetail.data?.signature_menus.length > 0
 
   useEffect(() => {
     setBarDetail(barDetail.data)
@@ -40,7 +44,7 @@ export default function BarDetailContent() {
           <BarBusinessHour />
         </div>
         <div className="lg:col-span-2">
-          <SignatureMenuList />
+          {showSignatureMenuList ? <SignatureMenuList /> : null}
         </div>
       </div>
       <BarFooter />
