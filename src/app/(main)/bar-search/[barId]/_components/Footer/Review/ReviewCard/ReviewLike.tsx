@@ -18,6 +18,8 @@ type ReviewLikeProps = {
 export default function ReviewLike({ review, userData }: ReviewLikeProps) {
   const queryClient = useQueryClient()
 
+  const isOwnReview = review.userinfo?.id === userData?.id
+
   const isLikedByCurrentUser = review.likes?.some(
     (like) => like.user_id === userData?.id,
   )
@@ -92,18 +94,19 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
   }
 
   return (
-    <div
-      className="flex cursor-pointer items-center gap-2 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-neutral-500 hover:text-neutral-800"
+    <button
+      className="flex cursor-pointer items-center gap-1 transition-all duration-200 ease-in-out"
+      disabled={isOwnReview}
       onClick={handleClick}
     >
       <HiHeart
         size={20}
         className={clsx(
-          'hover:animate-pulse',
+          !isOwnReview && 'hover:text-red-400',
           isLiked ? 'fill-red-400 text-red-400' : 'none',
         )}
       />
-      {review.like_count || 0}개
-    </div>
+      <span className="text-lg">{review.like_count || 0}</span>
+    </button>
   )
 }

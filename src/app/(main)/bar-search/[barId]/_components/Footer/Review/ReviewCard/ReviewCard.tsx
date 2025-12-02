@@ -66,13 +66,7 @@ export default function ReviewCard({ review }: { review: BarReview }) {
           .filter((tag) => tag !== null)}
       />
       <div className="flex justify-between text-zinc-500">
-        <div className="flex gap-5">
-          <ReviewLike review={review} userData={userData} />
-          {/* <div className="flex cursor-pointer items-center gap-1 rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-amber-400 hover:text-neutral-900">
-            <HiOutlineChat size={20} />
-            {review.comment_count || 0}개
-          </div> */}
-        </div>
+        <ReviewLike review={review} userData={userData} />
         <span>
           {review.updated_at
             ? `${dayjs(review.updated_at).format('YYYY.MM.DD')} 수정됨`
