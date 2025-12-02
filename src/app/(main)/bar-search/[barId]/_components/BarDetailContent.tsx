@@ -7,15 +7,17 @@ import BarContact from './BasicInfo/BarContact'
 import BackToListButton from '../../../../../components/bar/BackToListButton'
 import BarFooter from './Footer/BarFooter'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useBar } from '../_providers/BarProviders'
 import { useEffect } from 'react'
 import { useBarDetailStore } from '../_stores/bar-detail.store'
 import SignatureMenuList from './SignatureMenu/SignatureMenuList'
 import { queries } from '@/api/queries'
+import { useParams } from 'next/navigation'
 
 export default function BarDetailContent() {
-  const { barId } = useBar()
-  const { data: barDetail } = useSuspenseQuery(queries.bar.detail(barId))
+  const { barId } = useParams()
+  const { data: barDetail } = useSuspenseQuery(
+    queries.bar.detail(Number(barId)),
+  )
 
   const setBarDetail = useBarDetailStore((state) => state.setBarDetail)
 

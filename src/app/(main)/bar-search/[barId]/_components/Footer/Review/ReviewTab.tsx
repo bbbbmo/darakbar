@@ -10,15 +10,17 @@ import { HiOutlineChat, HiPencil } from 'react-icons/hi'
 import { useModal } from '@/app/_providers/ModalProvider'
 import { reviewSortOptions } from './review.const'
 import { BarReview } from '@/api/review/getBarReviews'
+import { useParams } from 'next/navigation'
 
 export default function ReviewTab({ reviews }: { reviews: BarReview[] }) {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortOption, setSortOption] = useState<string>(reviewSortOptions[0])
+  const { barId } = useParams()
 
   const { open, close } = useModal()
 
   const openReviewCreateModal = () => {
-    open('ReviewCreateModal', { barId: reviews[0].bar_id, onClose: close })
+    open('ReviewCreateModal', { barId: Number(barId), onClose: close })
   }
 
   const onPageChange = (page: number) => setCurrentPage(page)

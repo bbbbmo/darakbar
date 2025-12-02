@@ -4,7 +4,6 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 import BarDetailContent from './_components/BarDetailContent'
-import { BarProvider } from './_providers/BarProviders'
 import { queries } from '@/api/queries'
 
 export default async function BarDetailPage({
@@ -19,10 +18,8 @@ export default async function BarDetailPage({
   await queryClient.prefetchQuery(queries.bar.detail(barId))
 
   return (
-    <BarProvider barId={barId}>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <BarDetailContent />
-      </HydrationBoundary>
-    </BarProvider>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <BarDetailContent />
+    </HydrationBoundary>
   )
 }
