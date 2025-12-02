@@ -4,8 +4,6 @@ import FormDescription from '@/components/ui/forms/FormDescription'
 import FormFileInput from '@/components/ui/forms/FormFileInput'
 import FormHeader from '@/components/ui/forms/FormHeader'
 import FormItem from '@/components/ui/forms/FormItem'
-import { barCategoryOptions } from '@/const/bar-options.const'
-import FormOption from '@/components/ui/forms/FormOption'
 import Tags from '@/components/ui/Tags'
 import { useQuery } from '@tanstack/react-query'
 import { TextInput } from 'flowbite-react'
@@ -28,8 +26,11 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
     register,
     setValue,
     trigger,
+    watch,
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
+
+  const atmosphereTagIds = watch('atmosphereTagIds')
 
   return (
     <>
@@ -46,6 +47,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
         <Tags
           tags={atmosphereTags?.data || []}
           active={true}
+          existingTagIds={atmosphereTagIds}
           setTagIds={(tagIds) => setValue('atmosphereTagIds', tagIds)}
         />
       </FormItem>

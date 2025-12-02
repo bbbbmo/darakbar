@@ -11,6 +11,8 @@ export const getIngredients = async (name?: string) => {
     query = query.eq('name', name)
   }
 
+  query = query.order('id', { ascending: true })
+
   const { data, error } = await query
 
   if (error) {

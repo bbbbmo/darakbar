@@ -27,7 +27,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
   const addIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
-    append({ ingredientId: null })
+    append({ ingredientId: 1 })
   }
 
   const removeIngredient = (

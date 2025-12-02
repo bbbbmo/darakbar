@@ -15,7 +15,6 @@ export default function BarBasicInfo(props: BarBasicInfoProps) {
   const { onNextStep } = props
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
   return (

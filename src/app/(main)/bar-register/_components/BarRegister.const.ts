@@ -30,67 +30,47 @@ export const emptySignatureCocktail: SignatureCocktailForm = {
   abv: 0,
   ingredients: [
     {
-      ingredientId: null,
+      ingredientId: 1,
     },
   ],
 }
 
+export const defaultBusinessHour = {
+  openTime: '17:00',
+  closeTime: '23:30',
+  lastOrderTime: '23:00',
+  isClosed: false,
+  significant: null,
+}
+
 export const emptyBusinessHour: BusinessHourForm[] = [
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'mon',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'tue',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'wed',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'thu',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'fri',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'sat',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
   {
+    ...defaultBusinessHour,
     dayOfWeek: 'sun',
-    openTime: '17:00',
-    closeTime: '23:30',
-    lastOrderTime: '23:00',
-    isClosed: false,
-    significant: null,
   },
 ]
 

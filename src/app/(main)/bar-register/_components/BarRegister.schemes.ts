@@ -29,7 +29,7 @@ export const SignatureCocktailFormSchema = z.object({
     .max(200, '칵테일 설명은 200자 이하로 입력해주세요'),
   image: FileInputSchema.nullable(),
   price: z.number().positive('가격은 0보다 커야 합니다'),
-  abv: z.number().positive('알코올 도수는 0보다 커야 합니다'),
+  abv: z.number().nonnegative('알코올 도수는 0 이상이어야 합니다'),
   ingredients: z.array(IngredientSchema).refine(
     (ingredients) => {
       const ingredientIds = ingredients.map(
