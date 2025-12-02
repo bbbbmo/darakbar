@@ -1,6 +1,6 @@
 'use client'
 
-import UploadCard from '@/components/Cards/UploadCard'
+import UploadCard from '@/components/ui/cards/UploadCard'
 import { Button } from 'flowbite-react'
 import { HiOutlineAnnotation } from 'react-icons/hi'
 import { useRouter } from 'next/navigation'

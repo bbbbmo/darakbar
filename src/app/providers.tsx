@@ -9,7 +9,7 @@ import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { ModalProvider, ModalRegistry } from '@/app/_providers/ModalProvider'
 import ReviewEditModal from '@/app/(main)/bar-search/[barId]/_components/Footer/Review/Modal/ReviewEditModal'
 import ReviewCreateModal from '@/app/(main)/bar-search/[barId]/_components/Footer/Review/Modal/ReviewCreateModal'
-import ConfirmModal from '@/components/Modals/ConfirmModal'
+import ConfirmModal from '@/components/ui/modals/ConfirmModal'
 import { SnackBarProvider } from '@/app/_providers/SnackBarProvider'
 import { queryClientOptions } from '@/lib/tanstack-query/tanstack-query'
 

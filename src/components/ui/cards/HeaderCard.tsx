@@ -1,5 +1,5 @@
 import { Card } from 'flowbite-react'
-import BlurText from '../Reactbits/BlurText'
+import BlurText from '../react-bits/BlurText'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 type HeaderCardProps = {

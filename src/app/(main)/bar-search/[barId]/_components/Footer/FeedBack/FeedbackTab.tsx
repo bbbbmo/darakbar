@@ -1,6 +1,6 @@
 import { Button } from 'flowbite-react'
 import { HiOutlineCamera, HiOutlineUpload } from 'react-icons/hi'
-import UploadCard from '@components/Cards/UploadCard'
+import UploadCard from '@/components/ui/cards/UploadCard'
 
 export default function FeedbackTab() {
   return (

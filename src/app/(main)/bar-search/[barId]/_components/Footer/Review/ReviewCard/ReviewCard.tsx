@@ -1,16 +1,16 @@
 'use client'
 
-import Tags from '@/components/Tags'
+import Tags from '@/components/ui/Tags'
 import { Avatar, Card } from 'flowbite-react'
 import Image from 'next/image'
 import dayjs from 'dayjs'
 import { BarReview } from '@api/review/getBarReviews'
-import Stars from '@/components/Stars'
+import Stars from '@/components/ui/Stars'
 import ReviewMenu from './ReviewMenu'
 import { useAuthStore } from '@/stores/auth.store'
 import { useParseFile } from '@/hooks/useParseFile'
 import ReviewLike from './ReviewLike'
-import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
+import ImageSkeleton from '@/components/ui/skeletons/ImageSkeleton'
 
 export default function ReviewCard({ review }: { review: BarReview }) {
   const { userData } = useAuthStore()

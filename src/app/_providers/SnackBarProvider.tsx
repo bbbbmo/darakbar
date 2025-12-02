@@ -3,9 +3,9 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
-import SnackBarHost from '@/components/SnackBar/SnackBarHost'
-import AppSnackBar from '@/components/SnackBar/SnackBar'
+import { AppSnackBarColor } from '@/components/ui/snack-bar/SnackBar.types'
+import SnackBarHost from '@/components/ui/snack-bar/SnackBarHost'
+import AppSnackBar from '@/components/ui/snack-bar/SnackBar'
 
 export type SnackBarEntry = {
   id: string

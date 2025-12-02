@@ -1,7 +1,7 @@
-import FormHeader from "@components/Forms/FormHeader";
-import { Card } from "flowbite-react";
-import EditProfileForm from "./_components/EditProfileForm";
-import BackButton from "@/components/Buttons/BackButton";
+import FormHeader from '@/components/ui/forms/FormHeader'
+import { Card } from 'flowbite-react'
+import EditProfileForm from './_components/EditProfileForm'
+import BackButton from '@/components/ui/buttons/BackButton'
 
 // [TODO] 유저 프로필 이미지 기능 추가하기
 export default function EditProfile() {
@@ -13,5 +13,5 @@ export default function EditProfile() {
         <EditProfileForm />
       </Card>
     </>
-  );
+  )
 }

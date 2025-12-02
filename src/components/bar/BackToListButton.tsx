@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { HiOutlineArrowLeft } from "react-icons/hi";
+import Link from 'next/link'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 export default function BackToListButton() {
   return (
@@ -9,5 +9,5 @@ export default function BackToListButton() {
     >
       <HiOutlineArrowLeft size={20} />바 목록으로 돌아가기
     </Link>
-  );
+  )
 }

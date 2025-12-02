@@ -1,7 +1,7 @@
 'use client'
 
-import CardSkeleton from '@/components/Skeletons/CardSkeleton'
-import Tags from '@/components/Tags'
+import CardSkeleton from '@/components/ui/skeletons/CardSkeleton'
+import Tags from '@/components/ui/Tags'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 import { Button, Card } from 'flowbite-react'
 import { HiClock, HiLocationMarker, HiOutlinePhone } from 'react-icons/hi'

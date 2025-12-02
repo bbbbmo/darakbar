@@ -1,5 +1,5 @@
-import SubTitleText from '@/components/SubTitleText'
-import Tags from '@/components/Tags'
+import SubTitleText from '@/components/ui/text/SubTitleText'
+import Tags from '@/components/ui/Tags'
 import { useParseFile } from '@/hooks/useParseFile'
 import { BarDetail } from '@api/bar/getBarDetail'
 import { Card } from 'flowbite-react'

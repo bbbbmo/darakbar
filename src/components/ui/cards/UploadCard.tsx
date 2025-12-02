@@ -1,6 +1,6 @@
 'use client'
 
-import SubTitleText from '@/components/SubTitleText'
+import SubTitleText from '@/components/ui/text/SubTitleText'
 import { Card } from 'flowbite-react'
 import { ReactNode } from 'react'
 

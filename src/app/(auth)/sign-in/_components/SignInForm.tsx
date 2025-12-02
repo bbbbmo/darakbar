@@ -1,15 +1,15 @@
 'use client'
 
-import FormItem from '@components/Forms/FormItem'
+import FormItem from '@/components/ui/forms/FormItem'
 import { Button, HelperText, TextInput } from 'flowbite-react'
 import { SignInFormData } from './SignInForm.types'
 import { useForm } from 'react-hook-form'
 import supabase from '@lib/supabase/supabase'
 import { useState } from 'react'
-import AppSnackBar from '@/components/SnackBar/SnackBar'
-import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
+import AppSnackBar from '@/components/ui/snack-bar/SnackBar'
+import { AppSnackBarColor } from '@/components/ui/snack-bar/SnackBar.types'
 import { useRouter } from 'next/navigation'
-import NextButton from '@/components/Buttons/NextButton'
+import NextButton from '@/components/ui/buttons/NextButton'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function SignForm() {

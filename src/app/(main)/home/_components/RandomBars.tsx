@@ -2,7 +2,7 @@
 
 import { queries } from '@/api/queries'
 import { useQuery } from '@tanstack/react-query'
-import BarCard from '../../_components/BarCard/BarCard'
+import BarCard from '../../../../components/bar/BarCard'
 import { useRouter } from 'next/navigation'
 import { Button } from 'flowbite-react'
 

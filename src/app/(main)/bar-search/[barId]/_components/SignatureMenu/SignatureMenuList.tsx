@@ -1,6 +1,6 @@
 'use client'
 
-import TitleText from '@/components/TitleText'
+import TitleText from '@/components/ui/text/TitleText'
 import { LiaCocktailSolid } from 'react-icons/lia'
 import { useState } from 'react'
 import SignatureMenuCard from './SignatureMenuCard'

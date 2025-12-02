@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import CocktailCard from '../../_components/CocktailCard/CocktailCard'
+import CocktailCard from '../../../../components/bar/CocktailCard'
 import { queries } from '@/api/queries'
 
 export default function RandomCocktails() {

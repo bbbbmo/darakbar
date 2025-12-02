@@ -1,5 +1,5 @@
-import BlurText from '@/components/Reactbits/BlurText'
-import SplitText from '@/components/Reactbits/SplitText'
+import BlurText from '@/components/ui/react-bits/BlurText'
+import SplitText from '@/components/ui/react-bits/SplitText'
 import Image from 'next/image'
 
 export default function LandingHeader() {

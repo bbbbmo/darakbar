@@ -1,11 +1,11 @@
-import NextButton from '@/components/Buttons/NextButton'
-import FormDescription from '@/components/Forms/FormDescription'
-import FormHeader from '@/components/Forms/FormHeader'
-import FormItem from '@/components/Forms/FormItem'
+import NextButton from '@/components/ui/buttons/NextButton'
+import FormDescription from '@/components/ui/forms/FormDescription'
+import FormHeader from '@/components/ui/forms/FormHeader'
+import FormItem from '@/components/ui/forms/FormItem'
 import { TextInput, Textarea } from 'flowbite-react'
 import { useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
-import FormErrorMessage from '@/components/Forms/FormErrorMessage'
+import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 
 type BarBasicInfoProps = {
   onNextStep: () => void

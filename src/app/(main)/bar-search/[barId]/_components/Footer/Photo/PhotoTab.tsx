@@ -1,6 +1,6 @@
 'use client'
 
-import ImageSkeleton from '@/components/Skeletons/ImageSkeleton'
+import ImageSkeleton from '@/components/ui/skeletons/ImageSkeleton'
 import { useParseFile } from '@/hooks/useParseFile'
 import { BarReview } from '@/api/review/getBarReviews'
 import Image from 'next/image'

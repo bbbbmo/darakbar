@@ -1,16 +1,16 @@
 'use client'
 
-import AppSnackBar from '@/components/SnackBar/SnackBar'
-import { AppSnackBarColor } from '@/components/SnackBar/SnackBar.types'
-import FormItem from '@components/Forms/FormItem'
+import AppSnackBar from '@/components/ui/snack-bar/SnackBar'
+import { AppSnackBarColor } from '@/components/ui/snack-bar/SnackBar.types'
+import FormItem from '@/components/ui/forms/FormItem'
 import { Button, HelperText, TextInput } from 'flowbite-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SignUpFormData } from './SignUpForm.types'
 import supabase from '@lib/supabase/supabase'
-import FormPasswordInput from '@components/Forms/FormPasswordInput'
+import FormPasswordInput from '@/components/ui/forms/FormPasswordInput'
 import { useRouter } from 'next/navigation'
-import NextButton from '@/components/Buttons/NextButton'
+import NextButton from '@/components/ui/buttons/NextButton'
 import { basicTheme } from '@/lib/flowbite/basicTheme'
 
 export default function SignUpForm() {

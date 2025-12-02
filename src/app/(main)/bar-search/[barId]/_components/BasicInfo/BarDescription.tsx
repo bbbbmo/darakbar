@@ -1,6 +1,6 @@
-import SubTitleText from '@/components/SubTitleText'
-import Tags from '@/components/Tags'
-import TitleText from '@/components/TitleText'
+import SubTitleText from '@/components/ui/text/SubTitleText'
+import Tags from '@/components/ui/Tags'
+import TitleText from '@/components/ui/text/TitleText'
 import { HiLocationMarker } from 'react-icons/hi'
 import { useBarDetailStore } from '../../_stores/bar-detail.store'
 

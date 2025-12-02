@@ -1,6 +1,6 @@
 'use client'
 
-import HeaderCard from '@/components/Cards/HeaderCard'
+import HeaderCard from '@/components/ui/cards/HeaderCard'
 
 export default function PersonalRecipeHeader() {
   return (

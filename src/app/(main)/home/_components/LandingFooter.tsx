@@ -1,4 +1,4 @@
-import UploadCard from '@/components/Cards/UploadCard'
+import UploadCard from '@/components/ui/cards/UploadCard'
 import { Button } from 'flowbite-react'
 import { HiOutlineMail } from 'react-icons/hi'
 

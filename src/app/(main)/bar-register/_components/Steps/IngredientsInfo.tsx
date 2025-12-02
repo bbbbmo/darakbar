@@ -1,7 +1,7 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import { Button, Select } from 'flowbite-react'
-import FormItem from '@/components/Forms/FormItem'
+import FormItem from '@/components/ui/forms/FormItem'
 import { HiPlusSm, HiXCircle } from 'react-icons/hi'
 import clsx from 'clsx'
 import { useQuery } from '@tanstack/react-query'
