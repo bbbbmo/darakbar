@@ -2,7 +2,7 @@
 
 import HeaderCard from '@/components/ui/cards/HeaderCard'
 
-export default function PersonalRecipeHeader() {
+export default function BarSearchHeader() {
   return (
     <HeaderCard
       title="칵테일 바 찾기"

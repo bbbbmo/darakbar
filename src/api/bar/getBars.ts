@@ -1,16 +1,22 @@
 import supabase from '@lib/supabase/supabase'
 
-export type getBarsQueryParams = {
+export type BarFilterOption = {
   name?: string
-  region?: string
-  priceRange?: string
-  // category?: BarCategory
-  // atmosphere?: AtmosphereTag
+  atmosphere?: number[]
+}
+
+export type BarSortOption = 'all' | 'name_asc' | 'rating_asc' | 'rating_desc'
+
+export type getBarsQueryParams = {
+  filterOption?: BarFilterOption
+  sortOption?: BarSortOption
 }
 
 export type Bar = NonNullable<Awaited<ReturnType<typeof getBars>>['data']>[0]
 
 export const getBars = async (params?: getBarsQueryParams) => {
+  const { filterOption, sortOption } = params || {}
+
   let query = supabase.from('bars').select(`
     id, 
     name, 
@@ -33,7 +39,8 @@ export const getBars = async (params?: getBarsQueryParams) => {
       is_closed,
       significant
     ),
-    bar_tags(
+    bar_tags!inner(
+      tag_id,
       tags(
         id,
         name
@@ -41,20 +48,29 @@ export const getBars = async (params?: getBarsQueryParams) => {
     )
   `)
 
-  // if (params?.name) {
-  //   query = query.ilike('name', params.name)
-  // }
-  // if (params?.region) {
-  //   query = query.ilike('address', params.region)
-  // }
-  // if (params?.category) {
-  //   query = query.contains('category', [params.category])
-  // }
-  // if (params?.atmosphere) {
-  //   query = query.in('bar_tags', [params.atmosphere])
-  // }
+  if (filterOption?.name) {
+    query = query.ilike('name', `%${filterOption.name}%`)
+  }
+
+  if (filterOption?.atmosphere && filterOption.atmosphere.length > 0) {
+    query = query.in('bar_tags.tag_id', filterOption.atmosphere)
+  }
+
+  if (sortOption && sortOption !== 'all') {
+    if (sortOption === 'name_asc') {
+      query = query.order('name', { ascending: true })
+    } else if (sortOption === 'rating_asc') {
+      query = query.order('rating', { ascending: true })
+    } else if (sortOption === 'rating_desc') {
+      query = query.order('rating', { ascending: false })
+    }
+  }
 
   const { data, error } = await query
 
-  return { data, error }
+  if (error) {
+    throw error
+  }
+
+  return { data }
 }

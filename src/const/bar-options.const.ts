@@ -1,3 +1,5 @@
+import { BarSortOption } from '@/api/bar/getBars'
+
 export const regionOptions: string[] = [
   '모든 지역',
   '서울',
@@ -17,13 +19,11 @@ export const priceRangeOptions: string[] = [
   '30000원 이하',
 ] as const
 
-export const sortOptions: string[] = [
-  '모든 정렬',
-  '이름 순',
-  '거리 순',
-  '평점 높은 순',
-  '가격 낮은 순',
-  '가격 높은 순',
+export const barSortOptions: { label: string; value: BarSortOption }[] = [
+  { label: '모든 정렬', value: 'all' },
+  { label: '이름순', value: 'name_asc' },
+  { label: '평점순', value: 'rating_asc' },
+  { label: '평점역순', value: 'rating_desc' },
 ] as const
 
 export const atmosphereOptions: string[] = [

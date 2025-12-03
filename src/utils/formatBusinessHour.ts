@@ -58,7 +58,6 @@ export const getOpenStatus = (businessHours: any[]): string => {
   ) {
     return `영업종료 (Open: ${formatToHHmm(todayBusinessHour.open_time)})`
   } else {
-    console.log(todayBusinessHour.open_time)
     return `영업전 (Open: ${formatToHHmm(todayBusinessHour.open_time)})`
   }
 }

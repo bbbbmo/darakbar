@@ -38,7 +38,7 @@ export default function BarRegister() {
     },
     onSuccess: () => {
       snackBar.showSuccess('바 등록 성공', '바가 성공적으로 등록되었습니다.')
-      invalidateQueries([queries.bar.all.queryKey])
+      invalidateQueries([queries.bar.all().queryKey])
       methods.reset()
       setStep(barRegisterSteps['기본정보'])
     },

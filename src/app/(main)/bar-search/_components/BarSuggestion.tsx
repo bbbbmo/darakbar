@@ -5,7 +5,7 @@ import { Button } from 'flowbite-react'
 import { HiOutlineAnnotation } from 'react-icons/hi'
 import { useRouter } from 'next/navigation'
 
-export default function BarSearchFooter() {
+export default function BarSuggestion() {
   const router = useRouter()
 
   const goToBarRegisterPage = () => {

@@ -60,7 +60,9 @@ export default function BarCard({
               </span>
               <div className="flex items-center gap-1">
                 <HiLocationMarker size={16} className="text-gray-400" />
-                <span className="text-sm">{barInfo.address || '미제공'}</span>
+                <span className="truncate text-sm">
+                  {barInfo.address || '미제공'}
+                </span>
               </div>
             </header>
             <div className="my-4 text-gray-400">

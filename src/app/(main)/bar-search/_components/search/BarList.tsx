@@ -18,7 +18,7 @@ export default function BarList({ bars, loading }: BarListProps) {
   }
 
   return (
-    <GridList items={bars ?? []}>
+    <GridList items={bars}>
       {(bar) => (
         <BarCard
           barInfo={bar}
