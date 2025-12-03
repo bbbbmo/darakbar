@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query'
 import BarFilter from './search/BarFilter'
 import BarList from './search/BarList'
-import BarMap from './search/BarMap'
 import { queries } from '@/api/queries'
 import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
@@ -24,11 +23,10 @@ export default function BarSearchContent() {
           바를 찾았어요.
         </p>
       </BarFilter>
-      <BarMap />
-      {bars && bars.data.length > 0 ? (
+      {bars && bars?.data.length > 0 ? (
         <BarList bars={bars.data} loading={isLoading} />
       ) : (
-        <p className="py-10 text-center text-gray-300">
+        <p className="py-50 text-center text-gray-300">
           검색 결과가 없어요. 필터를 초기화하거나 다른 검색어를 시도해 보세요.
         </p>
       )}

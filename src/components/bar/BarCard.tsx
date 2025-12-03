@@ -12,14 +12,14 @@ import Image from 'next/image'
 
 type BarCardProps = {
   barInfo: Bar
-  loading: boolean
+  loading?: boolean
   className?: string
   onClick?: () => void
 }
 
 export default function BarCard({
   barInfo,
-  loading,
+  loading = false,
   className,
   onClick,
 }: BarCardProps) {

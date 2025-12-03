@@ -7,10 +7,10 @@ import { Bar } from '@/api/bar/getBars'
 
 type BarListProps = {
   bars: Bar[]
-  loading: boolean
+  loading?: boolean
 }
 
-export default function BarList({ bars, loading }: BarListProps) {
+export default function BarList({ bars, loading = false }: BarListProps) {
   const router = useRouter()
 
   const goToBarDetail = (barId: number) => {
