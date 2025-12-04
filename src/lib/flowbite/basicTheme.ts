@@ -96,7 +96,7 @@ export const basicTheme = createTheme({
         base: 'flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
         variant: {
           default: {
-            base: 'rounded-t-lg',
+            base: 'rounded-t-lg ',
             active: {
               on: 'bg-neutral-700 border-neutral-600 text-amber-400 dark:bg-gray-800 dark:text-amber-400',
               off: 'text-gray-500 hover:bg-gray-50 hover:text-gray-600 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300',

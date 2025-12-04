@@ -1,11 +1,7 @@
+import { Tag } from '@/types/default.schemes'
 import clsx from 'clsx'
 import { Badge } from 'flowbite-react'
 import { useEffect, useState } from 'react'
-
-type Tag = {
-  id: number
-  name: string
-}
 
 type TagsProps = {
   tags: Tag[]

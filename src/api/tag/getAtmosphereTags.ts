@@ -1,10 +1,7 @@
+import { Tag } from '@/types/default.schemes'
 import supabase from '@lib/supabase/supabase'
 
-export type AtmosphereTag = Awaited<
-  ReturnType<typeof getAtmosphereTags>
->['data'][0]
-
-export const getAtmosphereTags = async () => {
+export const getAtmosphereTags = async (): Promise<{ data: Tag[] }> => {
   const { data, error } = await supabase
     .from('tags')
     .select('id, name')

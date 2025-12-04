@@ -8,7 +8,7 @@ import { Button } from 'flowbite-react'
 
 export default function RandomBars() {
   const router = useRouter()
-  const { data: bars, isLoading } = useQuery(queries.bar.all)
+  const { data: bars, isLoading } = useQuery(queries.bar.all())
 
   const filteredBars =
     bars?.data?.filter((bar) => bar.bar_images).slice(0, 6) || []

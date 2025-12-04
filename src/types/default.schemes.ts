@@ -12,3 +12,5 @@ export const TagSchema = z.object({
   id: z.number(),
   name: z.string(),
 })
+
+export type Tag = z.infer<typeof TagSchema>

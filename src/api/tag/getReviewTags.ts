@@ -1,9 +1,14 @@
+import { Tag } from '@/types/default.schemes'
 import supabase from '@lib/supabase/supabase'
 
-export const getReviewTags = async () => {
+export const getReviewTags = async (): Promise<{ data: Tag[] }> => {
   const { data, error } = await supabase
     .from('tags')
     .select('id, name')
     .eq('category', 'review')
-  return { data, error }
+
+  if (error) {
+    throw error
+  }
+  return { data }
 }
