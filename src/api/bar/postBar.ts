@@ -27,15 +27,17 @@ export const postBar = async (
     p_phone_number: body.phoneNumber,
     p_website_url: body.websiteUrl ?? undefined,
     p_instagram_url: body.instagramUrl ?? undefined,
-    p_bar_images: [], // 이미지는 별도로 업로드 후 업데이트
     // bar_tags 테이블
     p_atmosphere_tag_ids: body.atmosphereTagIds,
     // signature_menus 테이블
     p_signature_cocktails:
-      body.signatureCocktails.map((cocktail) => ({
-        ...cocktail,
-        image: null, // 나중에 업데이트
-      })) || null,
+      body.signatureCocktails.map((cocktail) => {
+        const { image, ...cocktailWithoutImage } = cocktail
+        return {
+          ...cocktailWithoutImage,
+          image_path: null, // 나중에 업데이트
+        }
+      }) || null,
     // business_hours 테이블
     p_business_hours: body.businessHours,
   })
@@ -119,7 +121,7 @@ const uploadAndUpdateBarImages = async (
     if (barImagePaths.length > 0) {
       const { error: barUpdateError } = await supabase
         .from('bars')
-        .update({ bar_images: barImagePaths })
+        .update({ image_paths: barImagePaths })
         .eq('id', barId)
 
       if (barUpdateError) {
@@ -147,7 +149,7 @@ const uploadAndUpdateBarImages = async (
           .map((menu, index) =>
             supabase
               .from('signature_menus')
-              .update({ image: cocktailImagePaths[index] })
+              .update({ image_path: cocktailImagePaths[index] })
               .eq('id', menu.id),
           )
 

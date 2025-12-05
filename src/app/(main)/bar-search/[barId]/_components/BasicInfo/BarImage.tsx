@@ -6,7 +6,7 @@ import { useParseFile } from '@/hooks/useParseFile'
 export default function BarImage() {
   const barDetail = useBarDetailStore((state) => state.barDetail)
 
-  const { publicUrls } = useParseFile(barDetail?.bar_images || [])
+  const { publicUrls } = useParseFile(barDetail?.image_paths || [])
   return (
     <section className="relative h-[400px] w-full">
       {publicUrls.length > 0 ? (

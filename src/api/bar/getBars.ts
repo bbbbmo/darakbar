@@ -24,7 +24,7 @@ export const getBars = async (params?: getBarsQueryParams) => {
     address, 
     description, 
     phone_number, 
-    bar_images,
+    image_paths,
     signature_menus(
       id,
       name,

@@ -37,7 +37,7 @@ export default function PostCard({ post }: PostCardProps) {
             <NewMenuCard key={menu.id} menu={menu} />
           ))}
         <img
-          src={post.image}
+          src={post.image_paths?.[0]}
           alt={post.title}
           className="h-80 w-full object-cover"
         />

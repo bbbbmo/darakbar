@@ -7,8 +7,8 @@ import Image from 'next/image'
 
 export default function PhotoTab({ reviews }: { reviews: BarReview[] }) {
   const images = reviews
-    .filter((review) => review.images && review.images.length > 0)
-    .flatMap((review) => review.images)
+    .filter((review) => review.image_paths && review.image_paths.length > 0)
+    .flatMap((review) => review.image_paths)
 
   const { publicUrls, isLoading } = useParseFile(images as string[])
 

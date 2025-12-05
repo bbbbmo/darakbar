@@ -15,12 +15,12 @@ export const getBarDetail = async (id: number) => {
         instagram_url, 
         description, 
         phone_number, 
-        bar_images,
+        image_paths,
         signature_menus(
           id,
           name,
           description,
-          image,
+          image_path,
           abv,
           price,
           signature_menu_ingredients(

@@ -25,7 +25,7 @@ export default function BarCard({
 }: BarCardProps) {
   if (!barInfo) return null
 
-  const { publicUrls } = useParseFile(barInfo.bar_images || [])
+  const { publicUrls } = useParseFile(barInfo.image_paths || [])
   return (
     <>
       {loading ? (

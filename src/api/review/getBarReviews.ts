@@ -14,11 +14,11 @@ export const getBarReviews = async (barId: number) => {
       userinfo(
         id,
         name,
-        profile_img_url
+        profile_image_path
       ),
       rating,
       body,
-      images,
+      image_paths,
       review_tags(
         tags(
           id,

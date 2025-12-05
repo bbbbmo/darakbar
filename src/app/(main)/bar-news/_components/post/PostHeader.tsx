@@ -15,18 +15,16 @@ export default function PostHeader({
   postTag,
 }: PostHeaderProps) {
   return (
-    <>
-      <div className="flex justify-between">
-        <div className="flex items-center gap-2">
-          <Avatar img={''} rounded>
-            <span className="font-medium dark:text-white">{'가상데이터'}</span>
-          </Avatar>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {dayjs(createdAt).format('YYYY.MM.DD')}
-          </span>
-        </div>
-        <Tags tags={[postTag]} />
+    <div className="flex justify-between">
+      <div className="flex items-center gap-2">
+        <Avatar img={''} rounded>
+          <span className="font-medium dark:text-white">{'가상데이터'}</span>
+        </Avatar>
+        <span className="text-sm text-gray-500 dark:text-gray-400">
+          {dayjs(createdAt).format('YYYY.MM.DD')}
+        </span>
       </div>
-    </>
+      <Tags tags={[postTag]} />
+    </div>
   )
 }

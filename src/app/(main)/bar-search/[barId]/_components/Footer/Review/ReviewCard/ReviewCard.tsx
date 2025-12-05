@@ -18,11 +18,11 @@ export default function ReviewCard({ review }: { review: BarReview }) {
   const isOwner = userData?.id === review.userinfo?.id
 
   const { publicUrls: avatarUrl } = useParseFile(
-    review.userinfo?.profile_img_url || '',
+    review.userinfo?.profile_image_path || '',
   )
 
   const { publicUrls: reviewImages, isLoading: isReviewImagesLoading } =
-    useParseFile(review.images || [])
+    useParseFile(review.image_paths || [])
 
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">

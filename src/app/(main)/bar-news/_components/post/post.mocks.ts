@@ -7,7 +7,7 @@ export type NewMenu = {
   type: string
   description: string
   price: number
-  image: string
+  image_path: string
 }
 
 export type Post = {
@@ -16,7 +16,7 @@ export type Post = {
   content: string
   createdAt: string
   updatedAt: string
-  image?: string
+  image_paths?: string[]
   businessUserId: string // 유저로 대체 가능성
   postTag: Tag
   likeCount: number
@@ -56,7 +56,7 @@ export const createMockPost = (): Post => {
         type: faker.helpers.arrayElement(['칵테일', '디저트', '음식']),
         description: faker.lorem.paragraph(),
         price: faker.number.int({ min: 1000, max: 100000 }),
-        image: faker.image.url(),
+        image_path: faker.image.url(),
       },
     ],
   }

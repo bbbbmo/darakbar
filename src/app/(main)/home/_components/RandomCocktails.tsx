@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import CocktailCard from '../../../../components/bar/CocktailCard'
+import CocktailCard from '@/components/bar/CocktailCard'
 import { queries } from '@/api/queries'
 
 export default function RandomCocktails() {
@@ -10,7 +10,7 @@ export default function RandomCocktails() {
   })
 
   const filteredSignatureMenus =
-    signatureMenus?.data.filter((menu) => menu.image).slice(0, 6) || []
+    signatureMenus?.data.filter((menu) => menu.image_path).slice(0, 6) || []
 
   return (
     <section className="relative z-10">

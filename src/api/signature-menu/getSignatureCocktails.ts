@@ -9,7 +9,7 @@ export const getSignatureCocktails = async () => {
     id,
     name,
     description,
-    image,
+    image_path,
     abv,
     price,
     signature_menu_ingredients(

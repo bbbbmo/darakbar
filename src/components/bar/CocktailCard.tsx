@@ -18,7 +18,7 @@ export default function CocktailCard({
   loading,
   className,
 }: CocktailCardProps) {
-  const { publicUrls } = useParseFile(menu.image!)
+  const { publicUrls } = useParseFile(menu.image_path || '')
 
   const isValidUrl =
     typeof publicUrls === 'string' &&
