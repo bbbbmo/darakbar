@@ -1,24 +1,33 @@
 import Tags from '@/components/ui/Tags'
+import { useParseFile } from '@/hooks/useParseFile'
 import { Tag } from '@/types/default.schemes'
 import dayjs from 'dayjs'
 import { Avatar } from 'flowbite-react'
 
 export type PostHeaderProps = {
-  businessUserId: string
+  userInfo: {
+    id: string
+    name: string | null
+    profile_image_path: string | null
+  }
   createdAt: string
   postTag: Tag
 }
 
 export default function PostHeader({
-  businessUserId,
+  userInfo,
   createdAt,
   postTag,
 }: PostHeaderProps) {
+  const { publicUrls } = useParseFile(userInfo.profile_image_path || '')
+
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-2">
-        <Avatar img={''} rounded>
-          <span className="font-medium dark:text-white">{'가상데이터'}</span>
+        <Avatar img={publicUrls} rounded>
+          <span className="font-medium dark:text-white">
+            {userInfo.name || '이름 정보 없음'}
+          </span>
         </Avatar>
         <span className="text-sm text-gray-500 dark:text-gray-400">
           {dayjs(createdAt).format('YYYY.MM.DD')}

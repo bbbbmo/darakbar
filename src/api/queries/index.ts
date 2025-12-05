@@ -5,6 +5,7 @@ import { tagKeys } from './tagKeys'
 import { ingredientKeys } from './ingredientKeys'
 import { userKeys } from './userKeys'
 import { signatureMenuKeys } from './signatureMenuKeys'
+import { postKeys } from './postKeys'
 
 export const queries = mergeQueryKeys(
   barKeys,
@@ -13,4 +14,5 @@ export const queries = mergeQueryKeys(
   ingredientKeys,
   userKeys,
   signatureMenuKeys,
+  postKeys,
 )

@@ -1,30 +1,35 @@
+import { useParseFile } from '@/hooks/useParseFile'
 import { Card } from 'flowbite-react'
-import { NewMenu } from './post.mocks'
+import Image from 'next/image'
 
 export type NewMenuCardProps = {
-  menu: NewMenu
+  newMenu: any
 }
 
-export default function NewMenuCard({ menu }: NewMenuCardProps) {
+export default function NewMenuCard({ newMenu }: NewMenuCardProps) {
+  const { publicUrls } = useParseFile(newMenu.image_path || '')
+
   return (
     <Card className="bg-secondary">
       <div className="flex justify-between">
         <div className="flex flex-col gap-1">
-          <h4 className="text-lg font-semibold">{menu.name}</h4>
-          <span className="text-sm text-zinc-500">{menu.type}</span>
+          <h4 className="text-lg font-semibold">{newMenu.name}</h4>
+          <span className="text-sm text-zinc-500">{newMenu.type}</span>
         </div>
         <span className="text-lg font-semibold">
-          {menu.price.toLocaleString()}원
+          {newMenu.price!.toLocaleString()}원
         </span>
       </div>
       <p>
-        <span className="line-clamp-1">{menu.description}</span>
+        <span className="line-clamp-1">{newMenu.description}</span>
       </p>
-      <img
-        src={menu.image}
-        alt={menu.name}
-        className="h-80 w-full object-cover"
-      />
+      <div className="relative w-full">
+        <Image
+          src={publicUrls}
+          alt={newMenu.name || ''}
+          className="h-80 w-full object-cover"
+        />
+      </div>
     </Card>
   )
 }

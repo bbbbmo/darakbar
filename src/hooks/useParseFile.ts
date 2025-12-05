@@ -10,7 +10,7 @@ export function useParseFile(filePaths: string[]): {
   publicUrls: string[]
   isLoading: boolean
 }
-export function useParseFile(filePaths: string | string[]) {
+export function useParseFile(filePaths: string | string[] | null | undefined) {
   const [publicUrls, setPublicUrls] = useState<string | string[]>([])
   const [isLoading, setIsLoading] = useState(true)
 

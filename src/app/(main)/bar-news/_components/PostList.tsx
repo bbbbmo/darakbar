@@ -1,12 +1,15 @@
-import { mockPosts } from './post/post.mocks'
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
 import PostCard from './post/PostCard'
+import { queries } from '@/api/queries'
 
 export default function PostList() {
-  const posts = mockPosts
+  const { data: posts } = useQuery(queries.post.all)
 
   return (
     <div className="flex flex-col gap-8">
-      {posts.map((post) => (
+      {posts?.data.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
     </div>
