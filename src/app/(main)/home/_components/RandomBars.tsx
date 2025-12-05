@@ -2,7 +2,7 @@
 
 import { queries } from '@/api/queries'
 import { useQuery } from '@tanstack/react-query'
-import BarCard from '../../../../components/bar/BarCard'
+import BarCard from '@/components/bar/BarCard'
 import { useRouter } from 'next/navigation'
 import { Button } from 'flowbite-react'
 
@@ -11,7 +11,7 @@ export default function RandomBars() {
   const { data: bars, isLoading } = useQuery(queries.bar.all())
 
   const filteredBars =
-    bars?.data?.filter((bar) => bar.bar_images).slice(0, 6) || []
+    bars?.data?.filter((bar) => bar.image_paths).slice(0, 6) || []
 
   const goToBarSearch = () => {
     router.push('/bar-search')

@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation'
 export default function BarSuggestion() {
   const router = useRouter()
 
-  const goToBarRegisterPage = () => {
-    router.push('/bar-register')
+  const goToBarSuggestionPage = () => {
+    router.push('/bar-search/suggestion')
   }
 
   return (
@@ -17,7 +17,10 @@ export default function BarSuggestion() {
       title="공유하고 싶은 나만의 바가 있나요?"
       description="알고 계신 바 정보를 공유해서 다른 사용자들에게 도움을 주세요"
     >
-      <Button className="flex items-center gap-2" onClick={goToBarRegisterPage}>
+      <Button
+        className="flex items-center gap-2"
+        onClick={goToBarSuggestionPage}
+      >
         <HiOutlineAnnotation size={20} />바 제안하기
       </Button>
     </UploadCard>
