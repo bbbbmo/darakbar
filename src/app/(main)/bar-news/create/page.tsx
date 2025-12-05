@@ -1,3 +1,9 @@
+import PostCreateForm from './_components/PostCreateForm'
+
 export default function BarNewsCreatePage() {
-  return <></>
+  return (
+    <>
+      <PostCreateForm />
+    </>
+  )
 }
