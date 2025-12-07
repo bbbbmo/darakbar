@@ -10,18 +10,18 @@ import { getUserProfileImagePath } from '../file/getStoragePath'
 export const getUserAvatarUrl = async (userId: string) => {
   const { data, error } = await supabase
     .from('userinfo')
-    .select('profile_img_url')
+    .select('profile_image_path')
     .eq('id', userId)
     .single()
   if (error) {
     throw new Error(`유저 프로필 이미지 가져오기 중 에러 발생 ${error.message}`)
   }
 
-  if (!data?.profile_img_url) {
+  if (!data?.profile_image_path) {
     return null
   }
 
-  const publicUrl = await getPublicUrl(data.profile_img_url)
+  const publicUrl = await getPublicUrl(data.profile_image_path)
   return publicUrl
 }
 
@@ -42,7 +42,7 @@ export const postUserAvatar = async (file: File, userId: string) => {
     const { error: updateError } = await supabase
       .from('userinfo')
       .update({
-        profile_img_url: publicUrl,
+        profile_image_path: publicUrl,
       })
       .eq('id', userId)
 
@@ -88,7 +88,7 @@ export const deleteUserAvatar = async (userId: string) => {
     const { error: updateError } = await supabase
       .from('userinfo')
       .update({
-        profile_img_url: null,
+        profile_image_path: null,
       })
       .eq('id', userId)
 
