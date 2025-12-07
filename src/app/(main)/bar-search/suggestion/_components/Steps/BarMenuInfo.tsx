@@ -8,13 +8,13 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 import { emptySignatureCocktail } from '../BarRegister.const'
-import { HiXCircle } from 'react-icons/hi'
 import { FaWonSign, FaPercent } from 'react-icons/fa6'
 import { Fragment } from 'react'
 import clsx from 'clsx'
 import PrevButton from '@/components/ui/buttons/PrevButton'
 import IngredientsInfo from './IngredientsInfo'
 import SubTitleText from '@/components/ui/text/SubTitleText'
+import RemoveButton from '@/components/ui/buttons/RemoveButton'
 
 type BarMenuInfoProps = {
   onPrevStep: () => void
@@ -64,12 +64,10 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
                   )}
                 >
                   시그니처 칵테일 {index + 1}
-                  <button
-                    className="ml-2 cursor-pointer"
+                  <RemoveButton
                     onClick={() => remove(index)}
-                  >
-                    <HiXCircle size={20} className="text-gray-500" />
-                  </button>
+                    className="ml-2"
+                  />
                 </p>
                 <FormItem key={field.id} label="칵테일 이름" required>
                   <TextInput

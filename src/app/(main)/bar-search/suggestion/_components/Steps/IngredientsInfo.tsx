@@ -2,11 +2,12 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import { Button, Select } from 'flowbite-react'
 import FormItem from '@/components/ui/forms/FormItem'
-import { HiPlusSm, HiXCircle } from 'react-icons/hi'
+import { HiPlusSm } from 'react-icons/hi'
 import clsx from 'clsx'
 import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
 import React from 'react'
+import RemoveButton from '@/components/ui/buttons/RemoveButton'
 
 type IngredientsInfoProps = {
   index: number
@@ -30,12 +31,7 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
     append({ ingredientId: 1 })
   }
 
-  const removeIngredient = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    ingIndex: number,
-  ) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const removeIngredient = (ingIndex: number) => {
     remove(ingIndex)
   }
 
@@ -67,13 +63,10 @@ export default function IngredientsInfo(props: IngredientsInfoProps) {
               ))}
             </Select>
             {ingIndex !== 0 && (
-              <button
-                type="button"
-                className="cursor-pointer"
-                onClick={(e) => removeIngredient(e, ingIndex)}
-              >
-                <HiXCircle size={20} className="text-gray-500" />
-              </button>
+              <RemoveButton
+                onClick={() => removeIngredient(ingIndex)}
+                className="ml-2"
+              />
             )}
           </div>
         ))}
