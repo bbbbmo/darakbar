@@ -8,6 +8,7 @@ import {
   HiOutlineSpeakerphone,
   HiOutlineTrendingUp,
 } from 'react-icons/hi'
+import { postTypes } from '../_const/post-types.const'
 
 export default function PostTabs() {
   const tabsRef = useRef<TabsRef>(null)
@@ -16,9 +17,9 @@ export default function PostTabs() {
     <div className="sticky top-18 z-10 opacity-90">
       <Tabs aria-label="Post tabs" ref={tabsRef} variant="fullWidth">
         <TabItem icon={HiOutlineTrendingUp} active title="전체"></TabItem>
-        <TabItem icon={HiOutlineSparkles} title="신메뉴"></TabItem>
-        <TabItem icon={HiOutlineCake} title="이벤트"></TabItem>
-        <TabItem icon={HiOutlineSpeakerphone} title="소식"></TabItem>
+        <TabItem icon={HiOutlineSparkles} title={postTypes[0]}></TabItem>
+        <TabItem icon={HiOutlineCake} title={postTypes[1]}></TabItem>
+        <TabItem icon={HiOutlineSpeakerphone} title={postTypes[2]}></TabItem>
       </Tabs>
     </div>
   )

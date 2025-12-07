@@ -9,7 +9,6 @@ const nextConfig = {
       'localhost',
       'images.unsplash.com',
       'example.com',
-      'loremflickr.com',
       'btkztlafowtisbypxsre.supabase.co',
     ],
   },

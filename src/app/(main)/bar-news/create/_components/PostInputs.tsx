@@ -6,16 +6,9 @@ import { useQuery } from '@tanstack/react-query'
 import { Card, Textarea, TextInput } from 'flowbite-react'
 
 export default function PostInputs() {
-  const { data: postTags } = useQuery(queries.tag.posts)
   return (
     <Card>
       <SubTitleText title="게시글 정보" />
-      <FormItem label="게시글 유형" required>
-        <FormOption
-          options={postTags?.data.map((tag) => tag.name) || []}
-          setOption={() => {}}
-        />
-      </FormItem>
       <FormItem label="제목" required>
         <TextInput
           type="text"
