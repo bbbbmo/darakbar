@@ -1,13 +1,18 @@
-import PostCreateButton from './_components/PostCreateButton'
-import PostList from './_components/PostList'
-import PostTabs from './_components/PostTabs'
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query'
+import { queries } from '@/api/queries'
+import PostSearch from './_components/PostSearch'
 
-export default function BarNewsPage() {
+export default async function BarNewsPage() {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery(queries.tag.posts)
+
   return (
-    <>
-      <PostTabs />
-      <PostList />
-      <PostCreateButton />
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PostSearch />
+    </HydrationBoundary>
   )
 }

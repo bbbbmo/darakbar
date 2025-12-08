@@ -42,6 +42,7 @@ export default function PostBody({ post }: PostBodyProps) {
             src={publicUrls[0]}
             alt={post.title}
             fill
+            priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="rounded-t-lg object-cover"
           />

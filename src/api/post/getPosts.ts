@@ -1,10 +1,9 @@
-import { PostType } from '@/app/(main)/bar-news/_types/post-type.types'
 import supabase from '@/lib/supabase/supabase'
 
 export type Post = NonNullable<Awaited<ReturnType<typeof getPosts>>['data']>[0]
 
 export type getPostsQueryParams = {
-  postType?: PostType
+  postTypeId?: number
 }
 
 export const getPosts = async (params?: getPostsQueryParams) => {
@@ -34,6 +33,7 @@ export const getPosts = async (params?: getPostsQueryParams) => {
       price,
       image_path
     ),
+    tag_id,
     tags(
       id,
       name
@@ -42,10 +42,9 @@ export const getPosts = async (params?: getPostsQueryParams) => {
     )
     .order('created_at', { ascending: false })
 
-  if (params?.postType) {
-    query = query.eq('tags.name', params.postType)
+  if (params?.postTypeId) {
+    query = query.eq('tag_id', params.postTypeId)
   }
-
   const { data, error } = await query
 
   if (error) {
