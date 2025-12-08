@@ -1,9 +1,9 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { getPosts } from '../post/getPosts'
+import { getPosts, getPostsQueryParams } from '../post/getPosts'
 
 export const postKeys = createQueryKeys('post', {
-  all: {
-    queryKey: null,
-    queryFn: () => getPosts(),
-  },
+  all: (params?: getPostsQueryParams) => ({
+    queryKey: ['all', params],
+    queryFn: () => getPosts(params), // 클로저로 params 접근
+  }),
 })

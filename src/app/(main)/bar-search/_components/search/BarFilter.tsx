@@ -2,7 +2,7 @@
 
 import { Button, Card, Select, TextInput } from 'flowbite-react'
 import { HiAdjustments, HiOutlineSearch } from 'react-icons/hi'
-import { Bar, BarFilterOption, BarSortOption } from '@/api/bar/getBars'
+import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/api/queries'

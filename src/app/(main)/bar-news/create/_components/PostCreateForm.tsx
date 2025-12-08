@@ -45,7 +45,7 @@ export default function PostCreateForm() {
         '게시글이 성공적으로 생성되었습니다.',
       )
       methods.reset()
-      invalidateQueries([queries.post.all.queryKey])
+      invalidateQueries([queries.post.all().queryKey])
     },
     onError: (error) => {
       snackBar.showError('게시글 생성 실패', error.message)

@@ -1,9 +1,18 @@
 import { basicTheme } from '@/lib/flowbite/basicTheme'
+import clsx from 'clsx'
 import { Card } from 'flowbite-react'
 
-export default function CardSkeleton() {
+type CardSkeletonProps = {
+  className?: string
+}
+
+export default function CardSkeleton({ className }: CardSkeletonProps) {
   return (
-    <Card role="status" className="!animate-pulse" theme={basicTheme.bar}>
+    <Card
+      role="status"
+      className={clsx('!animate-pulse', className)}
+      theme={basicTheme.bar}
+    >
       <div className="mb-4 flex h-48 items-center justify-center rounded-sm bg-gray-300">
         <svg
           className="h-10 w-10 text-gray-200"
