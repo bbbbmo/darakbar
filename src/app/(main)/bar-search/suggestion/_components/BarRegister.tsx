@@ -53,15 +53,17 @@ export default function BarRegister() {
 
   const registerBarInfo = async () => {
     const isValid = await methods.trigger()
-    if (isValid) {
-      mutate(methods.getValues())
-    } else {
+
+    if (!isValid) {
       const firstError = Object.values(methods.formState.errors)[0]
       snackBar.showError(
         '입력 오류',
         firstError?.message ?? '모든 필드를 올바르게 입력해주세요.',
       )
+      return
     }
+
+    mutate(methods.getValues())
   }
 
   return (

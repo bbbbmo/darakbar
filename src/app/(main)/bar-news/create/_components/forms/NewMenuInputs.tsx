@@ -4,16 +4,21 @@ import SubTitleText from '@/components/ui/text/SubTitleText'
 import { Button, Card, Textarea, TextInput } from 'flowbite-react'
 import { menuTypeOptions } from '../../_const/menu-type.cont'
 import { PostCreateInput } from '../../_types/post-create-form.schemes'
-import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import FormFileInput from '@/components/ui/forms/FormFileInput'
 import { HiPlus } from 'react-icons/hi'
 import { newMenuDefaultValues } from '../../_const/form.const'
 import RemoveButton from '@/components/ui/buttons/RemoveButton'
 import { FaWonSign } from 'react-icons/fa6'
+import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 
 export default function NewMenuInputs() {
-  const { register, setValue, trigger, control } =
-    useFormContext<PostCreateInput>()
+  const {
+    register,
+    setValue,
+    control,
+    formState: { errors },
+  } = useFormContext<PostCreateInput>()
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'newMenus',
@@ -35,6 +40,7 @@ export default function NewMenuInputs() {
                   setValue(`newMenus.${index}.type`, option)
                 }
               />
+              <FormErrorMessage error={errors.newMenus?.[index]?.type} />
             </FormItem>
             <FormItem label="메뉴 이름" required>
               <TextInput
@@ -43,6 +49,7 @@ export default function NewMenuInputs() {
                 placeholder="메뉴 이름을 입력해주세요"
                 {...register(`newMenus.${index}.name`)}
               />
+              <FormErrorMessage error={errors.newMenus?.[index]?.name} />
             </FormItem>
             <FormItem label="메뉴 설명" required>
               <Textarea
@@ -50,6 +57,7 @@ export default function NewMenuInputs() {
                 placeholder="메뉴 설명을 입력해주세요"
                 {...register(`newMenus.${index}.description`)}
               />
+              <FormErrorMessage error={errors.newMenus?.[index]?.description} />
             </FormItem>
             <FormItem label="메뉴 가격" required>
               <TextInput
@@ -63,12 +71,15 @@ export default function NewMenuInputs() {
                   valueAsNumber: true,
                 })}
               />
+              <FormErrorMessage error={errors.newMenus?.[index]?.price} />
             </FormItem>
             <FormItem label="메뉴 이미지" required>
-              <FormFileInput
-                registeration={register(`newMenus.${index}.newMenuImage`)}
-                setValue={setValue}
-                trigger={trigger}
+              <Controller
+                name={`newMenus.${index}.newMenuImage`}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <FormFileInput value={value} onChange={onChange} />
+                )}
               />
             </FormItem>
           </Card>

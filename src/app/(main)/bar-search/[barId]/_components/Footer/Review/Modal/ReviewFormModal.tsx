@@ -54,8 +54,6 @@ export default function ReviewFormModal({
     register,
     control,
     watch,
-    setValue,
-    trigger,
     formState: { errors },
   } = form
   const watchedRating = watch('rating')
@@ -125,11 +123,17 @@ export default function ReviewFormModal({
             </FormItem>
 
             <FormItem label="사진 (최대 3장)">
-              <FormFileInput
-                registeration={register('images')}
-                setValue={setValue}
-                trigger={trigger}
-                existingImages={existingImages}
+              <Controller
+                name="images"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <FormFileInput
+                    value={value}
+                    onChange={onChange}
+                    multiple={true}
+                    existingImages={existingImages}
+                  />
+                )}
               />
             </FormItem>
 

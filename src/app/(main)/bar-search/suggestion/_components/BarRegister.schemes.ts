@@ -57,7 +57,7 @@ export const BarRegisterFormSchema = z.object({
     .min(1, '바 설명을 입력해주세요')
     .max(200, '바 설명은 200자 이하로 입력해주세요'),
   barImages: z
-    .array(FileInputSchema.nullable())
+    .array(FileInputSchema)
     .max(3, '바 이미지는 최대 3장까지 업로드할 수 있습니다')
     .nullable(),
   atmosphereTagIds: z.array(z.number()).min(1, '분위기 태그를 선택해주세요'),

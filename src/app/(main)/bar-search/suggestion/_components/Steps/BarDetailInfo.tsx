@@ -8,7 +8,7 @@ import Tags from '@/components/ui/Tags'
 import { useQuery } from '@tanstack/react-query'
 import { TextInput } from 'flowbite-react'
 import NextButton from '@/components/ui/buttons/NextButton'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 import PrevButton from '@/components/ui/buttons/PrevButton'
@@ -25,7 +25,7 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
   const {
     register,
     setValue,
-    trigger,
+    control,
     watch,
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
@@ -37,10 +37,12 @@ export default function BarDetailInfo(props: BarDetailInfoProps) {
       <FormHeader title="상세 정보 입력" />
       <FormDescription>바의 상세 정보를 입력해주세요.</FormDescription>
       <FormItem label="바 이미지" required>
-        <FormFileInput
-          registeration={register('barImages')}
-          setValue={setValue}
-          trigger={trigger}
+        <Controller
+          name="barImages"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <FormFileInput value={value} onChange={onChange} multiple={true} />
+          )}
         />
       </FormItem>
       <FormItem label="바 분위기" required>

@@ -4,7 +4,7 @@ import FormFileInput from '@/components/ui/forms/FormFileInput'
 import FormHeader from '@/components/ui/forms/FormHeader'
 import FormItem from '@/components/ui/forms/FormItem'
 import { Button, Textarea, TextInput } from 'flowbite-react'
-import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { BarRegisterForm } from '../BarRegister.schemes'
 import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 import { emptySignatureCocktail } from '../BarRegister.const'
@@ -26,8 +26,6 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
 
   const {
     register,
-    setValue,
-    trigger,
     control,
     formState: { errors },
   } = useFormContext<BarRegisterForm>()
@@ -95,12 +93,16 @@ export default function BarMenuInfo(props: BarMenuInfoProps) {
                   />
                 </FormItem>
                 <FormItem label="칵테일 이미지" required>
-                  <FormFileInput
-                    registeration={register(
-                      `signatureCocktails.${index}.image`,
+                  <Controller
+                    name={`signatureCocktails.${index}.image`}
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <FormFileInput
+                        value={value}
+                        onChange={onChange}
+                        multiple={true}
+                      />
                     )}
-                    setValue={setValue}
-                    trigger={trigger}
                   />
                   <FormErrorMessage
                     error={errors.signatureCocktails?.[index]?.image}

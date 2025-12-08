@@ -11,14 +11,30 @@ import {
   TextInput,
 } from 'flowbite-react'
 import { PostCreateInput } from '../../_types/post-create-form.schemes'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import FormFileInput from '@/components/ui/forms/FormFileInput'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 
 export default function PostInputs() {
   const [isEventChecked, setIsEventChecked] = useState<boolean>(true)
-  const { register, setValue, trigger, watch } =
-    useFormContext<PostCreateInput>()
+  const {
+    register,
+    setValue,
+    control,
+    watch,
+    formState: { errors },
+  } = useFormContext<PostCreateInput>()
+
+  useEffect(() => {
+    if (!isEventChecked) {
+      setValue('eventStartDate', null as any)
+      setValue('eventEndDate', null as any)
+    } else {
+      setValue('eventStartDate', new Date())
+      setValue('eventEndDate', new Date())
+    }
+  }, [isEventChecked])
 
   return (
     <Card>
@@ -30,6 +46,7 @@ export default function PostInputs() {
           color="primary"
           placeholder="제목을 입력해주세요"
         />
+        <FormErrorMessage error={errors.title} />
       </FormItem>
       <FormItem label="내용" required>
         <Textarea
@@ -37,6 +54,7 @@ export default function PostInputs() {
           color="primary"
           placeholder="자세한 내용을 입력해주세요"
         />
+        <FormErrorMessage error={errors.content} />
       </FormItem>
       <FormItem label="기간">
         <div className="flex items-center">
@@ -82,10 +100,12 @@ export default function PostInputs() {
         </div>
       </FormItem>
       <FormItem label="이미지" required>
-        <FormFileInput
-          registeration={register('postImages')}
-          setValue={setValue}
-          trigger={trigger}
+        <Controller
+          name="postImages"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <FormFileInput value={value} onChange={onChange} multiple={true} />
+          )}
         />
       </FormItem>
     </Card>

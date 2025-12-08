@@ -3,26 +3,21 @@
 import { useParseFile } from '@/hooks/useParseFile'
 import { FileInput, Label } from 'flowbite-react'
 import { useEffect, useId, useState } from 'react'
-import {
-  UseFormRegisterReturn,
-  UseFormSetValue,
-  UseFormTrigger,
-} from 'react-hook-form'
 
 type FormFileInputProps = {
   className?: string
-  registeration: UseFormRegisterReturn
-  setValue: UseFormSetValue<any>
-  trigger: UseFormTrigger<any>
+  value: File[] | File | null
+  onChange: (value: File[] | File | null) => void
   existingImages?: string[] // 기존 이미지 URL 배열 추가
+  multiple?: boolean
 }
 
 export default function FormFileInput({
   className,
-  registeration,
-  setValue,
-  trigger,
+  value,
+  onChange,
   existingImages = [],
+  multiple = false,
 }: FormFileInputProps) {
   const uniqueId = useId()
   const dropzoneId = `dropzone-file-${uniqueId}`
@@ -31,24 +26,37 @@ export default function FormFileInput({
 
   const removeExistingImage = (index: number) => {
     const updatedImages = existingImages?.filter((_, i) => i !== index)
-    setValue('existingImages', updatedImages)
   }
 
-  const fileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const multipleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
-
-    if (imagePreview) {
-      URL.revokeObjectURL(imagePreview)
-    }
     if (files.length > 0) {
-      const previewUrl = URL.createObjectURL(files[0])
-      console.log(previewUrl)
-      setImagePreview(previewUrl)
-      setValue(registeration.name, files) // 배열로 설정
-      await trigger(registeration.name as any)
+      const previewUrls = files.map((file) => URL.createObjectURL(file))
+      setImagePreview(previewUrls[0])
+      onChange(files)
     } else {
-      setValue(registeration.name, null) // 파일이 없으면 null
-      await trigger(registeration.name as any)
+      setImagePreview(null)
+      onChange(null)
+    }
+  }
+
+  const singleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null
+    if (file) {
+      const previewUrl = URL.createObjectURL(file)
+      setImagePreview(previewUrl)
+      onChange(file)
+    } else {
+      setImagePreview(null)
+      onChange(null)
+    }
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (multiple) {
+      await multipleFileChange(e)
+    } else {
+      await singleFileChange(e)
     }
   }
 
@@ -127,9 +135,8 @@ export default function FormFileInput({
             id={dropzoneId}
             className="hidden"
             accept="image/*"
-            ref={registeration.ref}
-            name={registeration.name}
-            onChange={fileChange}
+            onChange={handleFileChange}
+            multiple={multiple}
           />
         </Label>
       </div>
