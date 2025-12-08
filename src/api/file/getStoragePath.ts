@@ -13,3 +13,11 @@ export const getReviewImagePath = (barId: number, userId: string) => {
 export const getUserProfileImagePath = (userId: string) => {
   return `/users/${userId}/profile`
 }
+
+export const getPostImagePath = (postId: number) => {
+  return `/posts/${postId}/post-images`
+}
+
+export const getNewMenuImagePath = (postId: number) => {
+  return `/posts/${postId}/new-menu-images`
+}

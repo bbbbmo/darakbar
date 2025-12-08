@@ -5,19 +5,10 @@ import {
   getSignatureCocktailImagePath,
 } from '../file/getStoragePath'
 import { uploadFiles } from '../file/storage'
-import z from 'zod'
 
-const PostBarResultSchema = z.object({
-  success: z.boolean(),
-  bar_id: z.number().nullable(),
-  error: z.string().optional(),
-})
+import { handleRpcError } from '@/api/handleError'
 
-export type PostBarResult = z.infer<typeof PostBarResultSchema>
-
-export const postBar = async (
-  body: BarRegisterForm,
-): Promise<PostBarResult> => {
+export const postBar = async (body: BarRegisterForm) => {
   // 1. 바 기본 정보 생성 (이미지 없이)
   const { data, error } = await supabase.rpc('create_bar_with_detail', {
     // 바 기본 정보 테이블
@@ -47,17 +38,7 @@ export const postBar = async (
   }
 
   // RPC 함수가 JSONB로 에러를 반환하는 경우 처리
-  if (data && typeof data === 'object' && 'success' in data && !data.success) {
-    const errorMessage =
-      (data as { error?: string }).error || '바 등록 중 오류가 발생했습니다.'
-    const postgrestError = {
-      message: errorMessage,
-      details: '',
-      hint: '',
-      code: 'PGRST301',
-    } as const
-    throw postgrestError
-  }
+  handleRpcError(data)
 
   // 2. 생성된 바 ID 추출
   const barId =
@@ -73,10 +54,7 @@ export const postBar = async (
   await uploadAndUpdateBarImages(barId, body)
 
   // 성공 결과 반환
-  return {
-    success: true,
-    bar_id: barId,
-  }
+  return barId
 }
 
 /**
