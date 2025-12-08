@@ -10,7 +10,7 @@ type SignatureMenuCardProps = {
 }
 
 export default function SignatureMenuCard({ menu }: SignatureMenuCardProps) {
-  const { publicUrls } = useParseFile(menu.image_path || '')
+  const { publicUrls } = useParseFile(menu.image_path)
 
   // 더 엄격한 URL 검증
   const isValidUrl =

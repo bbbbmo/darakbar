@@ -18,15 +18,13 @@ export const getPosts = async () => {
       name,
       profile_image_path
     ),
-    post_new_menus(
-      new_menus(
-        id,
-        name,
-        type,
-        description,
-        price,
-        image_path
-      )
+    new_menus(
+      id,
+      name,
+      type,
+      description,
+      price,
+      image_path
     ),
     tags(
       id,

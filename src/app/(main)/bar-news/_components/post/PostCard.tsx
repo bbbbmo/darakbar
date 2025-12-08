@@ -14,12 +14,15 @@ export type PostCardProps = {
 }
 
 export default function PostCard({ post }: PostCardProps) {
-  const { publicUrls } = useParseFile(post.image_paths || [])
+  const { publicUrls } = useParseFile(post.image_paths)
 
-  const showNewMenu =
+  const showNewMenu: boolean = !!(
     post.tags.name === '신메뉴' &&
-    post.post_new_menus &&
-    post.post_new_menus.length > 0
+    post.new_menus &&
+    post.new_menus.length > 0
+  )
+
+  const showEvent: boolean = !!(post.event_start_date && post.event_end_date)
 
   return (
     <Card className="border-neutral-600 bg-neutral-800 py-4">
@@ -34,19 +37,27 @@ export default function PostCard({ post }: PostCardProps) {
         <p className="text-zinc-500">
           <span className="line-clamp-5">{post.content}</span>
         </p>
-        <EventDate
-          eventStartDate={post.event_start_date ?? ''}
-          eventEndDate={post.event_end_date ?? ''}
-        />
+        {showEvent && (
+          <EventDate
+            eventStartDate={post.event_start_date!}
+            eventEndDate={post.event_end_date!}
+          />
+        )}
         {showNewMenu &&
-          post.post_new_menus.map((menu: any) => (
-            <NewMenuCard key={menu.new_menus?.id} newMenu={menu.new_menus} />
+          post.new_menus.map((menu) => (
+            <NewMenuCard key={menu.id} newMenu={menu} />
           ))}
-        <Image
-          src={publicUrls[0]}
-          alt={post.title}
-          className="h-80 w-full object-cover"
-        />
+        {publicUrls && (
+          <div className="relative h-[400px] w-full">
+            <Image
+              src={publicUrls[0]}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="rounded-t-lg object-cover"
+            />
+          </div>
+        )}
       </section>
     </Card>
   )

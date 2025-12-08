@@ -19,16 +19,18 @@ export default function PostHeader({
   createdAt,
   postTag,
 }: PostHeaderProps) {
-  const { publicUrls } = useParseFile(userInfo.profile_image_path || '')
+  const { publicUrls } = useParseFile(userInfo.profile_image_path)
 
   return (
-    <div className="flex justify-between">
+    <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <Avatar img={publicUrls} rounded>
-          <span className="font-medium dark:text-white">
-            {userInfo.name || '이름 정보 없음'}
-          </span>
-        </Avatar>
+        {publicUrls && (
+          <Avatar img={publicUrls} rounded>
+            <span className="font-medium dark:text-white">
+              {userInfo.name || '이름 정보 없음'}
+            </span>
+          </Avatar>
+        )}
         <span className="text-sm text-gray-500 dark:text-gray-400">
           {dayjs(createdAt).format('YYYY.MM.DD')}
         </span>

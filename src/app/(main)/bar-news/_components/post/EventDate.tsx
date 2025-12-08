@@ -11,8 +11,8 @@ export default function EventDate({
   eventStartDate,
   eventEndDate,
 }: EventDateProps) {
-  const startDate = dayjs(eventStartDate).format('YYYY.MM.DD')
-  const endDate = dayjs(eventEndDate).format('YYYY.MM.DD')
+  const startDate = dayjs(new Date(eventStartDate)).format('YYYY.MM.DD')
+  const endDate = dayjs(new Date(eventEndDate)).format('YYYY.MM.DD')
 
   const inputValue = `${startDate} ~ ${endDate}`
 

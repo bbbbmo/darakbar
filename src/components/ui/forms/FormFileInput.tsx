@@ -71,7 +71,7 @@ export default function FormFileInput({
   return (
     <div className={`flex w-full flex-col gap-2 ${className}`}>
       {/* 기존 이미지들 표시 */}
-      {existingImagePreviews.length > 0 && (
+      {existingImagePreviews && existingImagePreviews.length > 0 && (
         <div className="grid grid-cols-3 gap-2">
           {existingImagePreviews.map((preview, index) => (
             <div key={index} className="relative">

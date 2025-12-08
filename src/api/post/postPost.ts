@@ -1,6 +1,5 @@
 import { PostCreateInput } from '@/app/(main)/bar-news/create/_types/post-create-form.schemes'
 import supabase from '@/lib/supabase/supabase'
-import { toLocalTimestamp } from '@/utils/date/toLocalTimestamp'
 import { handleRpcError } from '../handleError'
 import { getNewMenuImagePath, getPostImagePath } from '../file/getStoragePath'
 import { uploadFiles } from '../file/storage'
@@ -11,10 +10,10 @@ export const postPost = async (body: PostCreateInput) => {
     p_title: body.title,
     p_content: body.content,
     p_event_start_date: body.eventStartDate
-      ? toLocalTimestamp(body.eventStartDate)
+      ? body.eventStartDate.toISOString()
       : undefined,
     p_event_end_date: body.eventEndDate
-      ? toLocalTimestamp(body.eventEndDate)
+      ? body.eventEndDate.toISOString()
       : undefined,
     p_new_menus:
       body.newMenus?.map((menu) => {
@@ -95,7 +94,7 @@ const uploadAndUpdatePostImages = async (
     if (newMenuImagePaths.length > 0) {
       const { data: newMenus, error: newMenuFetchError } = await supabase
         .from('new_menus')
-        .select('id')
+        .select(`id`)
         .eq('post_id', postId)
         .order('id', { ascending: true })
 
