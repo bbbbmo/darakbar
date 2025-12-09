@@ -75,16 +75,13 @@ export default function ReviewCreateModal({
         throw new Error('바 정보가 없습니다.')
       }
       if (data.images) {
-        const results = await uploadFiles(
+        const uploadedImagePaths = await uploadFiles(
           data.images,
           `bars/${barId}/review-images/${userData.id}`,
         )
-        results.forEach((result) => {
-          if (result.data?.path) {
-            imageUrls.push(result.data.path)
-          }
-          if (result.error) {
-            throw new Error(`이미지 업로드 실패: ${result.error.message}`)
+        uploadedImagePaths.forEach((path) => {
+          if (path) {
+            imageUrls.push(path)
           }
         })
       }

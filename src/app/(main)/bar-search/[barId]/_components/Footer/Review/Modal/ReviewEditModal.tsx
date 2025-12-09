@@ -37,7 +37,7 @@ export default function ReviewEditModal({
       rating: review.rating,
       body: review.body || '',
       images: null,
-      existingImages: review.images || [],
+      existingImages: review.image_paths || [],
       tagIds: review.review_tags.map((tag) => tag.tags?.id),
       visitDate: new Date(review.visit_date),
     },
@@ -83,16 +83,13 @@ export default function ReviewEditModal({
         imageUrls.push(...data.existingImages)
       }
       if (data.images) {
-        const results = await uploadFiles(
+        const uploadedImagePaths = await uploadFiles(
           data.images,
           `bars/${barId}/review-images/${userData.id}`,
         )
-        results.forEach((result) => {
-          if (result.data?.path) {
-            imageUrls.push(result.data.path)
-          }
-          if (result.error) {
-            throw new Error(`이미지 업로드 실패: ${result.error.message}`)
+        uploadedImagePaths.forEach((path) => {
+          if (path) {
+            imageUrls.push(path)
           }
         })
       }
