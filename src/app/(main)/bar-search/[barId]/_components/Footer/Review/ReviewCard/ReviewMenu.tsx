@@ -3,13 +3,12 @@
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { deleteBarReview } from '@api/review/deleteBarReview'
 import { useMutation } from '@tanstack/react-query'
-import { Dropdown, DropdownItem } from 'flowbite-react'
-import { HiDotsHorizontal, HiPencil, HiTrash } from 'react-icons/hi'
 import { BarReview } from '@api/review/getBarReviews'
 import { useModal } from '@/app/_providers/ModalProvider'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { PostgrestError } from '@supabase/supabase-js'
 import { barReviewsKeys } from '@/api/queries/reviewKeys'
+import ActionMenu from '@/components/ui/ActionMenu'
 
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
@@ -47,19 +46,5 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
       deleteReviewMutation()
     }
   }
-  return (
-    <Dropdown
-      arrowIcon={false}
-      inline
-      placement="bottom"
-      label={<HiDotsHorizontal className="cursor-pointer" size={24} />}
-    >
-      <DropdownItem icon={HiPencil} onClick={openReviewEditModal}>
-        수정
-      </DropdownItem>
-      <DropdownItem icon={HiTrash} onClick={deleteReview}>
-        삭제
-      </DropdownItem>
-    </Dropdown>
-  )
+  return <ActionMenu onEdit={openReviewEditModal} onDelete={deleteReview} />
 }
