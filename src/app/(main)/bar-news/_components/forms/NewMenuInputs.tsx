@@ -1,3 +1,5 @@
+'use client'
+
 import FormItem from '@/components/ui/forms/FormItem'
 import FormOption from '@/components/ui/forms/FormOption'
 import SubTitleText from '@/components/ui/text/SubTitleText'

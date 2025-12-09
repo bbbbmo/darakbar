@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from 'flowbite-react'
 import NewMenuInputs from './NewMenuInputs'
 import PostInputs from './PostInputs'

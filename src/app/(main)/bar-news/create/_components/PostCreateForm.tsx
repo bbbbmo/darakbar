@@ -14,7 +14,7 @@ import { useTagStore } from '@/stores/tag.store'
 
 export default function PostCreateForm() {
   const { invalidateQueries } = useInvalidateQueries()
-  const { postTags } = useTagStore()
+  const postTags = useTagStore((state) => state.postTags)
   const newMenuTypeId = postTags.find((tag) => tag.name === '신메뉴')!.id
 
   const methods = useForm<PostForm>({
@@ -22,7 +22,7 @@ export default function PostCreateForm() {
     mode: 'onSubmit',
     shouldUnregister: false,
     defaultValues: {
-      postTypeId: newMenuTypeId ?? 0,
+      postTypeId: newMenuTypeId,
       title: '',
       content: '',
       postImages: [],
