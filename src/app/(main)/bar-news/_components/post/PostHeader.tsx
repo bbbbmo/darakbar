@@ -11,12 +11,14 @@ import { Tag } from '@/types/default.schemes'
 import { useMutation } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { Avatar, Badge } from 'flowbite-react'
+import { useRouter } from 'next/navigation'
 
 export type PostHeaderProps = {
   post: Post
 }
 
 export default function PostHeader({ post }: PostHeaderProps) {
+  const router = useRouter()
   const { publicUrls } = useParseFile(post.userinfo.profile_image_path)
   const { invalidateQueries } = useInvalidateQueries()
   const { confirm } = useModal()
@@ -33,6 +35,10 @@ export default function PostHeader({ post }: PostHeaderProps) {
       case '소식':
         return 'success'
     }
+  }
+
+  const goEditPostPage = () => {
+    router.push(`/bar-news/${post.id}/edit`)
   }
 
   const { mutate: deletePostMutation } = useMutation({
@@ -79,7 +85,11 @@ export default function PostHeader({ post }: PostHeaderProps) {
         </Avatar>
       )}
       {isOwner && (
-        <ActionMenu vertical onEdit={() => {}} onDelete={handleDeletePost} />
+        <ActionMenu
+          vertical
+          onEdit={goEditPostPage}
+          onDelete={handleDeletePost}
+        />
       )}
     </div>
   )

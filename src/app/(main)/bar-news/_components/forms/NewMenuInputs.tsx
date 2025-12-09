@@ -3,7 +3,7 @@ import FormOption from '@/components/ui/forms/FormOption'
 import SubTitleText from '@/components/ui/text/SubTitleText'
 import { Button, Card, Textarea, TextInput } from 'flowbite-react'
 import { menuTypeOptions } from '../../_const/menu-type.cont'
-import { PostCreateInput } from '../../_types/post-create-form.schemes'
+import { PostForm } from '../../_types/form.schemes'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import FormFileInput from '@/components/ui/forms/FormFileInput'
 import { HiPlus } from 'react-icons/hi'
@@ -18,7 +18,7 @@ export default function NewMenuInputs() {
     setValue,
     control,
     formState: { errors },
-  } = useFormContext<PostCreateInput>()
+  } = useFormContext<PostForm>()
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'newMenus',

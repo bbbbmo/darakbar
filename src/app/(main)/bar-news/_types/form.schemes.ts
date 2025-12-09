@@ -1,7 +1,7 @@
 import { FileInputSchema } from '@/types/default.schemes'
 import z from 'zod'
 
-const NewMenuInputSchema = z.object({
+const NewMenuFormSchema = z.object({
   type: z.string(),
   name: z.string().min(1, '메뉴 이름을 입력해주세요'),
   description: z.string().min(1, '메뉴 설명을 입력해주세요'),
@@ -9,16 +9,16 @@ const NewMenuInputSchema = z.object({
   newMenuImage: FileInputSchema.nullable(),
 })
 
-export const PostCreateInputSchema = z.object({
+export const PostFormSchema = z.object({
   postTypeId: z.number(),
   title: z.string().min(1, '제목을 입력해주세요'),
   content: z.string().min(1, '내용을 입력해주세요'),
   postImages: z.array(FileInputSchema).nullable(),
   eventStartDate: z.date().nullable(),
   eventEndDate: z.date().nullable(),
-  newMenus: z.array(NewMenuInputSchema),
+  newMenus: z.array(NewMenuFormSchema),
 })
 
-export type NewMenuInput = z.infer<typeof NewMenuInputSchema>
+export type NewMenuForm = z.infer<typeof NewMenuFormSchema>
 
-export type PostCreateInput = z.infer<typeof PostCreateInputSchema>
+export type PostForm = z.infer<typeof PostFormSchema>

@@ -1,4 +1,4 @@
-import { PostCreateInput } from '@/app/(main)/bar-news/create/_types/post-create-form.schemes'
+import { PostCreateInput } from '@/app/(main)/bar-news/_types/form.schemes'
 import supabase from '@/lib/supabase/supabase'
 import { handleRpcError } from '../handleError'
 import { getNewMenuImagePath, getPostImagePath } from '../file/getStoragePath'

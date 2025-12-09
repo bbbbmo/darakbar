@@ -3,7 +3,7 @@
 import FormItem from '@/components/ui/forms/FormItem'
 import { Card, Select } from 'flowbite-react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { PostCreateInput } from '../../_types/post-create-form.schemes'
+import { PostForm } from '../../_types/form.schemes'
 import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
 import { Tag } from '@/types/default.schemes'
 
@@ -15,7 +15,7 @@ export default function PostTypeSelect({ postTypes }: PostTypeSelectProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext<PostCreateInput>()
+  } = useFormContext<PostForm>()
 
   return (
     <Card>

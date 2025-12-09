@@ -10,7 +10,7 @@ import {
   Textarea,
   TextInput,
 } from 'flowbite-react'
-import { PostCreateInput } from '../../_types/post-create-form.schemes'
+import { PostForm } from '../../_types/form.schemes'
 import { Controller, useFormContext } from 'react-hook-form'
 import FormFileInput from '@/components/ui/forms/FormFileInput'
 import { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ export default function PostInputs() {
     control,
     watch,
     formState: { errors },
-  } = useFormContext<PostCreateInput>()
+  } = useFormContext<PostForm>()
 
   useEffect(() => {
     if (!isEventChecked) {
