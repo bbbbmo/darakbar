@@ -14,6 +14,8 @@ import { SnackBarProvider } from '@/app/_providers/SnackBarProvider'
 import { queryClientOptions } from '@/lib/tanstack-query/tanstack-query'
 import { getAllTags } from '@/api/tag/getAllTags'
 import { useTagStore } from '@/stores/tag.store'
+import { useQuery } from '@tanstack/react-query'
+import { queries } from '@/api/queries'
 
 const modalRegistry: ModalRegistry = {
   ReviewCreateModal: ReviewCreateModal,
@@ -36,17 +38,27 @@ export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const { data } = await getAllTags()
-        setAllTags(data)
-        setAtmosphereTags(data.filter((tag) => tag.category === 'atmosphere'))
-        setReviewTags(data.filter((tag) => tag.category === 'review'))
-        setPostTags(data.filter((tag) => tag.category === 'post'))
+        const tagsData = await queryClient.fetchQuery({
+          ...queries.tag.all,
+          staleTime: Infinity, // 태그는 거의 변하지 않으므로 무한 캐시
+        })
+
+        if (tagsData?.data) {
+          setAllTags(tagsData.data)
+          setAtmosphereTags(
+            tagsData.data.filter((tag) => tag.category === 'atmosphere'),
+          )
+          setReviewTags(
+            tagsData.data.filter((tag) => tag.category === 'review'),
+          )
+          setPostTags(tagsData.data.filter((tag) => tag.category === 'post'))
+        }
       } catch (error) {
         console.error('태그 로드 실패:', error)
       }
     }
     fetchTags()
-  }, [])
+  }, [queryClient, setAllTags, setAtmosphereTags, setReviewTags, setPostTags])
 
   return (
     <QueryClientProvider client={queryClient}>
