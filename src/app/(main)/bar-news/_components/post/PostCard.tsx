@@ -13,11 +13,7 @@ export type PostCardProps = {
 export default function PostCard({ post }: PostCardProps) {
   return (
     <Card className="border-zinc-600 bg-zinc-800 py-4">
-      <PostHeader
-        userInfo={post.userinfo}
-        createdAt={post.created_at}
-        postTag={post.tags}
-      />
+      <PostHeader post={post} />
       <HR className="my-2 bg-zinc-600" />
       <PostBody post={post} />
       <HR className="my-2 bg-zinc-600" />

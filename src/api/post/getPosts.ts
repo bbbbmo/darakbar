@@ -3,6 +3,8 @@ import supabase from '@/lib/supabase/supabase'
 export type Post = NonNullable<Awaited<ReturnType<typeof getPosts>>['data']>[0]
 
 export type getPostsQueryParams = {
+  postId?: number
+  userId?: string
   postTypeId?: number
 }
 
@@ -20,6 +22,7 @@ export const getPosts = async (params?: getPostsQueryParams) => {
     event_end_date,
     created_at,
     updated_at,
+    user_id,
     userinfo(
       id,
       name,
@@ -42,6 +45,12 @@ export const getPosts = async (params?: getPostsQueryParams) => {
     )
     .order('created_at', { ascending: false })
 
+  if (params?.postId) {
+    query = query.eq('id', params.postId)
+  }
+  if (params?.userId) {
+    query = query.eq('user_id', params.userId)
+  }
   if (params?.postTypeId) {
     query = query.eq('tag_id', params.postTypeId)
   }

@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import ModalHost from '../../components/ui/modals/ModalHost'
+import { ConfirmModalProps } from '@/components/ui/modals/ConfirmModal'
 
 export type ModalEntry = {
   id: string
@@ -15,7 +16,12 @@ export type ModalContextType = {
   openExclusive: (name: string, props?: Record<string, any>) => string
   close: (id: string) => void
   closeAll: () => void
-  confirm: (props: Record<string, any>) => Promise<boolean>
+  confirm: (
+    props: Pick<
+      ConfirmModalProps,
+      'title' | 'message' | 'confirmText' | 'cancelText'
+    >,
+  ) => Promise<boolean>
 }
 
 const ModalContext = createContext<ModalContextType | null>(null)

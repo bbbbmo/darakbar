@@ -1,29 +1,28 @@
+import { deletePost } from '@/api/post/deletePost'
+import { Post } from '@/api/post/getPosts'
+import { queries } from '@/api/queries'
+import { useModal } from '@/app/_providers/ModalProvider'
+import { snackBar } from '@/app/_providers/SnackBarProvider'
 import ActionMenu from '@/components/ui/ActionMenu'
+import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
 import { useParseFile } from '@/hooks/useParseFile'
 import { useAuthStore } from '@/stores/auth.store'
 import { Tag } from '@/types/default.schemes'
+import { useMutation } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { Avatar, Badge } from 'flowbite-react'
 
 export type PostHeaderProps = {
-  userInfo: {
-    id: string
-    name: string | null
-    profile_image_path: string | null
-  }
-  createdAt: string
-  postTag: Tag
+  post: Post
 }
 
-export default function PostHeader({
-  userInfo,
-  createdAt,
-  postTag,
-}: PostHeaderProps) {
-  const { publicUrls } = useParseFile(userInfo.profile_image_path)
+export default function PostHeader({ post }: PostHeaderProps) {
+  const { publicUrls } = useParseFile(post.userinfo.profile_image_path)
+  const { invalidateQueries } = useInvalidateQueries()
+  const { confirm } = useModal()
   const { userData: me } = useAuthStore()
 
-  const isOwner = me?.id === userInfo.id
+  const isOwner = me?.id === post.user_id
 
   const getPostTagColor = (postTag: Tag) => {
     switch (postTag.name) {
@@ -36,24 +35,52 @@ export default function PostHeader({
     }
   }
 
+  const { mutate: deletePostMutation } = useMutation({
+    mutationFn: async () => await deletePost(post.id),
+    onSuccess: () => {
+      snackBar.showSuccess(
+        '게시글 삭제 성공',
+        '게시글이 성공적으로 삭제되었습니다.',
+      )
+      invalidateQueries([queries.post.all().queryKey])
+    },
+    onError: (error) => {
+      snackBar.showError('게시글 삭제 실패', error.message)
+    },
+  })
+
+  const handleDeletePost = async () => {
+    const isConfirmed = await confirm({
+      title: '게시글 삭제',
+      message: '게시글을 삭제하시겠습니까?',
+    })
+    if (isConfirmed) {
+      deletePostMutation()
+    }
+  }
+
   return (
     <div className="flex items-center justify-between">
       {publicUrls && (
         <Avatar img={publicUrls} rounded>
           <span className="flex flex-row flex-wrap gap-2">
-            <Badge color={getPostTagColor(postTag)}>{postTag.name}</Badge>
+            <Badge color={getPostTagColor(post.tags)}>{post.tags.name}</Badge>
           </span>
           <p className="mt-2 flex gap-2">
             <span className="font-medium dark:text-white">
-              {userInfo.name || '이름 정보 없음'}
+              {post.userinfo.name || '이름 정보 없음'}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-              {dayjs(createdAt).format('YYYY.MM.DD')}
+              {post.updated_at
+                ? `${dayjs(post.updated_at).format('YYYY.MM.DD')} 수정됨`
+                : dayjs(post.created_at).format('YYYY.MM.DD')}
             </span>
           </p>
         </Avatar>
       )}
-      {isOwner && <ActionMenu vertical onEdit={() => {}} onDelete={() => {}} />}
+      {isOwner && (
+        <ActionMenu vertical onEdit={() => {}} onDelete={handleDeletePost} />
+      )}
     </div>
   )
 }
