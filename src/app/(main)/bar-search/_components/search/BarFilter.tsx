@@ -4,9 +4,8 @@ import { Button, Card, Select, TextInput } from 'flowbite-react'
 import { HiAdjustments, HiOutlineSearch } from 'react-icons/hi'
 import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { queries } from '@/api/queries'
 import { barSortOptions } from '@/const/bar-options.const'
+import { useTagStore } from '@/stores/tag.store'
 
 type BarFilterProps = {
   children: React.ReactNode
@@ -27,7 +26,7 @@ export default function BarFilter({
     barSortOptions[0].value,
   )
 
-  const { data: atmospheres } = useQuery(queries.tag.atmospheres)
+  const atmospheres = useTagStore((state) => state.atmosphereTags)
 
   const handleSearch = () => {
     onChangeFilter({
@@ -79,7 +78,7 @@ export default function BarFilter({
             onChange={(e) => setSelectedAtmosphereId(Number(e.target.value))}
           >
             <option> 모든 분위기 </option>
-            {atmospheres?.data?.map((option) => (
+            {atmospheres.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
               </option>

@@ -1,26 +1,21 @@
 'use client'
 
-import NewMenuInputs from '../../_components/forms/NewMenuInputs'
-import PostInputs from '../../_components/forms/PostInputs'
-import PostTypeSelect from '../../_components/forms/PostTypeSelect'
 import { FormProvider, useForm } from 'react-hook-form'
 import { PostForm, PostFormSchema } from '../../_types/form.schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { newMenuDefaultValues } from '../../_const/form.const'
 import { queries } from '@/api/queries'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { Button } from 'flowbite-react'
+import { useMutation } from '@tanstack/react-query'
 import { postPost } from '@/api/post/postPost'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
+import PostWriteForm from '../../_components/forms/PostWriteForm'
+import { useTagStore } from '@/stores/tag.store'
 
 export default function PostCreateForm() {
-  const { data: postTypes } = useQuery(queries.tag.posts)
   const { invalidateQueries } = useInvalidateQueries()
-
-  const newMenuTypeId = postTypes?.data?.find(
-    (type) => type.name === '신메뉴',
-  )!.id
+  const { postTags } = useTagStore()
+  const newMenuTypeId = postTags.find((tag) => tag.name === '신메뉴')!.id
 
   const methods = useForm<PostForm>({
     resolver: zodResolver(PostFormSchema),
@@ -38,7 +33,6 @@ export default function PostCreateForm() {
   })
 
   const watchedPostTypeId = methods.watch('postTypeId')
-  const isEventPostType = watchedPostTypeId === newMenuTypeId
 
   const { mutate: createPostMutation } = useMutation({
     mutationFn: async (data: PostForm) => {
@@ -74,12 +68,11 @@ export default function PostCreateForm() {
 
   return (
     <FormProvider {...methods}>
-      <form className="flex flex-col gap-4" onSubmit={createPost}>
-        <PostTypeSelect postTypes={postTypes?.data || []} />
-        <PostInputs />
-        {isEventPostType && <NewMenuInputs />}
-        <Button type="submit">게시글 생성</Button>
-      </form>
+      <PostWriteForm
+        onSubmit={createPost}
+        currentPostTypeId={watchedPostTypeId}
+        newMenuTypeId={newMenuTypeId}
+      />
     </FormProvider>
   )
 }

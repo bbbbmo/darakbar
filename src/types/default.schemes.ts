@@ -7,10 +7,3 @@ export const FileInputSchema = z
     (file) => file.size <= 5 * 1024 * 1024,
     '이미지 크기는 5MB 이하여야 합니다.',
   )
-
-export const TagSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-})
-
-export type Tag = z.infer<typeof TagSchema>

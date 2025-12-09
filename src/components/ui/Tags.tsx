@@ -1,4 +1,4 @@
-import { Tag } from '@/types/default.schemes'
+import { Tag } from '@/stores/tag.store'
 import clsx from 'clsx'
 import { Badge } from 'flowbite-react'
 import { useEffect, useState } from 'react'

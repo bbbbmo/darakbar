@@ -1,4 +1,4 @@
-import { Tag } from '@/types/default.schemes'
+import { Tag } from '@/stores/tag.store'
 import supabase from '@lib/supabase/supabase'
 
 export const getReviewTags = async (): Promise<{ data: Tag[] }> => {

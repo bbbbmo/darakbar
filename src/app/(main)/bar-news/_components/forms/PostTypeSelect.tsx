@@ -5,7 +5,7 @@ import { Card, Select } from 'flowbite-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { PostForm } from '../../_types/form.schemes'
 import FormErrorMessage from '@/components/ui/forms/FormErrorMessage'
-import { Tag } from '@/types/default.schemes'
+import { Tag } from '@/stores/tag.store'
 
 type PostTypeSelectProps = {
   postTypes: Tag[]
