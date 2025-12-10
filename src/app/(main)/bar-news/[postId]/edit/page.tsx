@@ -5,6 +5,8 @@ import {
 } from '@tanstack/react-query'
 import PostEditForm from './_components/PostEditForm'
 import { queries } from '@/api/queries'
+import { Suspense } from 'react'
+import Loading from '@/app/loading'
 
 export default async function BarNewsEditPage({
   params,
@@ -17,7 +19,9 @@ export default async function BarNewsEditPage({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <PostEditForm />
+      <Suspense fallback={<Loading />}>
+        <PostEditForm />
+      </Suspense>
     </HydrationBoundary>
   )
 }

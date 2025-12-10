@@ -68,9 +68,7 @@ export default function PostInputs() {
               title="이벤트 시작일"
               disabled={!isEventChecked}
               value={watch('eventStartDate')}
-              onChange={(date: Date | null) =>
-                setValue('eventStartDate', date ?? new Date())
-              }
+              onChange={(date: Date | null) => setValue('eventStartDate', date)}
             />
             <span> ~ </span>
             <Datepicker
@@ -82,9 +80,7 @@ export default function PostInputs() {
               title="이벤트 종료일"
               disabled={!isEventChecked}
               value={watch('eventEndDate')}
-              onChange={(date: Date | null) =>
-                setValue('eventEndDate', date ?? new Date())
-              }
+              onChange={(date: Date | null) => setValue('eventEndDate', date)}
             />
           </div>
           <div className="ml-auto flex items-center gap-2">
