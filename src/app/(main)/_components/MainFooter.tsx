@@ -5,7 +5,7 @@ import { Footer, FooterCopyright, FooterIcon } from 'flowbite-react'
 
 import { BsInstagram, BsGithub, BsEnvelope } from 'react-icons/bs'
 
-export default function AppFooter() {
+export default function MainFooter() {
   const NAVER_EMAIL = 'aqw20501@naver.com'
 
   return (

@@ -1,5 +1,5 @@
-import AppFooter from '@/components/ui/layout/Footer'
-import AppNavBar from '@/components/ui/layout/NavBar/NavBar'
+import MainFooter from '@/app/(main)/_components/MainFooter'
+import MainNavBar from './_components/MainNavBar'
 
 export default function MainLayout({
   children,
@@ -10,12 +10,12 @@ export default function MainLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <AppNavBar />
+      <MainNavBar />
       <div className="mt-10 flex flex-1 flex-col gap-10 px-15 xl:px-[5vw]">
         {children}
       </div>
       {recipeModal}
-      <AppFooter />
+      <MainFooter />
     </div>
   )
 }
