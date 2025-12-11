@@ -9,6 +9,7 @@ type FormFileInputProps = {
   value: File[] | File | null
   onChange: (value: File[] | File | null) => void
   existingImages?: string[] // 기존 이미지 URL 배열 추가
+  setExistingImages?: (images: string[]) => void
   multiple?: boolean
 }
 
@@ -17,6 +18,7 @@ export default function FormFileInput({
   value,
   onChange,
   existingImages = [],
+  setExistingImages,
   multiple = false,
 }: FormFileInputProps) {
   const uniqueId = useId()
@@ -26,6 +28,7 @@ export default function FormFileInput({
 
   const removeExistingImage = (index: number) => {
     const updatedImages = existingImages?.filter((_, i) => i !== index)
+    setExistingImages?.(updatedImages)
   }
 
   const multipleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

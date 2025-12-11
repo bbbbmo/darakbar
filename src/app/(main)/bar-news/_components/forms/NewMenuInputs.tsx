@@ -19,6 +19,7 @@ export default function NewMenuInputs() {
     register,
     setValue,
     control,
+    watch,
     formState: { errors },
   } = useFormContext<PostForm>()
   const { fields, append, remove } = useFieldArray({
@@ -79,9 +80,28 @@ export default function NewMenuInputs() {
               <Controller
                 name={`newMenus.${index}.newMenuImage`}
                 control={control}
-                render={({ field: { onChange, value } }) => (
-                  <FormFileInput value={value} onChange={onChange} />
-                )}
+                render={({ field: { onChange, value } }) => {
+                  const existingMenuImage = watch(
+                    `newMenus.${index}.existingNewMenuImages`,
+                  )
+                  const existingImagesArray = existingMenuImage
+                    ? [existingMenuImage]
+                    : []
+
+                  return (
+                    <FormFileInput
+                      value={value}
+                      onChange={onChange}
+                      existingImages={existingImagesArray}
+                      setExistingImages={(images) =>
+                        setValue(
+                          `newMenus.${index}.existingNewMenuImages`,
+                          images[0] || null,
+                        )
+                      }
+                    />
+                  )
+                }}
               />
             </FormItem>
           </Card>

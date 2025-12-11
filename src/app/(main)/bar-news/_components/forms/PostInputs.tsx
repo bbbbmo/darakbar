@@ -26,6 +26,8 @@ export default function PostInputs() {
     formState: { errors },
   } = useFormContext<PostForm>()
 
+  const existingPostImages = watch('existingPostImages')
+
   useEffect(() => {
     if (!isEventChecked) {
       setValue('eventStartDate', null as any)
@@ -100,7 +102,15 @@ export default function PostInputs() {
           name="postImages"
           control={control}
           render={({ field: { onChange, value } }) => (
-            <FormFileInput value={value} onChange={onChange} multiple={true} />
+            <FormFileInput
+              value={value}
+              onChange={onChange}
+              multiple={true}
+              existingImages={existingPostImages}
+              setExistingImages={(images) =>
+                setValue('existingPostImages', images)
+              }
+            />
           )}
         />
       </FormItem>

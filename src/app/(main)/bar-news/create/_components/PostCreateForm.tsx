@@ -32,8 +32,6 @@ export default function PostCreateForm() {
     },
   })
 
-  const watchedPostTypeId = methods.watch('postTypeId')
-
   const { mutate: createPostMutation } = useMutation({
     mutationFn: async (data: PostForm) => {
       await postPost(data)
@@ -68,11 +66,7 @@ export default function PostCreateForm() {
 
   return (
     <FormProvider {...methods}>
-      <PostWriteForm
-        onSubmit={createPost}
-        currentPostTypeId={watchedPostTypeId}
-        newMenuTypeId={newMenuTypeId}
-      />
+      <PostWriteForm onSubmit={createPost} newMenuTypeId={newMenuTypeId} />
     </FormProvider>
   )
 }
