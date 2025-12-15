@@ -9,9 +9,11 @@ import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { PostgrestError } from '@supabase/supabase-js'
 import { barReviewsKeys } from '@/api/queries/reviewKeys'
 import ActionMenu from '@/components/ui/ActionMenu'
+import { useCheckLogin } from '@/hooks/useCheckLogin'
 
 export default function ReviewMenu({ review }: { review: BarReview }) {
   const { invalidateQueries } = useInvalidateQueries()
+  const { checkLogin } = useCheckLogin()
   const { open, close, confirm } = useModal()
 
   const { mutate: deleteReviewMutation } = useMutation({
@@ -33,7 +35,11 @@ export default function ReviewMenu({ review }: { review: BarReview }) {
     },
   })
 
-  const openReviewEditModal = () => {
+  const openReviewEditModal = async () => {
+    const isLoggedIn = await checkLogin()
+    if (!isLoggedIn) {
+      return
+    }
     open('ReviewEditModal', { barId: review.bar_id, review, onClose: close })
   }
 

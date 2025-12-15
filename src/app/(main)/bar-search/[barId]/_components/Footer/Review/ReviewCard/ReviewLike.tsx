@@ -87,7 +87,7 @@ export default function ReviewLike({ review, userData }: ReviewLikeProps) {
 
   const handleClick = () => {
     if (!userData?.id) {
-      snackBar.showError('실패', '로그인 후 좋아요를 누를 수 있습니다.')
+      snackBar.showError('로그인 필요', '로그인이 필요합니다.')
       return
     }
     isLiked ? unlikeMutate() : likeMutate()

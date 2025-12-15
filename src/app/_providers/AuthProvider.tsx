@@ -56,7 +56,5 @@ export default function AuthProvider({
 
   if (!isReady) return <Loading />
 
-  if (session === null && !isAuthPage) redirect('/sign-in')
-
   return <>{children}</>
 }

@@ -11,15 +11,21 @@ import { useModal } from '@/app/_providers/ModalProvider'
 import { reviewSortOptions } from './review.const'
 import { BarReview } from '@/api/review/getBarReviews'
 import { useParams } from 'next/navigation'
+import { useCheckLogin } from '@/hooks/useCheckLogin'
 
 export default function ReviewTab({ reviews }: { reviews: BarReview[] }) {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortOption, setSortOption] = useState<string>(reviewSortOptions[0])
   const { barId } = useParams()
+  const { checkLogin } = useCheckLogin()
 
   const { open, close } = useModal()
 
-  const openReviewCreateModal = () => {
+  const openReviewCreateModal = async () => {
+    const isLoggedIn = await checkLogin()
+    if (!isLoggedIn) {
+      return
+    }
     open('ReviewCreateModal', { barId: Number(barId), onClose: close })
   }
 
