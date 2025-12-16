@@ -1,14 +1,9 @@
-'use client'
-
 import { Suspense } from 'react'
-import PostCreateButton from './PostCreateButton'
 import PostList from './PostList'
 import PostTabs from './PostTabs'
 import CardSkeleton from '@/components/ui/skeletons/CardSkeleton'
-import { useCheckLogin } from '@/hooks/useCheckLogin'
 
 export default function PostSearch() {
-  const { isLoggedIn } = useCheckLogin()
   return (
     <>
       <PostTabs />
@@ -23,7 +18,6 @@ export default function PostSearch() {
       >
         <PostList />
       </Suspense>
-      {isLoggedIn && <PostCreateButton />}
     </>
   )
 }

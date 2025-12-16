@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from 'flowbite-react'
 import NewMenuInputs from './NewMenuInputs'
 import PostInputs from './PostInputs'
 import PostTypeSelect from './PostTypeSelect'
@@ -29,7 +28,6 @@ export default function PostWriteForm({
       <PostTypeSelect postTypes={postTags} />
       <PostInputs />
       {isEventPostType && <NewMenuInputs />}
-      <Button type="submit">게시글 생성</Button>
     </form>
   )
 }

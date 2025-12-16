@@ -10,11 +10,7 @@ export default function PostCreateButton() {
     router.push('/bar-news/create')
   }
   return (
-    <Button
-      color="primary"
-      className="mx-auto my-8"
-      onClick={goToBarNewsCreatePage}
-    >
+    <Button color="primary" onClick={goToBarNewsCreatePage}>
       게시글 작성
     </Button>
   )

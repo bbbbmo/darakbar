@@ -7,6 +7,7 @@ import PostEditForm from './_components/PostEditForm'
 import { queries } from '@/api/queries'
 import { Suspense } from 'react'
 import Loading from '@/app/loading'
+import PostEditNavBar from './_components/PostEditNavBar'
 
 export default async function BarNewsEditPage({
   params,
@@ -20,7 +21,10 @@ export default async function BarNewsEditPage({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense fallback={<Loading />}>
-        <PostEditForm />
+        <PostEditNavBar />
+        <div className="mx-[20vw] flex flex-col">
+          <PostEditForm />
+        </div>
       </Suspense>
     </HydrationBoundary>
   )
