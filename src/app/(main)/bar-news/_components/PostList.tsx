@@ -22,6 +22,9 @@ export default function PostList() {
       {posts.data.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
+      {posts.data.length === 0 && (
+        <p className="py-50 text-center text-gray-300">게시글이 없어요.</p>
+      )}
     </div>
   )
 }

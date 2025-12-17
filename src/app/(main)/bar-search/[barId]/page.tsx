@@ -5,6 +5,8 @@ import {
 } from '@tanstack/react-query'
 import BarDetailContent from './_components/BarDetailContent'
 import { queries } from '@/api/queries'
+import ContentWrapper from '@/components/ui/layout/ContentWrapper'
+import SubNavBar from '../../_components/SubNavBar'
 
 export default async function BarDetailPage({
   params,
@@ -19,7 +21,14 @@ export default async function BarDetailPage({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BarDetailContent />
+      <SubNavBar
+        title="상세 정보"
+        description="바의 상세 정보를 확인할 수 있어요."
+        href="/bar-search"
+      />
+      <ContentWrapper>
+        <BarDetailContent />
+      </ContentWrapper>
     </HydrationBoundary>
   )
 }

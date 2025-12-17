@@ -4,7 +4,6 @@ import BarImage from './BasicInfo/BarImage'
 import BarDescription from './BasicInfo/BarDescription'
 import BarBusinessHour from './BasicInfo/BarBusinessHour'
 import BarContact from './BasicInfo/BarContact'
-import BackToListButton from '@/components/ui/buttons/BackToListButton'
 import BarFooter from './Footer/BarFooter'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
@@ -12,6 +11,7 @@ import { useBarDetailStore } from '../_stores/bar-detail.store'
 import SignatureMenuList from './SignatureMenu/SignatureMenuList'
 import { queries } from '@/api/queries'
 import { useParams } from 'next/navigation'
+import ContentWrapper from '@/components/ui/layout/ContentWrapper'
 
 export default function BarDetailContent() {
   const { barId } = useParams()
@@ -31,7 +31,6 @@ export default function BarDetailContent() {
 
   return (
     <div className="flex flex-col gap-8 md:px-[8vw]">
-      <BackToListButton text="바 목록으로 돌아가기" href="/bar-search" />
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
           <BarImage />
