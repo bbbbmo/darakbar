@@ -1,7 +1,7 @@
 import supabase from '@/lib/supabase/supabase'
 import { getNewMenuImagePath, getPostImagePath } from '../file/getStoragePath'
 import { uploadFiles } from '../file/storage'
-import { PostForm } from '@/app/(post)/bar-news/_types/form.schemes'
+import { PostForm } from '@/app/(main)/bar-news/_types/form.schemes'
 
 export const uploadAndUpdatePostImages = async (
   postId: number,

@@ -5,11 +5,11 @@ import { Button } from 'flowbite-react'
 import { HiOutlineAnnotation } from 'react-icons/hi'
 import { useRouter } from 'next/navigation'
 
-export default function BarSuggestion() {
+export default function BarSearchFooter() {
   const router = useRouter()
 
   const goToBarSuggestionPage = () => {
-    router.push('/bar-search/suggestion')
+    router.push('/suggestion')
   }
 
   return (

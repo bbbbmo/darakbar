@@ -1,4 +1,4 @@
-import { BarRegisterForm } from '@/app/(main)/bar-search/suggestion/_components/BarRegister.schemes'
+import { BarRegisterForm } from '@/app/(main)/suggestion/_components/BarRegister.schemes'
 import supabase from '@lib/supabase/supabase'
 import {
   getBarImagePath,

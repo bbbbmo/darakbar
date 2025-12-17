@@ -1,4 +1,4 @@
-import { PostForm } from '@/app/(post)/bar-news/_types/form.schemes'
+import { PostForm } from '@/app/(main)/bar-news/_types/form.schemes'
 import supabase from '@/lib/supabase/supabase'
 import { handleRpcError } from '../handleError'
 import { getNewMenuImagePath, getPostImagePath } from '../file/getStoragePath'
