@@ -14,7 +14,7 @@ export default function NavMenu() {
     },
     {
       text: '바 탐색',
-      url: '/bar-search',
+      url: '/bars',
     },
     {
       text: '바 소식',

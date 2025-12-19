@@ -24,7 +24,7 @@ export default async function BarDetailPage({
       <SubNavBar
         title="상세 정보"
         description="바의 상세 정보를 확인할 수 있어요."
-        href="/bar-search"
+        href="/bars"
       />
       <ContentWrapper>
         <BarDetailContent />

@@ -14,11 +14,11 @@ export default function RandomBars() {
     bars?.data?.filter((bar) => bar.image_paths).slice(0, 6) || []
 
   const goToBarSearch = () => {
-    router.push('/bar-search')
+    router.push('/bars')
   }
 
   const goToBarDetail = (barId: number) => {
-    router.push(`/bar-search/${barId}`)
+    router.push(`/bars/${barId}`)
   }
 
   return (

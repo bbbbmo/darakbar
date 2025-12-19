@@ -1,4 +1,3 @@
-// ReviewEditModal.tsx
 'use client'
 
 import { useForm } from 'react-hook-form'
@@ -6,26 +5,23 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ReviewForm, ReviewFormSchema } from './ReviewFormModal.schemes'
 import ReviewFormModal from './ReviewFormModal'
 import { useAuthStore } from '@/stores/auth.store'
-import { useBarDetailStore } from '@/app/(main)/bar-search/[barId]/_stores/bar-detail.store'
-import { patchBarReview, patchBarReviewBody } from '@/api/review/patchBarReview'
+import { useBarDetailStore } from '@/app/(main)/bars/[barId]/_stores/bar-detail.store'
+import { postBarReview, PostBarReviewBody } from '@api/review/postBarReview'
 import { useMutation } from '@tanstack/react-query'
 import { useInvalidateQueries } from '@/hooks/tanstack-query/useInvalidateQueries'
-import { BarReview } from '@api/review/getBarReviews'
 import { uploadFiles } from '@/api/file/storage'
 import { snackBar } from '@/app/_providers/SnackBarProvider'
 import { barReviewsKeys } from '@/api/queries/reviewKeys'
 
-export type ReviewEditModalProps = {
+export type ReviewCreateModalProps = {
   barId: number
-  review: BarReview
   onClose: () => void
 }
 
-export default function ReviewEditModal({
+export default function ReviewCreateModal({
   barId,
-  review,
   onClose,
-}: ReviewEditModalProps) {
+}: ReviewCreateModalProps) {
   const { userData } = useAuthStore()
   const barDetail = useBarDetailStore((state) => state.barDetail)
   const { invalidateQueries } = useInvalidateQueries()
@@ -34,35 +30,34 @@ export default function ReviewEditModal({
     mode: 'onSubmit',
     resolver: zodResolver(ReviewFormSchema),
     defaultValues: {
-      rating: review.rating,
-      body: review.body || '',
+      rating: 0,
+      body: '',
       images: null,
-      existingImages: review.image_paths || [],
-      tagIds: review.review_tags.map((tag) => tag.tags?.id),
-      visitDate: new Date(review.visit_date),
+      existingImages: [],
+      tagIds: [],
+      visitDate: new Date(),
     },
   })
 
-  const { mutate: updateReviewMutation } = useMutation({
+  const { mutate: createReviewMutation } = useMutation({
     mutationFn: ({
       userId,
       body,
     }: {
       userId: string
-      body: patchBarReviewBody
-    }) => patchBarReview({ reviewId: review.id, userId, body }),
+      body: PostBarReviewBody
+    }) => postBarReview({ barId: barId, userId, body }),
     onSuccess: () => {
-      console.log('barId', barId)
       invalidateQueries([barReviewsKeys.all(barId).queryKey])
       snackBar.showSuccess(
-        '리뷰 수정 성공',
-        '리뷰가 성공적으로 수정되었습니다.',
+        '리뷰 등록 성공',
+        '리뷰가 성공적으로 등록되었습니다.',
       )
       onClose()
     },
     onError: (error) => {
       snackBar.showError(
-        '리뷰 수정 실패',
+        '리뷰 등록 실패',
         error instanceof Error
           ? error.message
           : '알 수 없는 오류가 발생했습니다.',
@@ -70,7 +65,7 @@ export default function ReviewEditModal({
     },
   })
 
-  const updateReview = form.handleSubmit(async (data) => {
+  const createReview = form.handleSubmit(async (data) => {
     try {
       const imageUrls: string[] = []
       if (!userData) {
@@ -78,9 +73,6 @@ export default function ReviewEditModal({
       }
       if (!barId) {
         throw new Error('바 정보가 없습니다.')
-      }
-      if (data.existingImages) {
-        imageUrls.push(...data.existingImages)
       }
       if (data.images) {
         const uploadedImagePaths = await uploadFiles(
@@ -102,10 +94,10 @@ export default function ReviewEditModal({
         visitDate: data.visitDate.toISOString(),
       }
 
-      updateReviewMutation({ userId: userData.id, body })
+      createReviewMutation({ userId: userData.id, body })
     } catch (error) {
       snackBar.showError(
-        '리뷰 수정 실패',
+        '리뷰 등록 실패',
         error instanceof Error
           ? error.message
           : '알 수 없는 오류가 발생했습니다.',
@@ -115,13 +107,12 @@ export default function ReviewEditModal({
 
   return (
     <ReviewFormModal
-      title="리뷰 수정"
-      description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 수정해주세요`}
-      disableRating={true}
+      title="리뷰 작성"
+      description={`${barDetail?.name || '이름 없음'}에 대한 리뷰를 작성해주세요`}
       form={form}
-      onSubmit={updateReview}
+      onSubmit={createReview}
       onClose={onClose}
-      submitButtonText="리뷰 수정"
+      submitButtonText="리뷰 등록"
     />
   )
 }

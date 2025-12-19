@@ -14,7 +14,7 @@ export default function BarList({ bars, loading = false }: BarListProps) {
   const router = useRouter()
 
   const goToBarDetail = (barId: number) => {
-    router.push(`/bar-search/${barId}`)
+    router.push(`/bars/${barId}`)
   }
 
   return (

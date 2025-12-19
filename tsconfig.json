@@ -30,8 +30,8 @@
       "@utils/*": ["src/utils/*"],
       "@lib/*": ["src/lib/*"],
       "@api/*": ["src/api/*"],
-      "@bar-search/*": ["src/app/(main)/bar-search/*"],
-      "@bar-detail/*": ["src/app/(main)/bar-search/[barId]/*"]
+      "@bars/*": ["src/app/(main)/bars/*"],
+      "@bar-detail/*": ["src/app/(main)/bars/[barId]/*"]
     },
     "types": ["kakao.maps.d.ts"]
   },
@@ -41,7 +41,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "postcss.config.mjs",
-    "src/app/(main)/bar-search/[barId]/_components/Footer"
+    "src/app/(main)/bars/[barId]/_components/Footer"
   ],
   "exclude": ["node_modules"]
 }
