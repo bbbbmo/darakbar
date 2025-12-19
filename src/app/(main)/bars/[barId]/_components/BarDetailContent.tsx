@@ -12,6 +12,7 @@ import SignatureMenuList from './SignatureMenu/SignatureMenuList'
 import { queries } from '@/api/queries'
 import { useParams } from 'next/navigation'
 import ContentWrapper from '@/components/ui/layout/ContentWrapper'
+import BarLocation from './BasicInfo/BarLocation'
 
 export default function BarDetailContent() {
   const { barId } = useParams()
@@ -39,8 +40,11 @@ export default function BarDetailContent() {
           <BarDescription />
           <BarContact />
         </div>
-        <div className="lg:col-span-2">
+        <div className="flex flex-col gap-8 lg:col-span-2">
           <BarBusinessHour />
+          {barDetail.data?.address && barDetail.data?.address.length > 0 ? (
+            <BarLocation address={barDetail.data?.address} />
+          ) : null}
         </div>
         <div className="lg:col-span-2">
           {showSignatureMenuList ? <SignatureMenuList /> : null}

@@ -12,9 +12,7 @@ import ReviewCreateModal from '@/app/(main)/bars/[barId]/_components/Footer/Revi
 import ConfirmModal from '@/components/ui/modals/ConfirmModal'
 import { SnackBarProvider } from '@/app/_providers/SnackBarProvider'
 import { queryClientOptions } from '@/lib/tanstack-query/tanstack-query'
-import { getAllTags } from '@/api/tag/getAllTags'
 import { useTagStore } from '@/stores/tag.store'
-import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/api/queries'
 
 const modalRegistry: ModalRegistry = {
@@ -67,6 +65,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <ModalProvider registry={modalRegistry}>
             <SnackBarProvider>
               {children}
+
               <div id="modal-root" />
               <div id="snackbar-root" />
             </SnackBarProvider>
