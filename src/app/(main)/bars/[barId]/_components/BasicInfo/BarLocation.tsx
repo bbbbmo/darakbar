@@ -18,6 +18,7 @@ export default function BarLocation({ address }: BarLocationProps) {
       return
     }
     kakao.maps.load(() => {
+      // 이거 항상 실행되어야 함. 카카오 맵 SDK가 로드되었는지 확인하기 위해
       const geocoder = new kakao.maps.services.Geocoder()
 
       geocoder.addressSearch(address, (result, status) => {

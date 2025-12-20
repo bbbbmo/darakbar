@@ -6,6 +6,7 @@ import BarList from './search/BarList'
 import { queries } from '@/api/queries'
 import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
+import BarMap from './search/BarMap'
 
 export default function BarSearchContent() {
   const [filterOption, setFilterOption] = useState<BarFilterOption>({})
@@ -23,6 +24,7 @@ export default function BarSearchContent() {
           바를 찾았어요.
         </p>
       </BarFilter>
+      <BarMap bars={bars?.data || []} locationName={'이태원'} />
       {bars && bars?.data.length > 0 ? (
         <BarList bars={bars.data} loading={isLoading} />
       ) : (
