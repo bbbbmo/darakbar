@@ -1,4 +1,5 @@
 import { Bar } from '@/api/bar/getBars'
+import { regionOptions } from '@/const/bar-options.const'
 import { Card } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { HiLocationMarker } from 'react-icons/hi'
@@ -6,7 +7,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
 type BarMapProps = {
   bars: Bar[]
-  locationName?: string
+  locationName: string
 }
 
 export default function BarMap({ bars, locationName }: BarMapProps) {
@@ -14,7 +15,8 @@ export default function BarMap({ bars, locationName }: BarMapProps) {
 
   useEffect(() => {
     kakao.maps.load(() => {
-      if (!locationName) {
+      if (locationName === regionOptions[0]) {
+        // 현재 위치로 설정
         return
       }
       const geocoder = new kakao.maps.services.Geocoder()
@@ -29,7 +31,8 @@ export default function BarMap({ bars, locationName }: BarMapProps) {
         }
       })
     })
-  })
+  }, [bars, locationName])
+
   return (
     <Card>
       <h2 className="flex items-center gap-2">
@@ -45,7 +48,10 @@ export default function BarMap({ bars, locationName }: BarMapProps) {
         style={{ width: '100%', height: '360px' }}
       >
         <MapMarker
-          position={{ lat: coords?.getLat() || 33.450701, lng: coords?.getLng() || 126.570667 }}
+          position={{
+            lat: coords?.getLat() || 33.450701,
+            lng: coords?.getLng() || 126.570667,
+          }}
           image={{
             src: '/images/marker/bar-marker.png',
             size: {

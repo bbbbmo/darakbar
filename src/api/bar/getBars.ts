@@ -1,8 +1,10 @@
+import { regionOptions } from '@/const/bar-options.const'
 import supabase from '@lib/supabase/supabase'
 
 export type BarFilterOption = {
   name?: string
   atmosphere?: number[]
+  region?: string
 }
 
 export type BarSortOption = 'all' | 'name_asc' | 'rating_asc' | 'rating_desc'
@@ -47,6 +49,10 @@ export const getBars = async (params?: getBarsQueryParams) => {
       )
     )
   `)
+
+  if (filterOption?.region && filterOption.region !== regionOptions[0]) {
+    query = query.ilike('address', `%${filterOption.region}%`)
+  }
 
   if (filterOption?.name) {
     query = query.ilike('name', `%${filterOption.name}%`)

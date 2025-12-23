@@ -7,9 +7,12 @@ import { queries } from '@/api/queries'
 import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
 import BarMap from './search/BarMap'
+import { regionOptions } from '@/const/bar-options.const'
 
 export default function BarSearchContent() {
-  const [filterOption, setFilterOption] = useState<BarFilterOption>({})
+  const [filterOption, setFilterOption] = useState<BarFilterOption>({
+    region: regionOptions[0],
+  })
   const [sortOption, setSortOption] = useState<BarSortOption | undefined>()
 
   const { data: bars, isLoading } = useQuery(
@@ -24,7 +27,7 @@ export default function BarSearchContent() {
           바를 찾았어요.
         </p>
       </BarFilter>
-      <BarMap bars={bars?.data || []} locationName={'이태원'} />
+      <BarMap bars={bars?.data || []} locationName={filterOption.region!} />
       {bars && bars?.data.length > 0 ? (
         <BarList bars={bars.data} loading={isLoading} />
       ) : (

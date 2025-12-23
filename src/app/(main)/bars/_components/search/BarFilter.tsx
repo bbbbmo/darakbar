@@ -4,7 +4,7 @@ import { Button, Card, Select, TextInput } from 'flowbite-react'
 import { HiAdjustments, HiOutlineSearch } from 'react-icons/hi'
 import { BarFilterOption, BarSortOption } from '@/api/bar/getBars'
 import { useState } from 'react'
-import { barSortOptions } from '@/const/bar-options.const'
+import { barSortOptions, regionOptions } from '@/const/bar-options.const'
 import { useTagStore } from '@/stores/tag.store'
 
 type BarFilterProps = {
@@ -22,6 +22,7 @@ export default function BarFilter({
   const [selectedAtmosphereId, setSelectedAtmosphereId] = useState<
     number | null
   >(null)
+  const [selectedRegion, setSelectedRegion] = useState<string>(regionOptions[0])
   const [selectedSortOption, setSelectedSortOption] = useState<BarSortOption>(
     barSortOptions[0].value,
   )
@@ -32,6 +33,7 @@ export default function BarFilter({
     onChangeFilter({
       name: name || undefined,
       atmosphere: selectedAtmosphereId ? [selectedAtmosphereId] : undefined,
+      region: selectedRegion || undefined,
     })
 
     onChangeSort(selectedSortOption)
@@ -40,6 +42,7 @@ export default function BarFilter({
   const handleReset = () => {
     setName('')
     setSelectedAtmosphereId(null)
+    setSelectedRegion(regionOptions[0])
     setSelectedSortOption(barSortOptions[0].value)
   }
 
@@ -81,6 +84,17 @@ export default function BarFilter({
             {atmospheres.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
+              </option>
+            ))}
+          </Select>
+          <Select
+            color="primary"
+            value={selectedRegion}
+            onChange={(e) => setSelectedRegion(e.target.value)}
+          >
+            {regionOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
               </option>
             ))}
           </Select>
